@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+R=/data/raw/huzijian/project1_database/code/physics-video-sim/physics-video-sim-main
+echo "=== elephant asset.yaml ==="
+cat "$R/assets/objects/gso_sootheze_cold_therapy_elephant/asset.yaml"
+echo "=== elephant asset.yaml.t3dev-bak ==="
+cat "$R/assets/objects/gso_sootheze_cold_therapy_elephant/asset.yaml.t3dev-bak"
+echo "=== elephant license/SOURCE.md ==="
+cat "$R/assets/objects/gso_sootheze_cold_therapy_elephant/license/SOURCE.md"
+echo "=== elephant collision/model.urdf ==="
+cat "$R/assets/objects/gso_sootheze_cold_therapy_elephant/collision/model.urdf"
+echo "=== replicad asset.yaml ==="
+cat "$R/assets/environments/replicad_apartment/asset.yaml"
+echo "=== replicad asset.yaml.t3dev-bak ==="
+cat "$R/assets/environments/replicad_apartment/asset.yaml.t3dev-bak"
+echo "=== replicad license/SOURCE.md ==="
+cat "$R/assets/environments/replicad_apartment/license/SOURCE.md"
+echo "=== replicad collision floor urdf ==="
+cat "$R/assets/environments/replicad_apartment/collision/surfaces/replicad_apartment_floor.urdf"
+echo "=== scripts dir ==="
+ls -la "$R/scripts/"
+echo "=== docs dir ==="
+ls -la "$R/docs/" 2>&1

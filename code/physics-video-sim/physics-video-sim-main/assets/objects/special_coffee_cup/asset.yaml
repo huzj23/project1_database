@@ -1,0 +1,54 @@
+version: 1
+id: special_coffee_cup
+kind: object
+category: special
+
+source: user-provided local asset
+source_page: UNKNOWN
+source_filename: cup_of_coffee.glb
+source_sha256: 49235f0cf9ec9a34c32e63d3b7ccba23069b008a0f7a9b7ca1cf1c9947ce24af
+license: UNKNOWN
+sha256: dd1de5d220ad2076dbe7f0f82e5c1401b084ee5924b37d9ff41674373cf7c5dd
+quality:
+  source_mesh_objects: 2
+  vertices: 21096
+  triangles: 41967
+  normalized_max_dimension_m: 0.12
+
+visual:
+  mesh: visual/model.glb
+  size: [0.082503, 0.117602, 0.120000]
+  scale: [1.0, 1.0, 1.0]
+visual_transform:
+  x_rotation_degrees: 90.0
+  center_mesh_origin: false
+
+initial_orientation:
+  policy: fixed_upright
+  quaternion_wxyz: [1.0, 0.0, 0.0, 0.0]
+  rationale: cup_base_faces_down_and_cavity_faces_up
+
+collision:
+  type: mesh
+  mesh: collision/model.obj
+  simulation: collision/model.urdf
+  mesh_sha256: 59fdb48338a94a827761b360ea2398bd6a8ead57b312eb1f6dd745c83800e0ba
+  strategy: compound_hollow_shell
+  convex_parts: 45
+  vertices: 418
+  triangles: 656
+  max_triangles: 1024
+  wall_segments: 32
+  handle_segments: 12
+  cavity_diameter: 0.066
+  bounding_radius: 0.082649
+  footprint_radius: 0.058802
+  support_height: 0.060000
+  half_extents: [0.041252, 0.058801, 0.060000]
+
+physics:
+  mass_range: [0.250, 0.400]
+  friction_range: [0.30, 0.60]
+  restitution_range: [0.05, 0.15]
+
+allowed_scenarios: [rolling, constant_force, free_fall]

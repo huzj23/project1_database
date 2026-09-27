@@ -1,0 +1,51 @@
+profile: server
+
+# ===========================================================================
+# Environment config for motion #5 (turntable_carry), used ONLY by the turntable
+# render runner.
+#
+# Why this file exists: scripts/generate.py reads the environment config's
+# `project.scenario_config` when --scenario is not given, and its --scenario
+# choices do not include the turntable motions.  Passing `--config` this file
+# therefore selects the turntable scenario WITHOUT editing configs/server.yaml,
+# which the parent's t1 runner rewrites between clips (sed on its
+# scenario_config line).  Nothing globs configs/, so adding this file cannot
+# disturb any other run.
+#
+# Everything except scenario_config is copied verbatim from configs/server.yaml.
+# ===========================================================================
+
+project:
+  scenario_config: configs/scenarios/turntable_carry_gso.yaml
+  seed: 5001
+
+paths:
+  asset_registry: configs/assets.yaml
+  map_registry: configs/maps.yaml
+  asset_root: assets
+  output_root: datasets
+  cache_root: cache
+  log_root: logs
+  blender_executable: /data/raw/huzijian/project1_database/tools/runtime/blender-3.4.1-linux-x64/blender
+  phyco_sim_root: third_party/phyco-sim
+
+execution:
+  headless: true
+  num_workers: 1
+  num_samples: 1
+  gpu_ids: []
+
+render:
+  samples_per_pixel: 24
+  engine: CYCLES
+  device: CPU
+  compute_backend: NONE
+  use_denoising: true
+  use_adaptive_sampling: true
+  adaptive_threshold: 0.01
+  max_bounces: 8
+  view_transform: Filmic
+  look: Medium High Contrast
+  exposure: 0.0
+  gamma: 1.0
+  save_blend: false

@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<robot name="Ecoforms_Plant_Container_GP16A_Coral">
+  <link name="base">
+    <inertial>
+      <origin xyz="-1.439094353096141e-17 -2.3984905884935682e-17 2.878188706192282e-17" />
+      <mass value="0.000176576249937737" />
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" />
+      <geometry>
+        <mesh filename="../visual/model.obj" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" />
+      <geometry>
+        <mesh filename="model.obj" />
+      </geometry>
+    </collision>
+  </link>
+</robot>

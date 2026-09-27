@@ -1,0 +1,120 @@
+version: 1
+scenario: turntable_spin
+
+# ===========================================================================
+# 运动 #6 转盘自转 -- the disc spins and the actor co-rotates in place on it
+#
+# Same rig and same mechanism as #5 (a real second dynamic body, driven by the
+# frozen 4-step loop, with the actor carried by contact friction).  What differs
+# is the subject: here the clip is about the ROTATION ITSELF, so the actor is
+# placed nearer the axis and the disc turns more slowly, so it stays put on the
+# disc and co-rotates instead of being swept around a large arc.
+#
+# Nothing about the rotation is written into the trajectory: the disc's angular
+# velocity is re-imposed on the solver each substep and the actor's motion is
+# whatever the contact produces.  The validator measures the disc's rotation
+# from its quaternion rather than trusting the commanded omega.
+#
+# Geometry (frozen, measured -- see configs/maps.yaml):
+#   table top z = 0.7584, disc r = 0.30 m, thickness 0.022 m
+#   disc centre z = 0.7694, disc top face = 0.7804
+# ===========================================================================
+
+controlled_variants:
+  variable: angular_speed
+  multipliers: [1.0]
+  labels: [x1]
+
+selection:
+  map_ids: [replicad_apartment]
+  asset_ids:
+    - special_plush_elephant
+
+timing:
+  duration_seconds: 5.0625
+  frame_count: 81
+  physics_fps: 240
+  video_fps: 16
+
+# --- the driven disc --------------------------------------------------------
+support:
+  asset_id: turntable
+  mass_range: [1.0, 3.0]
+  # Capped at 1.0: Kubric validates `friction <= 1.0` even though the turntable
+  # manifest declares up to 1.30.
+  friction_range: [0.95, 1.00]
+  rolling_friction: 0.0
+  spinning_friction: 0.0
+  restitution: 0.0
+
+physics:
+  gravity: [0.0, 0.0, -9.81]
+  # Slower than #5, and measured: the actor must co-rotate without drifting
+  # outward.  See t3dev_sweep1.txt for the carried band.
+  angular_speed_range: [1.2, 1.3]
+  # Nearer the axis than #5, so the actor visibly stays put while the disc and
+  # the actor turn together.
+  orbit_radius_fraction_range: [0.15, 0.25]
+  rolling_friction: 0.0
+  spinning_friction: 0.0
+  friction_range: [0.60, 0.90]
+  restitution_range: [0.0, 0.05]
+  # Light on purpose: the carry is mass-independent (a = mu*g) but the frozen
+  # drive recipe's per-substep contact rebuild makes penetration grow with
+  # weight.  See the #5 config for the measured numbers.
+  mass_range: [0.015, 0.05]
+
+surface:
+  allowed_types: [table_top]
+  # Named explicitly for the same reason as #5: the 0.60 m disc, not the actor,
+  # is what has to fit in this 0.60 x 0.60 m measured region.
+  surface_id: replicad_apartment_table_top
+  edge_margin: 0.02
+
+validation:
+  max_sample_attempts: 200
+  reject_initial_overlap: true
+  require_supported: true
+  min_supported_fraction: 0.90
+  require_in_map_bounds: false
+  max_linear_speed: 3.0
+  max_trajectory_extent_object_ratio: 20.0
+  # --- disc-rotation checks ---
+  # The disc must really have turned, measured from its quaternion.
+  min_disc_rotation_degrees: 60.0
+  # The actor co-rotates with it rather than being left behind.
+  min_arc_degrees: 30.0
+  min_slip_ratio: 0.55
+  # ...without wandering across or off the disc.
+  max_radial_displacement: 0.05
+  max_radial_growth: 0.05
+  max_radial_fraction_of_travel: 0.35
+  max_overhang: 0.02
+
+camera:
+  # ---------------------------------------------------------------------
+  # APPROVED POSE -- copied from tools/tt_on_table.sh, the turntable render
+  # the user accepted.  Written relative to the frozen table top
+  # (0.414, 0.175, 0.7584):
+  #     cam  = top + (0.52, -0.66, +0.42) = (0.9340, -0.4850, 1.1784)
+  #     look = top + (0.00,  0.00, +0.05) = (0.4140,  0.1750, 0.8084)
+  #     focal 50 mm, sensor 36 mm
+  # `fixed` is required: the previous `trajectory_side` policy DERIVES the pose
+  # from each clip's own motion, so it cannot reproduce a pose that was reviewed
+  # and signed off.  `fixed` uses this pose verbatim and injects no azimuth or
+  # side randomness (see fixed_camera in src/physim/camera/__init__.py).
+  # ---------------------------------------------------------------------
+  policy: fixed
+  position: [1.194, -0.815, 1.3634]
+  look_at: [0.4140, 0.1750, 0.8084]
+  focal_length_mm: 50.0
+  framing:
+    sensor_width_mm: 36.0
+output:
+  resolution: [1920, 1080]
+  modalities: [rgb, depth, segmentation]
+  save_physics_trajectory: true
+  save_render_trajectory: true
+  save_collision_events: true
+  save_config: true
+  write_video: true

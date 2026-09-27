@@ -1,0 +1,139 @@
+version: 1
+scenario: turntable_carry
+
+# ===========================================================================
+# 运动 #5 圆周运动 -- the actor is CARRIED around by a spinning turntable disc
+#
+# Mechanism: the disc is a real second DYNAMIC body.  PyBullet holds it on its
+# axis and a constant angular velocity is re-imposed on it every physics substep
+# (the frozen 4-step drive loop in pybullet_backend._drive_support).  The actor
+# is placed on the disc AT REST and receives no initial velocity at all: the
+# circular path is produced by disc<->actor contact friction, resolved by the
+# solver, so nothing about the arc is prescribed.
+#
+# The disc's own rotation comes out of the solver too; the renderer only replays
+# the recorded keyframes.
+#
+# Geometry (frozen, measured -- see configs/maps.yaml):
+#   table top z = 0.7584, disc r = 0.30 m, thickness 0.022 m
+#   disc centre z = 0.7584 + 0.011 = 0.7694
+#   disc top face = 0.7804  <- the actor rests here, not on the table
+# ===========================================================================
+
+controlled_variants:
+  variable: angular_speed
+  multipliers: [1.0]
+  labels: [x1]
+
+selection:
+  map_ids: [replicad_apartment]
+  asset_ids:
+    - gso_sootheze_cold_therapy_elephant
+    - gso_room_essentials_fabric_cube_lavender
+
+timing:
+  duration_seconds: 5.0625
+  frame_count: 81
+  physics_fps: 240
+  video_fps: 16
+
+# --- the driven disc --------------------------------------------------------
+support:
+  asset_id: turntable
+  mass_range: [1.0, 3.0]
+  # Kubric validates `friction <= 1.0` (the turntable manifest declares up to
+  # 1.30, which PyBullet would accept but Kubric's trait does not), so the band
+  # is capped here rather than being silently clamped at runtime.
+  friction_range: [0.95, 1.00]
+  rolling_friction: 0.0
+  spinning_friction: 0.0
+  restitution: 0.0
+
+physics:
+  gravity: [0.0, 0.0, -9.81]
+  # omega band chosen from the measured sweep (t3dev_sweep1.txt): the actor is
+  # carried with slip 1.00 from 0.15 rad/s upward and is never thrown off, so
+  # the band is picked for arc length, not for stability.
+  angular_speed_range: [0.45, 0.60]
+  # The actor sits well inside the rim so the placement alone cannot throw it.
+  orbit_radius_fraction_range: [0.35, 0.50]
+  rolling_friction: 0.0
+  spinning_friction: 0.0
+  # Contact friction between the actor and the disc must be high enough to carry
+  # it; the disc's own friction is set under `support` above.
+  friction_range: [0.60, 0.90]
+  restitution_range: [0.0, 0.05]
+  # Light actors on purpose, and this is a PHYSICS choice rather than a
+  # cosmetic one.  The frozen drive recipe re-pins the disc every substep, which
+  # rebuilds the contact manifold each step; penetration recovery therefore
+  # restarts constantly and the actor creeps into the disc at a rate
+  # proportional to its weight (measured: -0.0006 m at 2 g up to -0.022 m at
+  # 600 g, t3dev_mass.sh).  The carry itself is mass-INDEPENDENT -- friction is
+  # mu*N with N = m*g, so a = mu*g -- and the sweep confirms slip 1.00 at every
+  # mass.  Mass therefore only controls penetration, and this band keeps the
+  # actor resting on the disc surface instead of sinking into it.
+  mass_range: [0.015, 0.05]
+
+surface:
+  allowed_types: [table_top]
+  # The disc is 0.60 m across and the measured table_top region is exactly
+  # 0.60 x 0.60 m, so the region is named explicitly: the generic extent filter
+  # would otherwise reject it on the ACTOR's size rather than the disc's.
+  surface_id: replicad_apartment_table_top
+  edge_margin: 0.02
+
+validation:
+  max_sample_attempts: 200
+  reject_initial_overlap: true
+  require_supported: true
+  min_supported_fraction: 0.90
+  require_in_map_bounds: false
+  max_linear_speed: 3.0
+  max_trajectory_extent_object_ratio: 20.0
+  # --- circular-carry checks ---
+  # Must sweep a real arc around the disc axis...
+  min_arc_degrees: 120.0
+  # ...while its distance from the axis barely changes (a straight slide off
+  # the disc would move this by the disc radius or more).
+  max_radial_displacement: 0.08
+  max_radial_fraction_of_travel: 0.30
+  # Carried by contact rather than the disc spinning underneath: measured
+  # |actor arc| / |disc rotation|.
+  min_slip_ratio: 0.55
+  min_disc_rotation_degrees: 120.0
+  # The actor may overhang the rim by this much without counting as ejected.
+  max_overhang: 0.02
+
+camera:
+  policy: trajectory_side
+  relative_to_trajectory: true
+  # `left` and azimuth 0 are chosen from a measured line-of-sight sweep
+  # (tools/t3dev_camsweep.sh): the default `right` position sits behind the
+  # apartment's furniture and the camera->actor ray hit the room 44% of the way,
+  # which made every rendered frame identical.  `left` sees the table directly
+  # (first hit is the actor, 95% along the ray).
+  side: left
+  azimuth_offset_degrees_range: [0.0, 0.0]
+  focal_length_mm: 40.0
+  framing:
+    sensor_width_mm: 36.0
+    trajectory_frame_fraction: 0.80
+    object_padding: 0.25
+    min_object_frame_fraction: 0.10
+    max_object_frame_fraction: 0.55
+    min_object_frame_area_fraction: 0.0025
+    max_object_frame_area_fraction: 0.20
+    min_distance: 0.50
+    max_distance: 8.00
+    elevation_degrees: 20.0
+    min_height_above_trajectory: 0.30
+    look_at_offset: 0.0
+
+output:
+  resolution: [1920, 1080]
+  modalities: [rgb, depth, segmentation]
+  save_physics_trajectory: true
+  save_render_trajectory: true
+  save_collision_events: true
+  save_config: true
+  write_video: true

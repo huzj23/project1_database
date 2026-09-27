@@ -1,0 +1,52 @@
+version: 1
+id: replicad_apartment
+kind: environment
+category: environment
+
+# --- provenance -----------------------------------------------------------
+# Original ReplicaCAD source material lives in source/ (stage GLB, LICENSE,
+# README, scene_dataset_config).  The full ~1000-file dataset is intentionally
+# NOT mirrored.
+source: ReplicaCAD (FAIR / Meta), frl_apartment_stage + apt_0 layout
+source_page: https://aihabitat.org/datasets/replica_cad/
+source_download_url: https://dl.fbaipublicfiles.com/habitat/ReplicaCAD/ReplicaCAD_Interactive_full.zip
+source_sha256: 9a28a0511ab15cb48bbd1a6a171798918f24b66e54a8406d69d270938d71d923
+author: Meta AI (FAIR) — ReplicaCAD
+license: CC BY-NC 4.0
+license_note: NonCommercial; academic use permitted. See license/SOURCE.md
+sha256: 6a88f6e79b76057be91cd95d8046be262204e7cd85b4390487f0086053fdbbc4
+
+quality:
+  description: Scanned studio apartment, furnished from the authored apt_0 layout
+  stage_mesh_objects: 20
+  prop_instances: 113
+  preserved_source_lights: 7
+  authored_lighting_config: configs/lighting/frl_apartment_stage.lighting_config.json
+  vertices: 313181
+
+visual:
+  mesh: visual/scene.blend
+  object_name: environment
+  size: [1.000000, 5.400000, 3.13]
+  scale: [1.0, 1.0, 1.0]
+
+# The floor is flat; a box proxy over the verified-clear region is sufficient.
+# The scene ships its own floor slab: x=[-2.677,4.580] y=[-8.164,4.829]
+# = 94.28 m^2 at z~0.  A single box spanning that footprint is geometrically
+# exact for the flat living area and replaces the earlier 5.4 m^2 patch that
+# covered only 5.7% of the real floor.
+collision:
+  type: box
+  center: [0.9515, -1.6675, -0.049268]
+  half_extents: [3.6285, 6.4965, 0.05]
+
+physics:
+  mass_range: [0.0, 0.0]
+  friction_range: [0.45, 0.75]
+  restitution_range: [0.0, 0.1]
+
+render:
+  lighting_source: authored_config_only
+  authored_config: configs/lighting/frl_apartment_stage.lighting_config.json
+
+allowed_scenarios: [rolling, constant_force, free_fall, turntable_carry, turntable_spin, damping]

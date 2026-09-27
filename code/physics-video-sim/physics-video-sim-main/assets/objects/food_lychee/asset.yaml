@@ -1,0 +1,42 @@
+version: 1
+id: food_lychee
+kind: object
+category: food
+
+source: Poly Haven
+source_page: https://polyhaven.com/a/food_lychee_01
+author: Oliver Harries
+license: CC0-1.0
+sha256: 9820ebf15ac7f709d5f3f7ca10fbde6969c2df3201b74fc576811bec1a18ac27
+quality:
+  source_texture_resolution: 4k
+  source_max_texture_resolution: 8k
+  triangles: 6783
+
+visual:
+  mesh: visual/model.glb
+  size: [0.040873, 0.041951, 0.050599]
+  scale: [1.0, 1.0, 1.0]
+visual_transform:
+  x_rotation_degrees: 90.0
+  center_mesh_origin: false
+
+collision:
+  type: convex_hull
+  mesh: collision/model.obj
+  simulation: collision/model.urdf
+  mesh_sha256: ed7be7acc9c36fdfe6fdd06da0adbbc50f9ade8e2cecf0e7eb84851835cb4809
+  vertices: 258
+  triangles: 512
+  max_triangles: 512
+  bounding_radius: 0.025369
+  footprint_radius: 0.020976
+  support_height: 0.025300
+  half_extents: [0.020436, 0.020976, 0.025300]
+
+physics:
+  mass_range: [0.015, 0.030]
+  friction_range: [0.40, 0.70]
+  restitution_range: [0.15, 0.35]
+
+allowed_scenarios: [rolling, constant_force, free_fall]

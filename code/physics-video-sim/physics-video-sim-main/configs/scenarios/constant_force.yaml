@@ -1,0 +1,74 @@
+version: 1
+scenario: constant_force
+
+controlled_variants:
+  variable: constant_force
+  multipliers: [1.0, 0.5, 1.5]
+  labels: [x1, x0.5, x1.5]
+
+selection:
+  map_ids: [basketball_court, street]
+  asset_ids:
+    - sphere_basketball
+    - sphere_football
+    - sphere_baseball
+    - sphere_volleyball
+
+timing:
+  duration_seconds: 5.0625
+  frame_count: 81
+  physics_fps: 240
+  video_fps: 16
+
+physics:
+  gravity: [0.0, 0.0, -9.81]
+  rolling_friction: 0.0
+  spinning_friction: 0.0
+  # Express both displacement contributions relative to object size so the
+  # longer 81-frame clip remains visible for balls of different diameters.
+  initial_travel_object_extent_range: [0.8, 1.5]
+  acceleration_travel_object_extent_range: [1.5, 3.0]
+  direction_degrees_range: [-10.0, 10.0]
+
+surface:
+  allowed_types: [floor]
+  edge_margin: 0.10
+
+validation:
+  reject_initial_overlap: true
+  min_travel_distance: 0.03
+  max_linear_speed: 4.0
+  max_trajectory_extent_object_ratio: 18.0
+  min_force_response: 0.01
+  max_acceleration_relative_std: 0.50
+  require_supported: true
+  require_in_map_bounds: true
+
+camera:
+  policy: trajectory_side
+  relative_to_trajectory: true
+  side: random
+  azimuth_offset_degrees_range: [-12.0, 12.0]
+  focal_length_mm: 35.0
+  framing:
+    sensor_width_mm: 36.0
+    trajectory_frame_fraction: 0.80
+    object_padding: 0.25
+    min_object_frame_fraction: 0.03
+    max_object_frame_fraction: 0.30
+    min_object_frame_area_fraction: 0.0025
+    max_object_frame_area_fraction: 0.12
+    min_distance: 0.40
+    max_distance: 8.0
+    elevation_degrees: 6.0
+    min_height_above_trajectory: 0.20
+    look_at_offset: 0.0
+
+output:
+  resolution: [1280, 720]
+  modalities: [rgb, depth, segmentation]
+  save_physics_trajectory: true
+  save_render_trajectory: true
+  save_collision_events: true
+  save_config: true
+  write_video: true

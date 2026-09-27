@@ -1,0 +1,106 @@
+version: 1
+scenario: free_fall
+
+# ===========================================================================
+# 运动 #4 抛体运动
+#
+# Zero new code: the free_fall scenario ALREADY supports a horizontal launch
+# velocity (free_fall.py lines 52-58 read `horizontal_speed_range`), so a
+# projectile is a free_fall whose horizontal speed is large enough for the
+# parabolic arc to dominate.  The solver integrates gravity and the launch
+# velocity; no frame is prescribed.
+#
+# Difference from #3 (自由落体): here the actor is launched ACROSS the room, so the
+# horizontal displacement is the visible feature.  free_fall.yaml's own values
+# ([0.03, 0.12]) are a slight drift, not a throw, hence the larger range here.
+#
+# Actor choice: NO plush elephant -- material_class soft, no soft-body adaptation.
+# ===========================================================================
+
+controlled_variants:
+  variable: gravity
+  multipliers: [1.0, 0.5, 1.5]
+  labels: [x1, x0.5, x1.5]
+
+selection:
+  map_ids: [replicad_apartment]
+  asset_ids:
+    - gso_mad_gab_refresh_card_game
+    - gso_ecoforms_plant_container_gp16a_coral
+    - gso_down_to_earth_orchid_pot_ceramic_lime
+
+timing:
+  duration_seconds: 5.0625
+  frame_count: 81
+  physics_fps: 240
+  video_fps: 16
+
+physics:
+  gravity: [0.0, 0.0, -9.81]
+  rolling_friction: 0.0
+  spinning_friction: 0.0
+  # Sized to the room.  free_fall.py reserves the FULL clip duration of horizontal
+  # travel as placement margin (travel_distance = horizontal_speed * duration), so
+  # a fast throw cannot be placed inside a 5.10 x 3.70 m living room: at 1.5 m/s the
+  # reservation alone is 7.6 m.  The cap is therefore ~0.40 m/s.
+  #
+  # 0.30-0.40 m/s over the ~0.45 s flight carries the actor ~0.14-0.18 m sideways
+  # while it falls ~1 m, so the trajectory is a clear parabola; the horizontal
+  # component then continues as a slide after landing.
+  horizontal_speed_range: [0.30, 0.40]
+  vertical_speed_range: [-0.05, 0.05]
+  angular_speed_range: [0.0, 1.5]
+  direction_degrees_range: [-180.0, 180.0]
+  restitution_range: [0.15, 0.30]
+  drop_height_absolute_range: [0.90, 1.20]
+  drop_height_object_extent_range: [5.0, 9.0]
+
+surface:
+  allowed_types: [floor]
+  # Modest margin; the sampler already reserves the full horizontal travel and the
+  # drop height, so a large edge_margin would make placement impossible.
+  edge_margin: 0.20
+
+validation:
+  max_sample_attempts: 200
+  reject_initial_overlap: true
+  min_drop_height: 0.70
+  min_drop_distance: 0.70
+  max_linear_speed: 8.0
+  max_trajectory_extent_object_ratio: 18.0
+  max_surface_penetration: 0.04
+  require_expected_collision: true
+  require_bounce: false
+  min_bounce_upward_speed: 0.03
+  max_settle_speed: 0.06
+  max_soft_rebound_speed: 0.35
+  require_in_map_bounds: true
+
+camera:
+  policy: trajectory_side
+  relative_to_trajectory: true
+  side: random
+  azimuth_offset_degrees_range: [-15.0, 15.0]
+  focal_length_mm: 35.0
+  framing:
+    sensor_width_mm: 36.0
+    trajectory_frame_fraction: 0.78
+    object_padding: 0.30
+    min_object_frame_fraction: 0.03
+    max_object_frame_fraction: 0.30
+    min_object_frame_area_fraction: 0.0025
+    max_object_frame_area_fraction: 0.12
+    min_distance: 0.40
+    max_distance: 8.00
+    elevation_degrees: 6.0
+    min_height_above_trajectory: 0.15
+    look_at_offset: 0.0
+
+output:
+  resolution: [1920, 1080]
+  modalities: [rgb, depth, segmentation]
+  save_physics_trajectory: true
+  save_render_trajectory: true
+  save_collision_events: true
+  save_config: true
+  write_video: true

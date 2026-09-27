@@ -1,0 +1,43 @@
+version: 1
+id: gso_ecoforms_plant_container_gp16a_coral
+kind: object
+category: none
+
+source: Google Scanned Objects (GSO)
+source_filename: Ecoforms_Plant_Container_GP16A_Coral
+license: CC BY-SA 4.0
+license_note: attribution + ShareAlike; see license/SOURCE.md
+
+quality:
+  vertices: 5342
+  triangles: 10040
+  normalized_max_dimension_m: 0.164742
+
+visual:
+  mesh: visual/model.obj
+  size: [0.164742, 0.164468, 0.160835]
+  scale: [1.0, 1.0, 1.0]
+
+visual_transform:
+  x_rotation_degrees: 0.0
+  center_mesh_origin: false
+
+initial_orientation:
+  policy: fixed_authored_upright
+  quaternion_wxyz: [1.0, 0.0, 0.0, 0.0]
+
+collision:
+  type: convex_hull
+  mesh: collision/model.obj
+  simulation: collision/model.urdf
+  bounding_radius: 0.141472
+  footprint_radius: 0.082371
+  support_height: 0.079060
+  half_extents: [0.082371, 0.082234, 0.080418]
+
+physics:
+  mass_range: [0.000141, 0.000212]
+  friction_range: [0.30, 0.60]
+  restitution_range: [0.05, 0.35]
+
+allowed_scenarios: [rolling, constant_force, free_fall, turntable_carry, turntable_spin, damping]

@@ -1,0 +1,596 @@
+{
+  "preset": "phase1",
+  "created": "2026-09-21T04:42:11",
+  "common_args": {
+    "--resolution": "768x432",
+    "--samples": "64",
+    "--frame_rate": "24",
+    "--threads": "17",
+    "--output_dir": "/data/raw/huzijian/project1_database/outcomes/dataset/single_object",
+    "--save_mp4": "True",
+    "--qa_sheet": "True",
+    "--hdri_random": "True"
+  },
+  "jobs_total": 36,
+  "jobs_ok": 36,
+  "jobs_failed": 0,
+  "wall_seconds": 4948.3,
+  "results": [
+    {
+      "label": "circular_objectball_radius0.8_period2.0",
+      "args": {
+        "--motion": "circular",
+        "--frame_end": "95",
+        "--object": "ball",
+        "--radius": "0.8",
+        "--period": "2.0"
+      },
+      "returncode": 0,
+      "seconds": 901.7,
+      "ok": true,
+      "output_dir": "/data/raw/huzijian/project1_database/outcomes/dataset/single_object/circular_objectball_radius0.8_period2.0",
+      "stdout_tail": "4 | Compositing | Tile 6-6\nFra:95 Mem:77.06M (Peak 530.61M) | Time:00:04.74 | Compositing | De-initializing execution\nSaved: '/data/raw/huzijian/project1_database/tmp/phyco_scratch_f30h2i2w/images/frame_0095.png'\n Time: 00:04.88 (Saving: 00:00.05)\n\n[phyco] rendered 96 frames in 891.0s (9.28s/frame)\n[phyco] videos: ['depth', 'rgb', 'segmentation']\n[phyco] QA sheet: qa_contact_sheet.jpg\n[phyco] DONE -> /data/raw/huzijian/project1_database/outcomes/dataset/single_object/circular_objectball_radius0.8_period2.0\n[phyco] frames written: {'rgba': 96, 'segmentation': 96, 'depth': 96}\n[phyco] exit rc=0\n",
+      "stderr_tail": ""
+    },
+    {
+      "label": "circular_objectball_radius0.8_period3.0",
+      "args": {
+        "--motion": "circular",
+        "--frame_end": "95",
+        "--object": "ball",
+        "--radius": "0.8",
+        "--period": "3.0"
+      },
+      "returncode": 0,
+      "seconds": 897.1,
+      "ok": true,
+      "output_dir": "/data/raw/huzijian/project1_database/outcomes/dataset/single_object/circular_objectball_radius0.8_period3.0",
+      "stdout_tail": "2 | Compositing | Tile 6-6\nFra:95 Mem:77.06M (Peak 530.61M) | Time:00:05.92 | Compositing | De-initializing execution\nSaved: '/data/raw/huzijian/project1_database/tmp/phyco_scratch_q426w4pf/images/frame_0095.png'\n Time: 00:06.05 (Saving: 00:00.06)\n\n[phyco] rendered 96 frames in 887.3s (9.24s/frame)\n[phyco] videos: ['depth', 'rgb', 'segmentation']\n[phyco] QA sheet: qa_contact_sheet.jpg\n[phyco] DONE -> /data/raw/huzijian/project1_database/outcomes/dataset/single_object/circular_objectball_radius0.8_period3.0\n[phyco] frames written: {'rgba': 96, 'segmentation': 96, 'depth': 96}\n[phyco] exit rc=0\n",
+      "stderr_tail": ""
+    },
+    {
+      "label": "circular_objectball_radius1.2_period2.0",
+      "args": {
+        "--motion": "circular",
+        "--frame_end": "95",
+        "--object": "ball",
+        "--radius": "1.2",
+        "--period": "2.0"
+      },
+      "returncode": 0,
+      "seconds": 889.5,
+      "ok": true,
+      "output_dir": "/data/raw/huzijian/project1_database/outcomes/dataset/single_object/circular_objectball_radius1.2_period2.0",
+      "stdout_tail": "6 | Compositing | Tile 6-6\nFra:95 Mem:77.06M (Peak 530.61M) | Time:00:06.76 | Compositing | De-initializing execution\nSaved: '/data/raw/huzijian/project1_database/tmp/phyco_scratch_ddwgz9r3/images/frame_0095.png'\n Time: 00:06.97 (Saving: 00:00.12)\n\n[phyco] rendered 96 frames in 879.8s (9.16s/frame)\n[phyco] videos: ['depth', 'rgb', 'segmentation']\n[phyco] QA sheet: qa_contact_sheet.jpg\n[phyco] DONE -> /data/raw/huzijian/project1_database/outcomes/dataset/single_object/circular_objectball_radius1.2_period2.0\n[phyco] frames written: {'rgba': 96, 'segmentation': 96, 'depth': 96}\n[phyco] exit rc=0\n",
+      "stderr_tail": ""
+    },
+    {
+      "label": "circular_objectball_radius1.2_period3.0",
+      "args": {
+        "--motion": "circular",
+        "--frame_end": "95",
+        "--object": "ball",
+        "--radius": "1.2",
+        "--period": "3.0"
+      },
+      "returncode": 0,
+      "seconds": 890.7,
+      "ok": true,
+      "output_dir": "/data/raw/huzijian/project1_database/outcomes/dataset/single_object/circular_objectball_radius1.2_period3.0",
+      "stdout_tail": "4 | Compositing | Tile 6-6\nFra:95 Mem:77.06M (Peak 530.61M) | Time:00:06.74 | Compositing | De-initializing execution\nSaved: '/data/raw/huzijian/project1_database/tmp/phyco_scratch_5_gfh8y8/images/frame_0095.png'\n Time: 00:06.92 (Saving: 00:00.09)\n\n[phyco] rendered 96 frames in 880.8s (9.18s/frame)\n[phyco] videos: ['depth', 'rgb', 'segmentation']\n[phyco] QA sheet: qa_contact_sheet.jpg\n[phyco] DONE -> /data/raw/huzijian/project1_database/outcomes/dataset/single_object/circular_objectball_radius1.2_period3.0\n[phyco] frames written: {'rgba': 96, 'segmentation': 96, 'depth': 96}\n[phyco] exit rc=0\n",
+      "stderr_tail": ""
+    },
+    {
+      "label": "circular_objectbrick_box_radius0.8_period2.0",
+      "args": {
+        "--motion": "circular",
+        "--frame_end": "95",
+        "--object": "brick_box",
+        "--radius": "0.8",
+        "--period": "2.0"
+      },
+      "returncode": 0,
+      "seconds": 900.6,
+      "ok": true,
+      "output_dir": "/data/raw/huzijian/project1_database/outcomes/dataset/single_object/circular_objectbrick_box_radius0.8_period2.0",
+      "stdout_tail": "ompositing | Tile 6-6\nFra:95 Mem:73.09M (Peak 524.38M) | Time:00:05.80 | Compositing | De-initializing execution\nSaved: '/data/raw/huzijian/project1_database/tmp/phyco_scratch_mq59ucnl/images/frame_0095.png'\n Time: 00:05.94 (Saving: 00:00.06)\n\n[phyco] rendered 96 frames in 890.6s (9.28s/frame)\n[phyco] videos: ['depth', 'rgb', 'segmentation']\n[phyco] QA sheet: qa_contact_sheet.jpg\n[phyco] DONE -> /data/raw/huzijian/project1_database/outcomes/dataset/single_object/circular_objectbrick_box_radius0.8_period2.0\n[phyco] frames written: {'rgba': 96, 'segmentation': 96, 'depth': 96}\n[phyco] exit rc=0\n",
+      "stderr_tail": ""
+    },
+    {
+      "label": "circular_objectbrick_box_radius0.8_period3.0",
+      "args": {
+        "--motion": "circular",
+        "--frame_end": "95",
+        "--object": "brick_box",
+        "--radius": "0.8",
+        "--period": "3.0"
+      },
+      "returncode": 0,
+      "seconds": 897.1,
+      "ok": true,
+      "output_dir": "/data/raw/huzijian/project1_database/outcomes/dataset/single_object/circular_objectbrick_box_radius0.8_period3.0",
+      "stdout_tail": "ompositing | Tile 6-6\nFra:95 Mem:73.09M (Peak 524.38M) | Time:00:05.48 | Compositing | De-initializing execution\nSaved: '/data/raw/huzijian/project1_database/tmp/phyco_scratch_vkg6g3vm/images/frame_0095.png'\n Time: 00:05.62 (Saving: 00:00.06)\n\n[phyco] rendered 96 frames in 887.7s (9.25s/frame)\n[phyco] videos: ['depth', 'rgb', 'segmentation']\n[phyco] QA sheet: qa_contact_sheet.jpg\n[phyco] DONE -> /data/raw/huzijian/project1_database/outcomes/dataset/single_object/circular_objectbrick_box_radius0.8_period3.0\n[phyco] frames written: {'rgba': 96, 'segmentation': 96, 'depth': 96}\n[phyco] exit rc=0\n",
+      "stderr_tail": ""
+    },
+    {
+      "label": "circular_objectbrick_box_radius1.2_period2.0",
+      "args": {
+        "--motion": "circular",
+        "--frame_end": "95",
+        "--object": "brick_box",
+        "--radius": "1.2",
+        "--period": "2.0"
+      },
+      "returncode": 0,
+      "seconds": 886.7,
+      "ok": true,
+      "output_dir": "/data/raw/huzijian/project1_database/outcomes/dataset/single_object/circular_objectbrick_box_radius1.2_period2.0",
+      "stdout_tail": "ompositing | Tile 6-6\nFra:95 Mem:73.09M (Peak 524.38M) | Time:00:06.67 | Compositing | De-initializing execution\nSaved: '/data/raw/huzijian/project1_database/tmp/phyco_scratch_cm6p2hb7/images/frame_0095.png'\n Time: 00:06.84 (Saving: 00:00.08)\n\n[phyco] rendered 96 frames in 875.6s (9.12s/frame)\n[phyco] videos: ['depth', 'rgb', 'segmentation']\n[phyco] QA sheet: qa_contact_sheet.jpg\n[phyco] DONE -> /data/raw/huzijian/project1_database/outcomes/dataset/single_object/circular_objectbrick_box_radius1.2_period2.0\n[phyco] frames written: {'rgba': 96, 'segmentation': 96, 'depth': 96}\n[phyco] exit rc=0\n",
+      "stderr_tail": ""
+    },
+    {
+      "label": "circular_objectbrick_box_radius1.2_period3.0",
+      "args": {
+        "--motion": "circular",
+        "--frame_end": "95",
+        "--object": "brick_box",
+        "--radius": "1.2",
+        "--period": "3.0"
+      },
+      "returncode": 0,
+      "seconds": 885.5,
+      "ok": true,
+      "output_dir": "/data/raw/huzijian/project1_database/outcomes/dataset/single_object/circular_objectbrick_box_radius1.2_period3.0",
+      "stdout_tail": "ompositing | Tile 6-6\nFra:95 Mem:73.09M (Peak 524.38M) | Time:00:06.37 | Compositing | De-initializing execution\nSaved: '/data/raw/huzijian/project1_database/tmp/phyco_scratch_5eut90yo/images/frame_0095.png'\n Time: 00:06.51 (Saving: 00:00.07)\n\n[phyco] rendered 96 frames in 875.8s (9.12s/frame)\n[phyco] videos: ['depth', 'rgb', 'segmentation']\n[phyco] QA sheet: qa_contact_sheet.jpg\n[phyco] DONE -> /data/raw/huzijian/project1_database/outcomes/dataset/single_object/circular_objectbrick_box_radius1.2_period3.0\n[phyco] frames written: {'rgba': 96, 'segmentation': 96, 'depth': 96}\n[phyco] exit rc=0\n",
+      "stderr_tail": ""
+    },
+    {
+      "label": "circular_objectjenga_radius0.8_period2.0",
+      "args": {
+        "--motion": "circular",
+        "--frame_end": "95",
+        "--object": "jenga",
+        "--radius": "0.8",
+        "--period": "2.0"
+      },
+      "returncode": 0,
+      "seconds": 884.5,
+      "ok": true,
+      "output_dir": "/data/raw/huzijian/project1_database/outcomes/dataset/single_object/circular_objectjenga_radius0.8_period2.0",
+      "stdout_tail": " | Compositing | Tile 6-6\nFra:95 Mem:73.28M (Peak 524.68M) | Time:00:05.91 | Compositing | De-initializing execution\nSaved: '/data/raw/huzijian/project1_database/tmp/phyco_scratch_67109ukh/images/frame_0095.png'\n Time: 00:06.05 (Saving: 00:00.06)\n\n[phyco] rendered 96 frames in 874.5s (9.11s/frame)\n[phyco] videos: ['depth', 'rgb', 'segmentation']\n[phyco] QA sheet: qa_contact_sheet.jpg\n[phyco] DONE -> /data/raw/huzijian/project1_database/outcomes/dataset/single_object/circular_objectjenga_radius0.8_period2.0\n[phyco] frames written: {'rgba': 96, 'segmentation': 96, 'depth': 96}\n[phyco] exit rc=0\n",
+      "stderr_tail": ""
+    },
+    {
+      "label": "circular_objectjenga_radius0.8_period3.0",
+      "args": {
+        "--motion": "circular",
+        "--frame_end": "95",
+        "--object": "jenga",
+        "--radius": "0.8",
+        "--period": "3.0"
+      },
+      "returncode": 0,
+      "seconds": 890.7,
+      "ok": true,
+      "output_dir": "/data/raw/huzijian/project1_database/outcomes/dataset/single_object/circular_objectjenga_radius0.8_period3.0",
+      "stdout_tail": " | Compositing | Tile 6-6\nFra:95 Mem:73.28M (Peak 524.68M) | Time:00:04.49 | Compositing | De-initializing execution\nSaved: '/data/raw/huzijian/project1_database/tmp/phyco_scratch_e552buu3/images/frame_0095.png'\n Time: 00:04.62 (Saving: 00:00.06)\n\n[phyco] rendered 96 frames in 880.4s (9.17s/frame)\n[phyco] videos: ['depth', 'rgb', 'segmentation']\n[phyco] QA sheet: qa_contact_sheet.jpg\n[phyco] DONE -> /data/raw/huzijian/project1_database/outcomes/dataset/single_object/circular_objectjenga_radius0.8_period3.0\n[phyco] frames written: {'rgba': 96, 'segmentation': 96, 'depth': 96}\n[phyco] exit rc=0\n",
+      "stderr_tail": ""
+    },
+    {
+      "label": "circular_objectjenga_radius1.2_period2.0",
+      "args": {
+        "--motion": "circular",
+        "--frame_end": "95",
+        "--object": "jenga",
+        "--radius": "1.2",
+        "--period": "2.0"
+      },
+      "returncode": 0,
+      "seconds": 883.5,
+      "ok": true,
+      "output_dir": "/data/raw/huzijian/project1_database/outcomes/dataset/single_object/circular_objectjenga_radius1.2_period2.0",
+      "stdout_tail": " | Compositing | Tile 6-6\nFra:95 Mem:73.28M (Peak 524.68M) | Time:00:05.36 | Compositing | De-initializing execution\nSaved: '/data/raw/huzijian/project1_database/tmp/phyco_scratch_u5d995ot/images/frame_0095.png'\n Time: 00:05.52 (Saving: 00:00.08)\n\n[phyco] rendered 96 frames in 872.8s (9.09s/frame)\n[phyco] videos: ['depth', 'rgb', 'segmentation']\n[phyco] QA sheet: qa_contact_sheet.jpg\n[phyco] DONE -> /data/raw/huzijian/project1_database/outcomes/dataset/single_object/circular_objectjenga_radius1.2_period2.0\n[phyco] frames written: {'rgba': 96, 'segmentation': 96, 'depth': 96}\n[phyco] exit rc=0\n",
+      "stderr_tail": ""
+    },
+    {
+      "label": "circular_objectjenga_radius1.2_period3.0",
+      "args": {
+        "--motion": "circular",
+        "--frame_end": "95",
+        "--object": "jenga",
+        "--radius": "1.2",
+        "--period": "3.0"
+      },
+      "returncode": 0,
+      "seconds": 884.7,
+      "ok": true,
+      "output_dir": "/data/raw/huzijian/project1_database/outcomes/dataset/single_object/circular_objectjenga_radius1.2_period3.0",
+      "stdout_tail": " | Compositing | Tile 6-6\nFra:95 Mem:73.28M (Peak 524.68M) | Time:00:04.94 | Compositing | De-initializing execution\nSaved: '/data/raw/huzijian/project1_database/tmp/phyco_scratch_hs3c6l0l/images/frame_0095.png'\n Time: 00:05.06 (Saving: 00:00.06)\n\n[phyco] rendered 96 frames in 873.5s (9.10s/frame)\n[phyco] videos: ['depth', 'rgb', 'segmentation']\n[phyco] QA sheet: qa_contact_sheet.jpg\n[phyco] DONE -> /data/raw/huzijian/project1_database/outcomes/dataset/single_object/circular_objectjenga_radius1.2_period3.0\n[phyco] frames written: {'rgba': 96, 'segmentation': 96, 'depth': 96}\n[phyco] exit rc=0\n",
+      "stderr_tail": ""
+    },
+    {
+      "label": "damped_objectball_speed2.0_linear_damping0.8",
+      "args": {
+        "--motion": "damped",
+        "--frame_end": "95",
+        "--object": "ball",
+        "--speed": "2.0",
+        "--linear_damping": "0.8"
+      },
+      "returncode": 0,
+      "seconds": 520.7,
+      "ok": true,
+      "output_dir": "/data/raw/huzijian/project1_database/outcomes/dataset/single_object/damped_objectball_speed2.0_linear_damping0.8",
+      "stdout_tail": "ompositing | Tile 6-6\nFra:95 Mem:76.90M (Peak 530.44M) | Time:00:03.03 | Compositing | De-initializing execution\nSaved: '/data/raw/huzijian/project1_database/tmp/phyco_scratch_iv4lqm7v/images/frame_0095.png'\n Time: 00:03.21 (Saving: 00:00.10)\n\n[phyco] rendered 96 frames in 509.5s (5.31s/frame)\n[phyco] videos: ['depth', 'rgb', 'segmentation']\n[phyco] QA sheet: qa_contact_sheet.jpg\n[phyco] DONE -> /data/raw/huzijian/project1_database/outcomes/dataset/single_object/damped_objectball_speed2.0_linear_damping0.8\n[phyco] frames written: {'rgba': 96, 'segmentation': 96, 'depth': 96}\n[phyco] exit rc=0\n",
+      "stderr_tail": ""
+    },
+    {
+      "label": "damped_objectball_speed2.0_linear_damping1.6",
+      "args": {
+        "--motion": "damped",
+        "--frame_end": "95",
+        "--object": "ball",
+        "--speed": "2.0",
+        "--linear_damping": "1.6"
+      },
+      "returncode": 0,
+      "seconds": 526.6,
+      "ok": true,
+      "output_dir": "/data/raw/huzijian/project1_database/outcomes/dataset/single_object/damped_objectball_speed2.0_linear_damping1.6",
+      "stdout_tail": "ompositing | Tile 6-6\nFra:95 Mem:76.90M (Peak 530.44M) | Time:00:02.76 | Compositing | De-initializing execution\nSaved: '/data/raw/huzijian/project1_database/tmp/phyco_scratch_4xhvij91/images/frame_0095.png'\n Time: 00:02.88 (Saving: 00:00.06)\n\n[phyco] rendered 96 frames in 515.5s (5.37s/frame)\n[phyco] videos: ['depth', 'rgb', 'segmentation']\n[phyco] QA sheet: qa_contact_sheet.jpg\n[phyco] DONE -> /data/raw/huzijian/project1_database/outcomes/dataset/single_object/damped_objectball_speed2.0_linear_damping1.6\n[phyco] frames written: {'rgba': 96, 'segmentation': 96, 'depth': 96}\n[phyco] exit rc=0\n",
+      "stderr_tail": ""
+    },
+    {
+      "label": "damped_objectball_speed3.5_linear_damping0.8",
+      "args": {
+        "--motion": "damped",
+        "--frame_end": "95",
+        "--object": "ball",
+        "--speed": "3.5",
+        "--linear_damping": "0.8"
+      },
+      "returncode": 0,
+      "seconds": 512.6,
+      "ok": true,
+      "output_dir": "/data/raw/huzijian/project1_database/outcomes/dataset/single_object/damped_objectball_speed3.5_linear_damping0.8",
+      "stdout_tail": "ompositing | Tile 6-6\nFra:95 Mem:76.90M (Peak 530.44M) | Time:00:03.02 | Compositing | De-initializing execution\nSaved: '/data/raw/huzijian/project1_database/tmp/phyco_scratch_ih5icc70/images/frame_0095.png'\n Time: 00:03.14 (Saving: 00:00.06)\n\n[phyco] rendered 96 frames in 502.7s (5.24s/frame)\n[phyco] videos: ['depth', 'rgb', 'segmentation']\n[phyco] QA sheet: qa_contact_sheet.jpg\n[phyco] DONE -> /data/raw/huzijian/project1_database/outcomes/dataset/single_object/damped_objectball_speed3.5_linear_damping0.8\n[phyco] frames written: {'rgba': 96, 'segmentation': 96, 'depth': 96}\n[phyco] exit rc=0\n",
+      "stderr_tail": ""
+    },
+    {
+      "label": "damped_objectball_speed3.5_linear_damping1.6",
+      "args": {
+        "--motion": "damped",
+        "--frame_end": "95",
+        "--object": "ball",
+        "--speed": "3.5",
+        "--linear_damping": "1.6"
+      },
+      "returncode": 0,
+      "seconds": 518.2,
+      "ok": true,
+      "output_dir": "/data/raw/huzijian/project1_database/outcomes/dataset/single_object/damped_objectball_speed3.5_linear_damping1.6",
+      "stdout_tail": "ompositing | Tile 5-6\nFra:95 Mem:76.90M (Peak 530.44M) | Time:00:02.68 | Compositing | De-initializing execution\nSaved: '/data/raw/huzijian/project1_database/tmp/phyco_scratch_wvvgihif/images/frame_0095.png'\n Time: 00:02.83 (Saving: 00:00.08)\n\n[phyco] rendered 96 frames in 508.2s (5.29s/frame)\n[phyco] videos: ['depth', 'rgb', 'segmentation']\n[phyco] QA sheet: qa_contact_sheet.jpg\n[phyco] DONE -> /data/raw/huzijian/project1_database/outcomes/dataset/single_object/damped_objectball_speed3.5_linear_damping1.6\n[phyco] frames written: {'rgba': 96, 'segmentation': 96, 'depth': 96}\n[phyco] exit rc=0\n",
+      "stderr_tail": ""
+    },
+    {
+      "label": "damped_objectbrick_box_speed2.0_linear_damping0.8",
+      "args": {
+        "--motion": "damped",
+        "--frame_end": "95",
+        "--object": "brick_box",
+        "--speed": "2.0",
+        "--linear_damping": "0.8"
+      },
+      "returncode": 0,
+      "seconds": 516.7,
+      "ok": true,
+      "output_dir": "/data/raw/huzijian/project1_database/outcomes/dataset/single_object/damped_objectbrick_box_speed2.0_linear_damping0.8",
+      "stdout_tail": "iting | Tile 6-6\nFra:95 Mem:72.93M (Peak 524.22M) | Time:00:02.61 | Compositing | De-initializing execution\nSaved: '/data/raw/huzijian/project1_database/tmp/phyco_scratch_n359b4vu/images/frame_0095.png'\n Time: 00:02.74 (Saving: 00:00.06)\n\n[phyco] rendered 96 frames in 507.0s (5.28s/frame)\n[phyco] videos: ['depth', 'rgb', 'segmentation']\n[phyco] QA sheet: qa_contact_sheet.jpg\n[phyco] DONE -> /data/raw/huzijian/project1_database/outcomes/dataset/single_object/damped_objectbrick_box_speed2.0_linear_damping0.8\n[phyco] frames written: {'rgba': 96, 'segmentation': 96, 'depth': 96}\n[phyco] exit rc=0\n",
+      "stderr_tail": ""
+    },
+    {
+      "label": "damped_objectbrick_box_speed2.0_linear_damping1.6",
+      "args": {
+        "--motion": "damped",
+        "--frame_end": "95",
+        "--object": "brick_box",
+        "--speed": "2.0",
+        "--linear_damping": "1.6"
+      },
+      "returncode": 0,
+      "seconds": 523.0,
+      "ok": true,
+      "output_dir": "/data/raw/huzijian/project1_database/outcomes/dataset/single_object/damped_objectbrick_box_speed2.0_linear_damping1.6",
+      "stdout_tail": "iting | Tile 6-6\nFra:95 Mem:72.93M (Peak 524.22M) | Time:00:02.49 | Compositing | De-initializing execution\nSaved: '/data/raw/huzijian/project1_database/tmp/phyco_scratch_hhao59mr/images/frame_0095.png'\n Time: 00:02.62 (Saving: 00:00.06)\n\n[phyco] rendered 96 frames in 513.1s (5.34s/frame)\n[phyco] videos: ['depth', 'rgb', 'segmentation']\n[phyco] QA sheet: qa_contact_sheet.jpg\n[phyco] DONE -> /data/raw/huzijian/project1_database/outcomes/dataset/single_object/damped_objectbrick_box_speed2.0_linear_damping1.6\n[phyco] frames written: {'rgba': 96, 'segmentation': 96, 'depth': 96}\n[phyco] exit rc=0\n",
+      "stderr_tail": ""
+    },
+    {
+      "label": "damped_objectbrick_box_speed3.5_linear_damping0.8",
+      "args": {
+        "--motion": "damped",
+        "--frame_end": "95",
+        "--object": "brick_box",
+        "--speed": "3.5",
+        "--linear_damping": "0.8"
+      },
+      "returncode": 0,
+      "seconds": 513.8,
+      "ok": true,
+      "output_dir": "/data/raw/huzijian/project1_database/outcomes/dataset/single_object/damped_objectbrick_box_speed3.5_linear_damping0.8",
+      "stdout_tail": "iting | Tile 6-6\nFra:95 Mem:72.93M (Peak 524.22M) | Time:00:03.04 | Compositing | De-initializing execution\nSaved: '/data/raw/huzijian/project1_database/tmp/phyco_scratch_lo04n2rb/images/frame_0095.png'\n Time: 00:03.17 (Saving: 00:00.07)\n\n[phyco] rendered 96 frames in 503.4s (5.24s/frame)\n[phyco] videos: ['depth', 'rgb', 'segmentation']\n[phyco] QA sheet: qa_contact_sheet.jpg\n[phyco] DONE -> /data/raw/huzijian/project1_database/outcomes/dataset/single_object/damped_objectbrick_box_speed3.5_linear_damping0.8\n[phyco] frames written: {'rgba': 96, 'segmentation': 96, 'depth': 96}\n[phyco] exit rc=0\n",
+      "stderr_tail": ""
+    },
+    {
+      "label": "damped_objectbrick_box_speed3.5_linear_damping1.6",
+      "args": {
+        "--motion": "damped",
+        "--frame_end": "95",
+        "--object": "brick_box",
+        "--speed": "3.5",
+        "--linear_damping": "1.6"
+      },
+      "returncode": 0,
+      "seconds": 513.0,
+      "ok": true,
+      "output_dir": "/data/raw/huzijian/project1_database/outcomes/dataset/single_object/damped_objectbrick_box_speed3.5_linear_damping1.6",
+      "stdout_tail": "iting | Tile 6-6\nFra:95 Mem:72.93M (Peak 524.22M) | Time:00:02.73 | Compositing | De-initializing execution\nSaved: '/data/raw/huzijian/project1_database/tmp/phyco_scratch_517kozde/images/frame_0095.png'\n Time: 00:02.88 (Saving: 00:00.09)\n\n[phyco] rendered 96 frames in 504.2s (5.25s/frame)\n[phyco] videos: ['depth', 'rgb', 'segmentation']\n[phyco] QA sheet: qa_contact_sheet.jpg\n[phyco] DONE -> /data/raw/huzijian/project1_database/outcomes/dataset/single_object/damped_objectbrick_box_speed3.5_linear_damping1.6\n[phyco] frames written: {'rgba': 96, 'segmentation': 96, 'depth': 96}\n[phyco] exit rc=0\n",
+      "stderr_tail": ""
+    },
+    {
+      "label": "damped_objectjenga_speed2.0_linear_damping0.8",
+      "args": {
+        "--motion": "damped",
+        "--frame_end": "95",
+        "--object": "jenga",
+        "--speed": "2.0",
+        "--linear_damping": "0.8"
+      },
+      "returncode": 0,
+      "seconds": 505.4,
+      "ok": true,
+      "output_dir": "/data/raw/huzijian/project1_database/outcomes/dataset/single_object/damped_objectjenga_speed2.0_linear_damping0.8",
+      "stdout_tail": "mpositing | Tile 4-6\nFra:95 Mem:73.12M (Peak 524.51M) | Time:00:02.91 | Compositing | De-initializing execution\nSaved: '/data/raw/huzijian/project1_database/tmp/phyco_scratch_byulnx1h/images/frame_0095.png'\n Time: 00:03.08 (Saving: 00:00.10)\n\n[phyco] rendered 96 frames in 496.7s (5.17s/frame)\n[phyco] videos: ['depth', 'rgb', 'segmentation']\n[phyco] QA sheet: qa_contact_sheet.jpg\n[phyco] DONE -> /data/raw/huzijian/project1_database/outcomes/dataset/single_object/damped_objectjenga_speed2.0_linear_damping0.8\n[phyco] frames written: {'rgba': 96, 'segmentation': 96, 'depth': 96}\n[phyco] exit rc=0\n",
+      "stderr_tail": ""
+    },
+    {
+      "label": "damped_objectjenga_speed2.0_linear_damping1.6",
+      "args": {
+        "--motion": "damped",
+        "--frame_end": "95",
+        "--object": "jenga",
+        "--speed": "2.0",
+        "--linear_damping": "1.6"
+      },
+      "returncode": 0,
+      "seconds": 512.5,
+      "ok": true,
+      "output_dir": "/data/raw/huzijian/project1_database/outcomes/dataset/single_object/damped_objectjenga_speed2.0_linear_damping1.6",
+      "stdout_tail": "mpositing | Tile 6-6\nFra:95 Mem:73.12M (Peak 524.51M) | Time:00:02.57 | Compositing | De-initializing execution\nSaved: '/data/raw/huzijian/project1_database/tmp/phyco_scratch_9ou4w5k4/images/frame_0095.png'\n Time: 00:02.70 (Saving: 00:00.06)\n\n[phyco] rendered 96 frames in 503.2s (5.24s/frame)\n[phyco] videos: ['depth', 'rgb', 'segmentation']\n[phyco] QA sheet: qa_contact_sheet.jpg\n[phyco] DONE -> /data/raw/huzijian/project1_database/outcomes/dataset/single_object/damped_objectjenga_speed2.0_linear_damping1.6\n[phyco] frames written: {'rgba': 96, 'segmentation': 96, 'depth': 96}\n[phyco] exit rc=0\n",
+      "stderr_tail": ""
+    },
+    {
+      "label": "damped_objectjenga_speed3.5_linear_damping0.8",
+      "args": {
+        "--motion": "damped",
+        "--frame_end": "95",
+        "--object": "jenga",
+        "--speed": "3.5",
+        "--linear_damping": "0.8"
+      },
+      "returncode": 0,
+      "seconds": 504.3,
+      "ok": true,
+      "output_dir": "/data/raw/huzijian/project1_database/outcomes/dataset/single_object/damped_objectjenga_speed3.5_linear_damping0.8",
+      "stdout_tail": "mpositing | Tile 6-6\nFra:95 Mem:73.12M (Peak 524.51M) | Time:00:02.84 | Compositing | De-initializing execution\nSaved: '/data/raw/huzijian/project1_database/tmp/phyco_scratch_sy6z9dai/images/frame_0095.png'\n Time: 00:02.97 (Saving: 00:00.07)\n\n[phyco] rendered 96 frames in 495.2s (5.16s/frame)\n[phyco] videos: ['depth', 'rgb', 'segmentation']\n[phyco] QA sheet: qa_contact_sheet.jpg\n[phyco] DONE -> /data/raw/huzijian/project1_database/outcomes/dataset/single_object/damped_objectjenga_speed3.5_linear_damping0.8\n[phyco] frames written: {'rgba': 96, 'segmentation': 96, 'depth': 96}\n[phyco] exit rc=0\n",
+      "stderr_tail": ""
+    },
+    {
+      "label": "damped_objectjenga_speed3.5_linear_damping1.6",
+      "args": {
+        "--motion": "damped",
+        "--frame_end": "95",
+        "--object": "jenga",
+        "--speed": "3.5",
+        "--linear_damping": "1.6"
+      },
+      "returncode": 0,
+      "seconds": 508.7,
+      "ok": true,
+      "output_dir": "/data/raw/huzijian/project1_database/outcomes/dataset/single_object/damped_objectjenga_speed3.5_linear_damping1.6",
+      "stdout_tail": "mpositing | Tile 6-6\nFra:95 Mem:73.12M (Peak 524.51M) | Time:00:02.43 | Compositing | De-initializing execution\nSaved: '/data/raw/huzijian/project1_database/tmp/phyco_scratch_hcx8stlt/images/frame_0095.png'\n Time: 00:02.56 (Saving: 00:00.07)\n\n[phyco] rendered 96 frames in 498.1s (5.19s/frame)\n[phyco] videos: ['depth', 'rgb', 'segmentation']\n[phyco] QA sheet: qa_contact_sheet.jpg\n[phyco] DONE -> /data/raw/huzijian/project1_database/outcomes/dataset/single_object/damped_objectjenga_speed3.5_linear_damping1.6\n[phyco] frames written: {'rgba': 96, 'segmentation': 96, 'depth': 96}\n[phyco] exit rc=0\n",
+      "stderr_tail": ""
+    },
+    {
+      "label": "rotation_objectbrick_box_spin_axisy_spin_period2.0",
+      "args": {
+        "--motion": "rotation",
+        "--frame_end": "95",
+        "--object": "brick_box",
+        "--spin_axis": "y",
+        "--spin_period": "2.0"
+      },
+      "returncode": 0,
+      "seconds": 1057.1,
+      "ok": true,
+      "output_dir": "/data/raw/huzijian/project1_database/outcomes/dataset/single_object/rotation_objectbrick_box_spin_axisy_spin_period2.0",
+      "stdout_tail": "ng | Tile 6-6\nFra:95 Mem:73.09M (Peak 524.38M) | Time:00:08.84 | Compositing | De-initializing execution\nSaved: '/data/raw/huzijian/project1_database/tmp/phyco_scratch_ab5votya/images/frame_0095.png'\n Time: 00:09.01 (Saving: 00:00.08)\n\n[phyco] rendered 96 frames in 1046.0s (10.90s/frame)\n[phyco] videos: ['depth', 'rgb', 'segmentation']\n[phyco] QA sheet: qa_contact_sheet.jpg\n[phyco] DONE -> /data/raw/huzijian/project1_database/outcomes/dataset/single_object/rotation_objectbrick_box_spin_axisy_spin_period2.0\n[phyco] frames written: {'rgba': 96, 'segmentation': 96, 'depth': 96}\n[phyco] exit rc=0\n",
+      "stderr_tail": ""
+    },
+    {
+      "label": "rotation_objectbrick_box_spin_axisy_spin_period4.0",
+      "args": {
+        "--motion": "rotation",
+        "--frame_end": "95",
+        "--object": "brick_box",
+        "--spin_axis": "y",
+        "--spin_period": "4.0"
+      },
+      "returncode": 0,
+      "seconds": 1064.9,
+      "ok": true,
+      "output_dir": "/data/raw/huzijian/project1_database/outcomes/dataset/single_object/rotation_objectbrick_box_spin_axisy_spin_period4.0",
+      "stdout_tail": "ng | Tile 6-6\nFra:95 Mem:73.09M (Peak 524.38M) | Time:00:06.76 | Compositing | De-initializing execution\nSaved: '/data/raw/huzijian/project1_database/tmp/phyco_scratch_f1q2pgiq/images/frame_0095.png'\n Time: 00:06.89 (Saving: 00:00.06)\n\n[phyco] rendered 96 frames in 1054.4s (10.98s/frame)\n[phyco] videos: ['depth', 'rgb', 'segmentation']\n[phyco] QA sheet: qa_contact_sheet.jpg\n[phyco] DONE -> /data/raw/huzijian/project1_database/outcomes/dataset/single_object/rotation_objectbrick_box_spin_axisy_spin_period4.0\n[phyco] frames written: {'rgba': 96, 'segmentation': 96, 'depth': 96}\n[phyco] exit rc=0\n",
+      "stderr_tail": ""
+    },
+    {
+      "label": "rotation_objectbrick_box_spin_axisz_spin_period2.0",
+      "args": {
+        "--motion": "rotation",
+        "--frame_end": "95",
+        "--object": "brick_box",
+        "--spin_axis": "z",
+        "--spin_period": "2.0"
+      },
+      "returncode": 0,
+      "seconds": 1056.4,
+      "ok": true,
+      "output_dir": "/data/raw/huzijian/project1_database/outcomes/dataset/single_object/rotation_objectbrick_box_spin_axisz_spin_period2.0",
+      "stdout_tail": "ng | Tile 6-6\nFra:95 Mem:73.09M (Peak 524.38M) | Time:00:08.91 | Compositing | De-initializing execution\nSaved: '/data/raw/huzijian/project1_database/tmp/phyco_scratch_vep0_7sa/images/frame_0095.png'\n Time: 00:09.08 (Saving: 00:00.06)\n\n[phyco] rendered 96 frames in 1045.0s (10.89s/frame)\n[phyco] videos: ['depth', 'rgb', 'segmentation']\n[phyco] QA sheet: qa_contact_sheet.jpg\n[phyco] DONE -> /data/raw/huzijian/project1_database/outcomes/dataset/single_object/rotation_objectbrick_box_spin_axisz_spin_period2.0\n[phyco] frames written: {'rgba': 96, 'segmentation': 96, 'depth': 96}\n[phyco] exit rc=0\n",
+      "stderr_tail": ""
+    },
+    {
+      "label": "rotation_objectbrick_box_spin_axisz_spin_period4.0",
+      "args": {
+        "--motion": "rotation",
+        "--frame_end": "95",
+        "--object": "brick_box",
+        "--spin_axis": "z",
+        "--spin_period": "4.0"
+      },
+      "returncode": 0,
+      "seconds": 1059.5,
+      "ok": true,
+      "output_dir": "/data/raw/huzijian/project1_database/outcomes/dataset/single_object/rotation_objectbrick_box_spin_axisz_spin_period4.0",
+      "stdout_tail": "ng | Tile 6-6\nFra:95 Mem:73.09M (Peak 524.38M) | Time:00:07.97 | Compositing | De-initializing execution\nSaved: '/data/raw/huzijian/project1_database/tmp/phyco_scratch_drde_6up/images/frame_0095.png'\n Time: 00:08.13 (Saving: 00:00.08)\n\n[phyco] rendered 96 frames in 1048.2s (10.92s/frame)\n[phyco] videos: ['depth', 'rgb', 'segmentation']\n[phyco] QA sheet: qa_contact_sheet.jpg\n[phyco] DONE -> /data/raw/huzijian/project1_database/outcomes/dataset/single_object/rotation_objectbrick_box_spin_axisz_spin_period4.0\n[phyco] frames written: {'rgba': 96, 'segmentation': 96, 'depth': 96}\n[phyco] exit rc=0\n",
+      "stderr_tail": ""
+    },
+    {
+      "label": "rotation_objectbrick_spin_axisy_spin_period2.0",
+      "args": {
+        "--motion": "rotation",
+        "--frame_end": "95",
+        "--object": "brick",
+        "--spin_axis": "y",
+        "--spin_period": "2.0"
+      },
+      "returncode": 0,
+      "seconds": 1073.3,
+      "ok": true,
+      "output_dir": "/data/raw/huzijian/project1_database/outcomes/dataset/single_object/rotation_objectbrick_spin_axisy_spin_period2.0",
+      "stdout_tail": "siting | Tile 6-6\nFra:95 Mem:73.62M (Peak 525.35M) | Time:00:06.97 | Compositing | De-initializing execution\nSaved: '/data/raw/huzijian/project1_database/tmp/phyco_scratch_msa36and/images/frame_0095.png'\n Time: 00:07.15 (Saving: 00:00.08)\n\n[phyco] rendered 96 frames in 1061.7s (11.06s/frame)\n[phyco] videos: ['depth', 'rgb', 'segmentation']\n[phyco] QA sheet: qa_contact_sheet.jpg\n[phyco] DONE -> /data/raw/huzijian/project1_database/outcomes/dataset/single_object/rotation_objectbrick_spin_axisy_spin_period2.0\n[phyco] frames written: {'rgba': 96, 'segmentation': 96, 'depth': 96}\n[phyco] exit rc=0\n",
+      "stderr_tail": ""
+    },
+    {
+      "label": "rotation_objectbrick_spin_axisy_spin_period4.0",
+      "args": {
+        "--motion": "rotation",
+        "--frame_end": "95",
+        "--object": "brick",
+        "--spin_axis": "y",
+        "--spin_period": "4.0"
+      },
+      "returncode": 0,
+      "seconds": 1078.7,
+      "ok": true,
+      "output_dir": "/data/raw/huzijian/project1_database/outcomes/dataset/single_object/rotation_objectbrick_spin_axisy_spin_period4.0",
+      "stdout_tail": "siting | Tile 6-6\nFra:95 Mem:73.62M (Peak 525.35M) | Time:00:06.70 | Compositing | De-initializing execution\nSaved: '/data/raw/huzijian/project1_database/tmp/phyco_scratch_09x8x7ru/images/frame_0095.png'\n Time: 00:06.85 (Saving: 00:00.06)\n\n[phyco] rendered 96 frames in 1068.4s (11.13s/frame)\n[phyco] videos: ['depth', 'rgb', 'segmentation']\n[phyco] QA sheet: qa_contact_sheet.jpg\n[phyco] DONE -> /data/raw/huzijian/project1_database/outcomes/dataset/single_object/rotation_objectbrick_spin_axisy_spin_period4.0\n[phyco] frames written: {'rgba': 96, 'segmentation': 96, 'depth': 96}\n[phyco] exit rc=0\n",
+      "stderr_tail": ""
+    },
+    {
+      "label": "rotation_objectbrick_spin_axisz_spin_period2.0",
+      "args": {
+        "--motion": "rotation",
+        "--frame_end": "95",
+        "--object": "brick",
+        "--spin_axis": "z",
+        "--spin_period": "2.0"
+      },
+      "returncode": 0,
+      "seconds": 1092.1,
+      "ok": true,
+      "output_dir": "/data/raw/huzijian/project1_database/outcomes/dataset/single_object/rotation_objectbrick_spin_axisz_spin_period2.0",
+      "stdout_tail": "siting | Tile 6-6\nFra:95 Mem:73.62M (Peak 525.35M) | Time:00:05.59 | Compositing | De-initializing execution\nSaved: '/data/raw/huzijian/project1_database/tmp/phyco_scratch_z01e7vfp/images/frame_0095.png'\n Time: 00:05.73 (Saving: 00:00.07)\n\n[phyco] rendered 96 frames in 1079.4s (11.24s/frame)\n[phyco] videos: ['depth', 'rgb', 'segmentation']\n[phyco] QA sheet: qa_contact_sheet.jpg\n[phyco] DONE -> /data/raw/huzijian/project1_database/outcomes/dataset/single_object/rotation_objectbrick_spin_axisz_spin_period2.0\n[phyco] frames written: {'rgba': 96, 'segmentation': 96, 'depth': 96}\n[phyco] exit rc=0\n",
+      "stderr_tail": ""
+    },
+    {
+      "label": "rotation_objectbrick_spin_axisz_spin_period4.0",
+      "args": {
+        "--motion": "rotation",
+        "--frame_end": "95",
+        "--object": "brick",
+        "--spin_axis": "z",
+        "--spin_period": "4.0"
+      },
+      "returncode": 0,
+      "seconds": 1102.3,
+      "ok": true,
+      "output_dir": "/data/raw/huzijian/project1_database/outcomes/dataset/single_object/rotation_objectbrick_spin_axisz_spin_period4.0",
+      "stdout_tail": "siting | Tile 6-6\nFra:95 Mem:73.62M (Peak 525.35M) | Time:00:05.32 | Compositing | De-initializing execution\nSaved: '/data/raw/huzijian/project1_database/tmp/phyco_scratch_xrf7rvph/images/frame_0095.png'\n Time: 00:05.47 (Saving: 00:00.06)\n\n[phyco] rendered 96 frames in 1086.2s (11.31s/frame)\n[phyco] videos: ['depth', 'rgb', 'segmentation']\n[phyco] QA sheet: qa_contact_sheet.jpg\n[phyco] DONE -> /data/raw/huzijian/project1_database/outcomes/dataset/single_object/rotation_objectbrick_spin_axisz_spin_period4.0\n[phyco] frames written: {'rgba': 96, 'segmentation': 96, 'depth': 96}\n[phyco] exit rc=0\n",
+      "stderr_tail": ""
+    },
+    {
+      "label": "rotation_objectjenga_spin_axisy_spin_period2.0",
+      "args": {
+        "--motion": "rotation",
+        "--frame_end": "95",
+        "--object": "jenga",
+        "--spin_axis": "y",
+        "--spin_period": "2.0"
+      },
+      "returncode": 0,
+      "seconds": 1033.9,
+      "ok": true,
+      "output_dir": "/data/raw/huzijian/project1_database/outcomes/dataset/single_object/rotation_objectjenga_spin_axisy_spin_period2.0",
+      "stdout_tail": "siting | Tile 6-6\nFra:95 Mem:73.28M (Peak 524.68M) | Time:00:05.34 | Compositing | De-initializing execution\nSaved: '/data/raw/huzijian/project1_database/tmp/phyco_scratch_9xe752wj/images/frame_0095.png'\n Time: 00:05.48 (Saving: 00:00.06)\n\n[phyco] rendered 96 frames in 1022.2s (10.65s/frame)\n[phyco] videos: ['depth', 'rgb', 'segmentation']\n[phyco] QA sheet: qa_contact_sheet.jpg\n[phyco] DONE -> /data/raw/huzijian/project1_database/outcomes/dataset/single_object/rotation_objectjenga_spin_axisy_spin_period2.0\n[phyco] frames written: {'rgba': 96, 'segmentation': 96, 'depth': 96}\n[phyco] exit rc=0\n",
+      "stderr_tail": ""
+    },
+    {
+      "label": "rotation_objectjenga_spin_axisy_spin_period4.0",
+      "args": {
+        "--motion": "rotation",
+        "--frame_end": "95",
+        "--object": "jenga",
+        "--spin_axis": "y",
+        "--spin_period": "4.0"
+      },
+      "returncode": 0,
+      "seconds": 1026.5,
+      "ok": true,
+      "output_dir": "/data/raw/huzijian/project1_database/outcomes/dataset/single_object/rotation_objectjenga_spin_axisy_spin_period4.0",
+      "stdout_tail": "siting | Tile 6-6\nFra:95 Mem:73.28M (Peak 524.68M) | Time:00:05.16 | Compositing | De-initializing execution\nSaved: '/data/raw/huzijian/project1_database/tmp/phyco_scratch_f1hp18pr/images/frame_0095.png'\n Time: 00:05.30 (Saving: 00:00.06)\n\n[phyco] rendered 96 frames in 1014.5s (10.57s/frame)\n[phyco] videos: ['depth', 'rgb', 'segmentation']\n[phyco] QA sheet: qa_contact_sheet.jpg\n[phyco] DONE -> /data/raw/huzijian/project1_database/outcomes/dataset/single_object/rotation_objectjenga_spin_axisy_spin_period4.0\n[phyco] frames written: {'rgba': 96, 'segmentation': 96, 'depth': 96}\n[phyco] exit rc=0\n",
+      "stderr_tail": ""
+    },
+    {
+      "label": "rotation_objectjenga_spin_axisz_spin_period2.0",
+      "args": {
+        "--motion": "rotation",
+        "--frame_end": "95",
+        "--object": "jenga",
+        "--spin_axis": "z",
+        "--spin_period": "2.0"
+      },
+      "returncode": 0,
+      "seconds": 1041.5,
+      "ok": true,
+      "output_dir": "/data/raw/huzijian/project1_database/outcomes/dataset/single_object/rotation_objectjenga_spin_axisz_spin_period2.0",
+      "stdout_tail": "siting | Tile 6-6\nFra:95 Mem:73.28M (Peak 524.68M) | Time:00:08.05 | Compositing | De-initializing execution\nSaved: '/data/raw/huzijian/project1_database/tmp/phyco_scratch_jno7uygx/images/frame_0095.png'\n Time: 00:08.20 (Saving: 00:00.07)\n\n[phyco] rendered 96 frames in 1031.7s (10.75s/frame)\n[phyco] videos: ['depth', 'rgb', 'segmentation']\n[phyco] QA sheet: qa_contact_sheet.jpg\n[phyco] DONE -> /data/raw/huzijian/project1_database/outcomes/dataset/single_object/rotation_objectjenga_spin_axisz_spin_period2.0\n[phyco] frames written: {'rgba': 96, 'segmentation': 96, 'depth': 96}\n[phyco] exit rc=0\n",
+      "stderr_tail": ""
+    },
+    {
+      "label": "rotation_objectjenga_spin_axisz_spin_period4.0",
+      "args": {
+        "--motion": "rotation",
+        "--frame_end": "95",
+        "--object": "jenga",
+        "--spin_axis": "z",
+        "--spin_period": "4.0"
+      },
+      "returncode": 0,
+      "seconds": 1030.8,
+      "ok": true,
+      "output_dir": "/data/raw/huzijian/project1_database/outcomes/dataset/single_object/rotation_objectjenga_spin_axisz_spin_period4.0",
+      "stdout_tail": "siting | Tile 6-6\nFra:95 Mem:73.28M (Peak 524.68M) | Time:00:07.84 | Compositing | De-initializing execution\nSaved: '/data/raw/huzijian/project1_database/tmp/phyco_scratch_ftzthvkd/images/frame_0095.png'\n Time: 00:07.99 (Saving: 00:00.06)\n\n[phyco] rendered 96 frames in 1020.5s (10.63s/frame)\n[phyco] videos: ['depth', 'rgb', 'segmentation']\n[phyco] QA sheet: qa_contact_sheet.jpg\n[phyco] DONE -> /data/raw/huzijian/project1_database/outcomes/dataset/single_object/rotation_objectjenga_spin_axisz_spin_period4.0\n[phyco] frames written: {'rgba': 96, 'segmentation': 96, 'depth': 96}\n[phyco] exit rc=0\n",
+      "stderr_tail": ""
+    }
+  ]
+}

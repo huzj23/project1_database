@@ -1,0 +1,35 @@
+version: 1
+id: sphere_volleyball
+kind: object
+category: sphere
+
+source: user-provided local asset
+source_page: UNKNOWN
+source_filename: volleyball.glb
+source_sha256: 37e21bd8069159a1d5c33d331d5cc79d9cc9d95b396722475139fcd2a375fd7c
+license: UNKNOWN
+sha256: 82f8a973fecc01b4ed26ca1b8899580df386ca729f48e05a6b13c7aa040c8e31
+quality:
+  source_mesh_objects: 1
+  vertices: 949
+  triangles: 1728
+  normalized_max_dimension_m: 0.21
+
+visual:
+  mesh: visual/model.glb
+  size: [0.210000, 0.210000, 0.210000]
+  scale: [1.0, 1.0, 1.0]
+visual_transform:
+  x_rotation_degrees: 90.0
+  center_mesh_origin: false
+
+collision:
+  type: sphere
+  radius: 0.105000
+
+physics:
+  mass_range: [0.260, 0.280]
+  friction_range: [0.45, 0.70]
+  restitution_range: [0.65, 0.80]
+
+allowed_scenarios: [rolling, constant_force, free_fall]

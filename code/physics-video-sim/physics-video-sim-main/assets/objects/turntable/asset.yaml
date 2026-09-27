@@ -1,0 +1,68 @@
+version: 1
+id: turntable
+kind: object
+category: cylinder
+
+source: generated procedurally for this project
+license: CC0-1.0
+license_note: project-generated; no third-party content
+
+quality:
+  primitive: cylinder
+  radius_m: 0.3
+  thickness_m: 0.022
+  segments: 128
+
+visual:
+  mesh: visual/model.obj
+  size: [0.600000, 0.600000, 0.022000]
+  scale: [1.0, 1.0, 1.0]
+  # Declarative PBR material, applied by the renderer (see
+  # src/physim/render/materials.py).  `pbr` names a Poly Haven texture set,
+  # `category` is its sub-directory under the shared texture root
+  # (<workspace>/models/pbr_textures, overridable with $PHYSIM_PBR_TEXTURE_ROOT),
+  # and `uv_scale` uniformly rescales the texture mapping.
+  #
+  # The disc's model.mtl is EMPTY on purpose: writing the material into the MTL
+  # was measured and rejected (disc R/B 4.04 / R/G 2.55, far too red).  The
+  # frozen dark_wood look (R/B ~1.99 / R/G ~1.67) only reproduces with this
+  # full PBR node tree.
+  #
+  # `textures` ships the three 4k maps INSIDE this asset and is searched before
+  # the shared library, so the disc renders correctly after a plain
+  # `git clone` + `sync_hf_assets.py download`, with no
+  # <workspace>/models/pbr_textures present.  The maps are byte-identical to the
+  # shared originals (sha256 verified); rendering is unchanged (disc R/B 1.89,
+  # pixel-identical to the delivered clips).
+  material:
+    pbr: dark_wood
+    category: wood_textures
+    uv_scale: 1.6
+    # Asset-local map directory (relative to this asset).  Searched
+    # BEFORE the shared library, so the disc renders correctly after
+    # `sync_hf_assets.py download` without <workspace>/models/pbr_textures.
+    textures: visual/textures/dark_wood
+
+visual_transform:
+  x_rotation_degrees: 0.0
+  center_mesh_origin: false
+
+initial_orientation:
+  policy: fixed_authored_upright
+  quaternion_wxyz: [1.0, 0.0, 0.0, 0.0]
+
+collision:
+  type: cylinder
+  simulation: collision/model.urdf
+  radius: 0.3
+  half_extents: [0.300000, 0.300000, 0.011000]
+  support_height: 0.011000
+  footprint_radius: 0.300000
+
+physics:
+  mass_range: [1.0, 3.0]
+  friction_range: [0.80, 1.30]
+  restitution_range: [0.0, 0.05]
+
+# A turntable is scenery the actor rides on, not a subject itself.
+allowed_scenarios: []

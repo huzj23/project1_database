@@ -1,0 +1,92 @@
+version: 1
+scenario: free_fall
+
+controlled_variants:
+  variable: gravity
+  multipliers: [1.0, 0.5, 1.5]
+  labels: [x1, x0.5, x1.5]
+
+selection:
+  map_ids: [replicad_apartment]
+  # NO plush elephant: material_class soft, and we have no soft-body
+  # adaptation, so it must not appear in free_fall / constant_force /
+  # projectile.  Firm objects only.
+  asset_ids:
+    - gso_down_to_earth_orchid_pot_ceramic_lime
+    - gso_ecoforms_plant_container_gp16a_coral
+    - gso_mad_gab_refresh_card_game
+
+timing:
+  duration_seconds: 5.0625
+  frame_count: 81
+  physics_fps: 240
+  video_fps: 16
+
+physics:
+  gravity: [0.0, 0.0, -9.81]
+  rolling_friction: 0.0
+  spinning_friction: 0.0
+  # A dropped object keeps a little horizontal velocity -- the mentor's own
+  # free_fall config uses [0.03, 0.12]; matching it keeps the bounce from
+  # being a mathematically perfect vertical drop.
+  horizontal_speed_range: [0.03, 0.10]
+  vertical_speed_range: [-0.02, 0.02]
+  angular_speed_range: [0.0, 1.0]
+  direction_degrees_range: [0.0, 0.0]
+  # Drop height: large enough that the airborne phase fills a good share of 81
+  # frames.  These are firm objects (ceramic pot, plant container, card box), so
+  # a modest bounce is expected and physical; the plush elephant is excluded
+  # because we have no soft-body adaptation.
+  restitution_range: [0.15, 0.30]
+  drop_height_object_extent_range: [5.0, 9.0]
+  # Proven scale: the mentor's free_fall.yaml uses [0.45, 1.20].  A 2.4 m drop
+  # was measured to drift 0.40 m after the bounce and leave the placement
+  # rectangle (outside_surface_bounds).  1.10 m is a clearly visible fall that
+  # stays inside.
+  drop_height_absolute_range: [0.85, 1.20]
+
+surface:
+  allowed_types: [floor]
+  edge_margin: 0.25
+
+validation:
+  min_drop_height: 0.70
+  min_drop_distance: 0.70
+  max_linear_speed: 8.0
+  max_trajectory_extent_object_ratio: 18.0
+  max_surface_penetration: 0.04
+  require_expected_collision: true
+  require_bounce: false
+  min_bounce_upward_speed: 0.03
+  max_settle_speed: 0.06
+  max_soft_rebound_speed: 0.35
+  require_in_map_bounds: true
+
+camera:
+  policy: random
+  relative_to_trajectory: true
+  side: left
+  azimuth_offset_degrees_range: [-180.0, 180.0]
+  focal_length_mm: 50.0
+  framing:
+    sensor_width_mm: 36.0
+    trajectory_frame_fraction: 0.85
+    object_padding: 0.18
+    min_object_frame_fraction: 0.03
+    max_object_frame_fraction: 0.60
+    min_object_frame_area_fraction: 0.0025
+    max_object_frame_area_fraction: 0.12
+    min_distance: 0.55
+    max_distance: 6.00
+    elevation_degrees: 28.0
+    min_height_above_trajectory: 0.60
+    look_at_offset: 0.0
+
+output:
+  resolution: [1920, 1080]
+  modalities: [rgb, depth, segmentation]
+  save_physics_trajectory: true
+  save_render_trajectory: true
+  save_collision_events: true
+  save_config: true
+  write_video: true

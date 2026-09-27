@@ -1,0 +1,6 @@
+[submodule "third_party/kubric"]
+	path = third_party/kubric
+	url = https://github.com/google-research/kubric.git
+[submodule "third_party/phyco-sim"]
+	path = third_party/phyco-sim
+	url = https://github.com/nnsriram97/phyco-sim.git

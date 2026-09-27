@@ -1,0 +1,53 @@
+---
+pretty_name: Physics Video Simulation Assets
+license: other
+tags:
+  - blender
+  - pybullet
+  - physics-simulation
+  - synthetic-data
+---
+
+# Physics Video Simulation Assets
+
+Private working archive of runtime and source assets for
+[`TLEphage/physics-video-sim`](https://github.com/TLEphage/physics-video-sim).
+The directory layout is preserved so the files can be synchronized directly
+into a project checkout.
+
+Canonical private dataset repository:
+[`physics-video-lab/physics-video-assets`](https://huggingface.co/datasets/physics-video-lab/physics-video-assets).
+
+## Included assets
+
+- `classroom` — Blender Demo Files classroom, CC0-1.0;
+- `sphere_baseball` — Poly Haven baseball, CC0-1.0;
+- `food_lime` — Poly Haven lime, CC0-1.0;
+- `food_lychee` — Poly Haven lychee, CC0-1.0.
+
+The private archive can additionally contain locally supplied assets whose
+source and redistribution license are still `UNKNOWN`. Those files are for the
+owner's private storage and project synchronization only. They must not be
+republished, shared, or made accessible by changing this dataset to public.
+
+Each asset directory may contain its untouched download under `source/`, a
+normalized runtime visual under `visual/`, collision geometry, `asset.yaml`,
+and provenance under `license/`. `assets_manifest.json` records the byte size
+and SHA-256 digest of every synchronized file.
+
+The license in each `asset.yaml` and `license/SOURCE.md` applies to that asset;
+there is no single license covering the whole archive.
+
+## Synchronize into the project
+
+```bash
+git clone --recurse-submodules https://github.com/TLEphage/physics-video-sim.git
+cd physics-video-sim
+python -m pip install -e ".[assets]"
+hf auth login
+python scripts/sync_hf_assets.py download
+python scripts/sync_hf_assets.py verify
+```
+
+Authentication is currently required because the dataset repository is
+private. Never store a Hugging Face access token in the project tree.

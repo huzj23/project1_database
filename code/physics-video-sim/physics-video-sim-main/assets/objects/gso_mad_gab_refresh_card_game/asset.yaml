@@ -1,0 +1,43 @@
+version: 1
+id: gso_mad_gab_refresh_card_game
+kind: object
+category: board_games
+
+source: Google Scanned Objects (GSO)
+source_filename: Mad_Gab_Refresh_Card_Game
+license: CC BY-SA 4.0
+license_note: attribution + ShareAlike; see license/SOURCE.md
+
+quality:
+  vertices: 2598
+  triangles: 4622
+  normalized_max_dimension_m: 0.156004
+
+visual:
+  mesh: visual/model.obj
+  size: [0.155866, 0.156004, 0.155905]
+  scale: [1.0, 1.0, 1.0]
+
+visual_transform:
+  x_rotation_degrees: 0.0
+  center_mesh_origin: false
+
+initial_orientation:
+  policy: fixed_authored_upright
+  quaternion_wxyz: [1.0, 0.0, 0.0, 0.0]
+
+collision:
+  type: convex_hull
+  mesh: collision/model.obj
+  simulation: collision/model.urdf
+  bounding_radius: 0.135035
+  footprint_radius: 0.078002
+  support_height: 0.078223
+  half_extents: [0.077933, 0.078002, 0.077953]
+
+physics:
+  mass_range: [0.002935, 0.004403]
+  friction_range: [0.30, 0.60]
+  restitution_range: [0.05, 0.35]
+
+allowed_scenarios: [rolling, constant_force, free_fall, turntable_carry, turntable_spin, damping]

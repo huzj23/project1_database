@@ -1,0 +1,47 @@
+version: 1
+id: food_lime
+kind: object
+category: food
+
+source: Poly Haven
+source_page: https://polyhaven.com/a/food_lime_01
+author: Oliver Harries
+license: CC0-1.0
+sha256: 96471ca2b6190dc36639d70489413d4e67743ced3deeb12fcc0d54fec58b096e
+quality:
+  source_texture_resolution: 4k
+  source_max_texture_resolution: 8k
+  triangles: 8100
+
+visual:
+  mesh: visual/model.glb
+  size: [0.060070, 0.061338, 0.075441]
+  scale: [1.0, 1.0, 1.0]
+visual_transform:
+  x_rotation_degrees: 90.0
+  center_mesh_origin: false
+
+initial_orientation:
+  policy: shortest_axis_down
+  # Rotate local +X (the shortest 60 mm axis) onto world +Z.
+  quaternion_wxyz: [0.7071067812, 0.0, -0.7071067812, 0.0]
+
+collision:
+  type: convex_hull
+  mesh: collision/model.obj
+  simulation: collision/model.urdf
+  mesh_sha256: 47b7bf9b56898cc12ecc1d8720116abdae10b8ff3a8547ca758f1ebe8717d5f3
+  vertices: 257
+  triangles: 510
+  max_triangles: 512
+  bounding_radius: 0.038384
+  footprint_radius: 0.037884
+  support_height: 0.030081
+  half_extents: [0.030008, 0.030696, 0.037712]
+
+physics:
+  mass_range: [0.050, 0.100]
+  friction_range: [0.35, 0.65]
+  restitution_range: [0.20, 0.40]
+
+allowed_scenarios: [rolling, constant_force, free_fall]

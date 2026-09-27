@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<robot name="Room_Essentials_Fabric_Cube_Lavender">
+  <link name="base">
+    <inertial>
+      <origin xyz="-9.137135402175026e-18 -6.8528515516312695e-18 -2.512712235598132e-17" />
+      <mass value="0.0019776478527165423" />
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" />
+      <geometry>
+        <mesh filename="../visual/model.obj" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" />
+      <geometry>
+        <mesh filename="model.obj" />
+      </geometry>
+    </collision>
+  </link>
+</robot>

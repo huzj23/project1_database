@@ -1,0 +1,43 @@
+version: 1
+id: gso_room_essentials_fabric_cube_lavender
+kind: object
+category: none
+
+source: Google Scanned Objects (GSO)
+source_filename: Room_Essentials_Fabric_Cube_Lavender
+license: CC BY-SA 4.0
+license_note: attribution + ShareAlike; see license/SOURCE.md
+
+quality:
+  vertices: 6383
+  triangles: 11496
+  normalized_max_dimension_m: 0.285746
+
+visual:
+  mesh: visual/model.obj
+  size: [0.280326, 0.285746, 0.284830]
+  scale: [1.0, 1.0, 1.0]
+
+visual_transform:
+  x_rotation_degrees: 0.0
+  center_mesh_origin: false
+
+initial_orientation:
+  policy: fixed_authored_upright
+  quaternion_wxyz: [1.0, 0.0, 0.0, 0.0]
+
+collision:
+  type: convex_hull
+  mesh: collision/model.obj
+  simulation: collision/model.urdf
+  bounding_radius: 0.245643
+  footprint_radius: 0.142873
+  support_height: 0.111636
+  half_extents: [0.140163, 0.142873, 0.142415]
+
+physics:
+  mass_range: [0.001582, 0.002373]
+  friction_range: [0.30, 0.60]
+  restitution_range: [0.05, 0.35]
+
+allowed_scenarios: [rolling, constant_force, free_fall, turntable_carry, turntable_spin, damping]

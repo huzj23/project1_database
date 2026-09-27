@@ -1,0 +1,46 @@
+profile: local
+
+project:
+  scenario_config: configs/scenarios/rolling.yaml
+  seed: 123
+
+paths:
+  asset_registry: configs/assets.yaml
+  map_registry: configs/maps.yaml
+  asset_root: assets
+  output_root: outputs
+  cache_root: cache
+  log_root: logs
+  # Use an absolute path here when Blender is not available on PATH.
+  blender_executable: blender
+  blender_python_packages: cache/runtime/blender-3.6/site-packages
+  phyco_sim_root: third_party/phyco-sim
+
+execution:
+  headless: false
+  num_workers: 1
+  num_samples: 1
+  gpu_ids: []
+
+render:
+  engine: CYCLES
+  device: CPU
+  samples_per_pixel: 128
+  use_denoising: true
+  use_adaptive_sampling: true
+  adaptive_threshold: 0.01
+  max_bounces: 8
+  diffuse_bounces: 4
+  glossy_bounces: 4
+  transmission_bounces: 8
+  transparent_bounces: 8
+  volume_bounces: 2
+  view_transform: Filmic
+  look: Medium High Contrast
+  exposure: 0.0
+  gamma: 1.0
+  save_blend: true
+
+preview:
+  save_blend: outputs/previews/{scenario}-seed-{seed:06d}.blend
+  sample_root: cache/preview-sim/{scenario}-seed-{seed:06d}

@@ -1,0 +1,63 @@
+version: 1
+id: street
+kind: environment
+category: environment
+
+source: user-provided local asset
+source_page: UNKNOWN
+source_filename: 香港街道.blend
+source_sha256: 06d17d0a3da222c84259fea3c0935971d963b78ec3db061f0cee30d9455fc86b
+license: UNKNOWN
+sha256: 2e7feb4fe1359d260df033bfc39233da7b1b8893f0a63c6f7fa2fc7adbd60521
+quality:
+  description: High-detail Hong Kong street scene
+  source_blender_version: "4.0"
+  normalized_with_blender_version: "3.6"
+  source_mesh_objects: 2228
+  runtime_mesh_objects: 1
+  vertices: 840241
+  triangles: 757453
+  materials: 74
+  packed_file_images: 210
+  missing_images: 0
+  preserved_source_lights: 13
+  preserved_source_world: true
+
+visual:
+  mesh: visual/scene.blend
+  object_name: environment
+  size: [85.011719, 117.518677, 25.882225]
+  scale: [1.0, 1.0, 1.0]
+
+collision:
+  type: box
+  center: [188.596573, 28.650063, -0.150000]
+  half_extents: [42.505859, 58.759338, 0.050000]
+
+physics:
+  mass_range: [0.0, 0.0]
+  friction_range: [0.55, 0.85]
+  restitution_range: [0.0, 0.1]
+
+render:
+  ambient_illumination: [0.18, 0.18, 0.18]
+  background: [0.02, 0.025, 0.03]
+  lighting_assessment: insufficient_source_lighting
+  lighting_strategy: preserve_source_plus_sun_area
+  supplemental_lights:
+    - name: street_supplemental_sun
+      type: SUN
+      position: [188.60, 28.65, 30.0]
+      rotation_euler: [0.754103, 0.853824, 0.800405]
+      intensity: 1.0
+      color: [1.0, 0.96, 0.90]
+    - name: street_supplemental_area
+      type: AREA
+      position: [188.60, 28.65, 30.0]
+      look_at: [188.60, 28.65, 0.0]
+      intensity: 2500.0
+      width: 50.0
+      height: 50.0
+      color: [1.0, 0.92, 0.82]
+
+allowed_scenarios: [rolling, constant_force, free_fall]

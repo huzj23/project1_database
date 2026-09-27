@@ -1,0 +1,34 @@
+version: 1
+id: sphere_basketball
+kind: object
+category: sphere
+
+source: user-provided local asset
+source_filename: basketball (3).glb
+source_sha256: 0f492c955ded9d3f2157dfadc8e41c5e0df0aca77fecaacde69fe452abf6f2d2
+license: UNKNOWN
+sha256: 6d35ff2207e5de03887cc05f5bf7a153ee9afb2463ccf5355dfa16b96e412453
+quality:
+  source_mesh_objects: 2
+  vertices: 4512
+  triangles: 6704
+  normalized_max_dimension_m: 0.24
+
+visual:
+  mesh: visual/model.glb
+  size: [0.239922, 0.240000, 0.239922]
+  scale: [1.0, 1.0, 1.0]
+visual_transform:
+  x_rotation_degrees: 90.0
+  center_mesh_origin: false
+
+collision:
+  type: sphere
+  radius: 0.120000
+
+physics:
+  mass_range: [0.58, 0.65]
+  friction_range: [0.45, 0.75]
+  restitution_range: [0.70, 0.85]
+
+allowed_scenarios: [rolling, constant_force, free_fall]

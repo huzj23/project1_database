@@ -1,0 +1,65 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyd
+*.so
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+build/
+dist/
+*.egg-info/
+
+# Virtual environments and local environment files
+.venv/
+venv/
+env/
+.env
+.env.*
+!.env.example
+configs/*_xienan.yaml
+*_xienan.md
+**/*_xienan.md
+
+# Editors and operating systems
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Blender/PyBullet temporary state
+*.blend[0-9]
+*.blend@
+*.bullet
+scratch/
+
+# Local dependency/download caches
+kubric_cache/
+sim_assets/
+
+# Repository-local runtime data; keep contents out of Git
+assets/**
+!assets/**/
+!assets/README.md
+!assets/**/.gitkeep
+!assets/**/asset.yaml
+!assets/**/license/**
+!assets/**/collision/**
+datasets/**
+!datasets/**/
+!datasets/**/.gitkeep
+
+# Generated data (keep directory placeholders)
+outputs/**
+!outputs/**/
+!outputs/.gitkeep
+logs/**
+!logs/**/
+!logs/.gitkeep
+cache/**
+!cache/**/
+!cache/.gitkeep

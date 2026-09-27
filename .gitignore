@@ -1,0 +1,44 @@
+# Secrets and machine-local configuration
+.env
+.env.*
+!.env.example
+log/key.txt
+*.pem
+*.key
+
+# Large source assets and generated outputs. Large canonical assets live in HF.
+models/
+target/
+outcomes/
+blender_previews/
+share/
+
+# Local experiments, downloads, and recovery snapshots
+tmp/
+_scratch/
+tmp_zip_listing.txt
+
+# Runtime/toolchain payloads
+tools/runtime/
+tools/vendor/
+tools/__pycache__/
+
+# Upstream/vendor copies and source archives
+code/vendor/
+code/physics-video-sim-main.zip
+deepseek-harness/
+
+# Common generated files
+**/__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+*.log
+*.zip
+*.tar
+*.tar.gz
+*.7z
+Thumbs.db
+.DS_Store

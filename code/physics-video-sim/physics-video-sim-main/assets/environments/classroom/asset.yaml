@@ -1,0 +1,38 @@
+version: 1
+id: classroom
+kind: environment
+category: environment
+
+source: Blender Demo Files
+source_page: https://www.blender.org/download/demo-files/
+source_download_url: https://download.blender.org/demo/test/classroom.zip
+source_sha256: 0f0ecc58d45f12b2f4272a53e2d8e69135518e16e956b118f10c20d8dcfdf5e6
+author: Christophe Seux
+license: CC0-1.0
+sha256: e69599ae61531e596e6e102d3ebbe8fcc497fd3d28cb8cee0267180c55ace0d8
+quality:
+  source_mesh_objects: 800
+  realized_collection_instances: 56
+  vertices: 257916
+  triangles: 485250
+  preserved_source_lights: 10
+  preserved_source_world: true
+
+visual:
+  mesh: visual/scene.blend
+  object_name: environment
+  size: [10.170750, 8.498890, 3.126493]
+  scale: [1.0, 1.0, 1.0]
+
+# Rolling v1 uses one validated floor proxy; room furniture remains visual-only.
+collision:
+  type: box
+  center: [-0.58, -0.61, -0.05]
+  half_extents: [5.08, 4.18, 0.05]
+
+physics:
+  mass_range: [0.0, 0.0]
+  friction_range: [0.45, 0.75]
+  restitution_range: [0.0, 0.1]
+
+allowed_scenarios: [rolling, constant_force, free_fall]

@@ -1,0 +1,48 @@
+version: 1
+id: food_apple
+kind: object
+category: food
+
+source: user-provided local asset
+source_page: UNKNOWN
+source_filename: apple2_UV.OBJ
+source_sha256: ab78b2ca2572925934e95378b26a3e1035278d315dce229847e5200614c7bd06
+license: UNKNOWN
+sha256: a69d41901b44ff7af1a8ea23251a263f704444a465c29dae15e14fb13c5d6b0c
+quality:
+  vertices: 4707
+  triangles: 9414
+  normalized_max_dimension_m: 0.085
+  material_repair: explicit_diffuse_and_normal_textures
+
+visual:
+  mesh: visual/model.glb
+  size: [0.084972, 0.085000, 0.084577]
+  scale: [1.0, 1.0, 1.0]
+visual_transform:
+  x_rotation_degrees: 90.0
+  center_mesh_origin: false
+
+initial_orientation:
+  policy: fixed_authored_upright
+  quaternion_wxyz: [1.0, 0.0, 0.0, 0.0]
+
+collision:
+  type: convex_hull
+  mesh: collision/model.obj
+  simulation: collision/model.urdf
+  mesh_sha256: 79789f2536dd246c5e47ceef7c4b38e690c773f92780120e64e7128195091b66
+  vertices: 258
+  triangles: 512
+  max_triangles: 512
+  bounding_radius: 0.046102
+  footprint_radius: 0.042697
+  support_height: 0.042306
+  half_extents: [0.042629, 0.042574, 0.042177]
+
+physics:
+  mass_range: [0.120, 0.220]
+  friction_range: [0.30, 0.55]
+  restitution_range: [0.20, 0.35]
+
+allowed_scenarios: [rolling, constant_force, free_fall]

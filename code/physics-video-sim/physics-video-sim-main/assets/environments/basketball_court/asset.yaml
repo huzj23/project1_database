@@ -1,0 +1,92 @@
+version: 1
+id: basketball_court
+kind: environment
+category: environment
+
+source: user-provided local asset
+source_filename: 室内篮球场blend.blend
+source_sha256: 599cff5752da0c43693ee66eaa7c74ab628f4c37bcab02db7c5e560e74bd18a2
+license: UNKNOWN
+sha256: 904d7870ffd244fb325f196504cd8aeb41da21a08d34dc4c19acc0832b93be5c
+quality:
+  description: High-detail indoor basketball arena
+  source_blender_version: "4.0"
+  normalized_with_blender_version: "3.6"
+  source_mesh_objects: 969
+  runtime_mesh_objects: 1
+  vertices: 1351579
+  triangles: 1394312
+  materials: 124
+  packed_file_images: 240
+  missing_images: 0
+  mirrored_meshes_corrected: 27
+  preserved_source_lights: 6
+  preserved_source_world: true
+
+visual:
+  mesh: visual/scene.blend
+  object_name: environment
+  size: [75.791695, 72.000008, 24.197079]
+  scale: [1.0, 1.0, 1.0]
+
+# Rolling v1 uses the central marked court as a validated horizontal proxy.
+collision:
+  type: box
+  center: [-0.0073, 0.0, -0.0468]
+  half_extents: [15.36, 8.28, 0.05]
+
+physics:
+  mass_range: [0.0, 0.0]
+  friction_range: [0.45, 0.75]
+  restitution_range: [0.0, 0.1]
+
+# Fallback only. Runtime imports the six authored source lights and World first;
+# these area lights are created only if authored lighting is unavailable.
+render:
+  ambient_illumination: [0.18, 0.18, 0.18]
+  background: [0.015, 0.018, 0.025]
+
+  # The source-only fixed-seed Cycles preview was underexposed. Preserve all
+  # six authored lights and add the first-stage lighting remedy: one Sun plus
+  # one Area. The three-area rig below remains the second-stage fallback.
+  lighting_assessment: insufficient_source_lighting
+  lighting_strategy: preserve_source_plus_sun_area
+  supplemental_lights:
+    - name: court_supplemental_sun
+      type: SUN
+      position: [0.0, 0.0, 10.0]
+      rotation_euler: [0.754103, 0.853824, 0.800405]
+      intensity: 1.0
+      color: [1.0, 1.0, 1.0]
+    - name: court_supplemental_area
+      type: AREA
+      position: [0.0, 0.0, 10.0]
+      look_at: [0.0, 0.0, 0.0]
+      intensity: 2500.0
+      width: 7.0
+      height: 5.0
+      color: [1.0, 0.9225, 0.8111]
+
+  # Second-stage candidate only. It is not enabled because the Sun + single
+  # Area rig above already passes the fixed-seed Cycles brightness check.
+  area_lights:
+    - name: court_key_left
+      position: [-8.0, -2.5, 10.0]
+      look_at: [-5.0, 0.0, 0.0]
+      intensity: 900.0
+      width: 7.0
+      height: 5.0
+    - name: court_key_center
+      position: [0.0, 2.5, 10.0]
+      look_at: [0.0, 0.0, 0.0]
+      intensity: 1000.0
+      width: 7.0
+      height: 5.0
+    - name: court_key_right
+      position: [8.0, -2.5, 10.0]
+      look_at: [5.0, 0.0, 0.0]
+      intensity: 900.0
+      width: 7.0
+      height: 5.0
+
+allowed_scenarios: [rolling, constant_force, free_fall]

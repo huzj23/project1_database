@@ -1,0 +1,85 @@
+version: 1
+id: special_plush_elephant
+kind: object
+category: special
+
+# --- provenance -----------------------------------------------------------
+# Unaltered original download lives in source/ (GSO / Kubric physics-ready
+# bundle).  The published GSO collection is the canonical source page; the
+# tarball we actually mirrored is the Kubric GSO archive named below.
+source: Google Scanned Objects (GSO)
+source_filename: Sootheze_Cold_Therapy_Elephant
+source_page: https://app.gazebosim.org/GoogleResearch/fuel/collections/Scanned%20Objects%20by%20Google%20Research
+source_download_url: https://console.cloud.google.com/storage/browser/kubric-public/assets/GSO
+source_sha256: 1d19e919625da7054ea1f054208281e676711385dfd03f5c0eb189a3b4cac63c
+author: Google Research (Scanned Objects by Google Research)
+license: CC BY-SA 4.0
+license_note: attribution + ShareAlike; see license/SOURCE.md
+
+quality:
+  vertices: 29344
+  triangles: 53518
+  normalized_max_dimension_m: 0.267932
+
+visual:
+  mesh: visual/model.obj
+  size: [0.267932, 0.220669, 0.207446]
+  scale: [1.0, 1.0, 1.0]
+
+visual_transform:
+  x_rotation_degrees: 0.0
+  center_mesh_origin: false
+
+initial_orientation:
+  policy: fixed_authored_upright
+  quaternion_wxyz: [1.0, 0.0, 0.0, 0.0]
+
+# --- collision ------------------------------------------------------------
+# Low-poly convex hull regenerated from the normalized visual with the
+# project's own scripts/generate_collision_mesh.py at --target-faces 512.
+#
+# FRAME NOTE (important): the visual OBJ is authored Z-up, i.e. its file
+# coordinates are already the runtime frame (verified against the rendered
+# depth of datasets/turntable_carry/seed-005001).  generate_collision_mesh.py
+# imports OBJ with bpy defaults (Rx(+90)) and exports with
+# axis_forward="Y", axis_up="Z" (no further conversion), so its raw output for
+# an OBJ input is the visual rotated +90 deg about X -- support_height 0.115146
+# and a 90-deg-rotated body.  The exact inverse Rx(-90) has therefore been
+# applied to the generated mesh so collision and visual share ONE frame, which
+# the convention requires ("碰撞 mesh 必须 ... 保持相同原点、朝向和尺度").
+# The uncorrected generator output is kept at tmp/zz_coll_final/raw_model.obj
+# for comparison.  See log/V4.1_调研结果文档_碰撞体生成脚本对OBJ输入的坐标系缺陷_20260923.md
+#
+# bounding_radius definition change: this was 0.202186, which is the half
+# AABB DIAGONAL from the original data.json bounds
+# (0.5*sqrt(0.267932^2 + 0.220669^2 + 0.207446^2) = 0.202186 exactly) and is
+# not a bounding radius at all.  It is now max|vertex| of the installed convex
+# hull = 0.166734, the convention used by food_lime/food_apple/food_lychee and
+# the mathematically correct radius for a convex body.  This is a 17.5%
+# reduction in the reported figure and is a correctness fix, not a regression;
+# it does not change any simulated geometry.
+collision:
+  type: convex_hull
+  mesh: collision/model.obj
+  simulation: collision/model.urdf
+  mesh_sha256: bc916352bcbf71b790c1174aab06bcf8510e69b5f3a96cbe8b306062ab44ede1
+  vertices: 258
+  triangles: 512
+  max_triangles: 512
+  bounding_radius: 0.166734
+  # footprint_radius is retained at the measured horizontal half-extent; it is
+  # what the turntable scenario uses to check the actor fits on the 0.30 m
+  # disc (orbit + footprint <= disc radius), so it must stay below the new
+  # bounding_radius -- 0.133966 <= 0.166734 holds.
+  footprint_radius: 0.133966
+  support_height: 0.073611
+  half_extents: [0.133985, 0.110288, 0.103684]
+
+physics:
+  mass_range: [0.001840, 0.002760]
+  friction_range: [0.30, 0.60]
+  restitution_range: [0.05, 0.35]
+
+material_class: soft
+
+allowed_scenarios: [rolling, turntable_carry, turntable_spin, damping]

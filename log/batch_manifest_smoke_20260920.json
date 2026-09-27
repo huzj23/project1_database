@@ -1,0 +1,46 @@
+{
+  "preset": "smoke",
+  "created": "2026-09-20T23:55:21",
+  "common_args": {
+    "--resolution": "768x432",
+    "--samples": "64",
+    "--frame_rate": "24",
+    "--output_dir": "D:\\workspace\\project1_database\\outcomes\\dataset\\single_object",
+    "--save_mp4": "True",
+    "--qa_sheet": "True"
+  },
+  "jobs_total": 2,
+  "jobs_ok": 2,
+  "jobs_failed": 0,
+  "wall_seconds": 397.2,
+  "results": [
+    {
+      "label": "circular_smoke",
+      "args": {
+        "--motion": "circular",
+        "--object": "ball",
+        "--frame_end": "23"
+      },
+      "returncode": 0,
+      "seconds": 397.2,
+      "ok": true,
+      "output_dir": "D:\\workspace\\project1_database\\outcomes\\dataset\\single_object\\circular_smoke",
+      "stdout_tail": ":77.15M (Peak 101.67M) | Time:00:09.89 | Compositing | Tile 6-6\nFra:23 Mem:77.08M (Peak 101.67M) | Time:00:09.90 | Compositing | De-initializing execution\nSaved: 'C:\\Users\\12447\\AppData\\Local\\Temp\\phyco_scratch_9493p1vb\\images\\frame_0023.png'\n Time: 00:10.10 (Saving: 00:00.08)\n\n[phyco] rendered 24 frames in 367.3s (15.30s/frame)\n[phyco] videos: ['depth', 'rgb', 'segmentation']\n[phyco] QA sheet: qa_contact_sheet.jpg\n[phyco] DONE -> D:\\workspace\\project1_database\\outcomes\\dataset\\single_object\\circular_smoke\n[phyco] frames written: {'rgba': 24, 'segmentation': 24, 'depth': 24}\n[phyco] exit rc=0\n",
+      "stderr_tail": "ue for function _msize\n2026-09-20 23:48:47.487889: I tensorflow/core/util/port.cc:113] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.\nWARNING:tensorflow:From D:\\workspace\\project1_database\\tools\\runtime\\blender-3.4.1-windows-x64\\3.4\\python\\lib\\site-packages\\keras\\src\\losses.py:2976: The name tf.losses.sparse_softmax_cross_entropy is deprecated. Please use tf.compat.v1.losses.sparse_softmax_cross_entropy instead.\n\n"
+    },
+    {
+      "label": "damped_smoke",
+      "args": {
+        "--motion": "damped",
+        "--object": "ball",
+        "--frame_end": "23"
+      },
+      "returncode": 0,
+      "seconds": 285.6,
+      "ok": true,
+      "output_dir": "D:\\workspace\\project1_database\\outcomes\\dataset\\single_object\\damped_smoke",
+      "stdout_tail": "em:76.98M (Peak 101.50M) | Time:00:05.67 | Compositing | Tile 6-6\nFra:23 Mem:76.91M (Peak 101.50M) | Time:00:05.68 | Compositing | De-initializing execution\nSaved: 'C:\\Users\\12447\\AppData\\Local\\Temp\\phyco_scratch_pktdjhrb\\images\\frame_0023.png'\n Time: 00:05.86 (Saving: 00:00.09)\n\n[phyco] rendered 24 frames in 254.5s (10.60s/frame)\n[phyco] videos: ['depth', 'rgb', 'segmentation']\n[phyco] QA sheet: qa_contact_sheet.jpg\n[phyco] DONE -> D:\\workspace\\project1_database\\outcomes\\dataset\\single_object\\damped_smoke\n[phyco] frames written: {'rgba': 24, 'segmentation': 24, 'depth': 24}\n[phyco] exit rc=0\n",
+      "stderr_tail": "ue for function _msize\n2026-09-20 23:48:46.670893: I tensorflow/core/util/port.cc:113] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.\nWARNING:tensorflow:From D:\\workspace\\project1_database\\tools\\runtime\\blender-3.4.1-windows-x64\\3.4\\python\\lib\\site-packages\\keras\\src\\losses.py:2976: The name tf.losses.sparse_softmax_cross_entropy is deprecated. Please use tf.compat.v1.losses.sparse_softmax_cross_entropy instead.\n\n"
+    }
+  ]
+}

@@ -1,0 +1,63 @@
+version: 1
+id: gso_whey_protein_vanilla
+kind: object
+category: bottles_and_cans_and_cups
+
+source: Google Scanned Objects (GSO)
+source_filename: Whey_Protein_Vanilla
+license: CC BY-SA 4.0
+license_note: attribution + ShareAlike; see license/SOURCE.md
+
+quality:
+  vertices: 5908
+  triangles: 10702
+  normalized_max_dimension_m: 0.169031
+
+visual:
+  mesh: visual/model.obj
+  size: [0.122295, 0.122029, 0.169031]
+  scale: [1.0, 1.0, 1.0]
+
+visual_transform:
+  x_rotation_degrees: 0.0
+  center_mesh_origin: false
+
+initial_orientation:
+  policy: fixed_authored_upright
+  quaternion_wxyz: [1.0, 0.0, 0.0, 0.0]
+
+collision:
+  type: convex_hull
+  mesh: collision/model.obj
+  simulation: collision/model.urdf
+  bounding_radius: 0.120850
+  footprint_radius: 0.061148
+  support_height: 0.082322
+  half_extents: [0.061148, 0.061014, 0.084516]
+
+# ---------------------------------------------------------------------------
+# Side-on (rolling) collision geometry.  ADDITIVE: `collision:` above is
+# unchanged and remains what every upright scenario uses.
+#
+# The 64-vertex hull is a coarse polygon in cross-section (~16-gon), so a can
+# laid on its side rocks facet-to-facet and stops: measured decay +0.674 /s at
+# v0 = 0.27 m/s.  The convex hull of the real 5908-vertex scanned visual mesh
+# models the same can with small facets and rolls: measured decay -0.055 /s at
+# the identical initial condition (tools/_t1b_rigorous.sh).  Same object, same
+# radius, only a faithful collision surface instead of a coarse proxy.
+#
+# support_height / footprint_radius are the values measured from the ROTATED
+# refined hull, so the runtime does not have to re-derive them.
+# ---------------------------------------------------------------------------
+side_collision:
+  mesh: collision/model_side.obj
+  simulation: collision/model_side.urdf
+  support_height: 0.060968980
+  footprint_radius: 0.099890132
+
+physics:
+  mass_range: [0.001427, 0.002140]
+  friction_range: [0.30, 0.60]
+  restitution_range: [0.05, 0.35]
+
+allowed_scenarios: [rolling, constant_force, free_fall, turntable_carry, turntable_spin, damping]

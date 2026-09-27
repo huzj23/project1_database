@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "physics-video-sim"
+version = "0.1.0"
+description = "Config-driven physical video generation with PyBullet, Blender, and Kubric."
+readme = "README.md"
+requires-python = ">=3.10,<3.11"
+authors = [
+  { name = "physics-video-sim contributors" },
+]
+dependencies = [
+  "numpy==1.26.4",
+  "PyYAML>=6.0,<7",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.0,<9",
+  "ruff>=0.6,<1",
+]
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+addopts = "-ra"
+testpaths = ["tests"]
+
+[tool.ruff]
+target-version = "py310"
+line-length = 100

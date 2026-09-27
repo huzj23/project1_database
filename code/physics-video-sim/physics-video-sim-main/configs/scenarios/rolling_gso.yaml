@@ -1,0 +1,142 @@
+version: 1
+scenario: rolling
+
+# ===========================================================================
+# 运动 #1 匀速（滚动/平动）
+#
+# Zero new code: this reuses the mentor's `rolling` scenario unchanged.  What
+# differs from his config is only the ASSET SET and the MAP -- ours, per the
+# project rule that we use our own ReplicaCAD scene and our own GSO objects.
+#
+# Physics note: the scenario integrates a near-uniform pure-rolling state from
+# the sampled initial conditions; rolling/spinning drag are 0 and there is no
+# external force.  The solver still resolves gravity, contact and friction --
+# nothing is prescribed frame by frame.
+# ===========================================================================
+
+controlled_variants:
+  variable: initial_speed
+  multipliers: [1.0, 0.5, 1.5]
+  labels: [x1, x0.5, x1.5]
+
+selection:
+  map_ids: [replicad_apartment]
+  asset_ids:
+    # Only the ROLLING asset: the user asked for at most one more 匀速 clip, and
+    # this is the only asset we own that can roll (cross-section r_cv 0.078 vs
+    # 0.204-0.327 for every other asset), so it is the only one whose constant
+    # velocity is physically motivated rather than an imposed frictionless slide.
+    - gso_whey_protein_vanilla
+
+timing:
+  # 81 frames at 16 fps = 5.0625 s.  physics_fps must be divisible by video_fps.
+  duration_seconds: 5.0625
+  frame_count: 81
+  # 560 = 16 fps x 35 substeps.  Chosen by measurement, not by taste: Bullet's
+  # contact solver injects energy into rolling contact at coarse steps while the
+  # hull's faceting removes it, and 560 Hz is where those cancel.  Measured mean
+  # |net speed drift| over seeds 1001-1003: 6.8% at 560 Hz vs 9.2% at 480,
+  # 13.4% at 640 and 21.2% at 880 (tools/_t1b_profile.sh).
+  #
+  # This matters because the vendored Kubric wrapper never calls setTimeStep
+  # (its own source says "TODO: setTimeStep if scene.step_rate != 240 Hz"), so
+  # before that was fixed a finer step_rate silently stretched simulated time
+  # instead of shortening the step.  At the calibrated 240 Hz nothing changes.
+  physics_fps: 560
+  video_fps: 16
+
+physics:
+  gravity: [0.0, 0.0, -9.81]
+  rolling_friction: 0.0
+  spinning_friction: 0.0
+  # Frictionless support for the assets that SLIDE.  The convex-hull actors that
+  # stay upright brake at mu*g = 3.5 m/s^2 and stop inside one frame on the
+  # scanned floor, so their uniform motion is the frictionless idealisation
+  # (measured: mu 0.01 -> stops in 0.36 m, rel_change 0.999; mu 0 -> travels
+  # 1.000 m at constant speed, rel_change 0.0000).
+  #
+  # The ROLLING asset must NOT be frictionless -- friction is the torque that
+  # makes it roll -- so it gets its own range from the `orientation` block below,
+  # which applies only to the assets listed there.  Changing this shared value
+  # instead would brake every other asset in `selection`.
+  friction_range: [0.0, 0.0]
+  restitution_range: [0.05, 0.20]
+  # Travel expressed in object extents so it stays visible for both a 0.12 m
+  # can and a 0.28 m fabric cube.
+  travel_object_extent_range: [4.0, 7.0]
+  direction_degrees_range: [-10.0, 10.0]
+  angular_velocity_policy: pure_rolling
+  external_force: [0.0, 0.0, 0.0]
+
+# ---------------------------------------------------------------------------
+# Initial pose (additive capability; see physim.scenarios.common).
+#
+# The user's objection was physical: an upright container sliding across a floor
+# at constant velocity has no motivation.  Laid on its SIDE the same container
+# ROLLS, and a rolling body at constant velocity is exactly Newton's first law,
+# so the motion becomes motivated instead of arbitrary.
+#
+# `asset_ids` restricts the pose to the one near-circular asset we own.  Every
+# other asset in `selection` (the fabric cube) keeps the manifest's authored
+# upright pose, and any scenario config without this block is unaffected.
+# ---------------------------------------------------------------------------
+orientation:
+  policy: side
+  asset_ids:
+    - gso_whey_protein_vanilla
+  # Use the asset's refined side hull rather than its 64-vertex upright hull.
+  # Measured at an identical initial condition: the coarse hull's cross-section
+  # is only a ~16-gon, so the can rocks facet-to-facet and stops (decay
+  # +0.674 /s); the refined hull rolls (slip 0.996, decay -0.055 /s).
+  refined_collision: true
+  friction_range: [0.30, 0.60]
+
+surface:
+  allowed_types: [floor]
+  min_up_dot: 0.98
+  edge_margin: 0.10
+
+validation:
+  max_sample_attempts: 200
+  reject_initial_overlap: true
+  min_travel_distance: 0.05
+  min_travel_object_extent_ratio: 1.0
+  max_linear_speed: 10.0
+  max_trajectory_extent_object_ratio: 20.0
+  # The scene floor is real scanned geometry, so allow a slightly looser speed
+  # band than a perfectly flat synthetic plane would need.
+  max_speed_relative_change: 0.25
+  require_supported: true
+  require_in_map_bounds: true
+
+camera:
+  # ---------------------------------------------------------------------
+  # CAMERA C -- chosen by the user ("裁定匀速机位C，建议不要做特写").
+  #
+  # The old `trajectory_side` pose sat at (-0.643, 0.800, 0.458), which is
+  # 0.238 m from frl_apartment_bike_02 -- the camera was standing inside the
+  # bicycle, so it filled the left of frame.  This pose is 3.53-4.86 m from that
+  # bicycle and is the WIDER of the two candidates (object occupies 0.075 of the
+  # frame width vs 0.090 for camera A), i.e. deliberately not a close-up.
+  #
+  # Measured coverage of the bicycle here: ~13.1% of the image, on the RIGHT,
+  # 3.5-4.9 m away -> distant background, not near-field clutter.
+  #
+  # `fixed` uses the pose verbatim and injects no azimuth/side randomness, so the
+  # framing cannot drift with seed or trajectory.
+  # ---------------------------------------------------------------------
+  policy: fixed
+  position: [-0.6744, -3.1931, 0.6127]
+  look_at: [-0.6744, -0.9931, 0.1027]
+  focal_length_mm: 50.0
+  framing:
+    sensor_width_mm: 36.0
+
+output:
+  resolution: [1920, 1080]
+  modalities: [rgb, depth, segmentation]
+  save_physics_trajectory: true
+  save_render_trajectory: true
+  save_collision_events: true
+  save_config: true
+  write_video: true

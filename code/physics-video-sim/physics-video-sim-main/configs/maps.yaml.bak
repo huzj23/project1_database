@@ -1,0 +1,229 @@
+version: 2
+
+maps:
+  basketball_court:
+    environment_asset_id: basketball_court
+    surface_groups:
+      - surface_type: floor
+        object_extent_range_m: [0.03, 0.40]
+        edge_margin: 0.50
+        clearance: 6.0
+        collision_thickness: 0.10
+        regions:
+          # The four source court quadrants meet at z~=0.003 m.
+          - region_id: basketball_court_floor
+            cleanliness: verified_clear
+            position: [-0.0073, 0.0, 0.0032]
+            normal: [0.0, 0.0, 1.0]
+            bounds_xy: [-12.0, 12.0, -5.0, 5.0]
+
+  classroom:
+    environment_asset_id: classroom
+    surface_groups:
+      # Large balls use clear floor aisles rather than spawning below desks.
+      - surface_type: floor
+        object_extent_range_m: [0.18, 0.35]
+        edge_margin: 0.05
+        linear_speed_range: [0.13, 0.18]
+        clearance: 1.0
+        collision_thickness: 0.10
+        regions:
+          - region_id: classroom_floor_front_aisle
+            cleanliness: verified_clear
+            position: [0.0, 0.0, 0.0]
+            normal: [0.0, 0.0, 1.0]
+            bounds_xy: [0.20, 1.50, 2.00, 2.70]
+            camera:
+              side: right
+
+      # Small objects use measured desk-top bounds from the realized source
+      # collection instances. Slower rolling keeps trajectories on the desks.
+      - surface_type: table_top
+        object_extent_range_m: [0.03, 0.13]
+        edge_margin: 0.005
+        linear_speed_range: [0.025, 0.040]
+        direction_degrees_range: [-2.0, 2.0]
+        clearance: 0.35
+        collision_thickness: 0.04
+        camera:
+          side: right
+          # Resolve chair-back occlusion horizontally before increasing pitch.
+          azimuth_offset_degrees: 45.0
+          framing:
+            min_distance: 0.65
+        validation:
+          min_travel_distance: 0.08
+        regions:
+          - region_id: classroom_student_desk_a
+            cleanliness: verified_clear
+            verification: raycast_grid_and_cycles_preview
+            position: [0.0, 0.0, 0.79602]
+            normal: [0.0, 0.0, 1.0]
+            bounds_xy: [0.10, 0.40, -0.82, -0.68]
+            collision:
+              type: mesh
+              mesh: collision/surfaces/classroom_student_desk_a.obj
+              simulation: collision/surfaces/classroom_student_desk_a.urdf
+              source_components: [Plane.003, Plane.004]
+              triangles: 1288
+              max_triangles: 2048
+              mesh_sha256: 0fb1d0d7ae260aa6e30b8207c6a2b8a36afa7f9213dec22411cb64bba4b6ae07
+          - region_id: classroom_student_desk_b
+            cleanliness: verified_clear
+            verification: raycast_grid
+            position: [0.0, 0.0, 0.79518]
+            normal: [0.0, 0.0, 1.0]
+            bounds_xy: [1.40, 1.72, -0.80, -0.64]
+            collision:
+              type: mesh
+              mesh: collision/surfaces/classroom_student_desk_b.obj
+              simulation: collision/surfaces/classroom_student_desk_b.urdf
+              source_components: [Plane.003, Plane.004]
+              triangles: 1288
+              max_triangles: 2048
+              mesh_sha256: 9bb311aa51f61eca2b0ce69cfba8cec2f5d51debf29a01838ece3439288a2ca6
+          - region_id: classroom_student_desk_c
+            cleanliness: verified_clear
+            verification: raycast_grid
+            # This slightly smaller surface does not accept the 12 cm cup.
+            object_extent_range_m: [0.03, 0.10]
+            position: [0.0, 0.0, 0.79434]
+            normal: [0.0, 0.0, 1.0]
+            bounds_xy: [0.06, 0.35, -2.53, -2.35]
+            collision:
+              type: mesh
+              mesh: collision/surfaces/classroom_student_desk_c.obj
+              simulation: collision/surfaces/classroom_student_desk_c.urdf
+              source_components: [Plane.003, Plane.004]
+              triangles: 1288
+              max_triangles: 2048
+              mesh_sha256: d19ce125408f1a9dc124cf5a1b3e10b9d8cb14abdd50dc2a503d2e8c57d46470
+
+  street:
+    environment_asset_id: street
+    surface_groups:
+      - surface_type: floor
+        object_extent_range_m: [0.03, 0.40]
+        edge_margin: 0.05
+        linear_speed_range: [0.10, 0.15]
+        direction_degrees_range: [-5.0, 5.0]
+        clearance: 1.0
+        camera:
+          side: right
+        regions:
+          - region_id: street_clear_road
+            cleanliness: verified_clear
+            verification: source_object_bounds_and_overlap_audit
+            position: [0.0, 0.0, -0.10]
+            normal: [0.0, 0.0, 1.0]
+            # Conservative obstacle-free subset of SM_Road_Track10.
+            bounds_xy: [193.50, 195.50, 20.50, 22.50]
+            collision:
+              type: mesh
+              mesh: collision/surfaces/street_clear_road.obj
+              simulation: collision/surfaces/street_clear_road.urdf
+              source_components: [SM_Road_Track10_StaticMeshComponent0]
+              triangles: 2
+              max_triangles: 2048
+              mesh_sha256: 9192dbeed578501ae7103b9c97ec0aaf0b6ab05a8d0782bc4086fd2c0df86452
+          - region_id: street_south_road
+            cleanliness: verified_clear
+            verification: source_object_bounds_and_obstacle_overlap_audit
+            position: [0.0, 0.0, -0.10]
+            normal: [0.0, 0.0, 1.0]
+            bounds_xy: [193.50, 197.50, -21.50, -7.50]
+            direction_degrees_range: [85.0, 95.0]
+            collision:
+              type: mesh
+              mesh: collision/surfaces/street_south_road.obj
+              simulation: collision/surfaces/street_south_road.urdf
+              source_components:
+                - SM_Road_Track50_StaticMeshComponent0
+                - SM_Road_Track48_StaticMeshComponent0
+                - SM_Road_Track6_StaticMeshComponent0
+              triangles: 6
+              max_triangles: 2048
+              mesh_sha256: c69fb16cfa729d39593e2e778485ec618f5448e60215d4cdbbaeb901991e43e9
+          - region_id: street_mid_road
+            cleanliness: verified_clear
+            verification: source_object_bounds_and_obstacle_overlap_audit
+            position: [0.0, 0.0, -0.10]
+            normal: [0.0, 0.0, 1.0]
+            bounds_xy: [193.50, 197.50, 38.50, 47.50]
+            direction_degrees_range: [85.0, 95.0]
+            collision:
+              type: mesh
+              mesh: collision/surfaces/street_mid_road.obj
+              simulation: collision/surfaces/street_mid_road.urdf
+              source_components:
+                - SM_Road_Track14_StaticMeshComponent0
+                - SM_Road_Track24_StaticMeshComponent0
+              triangles: 4
+              max_triangles: 2048
+              mesh_sha256: 365c33c9ab3ad27a23ed1405e8f2fb1dae612c1ea7eacc3032e40219eae2d1a8
+          - region_id: street_north_road
+            cleanliness: verified_clear
+            verification: source_object_bounds_and_obstacle_overlap_audit
+            position: [0.0, 0.0, -0.10]
+            normal: [0.0, 0.0, 1.0]
+            bounds_xy: [193.50, 197.50, 58.50, 77.50]
+            direction_degrees_range: [85.0, 95.0]
+            collision:
+              type: mesh
+              mesh: collision/surfaces/street_north_road.obj
+              simulation: collision/surfaces/street_north_road.urdf
+              source_components:
+                - SM_Road_Track26_StaticMeshComponent0
+                - SM_Road_Track28_StaticMeshComponent0
+                - SM_Road_Track30_StaticMeshComponent0
+                - SM_Road_Track32_StaticMeshComponent0
+              triangles: 8
+              max_triangles: 2048
+              mesh_sha256: 417f5e5c960d4cf56644c97e0e08c1807e16402d4f05ad829d0fbeadedd4764e
+          - region_id: street_west_road
+            cleanliness: verified_clear
+            verification: source_object_bounds_and_obstacle_overlap_audit
+            position: [0.0, 0.0, -0.10]
+            normal: [0.0, 0.0, 1.0]
+            bounds_xy: [168.50, 177.50, 8.50, 12.50]
+            collision:
+              type: mesh
+              mesh: collision/surfaces/street_west_road.obj
+              simulation: collision/surfaces/street_west_road.urdf
+              source_components:
+                - SM_Road_Track39_StaticMeshComponent0
+                - SM_Road_Track37_StaticMeshComponent0
+              triangles: 4
+              max_triangles: 2048
+              mesh_sha256: b6ee0c0ee0b6ec12ede6eb3c09125d909798b36212b9d17c7a0a5c0a7430b3c0
+          - region_id: street_east_road
+            cleanliness: verified_clear
+            verification: source_object_bounds_and_obstacle_overlap_audit
+            position: [0.0, 0.0, -0.10]
+            normal: [0.0, 0.0, 1.0]
+            bounds_xy: [208.50, 212.50, 3.50, 12.50]
+            direction_degrees_range: [85.0, 95.0]
+            collision:
+              type: mesh
+              mesh: collision/surfaces/street_east_road.obj
+              simulation: collision/surfaces/street_east_road.urdf
+              source_components:
+                - SM_Road_Track56_StaticMeshComponent0
+                - SM_Road_Track55_StaticMeshComponent0
+              triangles: 4
+              max_triangles: 2048
+              mesh_sha256: 5f136dc06242e2821b01589b1a08543e3d94d273f11461deef320791ae4daf53
+          - region_id: street_northeast_road
+            cleanliness: verified_clear
+            verification: source_object_bounds_and_obstacle_overlap_audit
+            position: [0.0, 0.0, -0.10]
+            normal: [0.0, 0.0, 1.0]
+            bounds_xy: [213.50, 217.50, 3.50, 7.50]
+            collision:
+              type: mesh
+              mesh: collision/surfaces/street_northeast_road.obj
+              simulation: collision/surfaces/street_northeast_road.urdf
+              source_components: [SM_Road_Track58_StaticMeshComponent0]
+              triangles: 2
+              max_triangles: 2048
+              mesh_sha256: 18f330d0d083ee6562e3b008d8c1aa61ca8f1beea26adaa7ff807bec5f10f631

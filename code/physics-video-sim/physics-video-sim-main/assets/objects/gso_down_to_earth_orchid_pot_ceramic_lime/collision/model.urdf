@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<robot name="Down_To_Earth_Orchid_Pot_Ceramic_Lime">
+  <link name="base">
+    <inertial>
+      <origin xyz="1.2127638044812087e-18 -1.0914874240330879e-17 -2.4255276089624175e-18" />
+      <mass value="0.00046562127713271185" />
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" />
+      <geometry>
+        <mesh filename="../visual/model.obj" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" />
+      <geometry>
+        <mesh filename="model.obj" />
+      </geometry>
+    </collision>
+  </link>
+</robot>

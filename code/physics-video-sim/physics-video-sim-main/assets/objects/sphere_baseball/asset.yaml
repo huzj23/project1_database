@@ -1,0 +1,30 @@
+version: 1
+id: sphere_baseball
+kind: object
+category: sphere
+
+source: Poly Haven
+source_page: https://polyhaven.com/a/baseball_01
+author: Rico Cilliers
+license: CC0-1.0
+sha256: 9592ac503a8f56406cb1cb98af191eb381731de9291cad9a57d50af06efb4e19
+
+visual:
+  mesh: visual/model.glb
+  size: [0.073518, 0.075169, 0.075330]
+  scale: [1.0, 1.0, 1.0]
+visual_transform:
+  # Compensate the fixed rotation in the PhyCo-Sim GLB loader.
+  x_rotation_degrees: 90.0
+  center_mesh_origin: true
+
+collision:
+  type: sphere
+  radius: 0.037665
+
+physics:
+  mass_range: [0.142, 0.149]
+  friction_range: [0.35, 0.55]
+  restitution_range: [0.45, 0.55]
+
+allowed_scenarios: [rolling, constant_force, free_fall]

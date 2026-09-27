@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<robot name="Whey_Protein_Vanilla_side">
+  <link name="base">
+    <inertial>
+      <origin xyz="0 0 0" />
+      <mass value="0.0017833943411836959" />
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" />
+      <geometry>
+        <mesh filename="../visual/model.obj" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" />
+      <geometry>
+        <mesh filename="model_side.obj" />
+      </geometry>
+    </collision>
+  </link>
+</robot>

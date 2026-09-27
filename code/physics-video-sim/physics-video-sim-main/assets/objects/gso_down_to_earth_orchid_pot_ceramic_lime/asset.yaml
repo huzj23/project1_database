@@ -1,0 +1,43 @@
+version: 1
+id: gso_down_to_earth_orchid_pot_ceramic_lime
+kind: object
+category: consumer_goods
+
+source: Google Scanned Objects (GSO)
+source_filename: Down_To_Earth_Orchid_Pot_Ceramic_Lime
+license: CC BY-SA 4.0
+license_note: attribution + ShareAlike; see license/SOURCE.md
+
+quality:
+  vertices: 12461
+  triangles: 20260
+  normalized_max_dimension_m: 0.140098
+
+visual:
+  mesh: visual/model.obj
+  size: [0.140098, 0.139404, 0.127129]
+  scale: [1.0, 1.0, 1.0]
+
+visual_transform:
+  x_rotation_degrees: 0.0
+  center_mesh_origin: false
+
+initial_orientation:
+  policy: fixed_authored_upright
+  quaternion_wxyz: [1.0, 0.0, 0.0, 0.0]
+
+collision:
+  type: convex_hull
+  mesh: collision/model.obj
+  simulation: collision/model.urdf
+  bounding_radius: 0.117498
+  footprint_radius: 0.070049
+  support_height: 0.048641
+  half_extents: [0.070049, 0.069702, 0.063564]
+
+physics:
+  mass_range: [0.000372, 0.000559]
+  friction_range: [0.30, 0.60]
+  restitution_range: [0.05, 0.35]
+
+allowed_scenarios: [rolling, constant_force, free_fall, turntable_carry, turntable_spin, damping]

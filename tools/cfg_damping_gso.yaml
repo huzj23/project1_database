@@ -1,0 +1,100 @@
+version: 1
+scenario: damping
+
+# ===========================================================================
+# 运动 #7 阻尼运动
+#
+# Mechanism: Bullet's own linearDamping / angularDamping.  The sampler picks an
+# initial speed and a damping coefficient; the solver integrates the exponential
+# decay v(t) = v0 * exp(-k*t).  No frame is prescribed.
+#
+# Deliberately NOT Coulomb friction: friction gives v = v0 - mu*g*t, a straight
+# line reaching zero in finite time.  Keeping lateralFriction = 0 and using
+# linearDamping isolates the exponential law, so the clip shows true damped
+# motion rather than a slide that happens to stop.
+#
+# Measured usable band (damp_probe2.sh): k = 0.4 decays cleanly and
+# monotonically over 81 frames; k >= 1.2 arrests the body within one frame.
+# ===========================================================================
+
+controlled_variants:
+  variable: damping
+  multipliers: [1.0, 0.5, 1.5]
+  labels: [x1, x0.5, x1.5]
+
+selection:
+  map_ids: [replicad_apartment]
+  asset_ids:
+    - gso_whey_protein_vanilla
+    - gso_room_essentials_fabric_cube_lavender
+
+timing:
+  duration_seconds: 5.0625
+  frame_count: 81
+  physics_fps: 240
+  video_fps: 16
+
+physics:
+  gravity: [0.0, 0.0, -9.81]
+  rolling_friction: 0.0
+  spinning_friction: 0.0
+  # Frictionless support, so the ONLY velocity attenuation is the damping
+  # coefficient under test.
+  friction_range: [0.0, 0.0]
+  restitution_range: [0.05, 0.15]
+  damping_range: [0.25, 0.45]
+  # Travel expressed in object extents; the sampler inverts the exponential to
+  # choose the v0 that produces it.
+  travel_object_extent_range: [4.0, 7.0]
+  direction_degrees_range: [-10.0, 10.0]
+
+surface:
+  allowed_types: [floor]
+  edge_margin: 0.10
+
+validation:
+  max_sample_attempts: 200
+  reject_initial_overlap: true
+  min_travel_distance: 0.05
+  min_travel_object_extent_ratio: 1.0
+  max_linear_speed: 6.0
+  max_trajectory_extent_object_ratio: 20.0
+  require_supported: true
+  require_in_map_bounds: true
+  # Decay must be real, and must not be a disguised stop.
+  max_decay_ratio: 0.60
+  min_decay_ratio: 0.03
+  speed_rise_tolerance: 0.02
+  max_speed_rises: 3
+  # The measured decay should track exp(-k*T).  Loose, because the contact and the
+  # 240 Hz integrator introduce some divergence from the continuous solution.
+  max_decay_ratio_error: 0.45
+
+camera:
+  policy: trajectory_side
+  relative_to_trajectory: true
+  side: random
+  azimuth_offset_degrees_range: [-25.0, 25.0]
+  focal_length_mm: 40.0
+  framing:
+    sensor_width_mm: 36.0
+    trajectory_frame_fraction: 0.80
+    object_padding: 0.25
+    min_object_frame_fraction: 0.10
+    max_object_frame_fraction: 0.55
+    min_object_frame_area_fraction: 0.0025
+    max_object_frame_area_fraction: 0.20
+    min_distance: 0.50
+    max_distance: 8.00
+    elevation_degrees: 12.0
+    min_height_above_trajectory: 0.25
+    look_at_offset: 0.0
+
+output:
+  resolution: [1920, 1080]
+  modalities: [rgb, depth, segmentation]
+  save_physics_trajectory: true
+  save_render_trajectory: true
+  save_collision_events: true
+  save_config: true
+  write_video: true
