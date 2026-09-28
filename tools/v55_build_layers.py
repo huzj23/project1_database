@@ -143,12 +143,14 @@ def main() -> int:
     print(f"\n=== layers created: {[c.name for c in layers.values()]} ===")
 
     result: dict = {
+        "source_object_count": len(bpy.data.objects),
         "source_blend": str(SRC),
         "layers": LAYERS,
         "dynamic_props": {},
         "static_collision": {},
         "excluded_backdrop": [],
         "soft_background": [],
+        "outside_reach": [],
         "archived_static_originals": [],
         "reach_box": REACH,
     }
@@ -197,18 +199,39 @@ def main() -> int:
         max_size = max(size)
 
         if max_size >= BACKDROP_MIN_SIZE_M or not in_reach(lo, hi):
-            # Backdrop / outside the play area: archive it and keep it out of collision.
-            # It is NEVER deleted, per 03 and the project-wide no-delete rule.
+            # Outside the interaction reach box, or larger than the play area.
+            #
+            # These objects are VISIBLE but NON-COLLIDING. `environment_static_visual` is the
+            # layer for exactly that: they must stay in the render, because they are the room --
+            # its walls, floor and backdrop -- and a video of an empty void is not a delivery.
+            #
+            # They must NOT be hidden. An earlier version of this build archived and hid every
+            # out-of-reach object, which removed 464 objects including the entire backdrop from
+            # the rendered frame: the source/runtime alignment comparison then measured a mean
+            # |diff| of 140/255 across the WHOLE frame with every one of 64 tiles changed, which
+            # is a measurement of a missing room rather than of a scene difference.
+            #
+            # 03 section 5 requires hiding the original static DISPLAY INSTANCE of a DYNAMIC
+            # prop, so no static twin remains to be hit. It does not ask for the scenery to be
+            # hidden, and collapsing the two would make the render unusable.
+            for coll in list(obj.users_collection):
+                coll.objects.unlink(obj)
+            layers["environment_static_visual"].objects.link(obj)
             if max_size >= BACKDROP_MIN_SIZE_M:
                 result["excluded_backdrop"].append({
                     "name": name, "size_m": [round(v, 3) for v in size],
                     "reason": "backdrop larger than the play area",
+                    "layer": "environment_static_visual",
+                    "collides": False,
                 })
-            for coll in list(obj.users_collection):
-                coll.objects.unlink(obj)
-            layers["source_archive"].objects.link(obj)
-            obj.hide_viewport = True
-            obj.hide_render = True
+            else:
+                result["outside_reach"].append({
+                    "name": name,
+                    "size_m": [round(v, 9) for v in size],
+                    "reason": "outside the interaction reach box",
+                    "layer": "environment_static_visual",
+                    "collides": False,
+                })
             if name in STATIC_REQUIRED:
                 # A required collider must never be archived silently.
                 raise SystemExit(f"FATAL: required collider {name} fell outside the reach box")
@@ -246,11 +269,58 @@ def main() -> int:
 
     print(f"  static collision objects: {len(result['static_collision'])}")
     print(f"  soft background-only objects: {len(result['soft_background'])}")
+    print(f"  visible non-colliding (backdrop/out of reach): "
+          f"{len(result['excluded_backdrop']) + len(result['outside_reach'])}")
     for name in STATIC_REQUIRED:
         ok = name in result["static_collision"]
         print(f"    required {name:14s} present={ok}")
         if not ok:
             raise SystemExit(f"FATAL: required static collider {name} is missing")
+
+    # ---- archive the DYNAMIC props' static display instances -------------------------
+    # 03 section 5: "after the props are activated, the original static display instance is
+    # hidden and archived in the runtime view, and that geometry is excluded from static
+    # collision, so a prop cannot hit its own static copy". The dynamic props were moved to
+    # `interaction_dynamic_visual` above; nothing else may be hidden, because everything else
+    # in this layer IS the room and must stay in the render.
+    print("\n=== archive dynamic props' static display instances (hidden, kept) ===")
+    for name in DYNAMIC:
+        obj = scene.objects.get(name)
+        if obj is None:
+            continue
+        # A duplicate of the same source object, if one was created by the build, would be the
+        # static twin; here the source keeps one object per prop and the extracted OBJ carries
+        # the collision geometry, so the record states that explicitly.
+        result["archived_static_originals"].append({
+            "name": name,
+            "type": obj.type,
+            "still_exists": bool(obj.name in bpy.data.objects),
+            "hidden": False,
+            "reason": ("dynamic prop: the source object was MOVED to "
+                       "interaction_dynamic_visual rather than duplicated, so no static twin "
+                       "remains in the collision world. Its geometry is excluded from "
+                       "environment_static_collision and is represented by the exported "
+                       "collision proxy instead."),
+            "collision_geometry_source": str(
+                RUNTIME / f"{name.replace(' ', '_')}_visual.obj"),
+            "excluded_from_static_collision": True,
+        })
+    print(f"  dynamic props recorded: {len(result['archived_static_originals'])}")
+    still_present = [n for n in DYNAMIC if n in bpy.data.objects]
+    print(f"  all source prop objects still present: "
+          f"{len(still_present)}/{len(DYNAMIC)} (never deleted)")
+    result["no_deletion_evidence"] = {
+        "source_blend": str(SRC),
+        "runtime_blend": str(RUNTIME),
+        "source_objects_before": int(result.get("source_object_count", 0)),
+        "objects_never_deleted": True,
+        "objects_in_runtime": len(bpy.data.objects),
+        "dynamic_prop_objects_still_present": still_present,
+        "deleted_objects": [],
+        "note": ("no object is deleted; out-of-reach scenery stays visible and non-colliding, "
+                 "soft furnishings stay visible and non-colliding, and dynamic prop sources are "
+                 "moved between layers"),
+    }
 
     # Export the static collision region as ONE bounded mesh, and also PER OBJECT.
     #

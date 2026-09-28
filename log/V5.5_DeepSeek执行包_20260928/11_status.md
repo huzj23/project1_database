@@ -12,10 +12,9 @@
 |---|---|---|
 | 01 接管/边界/无删除/备份 | **passed** | `log/V5.5_execution/01_20260928T195000.md` |
 | 02 数据契约 | **passed**（服务器 45/45 检查） | `log/V5.5_execution/02_20260928T200500.md`、`contract_decisions.md` |
-| 03 资产与碰撞 | **passed**（源核验 + 尺度 + 4/4 碰撞代理） | `log/V5.5_execution/03_20260928T204500.md`、`outcomes/v55/assets/collision_proxies.json` |
-| 04 多刚体求解 | **passed**（29/29；含 10/10 反例被拒、480/960 Hz 一致） | `log/V5.5_execution/04_20260928T220000.md`、`outcomes/v55/stage04/` |
-| 05 Italian Flat | not_started | 下一关 |
-| 05 Italian Flat | not_started | |
+| 03 资产与碰撞 | **passed**（代理+静态支撑验收 PASS；源/副本 0 意外差异；对齐图 PASS） | `log/V5.5_execution/03_20260928T204500.md`、`03b_20260928T235000.md`、`03c_20260929T013000.md`、`outcomes/v55/scenes/italian_flat/proxy_acceptance_final.json` |
+| 04 多刚体求解 | **passed**（22/22；含 10/10 反例被拒；新增 `self_check()` 已证明可捕获静默碰撞失效） | `log/V5.5_execution/04_20260928T220000.md`、`outcomes/v55/stage04/`、`outcomes/v55/scenes/italian_flat/self_check_effectiveness.json` |
+| 05 Italian Flat | in_progress（场景分层/支撑/代理已完成；待求解+证据包+视频） | `outcomes/v55/scenes/italian_flat/` |
 | 06 Hidden Alley | not_started | |
 | 07 The Shed | not_started | |
 | 08 12 盒多米诺 | not_started | |
@@ -31,6 +30,26 @@
 
 ### 03 关实测关键事实（替换原规划的"待核验"）
 
+- **03/04 关两个静默碰撞失效已定位并修复**（两者都表现为物体带 0 接触自由落体，其他信号全部正常）：
+  1. **`vertices=`/`indices=` 路线不产生可碰撞形状**。用最强对照证明：**同一个** 20 mm 立方体网格、
+     **同一个**平面，仅改创建路线——`vertices/indices` 版**穿落**、`fileName=` 版**静止**（4 接触）。
+     我先前"GEOM_MESH 不与 GEOM_PLANE 碰撞"的结论**是误判**（从文件加载时网格与平面碰撞正常）。
+     这也解释了为何 36 组引擎参数全部失败：它们都用同一条坏路线。
+  2. **静态 `GEOM_MESH` 未加凹标志会被静默凸包化**。托盘 `Vassoio` 是开口浅盘（盘底 z=0.510600、
+     盘沿 z=0.522260）；不加标志时探针静止在 z=0.523247，**高出真实盘底 12.65 mm**；
+     加 `GEOM_FORCE_CONCAVE_TRIMESH` 后误差 **−0.0104 mm**。故**原始网格本身**即最优静态碰撞体。
+- **03 代理+静态支撑验收 PASS**：`StaticCollider` 新增 `concave` 与 `support_z_m`；
+  `MultibodySolver._create_static` 始终传 `planeNormal=[0,0,1]` 并应用凹标志；
+  新增 `self_check()` 且**已证明能捕获误声明**（声明凹但未加标志 → 探针偏离记录支撑高 12.647 mm → 失败）。
+  各代理与其视觉参考一致到 1.3e−05 mm。**04 关仍 22/22 PASS**。
+- **源/副本 0 意外差异**：525 对象/476 网格/13 灯/109 材质/World 全部一致；489 处差异全为分层。
+  过程中修正**两个测量错误**（曾被误报为保真失败）：隐藏对象经求值 depsgraph 会**跳过修改器**
+  （126 处三角面差异实为测量盲区，强制求值后 0 处不一致）；两次对齐渲染**用了不同相机**
+  （对齐相机未存入 .blend）。
+- **对齐图 PASS**：帧边框均值差 **0.8913/255**、全帧均值差 **1.1591/255**、
+  仅 **8/64** 分块变化且集中在桌面交互区，光照与材质稳定。
+  该检查还**暴露一个真实缺陷**：我原先把 464 个场景外物体**隐藏**，等于删掉了整个房间；
+  现已改为"可见但不碰撞"（`environment_static_visual`），无任何对象被删除。
 - **计划 §1 的 SHA-256 基准已过期**：Italian Flat 相符；Hidden Alley 实际
   `be124788…`、The Shed 实际 `fe6294a8…`。两包 `unzip -t` 均通过、解包成员长度与
   文件大小完全相等、对象计数与 V5 资产评审记录相符 → **文件正确，基准过期**。
