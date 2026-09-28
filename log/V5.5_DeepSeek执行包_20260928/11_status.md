@@ -11,14 +11,44 @@
 | 阶段 | 状态 | 证据 |
 |---|---|---|
 | 01 接管/边界/无删除/备份 | **passed** | `log/V5.5_execution/01_20260928T195000.md` |
-| 02 数据契约 | not_started | 下一关 |
-| 03 资产与碰撞 | not_started | |
-| 04 多刚体求解 | not_started | |
+| 02 数据契约 | **passed**（服务器 45/45 检查） | `log/V5.5_execution/02_20260928T200500.md`、`contract_decisions.md` |
+| 03 资产与碰撞 | **passed**（源核验 + 尺度 + 4/4 碰撞代理） | `log/V5.5_execution/03_20260928T204500.md`、`outcomes/v55/assets/collision_proxies.json` |
+| 04 多刚体求解 | not_started | 下一关 |
 | 05 Italian Flat | not_started | |
 | 06 Hidden Alley | not_started | |
 | 07 The Shed | not_started | |
 | 08 12 盒多米诺 | not_started | |
 | 09 渲染交付 | not_started | |
+
+### 02 关实测关键事实
+
+- 新增 `src/physim/contracts.py`：单位/坐标、`xyzw` 四元数（`wxyz` 边界显式转换）、
+  0 基帧与 `blender_frame = frame+1`、子步 `k` 覆盖 `((k-1)dt, k·dt]` 且报 `k·dt`
+  （**修正 V5 的提前一个 dt 偏差**）、`instance_id` 身份、角色、静态碰撞体分离。
+- `validate_no_passive_actors()` 把"全是被动项出不了链"变成**代码级拒绝**。
+- 旧 `SimulationResult`/`BodyState` **零改动**；45 项契约检查服务器全 PASS（rc=0）。
+
+### 03 关实测关键事实（替换原规划的"待核验"）
+
+- **计划 §1 的 SHA-256 基准已过期**：Italian Flat 相符；Hidden Alley 实际
+  `be124788…`、The Shed 实际 `fe6294a8…`。两包 `unzip -t` 均通过、解包成员长度与
+  文件大小完全相等、对象计数与 V5 资产评审记录相符 → **文件正确，基准过期**。
+  不覆盖、不重下（符合 03 §1）。
+- **Hidden Alley 服务器不可读的根因**（由 .blend 头部字节确定，非猜测）：
+  源文件由 **Blender 4.00** 写入（`BLENDER-v400REND`），服务器唯一可运行的
+  **3.4.1 在 `open_mainfile` 内部段错误（rc=139）**；项目自带 4.2.23 因需
+  glibc ≥2.26（宿主 2.17）**无法启动**。意大利 Flat 为 2.93、The Shed 为 3.4，均可读。
+- **"另存兼容副本"路线已证伪**：Blender 不能降版写入，另存产物仍是 4.2 格式。
+  半成品已**移入** `remove/v55_partial_uploads/`（移动非删除）。
+- **正确架构已实测**：物理路径**从不导入 `bpy`**。服务器 pybullet 202010061
+  真实求解通过（0.2 kg 盒 0.500→0.050 m 正确落定），本地 4.2.23 负责回放。
+- **本地 tmux 要求已满足**：WSL 提供 **tmux 3.4**，可驱动 Windows Blender；
+  两场景已在 tmux 会话内真实渲染（960×540），并经**定量**校验（std 40.1/70.7、
+  254/329 色阶）。01 §21 的"本地无 tmux"冲突**不成立**。
+- 四项计划候选资产尺寸**全部核实**；`Clue_Board` 实测 **0.497 m**，确认过大；
+  四者 **`watertight=false`**，均需自建闭合碰撞代理。
+- **待处理**：Hidden Alley `scale_length = 10.0`（另两场景 1.0），源数值不是米；
+  服务器 conda 环境**无 `kubric` 模块**，04 需选定依赖路线。
 
 ### 01 关实测关键事实（替换原规划的"待核验"）
 
@@ -71,6 +101,10 @@
 `tools/v5_render_rigid_video.py` 中的48帧/16fps、高俯视相机、两资产硬编码不能作为新视频规格。转盘每子步驱动支撑的控制方式不能作为多米诺模板。
 
 Hidden Alley本地Blender4.2的兼容路线已验证过，服务器3.4不能默认替代；本地计算如何满足tmux应按01/06在实际环境确认。所有凭据仍只用于用户授权的当前SSH进程。
+
+> **2026-09-28 执行者更新（03 关）**：上述"本地计算如何满足 tmux"**已解决**——
+> WSL 提供 tmux 3.4，已在 tmux 会话内完成真实渲染。服务器 3.4 **确认不能**读 Hidden Alley
+> （4.0 文件，段错误），已改用 06 §4 的"服务器求解 + 本地 4.2 回放"分离架构，两侧均实测通过。
 
 ## 第一次接手的具体下一步
 
