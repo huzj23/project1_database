@@ -13,7 +13,8 @@
 | 01 接管/边界/无删除/备份 | **passed** | `log/V5.5_execution/01_20260928T195000.md` |
 | 02 数据契约 | **passed**（服务器 45/45 检查） | `log/V5.5_execution/02_20260928T200500.md`、`contract_decisions.md` |
 | 03 资产与碰撞 | **passed**（源核验 + 尺度 + 4/4 碰撞代理） | `log/V5.5_execution/03_20260928T204500.md`、`outcomes/v55/assets/collision_proxies.json` |
-| 04 多刚体求解 | not_started | 下一关 |
+| 04 多刚体求解 | **passed**（29/29；含 10/10 反例被拒、480/960 Hz 一致） | `log/V5.5_execution/04_20260928T220000.md`、`outcomes/v55/stage04/` |
+| 05 Italian Flat | not_started | 下一关 |
 | 05 Italian Flat | not_started | |
 | 06 Hidden Alley | not_started | |
 | 07 The Shed | not_started | |

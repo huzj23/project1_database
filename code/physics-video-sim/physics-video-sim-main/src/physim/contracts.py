@@ -73,6 +73,24 @@ ROLE_TARGET = "target"
 ROLE_PASSIVE = "passive"
 VALID_ROLES = (ROLE_TRIGGER, ROLE_TARGET, ROLE_PASSIVE)
 
+
+def box_inertia_diagonal(
+    mass_kg: float, dimensions_m: Sequence[float]
+) -> tuple[float, float, float]:
+    """Solid-cuboid principal inertia: ``Ixx = m*(h^2 + d^2)/12`` and its two analogues.
+
+    Stage 03 requires boxes to use this form and explicitly forbids the old backend's
+    ``m*a^2/5`` half-axis approximation, which overstates a flat box's inertia several-fold
+    and would make it resist toppling.  This is the single shared implementation, so no
+    stage can quietly reintroduce the old formula.
+    """
+    x, y, z = (float(v) for v in dimensions_m[:3])
+    return (
+        mass_kg * (y * y + z * z) / 12.0,
+        mass_kg * (x * x + z * z) / 12.0,
+        mass_kg * (x * x + y * y) / 12.0,
+    )
+
 Z_UP_GRAVITY = (0.0, 0.0, -9.81)
 
 
@@ -638,6 +656,47 @@ class MultibodyResult:
                     f"contact step {r.step}: time_s={r.time_s} but step/physics_fps={expected}"
                 )
 
+    def validate_quaternions(self) -> None:
+        """Every stored quaternion must be a usable unit xyzw rotation.
+
+        A non-unit quaternion silently scales the body when applied, which would make a
+        replay disagree with the solve it came from.  Stage 04's counterexample suite
+        requires the contract to reject this rather than carry it into a render.
+        """
+        for spec in self.bodies:
+            q = tuple(float(v) for v in spec.quaternion_xyzw)
+            if len(q) != 4:
+                raise ContractError(
+                    f"{spec.instance_id}: quaternion must have 4 components, got {len(q)}"
+                )
+            norm = math.sqrt(sum(v * v for v in q))
+            if abs(norm - 1.0) > 1e-6:
+                raise ContractError(
+                    f"{spec.instance_id}: quaternion_xyzw is not unit length "
+                    f"(norm={norm!r}); a non-unit quaternion silently scales the body"
+                )
+        for iid, states in self.trajectories.items():
+            for state in states:
+                q = tuple(float(v) for v in state.quaternion)
+                if len(q) != 4:
+                    raise ContractError(
+                        f"{iid} frame {state.frame}: quaternion must have 4 components"
+                    )
+                norm = math.sqrt(sum(v * v for v in q))
+                if abs(norm - 1.0) > 1e-6:
+                    raise ContractError(
+                        f"{iid} frame {state.frame}: quaternion is not unit length "
+                        f"(norm={norm!r})"
+                    )
+        for record in self.substeps:
+            q = tuple(float(v) for v in record.quaternion_xyzw)
+            norm = math.sqrt(sum(v * v for v in q))
+            if abs(norm - 1.0) > 1e-6:
+                raise ContractError(
+                    f"{record.instance_id} step {record.step}: quaternion_xyzw is not unit "
+                    f"length (norm={norm!r})"
+                )
+
     def validate_no_passive_actors(self) -> None:
         """Refuse a 'chain' in which nothing can move.
 
@@ -653,6 +712,7 @@ class MultibodyResult:
     def validate(self) -> None:
         self.validate_identity()
         self.validate_time()
+        self.validate_quaternions()
         self.validate_no_passive_actors()
 
     def to_dict(self) -> dict[str, Any]:
