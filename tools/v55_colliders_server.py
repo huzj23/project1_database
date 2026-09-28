@@ -75,6 +75,36 @@ ASSETS = {
         "mass_note": "complete board game in box",
         "max_triangles": 512,
     },
+    # Added once 03 section 2's final selection was made, so the alternates are verified
+    # too rather than left with an unproven proxy (the stage-03 report listed this as an
+    # open item; this closes it).
+    "mario_thin_box": {
+        "asset_id": "New_Super_Mario_BrosWii_Wii_Game",
+        "role": "thin_box",
+        "declared_dimensions_m": [0.137079, 0.191721, 0.016727],
+        "mass_kg": 0.1200,
+        "mass_basis": "estimated",
+        "mass_note": "sealed plastic media case with paper sleeve and disc",
+        "max_triangles": 512,
+    },
+    "jarro_bottle_alt": {
+        "asset_id": "JarroDophilusFOS_Value_Size",
+        "role": "sealed_vessel_alternate",
+        "declared_dimensions_m": [0.066934, 0.066295, 0.128512],
+        "mass_kg": 0.0425,
+        "mass_basis": "estimated",
+        "mass_note": "sealed probiotic jar, contents plus HDPE container",
+        "max_triangles": 512,
+    },
+    "mad_gab_card_box_alt": {
+        "asset_id": "Mad_Gab_Refresh_Card_Game",
+        "role": "small_box_alternate",
+        "declared_dimensions_m": [0.155866, 0.156004, 0.155905],
+        "mass_kg": 0.0850,
+        "mass_basis": "estimated",
+        "mass_note": "sealed card game box, cards plus board and box",
+        "max_triangles": 512,
+    },
 }
 
 
