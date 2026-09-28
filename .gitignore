@@ -17,6 +17,7 @@ share/
 tmp/
 _scratch/
 tmp_zip_listing.txt
+remove/
 
 # Runtime/toolchain payloads
 tools/runtime/
