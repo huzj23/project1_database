@@ -20,6 +20,7 @@ tmp_zip_listing.txt
 
 # Runtime/toolchain payloads
 tools/runtime/
+tools/runtime_local/
 tools/vendor/
 tools/__pycache__/
 
