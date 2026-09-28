@@ -2,6 +2,39 @@
 
 登记时间：2026-09-28。本文件是计划包初始快照，不是实施报告。DeepSeek接手后按10将最新状态更新为真实记录，旧快照由Git保留。
 
+> **2026-09-28 更新（执行者）**：01 已完成并通过，实测记录见
+> `log/V5.5_execution/01_20260928T195000.md`，事件见 `log/V5.5_execution/events.jsonl`。
+> 下面"已知完成"一节保留规划时的原始快照；最新事实以本更新块为准。
+
+## 执行进度（实测，覆盖下方规划快照）
+
+| 阶段 | 状态 | 证据 |
+|---|---|---|
+| 01 接管/边界/无删除/备份 | **passed** | `log/V5.5_execution/01_20260928T195000.md` |
+| 02 数据契约 | not_started | 下一关 |
+| 03 资产与碰撞 | not_started | |
+| 04 多刚体求解 | not_started | |
+| 05 Italian Flat | not_started | |
+| 06 Hidden Alley | not_started | |
+| 07 The Shed | not_started | |
+| 08 12 盒多米诺 | not_started | |
+| 09 渲染交付 | not_started | |
+
+### 01 关实测关键事实（替换原规划的"待核验"）
+
+- 服务器连通：`gpu0001` / `wangzile`，conda python **3.10.18**，104 核，内存 503 GB（可用 369 GB）。
+- **服务器 Blender 3.4.1 可用**，但必须先加**项目自带** `tools/runtime/lib` 到
+  `LD_LIBRARY_PATH`（系统缺 `libxkbcommon.so.0`）。**未升级系统库。**
+- 服务器 `remove/` 已创建并核验：`drwxrwxrwx wangzile:wangzile`，`readlink -f` 在工作区内。
+- 上次中断的 `tools/v54_init_remove.sh` **确实不存在**——上传未落地。
+- **无删除链路已改造完成**：`purge_stale_frames` 由 `unlink` 改为移入 `remove/`；
+  新增 `src/physim/safe_output.py`。AST 审计 41 个文件：**0 处文件删除调用**。
+- 真实渲染回归 **rc=0**；哨兵帧被移走且 **sha256 不变**；既有 10 个场景配置 **10/10 ok**。
+- 服务器代码备份结论：主工程与本地**内容差异 0**；149 处差异**全部是 CRLF/LF**，
+  vendored `phyco-sim` 两侧同一 commit `bd8a3b4eb54fa1ad008250e2033a1f8369bff6d3`。
+- **服务器 tmux 是 1.8**：不支持 `-c`、不继承父环境、`new-session` 只接受**单个命令词**。
+  必须使用 `tools/v55_launch.sh` 生成单文件包装脚本，不要手写多参数 `tmux new-session`。
+
 ## 已知完成
 
 - V5.0资产清单、V5.1计划、V5.2旧视频和V5.3的84物体/4场景单帧已在log记录。

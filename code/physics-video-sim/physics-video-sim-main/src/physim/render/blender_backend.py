@@ -25,31 +25,60 @@ class BuiltBlenderScene:
     support_object: Any = None
 
 
-def purge_stale_frames(scratch_dir: str | Path) -> int:
-    """Delete leftover frame files so a re-run cannot read a previous run's frames.
+def purge_stale_frames(
+    scratch_dir: str | Path,
+    *,
+    workspace_root: str | Path | None = None,
+    remove_root: str | Path | None = None,
+) -> int:
+    """Move leftover frame files out of the scratch directory.  Deletes NOTHING.
 
     pipeline.py derives the scratch directory from scenario/seed/variant, so it is
     reused verbatim whenever the same sample is rendered again.  Kubric writes
     frame EXRs there and reads the whole directory back, which silently mixes old
     frames into the new clip (we saw 16 requested -> 32 returned, half of them
     rendered with the previous camera).
+
+    The original implementation called ``Path.unlink()``.  V5.5 forbids deleting
+    files, so the stale frames are now MOVED to the workspace ``remove`` directory
+    via :mod:`physim.safe_output`, which writes a hash-verified move manifest.
+    The user empties ``remove`` personally.
+
+    Returns the number of files moved.  Never raises for an unknown workspace:
+    stale frames that cannot be quarantined are left in place and reported, because
+    leaving them is recoverable while deleting is not.
     """
-    removed = 0
+    from physim.safe_output import quarantine_stale_frames, resolve_workspace_root
+
     root = Path(scratch_dir)
-    for sub in ("images", "exr", ""):
-        d = root / sub if sub else root
-        if not d.is_dir():
-            continue
-        for f in d.iterdir():
-            if not f.is_file():
-                continue
-            if f.suffix.lower() in (".exr", ".png") and f.name.startswith(("frame_", "rgba_", "depth_", "segmentation_")):
-                try:
-                    f.unlink()
-                    removed += 1
-                except OSError:
-                    pass
-    return removed
+    try:
+        ws = resolve_workspace_root(
+            explicit=workspace_root, start=remove_root or scratch_dir
+        )
+    except ValueError as exc:
+        import sys as _sys
+
+        print(
+            f"DIAG purge_stale_frames: {exc}; leaving stale frames in {root} untouched",
+            file=_sys.stderr,
+            flush=True,
+        )
+        return 0
+
+    remove_dir = Path(remove_root) if remove_root is not None else ws / "remove"
+    result = quarantine_stale_frames(
+        root, workspace_root=ws, remove_root=remove_dir
+    )
+    if result.failures:
+        import sys as _sys
+
+        for failure in result.failures:
+            print(
+                f"DIAG purge_stale_frames: {failure}",
+                file=_sys.stderr,
+                flush=True,
+            )
+    return result.moved_count
 
 
 class PhyCoBlenderBackend:
@@ -111,10 +140,11 @@ class PhyCoBlenderBackend:
         camera_spec: CameraSpec,
         config: dict,
     ) -> BuiltBlenderScene:
-        _purged = purge_stale_frames(self.scratch_dir)
-        if _purged:
+        _quarantined = purge_stale_frames(self.scratch_dir)
+        if _quarantined:
             import sys as _sys
-            print(f"DIAG purged {_purged} stale frame files from {self.scratch_dir}",
+            print(f"DIAG quarantined {_quarantined} stale frame files from "
+                  f"{self.scratch_dir} (moved to remove/, not deleted)",
                   file=_sys.stderr, flush=True)
         """Build the shared animated Blender scene without starting a render."""
         # Blender 3.4's bundled glTF importer still uses the removed NumPy alias.
