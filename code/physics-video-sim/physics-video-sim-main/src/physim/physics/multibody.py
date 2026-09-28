@@ -324,14 +324,23 @@ class MultibodySolver:
     def _create_static(self, collider: StaticCollider) -> int | None:
         cid = self.connect()
         if collider.collider_type == "plane":
-            shape = pb.createCollisionShape(pb.GEOM_PLANE, physicsClientId=cid)
+            # `planeNormal` is NOT optional in practice. Called without it, PyBullet builds a
+            # plane whose normal is not (0,0,1); stage 03 measured a body then free-falling
+            # straight through it. The normal is therefore always stated explicitly.
+            shape = pb.createCollisionShape(
+                pb.GEOM_PLANE, planeNormal=[0.0, 0.0, 1.0], physicsClientId=cid
+            )
         elif collider.collider_type == "box" and collider.half_extents_m:
             shape = pb.createCollisionShape(
                 pb.GEOM_BOX, halfExtents=list(collider.half_extents_m), physicsClientId=cid
             )
         elif collider.uri and Path(collider.uri).is_file():
+            # Concave scenery must be flagged, because an unflagged static GEOM_MESH is
+            # convex-hulled: the Italian Flat tray would then collide as a solid block whose
+            # top is its rim, 12.65 mm above the floor the props actually stand on.
+            flags = pb.GEOM_FORCE_CONCAVE_TRIMESH if collider.concave else 0
             shape = pb.createCollisionShape(
-                pb.GEOM_MESH, fileName=collider.uri, physicsClientId=cid
+                pb.GEOM_MESH, fileName=collider.uri, flags=flags, physicsClientId=cid
             )
         else:
             return None
@@ -351,6 +360,140 @@ class MultibodySolver:
         return body_id if body_id >= 0 else None
 
     # ------------------------------------------------------------------ checks
+
+    def self_check(self) -> dict[str, Any]:
+        """Prove the colliders this solver builds actually collide before trusting a solve.
+
+        Stage 03 found two PyBullet behaviours that fail SILENTLY: a static ``GEOM_MESH`` is
+        convex-hulled unless flagged concave, and a mesh built from ``vertices=``/``indices=``
+        produces a shape that does not collide with ``GEOM_PLANE`` or with a concave trimesh.
+        Both make a body free-fall with zero contacts while every other signal looks normal,
+        so neither can be detected from the trajectory alone.
+
+        Two things are checked per static collider, with a control box dropped on it:
+
+        ``supported``
+            the box makes contact and stops falling. A collider that fails this cannot produce
+            a truthful trajectory at all.
+
+        ``concavity_represented``
+            for a collider declared ``concave``, the box must come to rest BELOW the collider's
+            own bounding-box top. An upward-opening dish is exactly this case: if the box rests
+            at the AABB top instead, the concavity was discarded and PyBullet is colliding
+            against a filled hull. This assumption (upward-opening concavity) is stated because
+            it is what the check can detect; a downward-opening cavity would not be caught here.
+
+        The scene's dynamic bodies are masked out for the duration so their own fall cannot land
+        on the control box and be mistaken for the scenery supporting it, and the mask is
+        restored before returning.
+        """
+        cid = self.connect()
+        results: dict[str, Any] = {"controls": {}, "static_colliders": {}}
+
+        # Mask every dynamic body so the probe measures the SCENERY, not another body falling
+        # onto it. This was a real contamination: an earlier version of this check reported the
+        # dish as unsupported because a scene body had landed on the probe.
+        saved_masks: list[tuple[int, int, int]] = []
+        for body_id in self._body_ids.values():
+            group, mask = pb.getCollisionShapeData(body_id, -1, physicsClientId=cid)[0][3], 0
+            saved_masks.append((body_id, 1, 1))
+            pb.setCollisionFilterGroupMask(body_id, -1, 0, 0, physicsClientId=cid)
+
+        def settle_box_on(support_shape: int, x: float, y: float, drop_z: float) -> dict:
+            body = pb.createMultiBody(
+                0.05,
+                pb.createCollisionShape(pb.GEOM_BOX, halfExtents=[0.008] * 3,
+                                        physicsClientId=cid),
+                basePosition=(x, y, drop_z), physicsClientId=cid,
+            )
+            for _ in range(480):
+                pb.stepSimulation(physicsClientId=cid)
+            pos, _ = pb.getBasePositionAndOrientation(body, physicsClientId=cid)
+            contacts = pb.getContactPoints(bodyA=body, bodyB=support_shape,
+                                           physicsClientId=cid)
+            pb.removeBody(body, physicsClientId=cid)
+            bottom = float(pos[2]) - 0.008
+            return {"rest_z": round(float(pos[2]), 6), "rest_bottom_z": round(bottom, 6),
+                    "contacts": len(contacts), "rests": bool(len(contacts) > 0)}
+
+        try:
+            # Control 1: a plane built the way this solver builds it must support a box.
+            plane_shape = pb.createCollisionShape(
+                pb.GEOM_PLANE, planeNormal=[0.0, 0.0, 1.0], physicsClientId=cid
+            )
+            plane_body = pb.createMultiBody(0, plane_shape, basePosition=(0.0, 0.0, 0.0),
+                                            physicsClientId=cid)
+            results["controls"]["box_on_plane"] = settle_box_on(plane_body, 0.0, 0.0, 0.05)
+            pb.removeBody(plane_body, physicsClientId=cid)
+
+            # Control 2: every static mesh collider must support the same box.
+            for key, body_id in self._static_ids.items():
+                collider = next((c for c in self._statics if c.collider_id == key), None)
+                if collider is None:
+                    continue
+                aabb_min, aabb_max = pb.getAABB(body_id, physicsClientId=cid)
+                finite = all(abs(v) < 1e4 for v in list(aabb_min) + list(aabb_max))
+                if collider.collider_type == "plane" or not finite:
+                    # A GEOM_PLANE has no finite AABB, so it cannot choose a drop point; it is
+                    # unbounded and already covered by the control above.
+                    cx = cy = 0.0
+                    drop = float(collider.position_m[2]) + 0.05
+                    aabb_top = None
+                else:
+                    cx = 0.5 * (aabb_min[0] + aabb_max[0])
+                    cy = 0.5 * (aabb_min[1] + aabb_max[1])
+                    drop = float(aabb_max[2]) + 0.03
+                    aabb_top = float(aabb_max[2])
+                res = settle_box_on(body_id, cx, cy, drop)
+                res["concave"] = bool(getattr(collider, "concave", False))
+                res["collider_type"] = collider.collider_type
+                res["drop_z"] = round(drop, 6)
+                res["aabb_top_z"] = round(aabb_top, 6) if aabb_top is not None else None
+                res["probe_xy"] = [round(cx, 6), round(cy, 6)]
+                res["unbounded"] = aabb_top is None
+                res["supported"] = bool(
+                    res["rests"] and (aabb_top is None or res["rest_bottom_z"] <= drop - 0.02)
+                )
+                if aabb_top is None:
+                    res["concavity_represented"] = None
+                elif not res["concave"]:
+                    # A convex collider is SUPPOSED to be supported at its top surface.
+                    res["concavity_represented"] = None
+                else:
+                    # The probe must fall INTO the dish, i.e. below the AABB top; resting at or
+                    # above it means the declared concavity is not present in the collider.
+                    res["concavity_represented"] = bool(
+                        res["rest_bottom_z"] < aabb_top - 0.001
+                    )
+                # The strongest check available, and the one that catches a WRONG DECLARATION
+                # rather than a wrong flag: when the collider records the support height a stage
+                # measured by raycast, the probe must actually come to rest there. A concave dish
+                # left unflagged is silently hulled and supports bodies ~12.65 mm too high, which
+                # no flag-based check can see because the declaration itself said "convex".
+                support_z = getattr(collider, "support_z_m", None)
+                if support_z is None:
+                    res["support_height_verified"] = None
+                else:
+                    err = abs(res["rest_bottom_z"] - float(support_z))
+                    res["support_height_verified"] = bool(err <= 0.002)
+                    res["support_height_error_m"] = round(err, 9)
+                    res["recorded_support_z_m"] = float(support_z)
+                results["static_colliders"][key] = res
+        finally:
+            for body_id, group, mask in saved_masks:
+                pb.setCollisionFilterGroupMask(body_id, -1, group, mask,
+                                               physicsClientId=cid)
+
+        results["ok"] = bool(
+            results["controls"]["box_on_plane"]["rests"]
+            and all(
+                v.get("supported", True)
+                and v.get("concavity_represented") is not False
+                and v.get("support_height_verified") is not False
+                for v in results["static_colliders"].values()
+            )
+        )
+        return results
 
     def check_initial_penetration(self) -> PenetrationReport:
         """Detect overlap BEFORE solving.

@@ -558,6 +558,17 @@ class StaticCollider:
     quaternion_xyzw: tuple[float, float, float, float] = (0.0, 0.0, 0.0, 1.0)
     half_extents_m: tuple[float, float, float] | None = None
     triangles: int | None = None
+    # Concave scenery MUST set this, and the reason is measured rather than stylistic: a
+    # static GEOM_MESH without `GEOM_FORCE_CONCAVE_TRIMESH` is silently CONVEX-HULLED by
+    # PyBullet. The Italian Flat tray is a shallow open dish (floor z = 0.510600, rim
+    # z = 0.522260); handed over unflagged, a probe box came to rest at z = 0.523247 -- the
+    # RIM plane -- floating 12.65 mm above the real floor, while flagging it reproduces the
+    # floor to within 0.0104 mm. So the flag is part of the collider's identity: without it
+    # the recorded geometry is not the geometry that collides.
+    concave: bool = False
+    # Effective support height measured for this collider, when a stage has measured it. This
+    # is where a body may legally be placed so that it starts in contact without penetrating.
+    support_z_m: float | None = None
 
     def to_dict(self) -> dict[str, Any]:
         out: dict[str, Any] = {
@@ -565,11 +576,13 @@ class StaticCollider:
             "collider_type": self.collider_type,
             "position_m": list(self.position_m),
             "quaternion_xyzw": list(self.quaternion_xyzw),
+            "concave": self.concave,
         }
         for key, value in (
             ("uri", self.uri),
             ("source_object_id", self.source_object_id),
             ("triangles", self.triangles),
+            ("support_z_m", self.support_z_m),
         ):
             if value is not None:
                 out[key] = value
@@ -793,6 +806,7 @@ class MultibodyResult:
             item["quaternion_xyzw"] = tuple(item.get("quaternion_xyzw", (0.0, 0.0, 0.0, 1.0)))
             if item.get("half_extents_m") is not None:
                 item["half_extents_m"] = tuple(item["half_extents_m"])
+            item.setdefault("concave", False)
             colliders.append(StaticCollider(**item))
 
         events = []
