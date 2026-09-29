@@ -50,6 +50,13 @@ print(f"Hidden Alley unit scale investigation")
 print(f"  source {SRC}")
 bpy.ops.wm.open_mainfile(filepath=str(SRC))
 scene = bpy.context.scene
+# Guard the known trap in this scene. Its compositor renders a SECOND volumetric Fog scene, which
+# reached 25.8 GB of private memory on a 15.7 GB machine and wrote no file. This script never
+# renders, so the immediate risk is low, but any edit that adds a render must not reintroduce it, and
+# recording the state here makes the scene's compositor status explicit rather than implicit.
+print(f"  compositor in this scene: nodes={bool(getattr(scene, 'use_nodes', False))} "
+      f"enabled={getattr(scene.render, 'use_compositing', None)} "
+      f"(must be DISABLED before any render; see v5_audit_render_hidden_alley_local.ps1)")
 
 us = scene.unit_settings
 print(f"\n=== Blender unit settings ===")

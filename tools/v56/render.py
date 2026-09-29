@@ -389,6 +389,17 @@ scene.render.engine = "CYCLES"
 scene.cycles.device = "CPU"
 scene.cycles.samples = SPP
 scene.cycles.use_denoising = True
+# THE COMPOSITOR MUST BE DISABLED. The Hidden Alley source scene's compositor renders a SECOND
+# volumetric Fog scene: measured 2026-09-29 15:34 it reached 25,793 MB of private memory and
+# 26,469 MB of pagefile on a 15.7 GB machine without writing a single file, then made no progress
+# for 50 minutes while thrashing. This reproduces the 2026-09-28 finding recorded in
+# `tools/v5_audit_render_hidden_alley_local.ps1`, which disables compositing for the accepted
+# asset-review render for exactly this reason, and V5.6 section 4 requires the fog compositor to
+# stay off. Geometry, the 7 author lights, the World and all materials are untouched: only the
+# compositing step is skipped, so the rendered image is the authored render.
+scene.render.use_compositing = False
+print("  compositing DISABLED (fog compositor renders a second volumetric scene; section 4 "
+      "requires it off)")
 scene.render.resolution_x = RES_X
 scene.render.resolution_y = RES_Y
 scene.render.resolution_percentage = 100
