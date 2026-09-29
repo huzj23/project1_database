@@ -42,10 +42,15 @@ def main() -> int:
                            "because this project deletes nothing"),
                 "utc": stamp, "files": []}
     total = 0
-    for p in sorted(SRC.rglob("*")):
-        if not p.is_file():
-            continue
-        rel = p.relative_to(SRC)
+    # A FILE source must be handled explicitly: `Path.rglob` on a file yields nothing, so an earlier
+    # version archived zero files while printing "all hashes verified: True" -- vacuously true over
+    # an empty list -- and left the source in place. That is a silent success report on a no-op, so
+    # the file case is now first-class and the empty case is reported as a failure rather than a pass.
+    if SRC.is_file():
+        members = [(SRC, Path(SRC.name))]
+    else:
+        members = [(p, p.relative_to(SRC)) for p in sorted(SRC.rglob("*")) if p.is_file()]
+    for p, rel in members:
         target = dest / rel
         target.parent.mkdir(parents=True, exist_ok=True)
         digest = sha256(p)
@@ -60,11 +65,18 @@ def main() -> int:
         print(f"  moved {rel.as_posix():46s} {size:>12d} B  hash {'OK' if digest == after else 'MISMATCH'}")
     manifest["file_count"] = len(manifest["files"])
     manifest["total_bytes"] = total
-    manifest["all_hashes_verified"] = all(f["hash_verified"] for f in manifest["files"])
+    # `all([])` is True, which would report success for having moved nothing. archiving nothing is
+    # never a success: either the source was empty (a mistake worth surfacing) or the path was wrong.
+    manifest["all_hashes_verified"] = bool(manifest["files"]) and all(
+        f["hash_verified"] for f in manifest["files"])
     (dest / "MANIFEST.json").write_text(json.dumps(manifest, indent=2), encoding="utf-8")
     print(f"\narchived {manifest['file_count']} files ({total/1e6:.2f} MB) -> {dest}")
     print(f"all hashes verified: {manifest['all_hashes_verified']}")
     print(f"manifest: {dest / 'MANIFEST.json'}")
+    if not manifest["files"]:
+        print(f"FAILURE: {SRC} contained no files, so nothing was archived and nothing was moved. "
+              f"An archive that moves nothing must not report success.")
+        return 1
     return 0 if manifest["all_hashes_verified"] else 1
 
 
