@@ -37,7 +37,7 @@ import bpy
 argv = sys.argv
 argv = argv[argv.index("--") + 1:] if "--" in argv else []
 A = {"blend": "", "out": "", "tiers": "960x540:16", "frames": "1,2", "threads": "8",
-     "scene_frames": "2", "camera": "", "threshold": "0.01", "denoise": "1"}
+     "scene_frames": "2", "camera": "", "threshold": "0.01", "denoise": "1", "bounces": "6"}
 i = 0
 while i < len(argv):
     if argv[i].startswith("--"):
@@ -107,11 +107,11 @@ scene.render.use_compositing = False
 print(f"  compositing DISABLED (the authored compositor renders a second volumetric Fog scene and "
       f"exceeded 25 GiB private memory without writing a file)")
 scene.cycles.use_denoising = True
-scene.cycles.max_bounces = 6
-scene.cycles.diffuse_bounces = 2
-scene.cycles.glossy_bounces = 3
-scene.cycles.transmission_bounces = 6
-scene.cycles.transparent_max_bounces = 8
+scene.cycles.max_bounces = int(A["bounces"])
+scene.cycles.diffuse_bounces = min(2, int(A["bounces"]))
+scene.cycles.glossy_bounces = min(3, int(A["bounces"]))
+scene.cycles.transmission_bounces = min(6, int(A["bounces"]))
+scene.cycles.transparent_max_bounces = min(8, max(4, int(A["bounces"])))
 scene.cycles.volume_bounces = 0
 scene.cycles.use_adaptive_sampling = True
 scene.cycles.adaptive_threshold = float(A["threshold"])

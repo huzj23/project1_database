@@ -1,32 +1,30 @@
 """A2 recon: measure the Hidden Alley geometry around the chosen board.
 
-Read-only Blender pass.  Loads ph_hidden_alley.blend (Blender 4.0 file, opened by
-Blender 4.2.23 local), then reports, in world metres:
+Read-only Blender pass. Opens ph_hidden_alley.blend (a Blender 4.0 file, opened
+by local Blender 4.2.23), and reports in world metres:
 
-  * every object whose world AABB intersects a 6 m x 6 m x 3 m probe box
-    around the board, with its AABB, vertex/face count and material names;
-  * for the named support objects (Floor_main, apartment_walls,
-    base_tripple_01.003, dado_tripple_01.003) the exact exposed-surface
-    geometry: the plinth top plane, the plinth front face x, the wall plane x,
-    the skirting front x, and how far each extends in Y;
-  * a ray-cast bank that answers the question this task turns on: can a
-    rolling can of radius R on the FLOOR (z = -0.040) physically reach the
-    board's outer face, or does the 50 mm plinth kerb block it?
-  * scatter intrusion: the set of triangles of `stones` / `grass` / `leaves`
-    that lie inside the candidate travel corridor.
+  * every mesh object whose world AABB intersects a probe box around the board;
+  * exact AABB / tri-count for the named support objects;
+  * a ray bank at a grid of (y, z) firing -X from x = +3, reporting the FIRST
+    exposed surface a can travelling in -X would meet, and which object it
+    belongs to.  This is the question the whole task turns on: does the 50 mm
+    plinth kerb stop a rolling can before it reaches the board's face?
+  * the same bank firing +Y and -Y along the wall, to map the plinth profile;
+  * scatter intrusion: triangles of stones / grass / leaves inside the corridor.
 
-Nothing is written except the JSON report.  No render.
+Uses mathutils.bvhtree (C speed).  No render.  Writes JSON only.
 """
 
 from __future__ import annotations
 
 import json
-import math
 import sys
+import time
 from pathlib import Path
 
 import bpy
 from mathutils import Vector
+from mathutils.bvhtree import BVHTree
 
 ARGV = sys.argv[sys.argv.index("--") + 1:] if "--" in sys.argv else []
 OUT = Path(ARGV[0]) if ARGV else Path("recon.json")
@@ -34,13 +32,18 @@ OUT = Path(ARGV[0]) if ARGV else Path("recon.json")
 BLEND = ("D:/workspace/project1_database/models/backgrounds/candidates/"
          "hidden_alley/extracted/ph_hidden_alley.blend")
 
-# Board 01 world AABB (from the verified export).
 BOARD_MIN = Vector((-2.152816, 1.426557, 0.009686))
 BOARD_MAX = Vector((-2.017358, 2.887637, 0.399251))
 
 SUPPORT = ["Floor_main", "apartment_walls", "base_tripple_01.003",
            "dado_tripple_01.003", "wooden_boards.001", "wooden_boards",
-           "stones", "grass", "leaves"]
+           "stones", "grass", "leaves", "Floor", "floor_main"]
+
+T0 = time.time()
+
+
+def log(msg: str) -> None:
+    print(f"[{time.time() - T0:7.1f}s] {msg}", flush=True)
 
 
 def obj_world_aabb(ob):
@@ -55,197 +58,166 @@ def obj_world_aabb(ob):
     return mn, mx
 
 
-def verts_world(ob):
-    me = ob.data
-    mw = ob.matrix_world
-    return [mw @ v.co for v in me.vertices]
-
-
-def faces_tris(ob):
-    me = ob.data
+def build_bvh(ob, dg):
+    ev = ob.evaluated_get(dg)
+    me = ev.to_mesh()
+    mw = ev.matrix_world
+    vs = [mw @ v.co for v in me.vertices]
     me.calc_loop_triangles()
-    return [[t.vertices[0], t.vertices[1], t.vertices[2]]
-            for t in me.loop_triangles]
+    ts = [tuple(t.vertices) for t in me.loop_triangles]
+    bvh = None
+    if ts:
+        bvh = BVHTree.FromPolygons([tuple(v) for v in vs], ts, all_triangles=True)
+    ev.to_mesh_clear()
+    return vs, ts, bvh
 
 
 def main() -> int:
     bpy.ops.wm.open_mainfile(filepath=BLEND)
+    log(f"opened {BLEND}")
     scn = bpy.context.scene
-    print(f"[recon] opened {BLEND}")
-    print(f"[recon] unit_settings scale_length = {scn.unit_settings.scale_length} "
-          f"system={scn.unit_settings.system} length_unit={scn.unit_settings.length_unit}")
-    print(f"[recon] frame range {scn.frame_start}..{scn.frame_end} fps={scn.render.fps}")
+    log(f"unit scale_length={scn.unit_settings.scale_length} "
+        f"fps={scn.render.fps} frames {scn.frame_start}..{scn.frame_end}")
 
-    probe_min = Vector((-4.2, -0.2, -1.2))
-    probe_max = Vector((0.0, 5.0, 2.5))
+    probe_min = Vector((-4.5, -0.3, -1.5))
+    probe_max = Vector((0.5, 5.3, 2.8))
 
-    report = {"blend": BLEND, "objects": [], "named": {}, "rays": [], "scatter": {}}
+    report = {"blend": BLEND, "objects": [], "named": {}, "rays_negx": [],
+              "rays_posy": [], "rays_negy": [], "scatter": {}}
 
-    all_objs = []
+    report["objects"] = []
+    n_mesh = 0
     for ob in bpy.data.objects:
-        all_objs.append(ob)
-    print(f"[recon] {len(all_objs)} objects in file")
-
-    for ob in all_objs:
-        if ob.type not in {"MESH", "CURVE", "SURFACE", "FONT"}:
+        if ob.type != "MESH":
             continue
+        n_mesh += 1
         try:
             mn, mx = obj_world_aabb(ob)
         except Exception as exc:  # noqa: BLE001
-            print(f"[recon]   skip {ob.name}: {exc}")
+            log(f"  skip {ob.name}: {exc}")
             continue
         if not (mx.x >= probe_min.x and mn.x <= probe_max.x and
                 mx.y >= probe_min.y and mn.y <= probe_max.y and
                 mx.z >= probe_min.z and mn.z <= probe_max.z):
             continue
-        nmesh = len(ob.data.vertices) if hasattr(ob.data, "vertices") else -1
-        nface = len(ob.data.polygons) if hasattr(ob.data, "polygons") else -1
-        mats = []
-        if hasattr(ob.data, "materials"):
-            mats = [m.name if m else None for m in ob.data.materials]
-        rec = {
-            "name": ob.name, "type": ob.type,
+        report["objects"].append({
+            "name": ob.name,
             "aabb_min": list(mn), "aabb_max": list(mx),
-            "verts": nmesh, "faces": nface, "materials": mats,
+            "verts": len(ob.data.vertices), "faces": len(ob.data.polygons),
+            "materials": [m.name if m else None for m in ob.data.materials],
             "scale": list(ob.scale), "location": list(ob.location),
-            "hide_render": ob.hide_render, "hide_viewport": ob.hide_viewport,
-        }
-        report["objects"].append(rec)
+            "hide_render": bool(ob.hide_render),
+        })
+    report["objects"].sort(
+        key=lambda r: -((r["aabb_max"][0] - r["aabb_min"][0]) *
+                        (r["aabb_max"][1] - r["aabb_min"][1])))
+    log(f"{n_mesh} mesh objects in file; {len(report['objects'])} intersect probe box")
 
-    report["objects"].sort(key=lambda r: -((r["aabb_max"][0] - r["aabb_min"][0]) *
-                                           (r["aabb_max"][1] - r["aabb_min"][1])))
-    print(f"[recon] {len(report['objects'])} mesh objects intersect the probe box")
-    for r in report["objects"]:
-        print(f"  {r['name']:36s} {r['verts']:>8d}v {r['faces']:>8d}f "
-              f"x[{r['aabb_min'][0]:+.4f},{r['aabb_max'][0]:+.4f}] "
-              f"y[{r['aabb_min'][1]:+.4f},{r['aabb_max'][1]:+.4f}] "
-              f"z[{r['aabb_min'][2]:+.4f},{r['aabb_max'][2]:+.4f}]")
-
-    # ---- named support objects: exact geometry -----------------------------
     dg = bpy.context.evaluated_depsgraph_get()
-
-    def build_bvh(name):
-        ob = bpy.data.objects.get(name)
-        if ob is None:
-            return None, None, None
-        ev = ob.evaluated_get(dg)
-        me = ev.to_mesh()
-        mw = ev.matrix_world
-        vs = [mw @ v.co for v in me.vertices]
-        me.calc_loop_triangles()
-        ts = [[t.vertices[0], t.vertices[1], t.vertices[2]] for t in me.loop_triangles]
-        return vs, ts, ob
-
-    for name in SUPPORT:
-        vs, ts, ob = build_bvh(name)
-        if vs is None:
-            report["named"][name] = {"present": False}
-            print(f"[recon] {name}: ABSENT")
-            continue
-        mn = [min(v[i] for v in vs) for i in range(3)]
-        mx = [max(v[i] for v in vs) for i in range(3)]
-        rec = {"present": True, "n_verts": len(vs), "n_tris": len(ts),
-               "aabb_min": mn, "aabb_max": mx}
-        report["named"][name] = rec
-        print(f"[recon] {name}: {len(vs)}v {len(ts)}t "
-              f"x[{mn[0]:+.4f},{mx[0]:+.4f}] y[{mn[1]:+.4f},{mx[1]:+.4f}] "
-              f"z[{mn[2]:+.4f},{mx[2]:+.4f}]")
-
-    # ---- surface probe: what x does each z-plane expose near the wall? -----
-    # Fire +X rays (from deep inside the wall) and -X rays at a grid of (y, z)
-    # to find the FIRST exposed surface a can approaching in -X would meet.
-    probe_ys = [1.45, 1.6, 1.8, 2.0, 2.2, 2.4, 2.6, 2.8, 2.88]
-    probe_zs = [-0.045, -0.035, -0.02, 0.0, 0.010, 0.012, 0.02, 0.04, 0.06,
-                0.09, 0.12, 0.16, 0.20, 0.25, 0.30, 0.35, 0.39, 0.45]
-
     surfaces = []
     for name in SUPPORT:
-        vs, ts, ob = build_bvh(name)
-        if vs is None:
+        ob = bpy.data.objects.get(name)
+        if ob is None:
+            report["named"][name] = {"present": False}
             continue
-        surfaces.append((name, vs, ts))
+        vs, ts, bvh = build_bvh(ob, dg)
+        mn = [min(v[i] for v in vs) for i in range(3)] if vs else None
+        mx = [max(v[i] for v in vs) for i in range(3)] if vs else None
+        report["named"][name] = {"present": True, "n_verts": len(vs),
+                                 "n_tris": len(ts),
+                                 "aabb_min": mn, "aabb_max": mx}
+        surfaces.append((name, vs, ts, bvh))
+        log(f"{name}: {len(vs)}v {len(ts)}t")
+        if mn:
+            log(f"    x[{mn[0]:+.4f},{mx[0]:+.4f}] y[{mn[1]:+.4f},{mx[1]:+.4f}] "
+                f"z[{mn[2]:+.4f},{mx[2]:+.4f}]")
 
-    # ray from x = +3.0 travelling in -X: first hit gives the outermost surface
-    ray_rows = []
+    def first_hit(origin: Vector, direction: Vector):
+        best = None
+        for name, vs, ts, bvh in surfaces:
+            if bvh is None:
+                continue
+            loc, nrm, idx, dist = bvh.ray_cast(origin, direction)
+            if loc is None:
+                continue
+            if best is None or dist < best[0]:
+                best = (dist, loc, name, nrm)
+        return best
+
+    probe_zs = [-0.10, -0.045, -0.035, -0.025, -0.015, 0.0, 0.008, 0.010,
+                0.012, 0.020, 0.030, 0.040, 0.060, 0.090, 0.120, 0.160,
+                0.200, 0.250, 0.300, 0.350, 0.390, 0.450]
+    probe_ys = [1.30, 1.437, 1.50, 1.60, 1.80, 2.00, 2.20, 2.40, 2.60,
+                2.75, 2.877, 2.95, 3.10]
+
+    log("ray bank: -X from x=+3.0")
     for y in probe_ys:
         row = {"y": y, "hits": {}}
         for z in probe_zs:
-            origin = Vector((3.0, y, z))
-            direction = Vector((-1.0, 0.0, 0.0))
-            best = None
-            for name, vs, ts in surfaces:
-                hit = ray_mesh(vs, ts, origin, direction)
-                if hit is None:
-                    continue
-                dist, pos = hit
-                if best is None or dist < best[0]:
-                    best = (dist, pos, name)
-            if best is not None:
-                row["hits"][f"{z:+.4f}"] = {
-                    "x": best[1].x, "object": best[2], "dist": best[0]}
-        ray_rows.append(row)
-    report["rays"] = ray_rows
+            h = first_hit(Vector((3.0, y, z)), Vector((-1.0, 0.0, 0.0)))
+            if h is not None:
+                row["hits"][f"{z:+.4f}"] = {"x": h[1].x, "object": h[2],
+                                            "normal_x": h[3].x, "dist": h[0]}
+        report["rays_negx"].append(row)
 
     print()
-    print("[recon] outermost surface x for a -X ray (first hit from x=+3):")
-    hdr = "  y\\z    " + "".join(f"{z:+8.4f}" for z in probe_zs)
-    print(hdr)
-    for row in ray_rows:
+    print("[recon] FIRST surface met by a -X ray from x=+3  ->  x coordinate")
+    print("  y\\z    " + "".join(f"{z:+8.4f}" for z in probe_zs))
+    for row in report["rays_negx"]:
         cells = []
         for z in probe_zs:
             h = row["hits"].get(f"{z:+.4f}")
             cells.append(f"{h['x']:+8.4f}" if h else "    none")
-        print(f"  {row['y']:.2f}  " + "".join(cells))
-
+        print(f"  {row['y']:.3f} " + "".join(cells))
     print()
-    print("[recon] which object that outermost surface belongs to:")
-    print(hdr.replace("z", "z"))
-    for row in ray_rows:
+    print("[recon] object that surface belongs to")
+    print("  y\\z    " + "".join(f"{z:+8.4f}" for z in probe_zs))
+    for row in report["rays_negx"]:
         cells = []
         for z in probe_zs:
             h = row["hits"].get(f"{z:+.4f}")
             cells.append(f"{h['object'][:8]:>8s}" if h else "    none")
+        print(f"  {row['y']:.3f} " + "".join(cells))
+
+    # ---- vertical profile: +Z rays from below at fixed (x, y) ---------------
+    # Finds the TOP surface height of the plinth/floor at that (x,y).
+    log("vertical scan: top surface z at a grid of (x,y)")
+    vscan = []
+    xs = [-2.30, -2.25, -2.20, -2.18, -2.16, -2.14, -2.12, -2.10, -2.08,
+          -2.06, -2.04, -2.02, -2.00, -1.98, -1.95, -1.90, -1.80, -1.60,
+          -1.40, -1.20, -1.00]
+    ys = [1.40, 1.50, 1.80, 2.20, 2.60, 2.90, 3.20, 3.60, 4.00, 4.60]
+    for y in ys:
+        row = {"y": y, "top": {}}
+        for x in xs:
+            h = first_hit(Vector((x, y, -1.0)), Vector((0.0, 0.0, 1.0)))
+            if h is not None:
+                row["top"][f"{x:+.4f}"] = {"z": h[1].z, "object": h[2]}
+        vscan.append(row)
+    report["vertical_scan"] = vscan
+    print()
+    print("[recon] top surface z for a +Z ray from z=-1  (blank = no hit)")
+    print("  y\\x    " + "".join(f"{x:+8.3f}" for x in xs))
+    for row in vscan:
+        cells = []
+        for x in xs:
+            h = row["top"].get(f"{x:+.4f}")
+            cells.append(f"{h['z']:+8.4f}" if h else "        ")
+        print(f"  {row['y']:.2f}  " + "".join(cells))
+    print()
+    print("[recon] object owning that top surface")
+    print("  y\\x    " + "".join(f"{x:+8.3f}" for x in xs))
+    for row in vscan:
+        cells = []
+        for x in xs:
+            h = row["top"].get(f"{x:+.4f}")
+            cells.append(f"{h['object'][:8]:>8s}" if h else "        ")
         print(f"  {row['y']:.2f}  " + "".join(cells))
 
+    OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps(report, indent=2), encoding="utf-8")
-    print(f"\n[recon] written {OUT}")
+    log(f"written {OUT}")
     return 0
-
-
-def ray_mesh(vs, ts, origin, direction):
-    """Moller-Trumbore against a triangle list.  Returns (dist, point) or None."""
-    best = None
-    ox, oy, oz = origin
-    dx, dy, dz = direction
-    for a, b, c in ts:
-        p0, p1, p2 = vs[a], vs[b], vs[c]
-        e1 = p1 - p0
-        e2 = p2 - p0
-        px = dy * e2.z - dz * e2.y
-        py = dz * e2.x - dx * e2.z
-        pz = dx * e2.y - dy * e2.x
-        det = e1.x * px + e1.y * py + e1.z * pz
-        if -1e-12 < det < 1e-12:
-            continue
-        inv = 1.0 / det
-        tx = ox - p0.x
-        ty = oy - p0.y
-        tz = oz - p0.z
-        u = (tx * px + ty * py + tz * pz) * inv
-        if u < -1e-9 or u > 1.0 + 1e-9:
-            continue
-        qx = ty * e1.z - tz * e1.y
-        qy = tz * e1.x - tx * e1.z
-        qz = tx * e1.y - ty * e1.x
-        v = (dx * qx + dy * qy + dz * qz) * inv
-        if v < -1e-9 or u + v > 1.0 + 1e-9:
-            continue
-        t = (e2.x * qx + e2.y * qy + e2.z * qz) * inv
-        if t <= 1e-6:
-            continue
-        if best is None or t < best[0]:
-            best = (t, Vector((ox + t * dx, oy + t * dy, oz + t * dz)))
-    return best
 
 
 if __name__ == "__main__":

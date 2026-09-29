@@ -1,35 +1,35 @@
-"""b2_ground_survey.py -- V5.6 video B, step 1: pick the REAL ground region for the box chain.
+"""b2_ground_survey.py -- V5.6 video B, step 1: pick and MEASURE the real ground region for the chain.
 
 WHY THIS EXISTS
 ---------------
-Plan section 4.B says to reuse a plain, reasonably flat, non-reflective native area of Hidden Alley
+Plan section 4.B prefers a plain, reasonably flat, non-reflective NATIVE area of Hidden Alley
 (brick wall / door / wall base as a low-distraction background) and requires a clear straight region
-about 2-3 m long. It also forbids declaring an area usable "from an empty-looking still".
+about 2-3 m long. It forbids declaring an area usable "from an empty-looking still".
 
-We cannot look at images, so the ground is MEASURED:
+We cannot look at images, so the ground is measured with rays:
 
-  1. A downward ray grid against a BVH of the whole scene. Per cell we record the topmost hit object,
-     the hit height, and |normal.z|. This shows whether the ground under a candidate region is one
-     continuous surface or several objects meeting at a seam.
-  2. A two-stage search for axis-aligned rectangles of the required length x width in which every
-     ray hits the SAME object and the hit heights deviate from their best-fit plane by no more than
-     a tolerance. Stage A is a coarse sweep over the whole survey area; stage B refines each coarse
-     winner on a fine grid, and the FINAL reported flatness is the fine-grid number.
-     "Flatness" = max |residual| from a least-squares plane, and the fitted tilt is reported too, so
-     a planar-but-tilted slab is not confused with a bumpy one.
-  3. An obstacle check that is a measurement, not a look: a candidate is rejected if any OTHER
-     object's world AABB intersects the region's stand-up volume (footprint grown by `pad`, from
-     z_ground - 0.10 to z_ground + headroom). Every intersecting object is named with its overlap
-     volume, so a rejection is always explained.
-  4. A background check: horizontal rays from the region's centre report which object provides the
-     visible backdrop and at what distance, in four directions.
+  1. Restrict the survey to the alley floor proper. `b2_ground_inventory.py` shows the alley floor is
+     `Floor_main` (x -4.2..4.2, y -8.0..14.2, 12 437 verts) with a `stones` scatter layer on top of it
+     (185 330 verts), while `BG_floor` is a 810-unit backdrop plane and `courtyard_floor` is a single
+     quad 1.4 m up. Only Floor_main / stones are treated as ground; the backdrop planes cannot win.
+  2. A downward ray grid records, per cell, the topmost hit ground object, the hit height and
+     |normal.z| -- so a seam between two objects is visible rather than inferred.
+  3. A window search finds rectangles of the required length x width where every cell hits the SAME
+     object and the heights fit a plane within tolerance. Reported flatness is the max |residual| from
+     a least-squares plane at the FINE step, with the fitted tilt in degrees, so a planar-but-tilted
+     slab is not confused with a bumpy one. The fitted plane coefficients are reported because the
+     physics step needs an explicit support plane.
+  4. An obstacle check intersects the region's stand-up volume with every scene object's world AABB
+     and names each overlapping object with its overlap volume -- a measurement, not a look.
+  5. Background rays report which object provides the visible backdrop and at what distance, in four
+     directions (across the chain both ways, and past each end).
 
-Read-only w.r.t. the scene. Writes only its JSON report and a text grid map. Deletes nothing.
+Read-only w.r.t. the scene. Writes one JSON and one text map. Deletes nothing.
 
 Run:
   & '<blender.exe>' --background --factory-startup --python b2_ground_survey.py -- \
-        --blend <scene.blend> --out <report.json> [--coarse 0.15] [--fine 0.025]
-        [--len 3.0] [--width 0.60] [--flat-tol 0.008]
+        --blend <scene.blend> --out <report.json> [--step 0.04] [--fine 0.015]
+        [--len 3.0] [--width 0.60]
 """
 
 import argparse
@@ -44,15 +44,11 @@ import bpy
 from mathutils import Vector
 from mathutils.bvhtree import BVHTree
 
-# A ray counts as landing on "the ground" only if the topmost hit object's name matches one of
-# these. This is deliberately name-based so a barrel lid or a windowsill can never be reported as
-# the ground; the ray's own height filter (below) removes the huge backdrop planes as well.
-GROUND_NAME_HINTS = ("floor_main", "floor_", "_floor", "ground", "stones", "gravel",
-                     "concrete", "asphalt", "road", "paving", "pavement", "base_")
-
-# Objects whose AABB max dimension exceeds this are backdrop/sky and are excluded from setting the
-# survey extent. BG_floor is ~810 units across and would otherwise define a 810 m search area.
-BACKDROP_MAX_DIM_UNITS = 60.0
+#: Only these objects are allowed to BE the ground. Chosen from the measured inventory: Floor_main is
+#: the alley floor slab, `stones` is its decorative scatter layer. BG_floor (810 units across) and
+#: courtyard_floor (a single quad 1.4 m up) are deliberately excluded so a backdrop plane cannot be
+#: reported as the ground under the chain.
+GROUND_OBJECTS = ("Floor_main", "stones")
 
 
 def log(*a):
@@ -60,7 +56,9 @@ def log(*a):
 
 
 def rnd(x, nd=6):
-    if x is None or isinstance(x, bool):
+    if x is None:
+        return None
+    if isinstance(x, bool):
         return x
     if isinstance(x, (list, tuple, np.ndarray)):
         return [rnd(v, nd) for v in x]
@@ -73,51 +71,24 @@ def rnd(x, nd=6):
     return round(f, nd)
 
 
-def eval_world_verts(obj):
-    dg = bpy.context.evaluated_depsgraph_get()
-    ev = obj.evaluated_get(dg)
-    me = ev.to_mesh()
-    try:
-        nv = len(me.vertices)
-        if nv == 0:
-            return None, None
-        mw = np.array(obj.matrix_world, dtype=np.float64)
-        co = np.empty((nv, 3), dtype=np.float64)
-        me.vertices.foreach_get("co", co.ravel())
-        co4 = np.concatenate([co, np.ones((nv, 1))], axis=1)
-        w = (mw @ co4.T).T[:, :3]
-        me.calc_loop_triangles()
-        if len(me.loop_triangles) == 0:
-            return w, None
-        li = np.empty(len(me.loop_triangles) * 3, dtype=np.int32)
-        me.loop_triangles.foreach_get("vertices", li)
-        return w, li.reshape(-1, 3)
-    finally:
-        ev.to_mesh_clear()
-
-
-def build_scene(argv):
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--blend", required=True)
-    ap.add_argument("--out", required=True)
-    ap.add_argument("--coarse", type=float, default=0.15)
-    ap.add_argument("--fine", type=float, default=0.025)
-    ap.add_argument("--len", type=float, default=3.0)
-    ap.add_argument("--width", type=float, default=0.60)
-    ap.add_argument("--flat-tol", type=float, default=0.008)
-    ap.add_argument("--headroom", type=float, default=1.20)
-    ap.add_argument("--pad", type=float, default=0.10)
-    ap.add_argument("--z-min", type=float, default=-1.0)
-    ap.add_argument("--z-max", type=float, default=1.0)
-    ap.add_argument("--refine-keep", type=int, default=12)
-    ap.add_argument("--refine-span", type=float, default=0.8)
-    return ap.parse_args(argv)
-
-
 def main():
     argv = sys.argv
     args = argv[argv.index("--") + 1:] if "--" in argv else []
-    A = build_scene(args)
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--blend", required=True)
+    ap.add_argument("--out", required=True)
+    ap.add_argument("--ground", default=",".join(GROUND_OBJECTS))
+    ap.add_argument("--step", type=float, default=0.04)
+    ap.add_argument("--fine", type=float, default=0.015)
+    ap.add_argument("--len", type=float, default=3.0)
+    ap.add_argument("--width", type=float, default=0.60)
+    ap.add_argument("--flat-tol", type=float, default=0.010)
+    ap.add_argument("--headroom", type=float, default=1.20)
+    ap.add_argument("--pad", type=float, default=0.10)
+    ap.add_argument("--z-window", type=float, nargs=2, default=[-0.40, 0.60])
+    ap.add_argument("--top", type=int, default=14)
+    A = ap.parse_args(args)
+    ground_names = [g.strip() for g in A.ground.split(",") if g.strip()]
     t0 = time.time()
 
     bpy.ops.wm.open_mainfile(filepath=A.blend)
@@ -125,22 +96,45 @@ def main():
     meshes = [o for o in sc.objects if o.type == "MESH"]
     log(f"{len(meshes)} mesh objects; opened in {time.time() - t0:.1f}s")
 
+    if not all(bpy.data.objects.get(g) is not None for g in ground_names):
+        raise SystemExit(f"ground object(s) not in scene: "
+                         f"{[g for g in ground_names if bpy.data.objects.get(g) is None]}")
+
+    # ---- 1. one flattened triangle soup + a triangle->object map ----------------------------
     all_verts, all_tris, spans, names, aabbs = [], [], {}, [], {}
     v_off = t_off = 0
+    dg = bpy.context.evaluated_depsgraph_get()
     for o in meshes:
-        w, t = eval_world_verts(o)
-        if w is None or t is None or len(t) == 0:
-            continue
+        ev = o.evaluated_get(dg)
+        me = ev.to_mesh()
+        try:
+            nv = len(me.vertices)
+            if nv == 0:
+                continue
+            me.calc_loop_triangles()
+            if len(me.loop_triangles) == 0:
+                continue
+            mw = np.array(o.matrix_world, dtype=np.float64)
+            co = np.empty((nv, 3), dtype=np.float64)
+            me.vertices.foreach_get("co", co.ravel())
+            co4 = np.concatenate([co, np.ones((nv, 1))], axis=1)
+            w = (mw @ co4.T).T[:, :3]
+            li = np.empty(len(me.loop_triangles) * 3, dtype=np.int32)
+            me.loop_triangles.foreach_get("vertices", li)
+            tri = li.reshape(-1, 3)
+        finally:
+            ev.to_mesh_clear()
         aabbs[o.name] = (w.min(axis=0), w.max(axis=0))
         names.append(o.name)
-        spans[o.name] = (t_off, len(w), len(t))
+        spans[o.name] = (t_off, len(w), len(tri))
         all_verts.append(w)
-        all_tris.append(t + v_off)
+        all_tris.append(tri + v_off)
         v_off += len(w)
-        t_off += len(t)
+        t_off += len(tri)
     sv = np.concatenate(all_verts, axis=0)
     st = np.concatenate(all_tris, axis=0)
     n_mesh = len(names)
+    name_index = {nm: i for i, nm in enumerate(names)}
     tri_owner = np.empty(len(st), dtype=np.int32)
     for i, nm in enumerate(names):
         base, nv, nt = spans[nm]
@@ -156,67 +150,50 @@ def main():
     counts = np.bincount(tri_owner, minlength=n_mesh)
     for i, nm in enumerate(names):
         assert counts[i] == spans[nm][2], f"tri_owner wrong for {nm}"
-    log(f"scene BVH input ready: {len(sv)} verts, {len(st)} tris, "
-        f"attribution verified over {n_mesh} meshes ({time.time() - t0:.1f}s)")
+    log(f"triangle soup ready: {len(sv)} verts, {len(st)} tris, attribution verified over "
+        f"{n_mesh} meshes ({time.time() - t0:.1f}s)")
 
     scene_bvh = BVHTree.FromPolygons([tuple(v) for v in sv],
                                      [tuple(int(i) for i in t) for t in st],
                                      all_triangles=True, epsilon=0.0)
     log(f"scene BVH built ({time.time() - t0:.1f}s)")
 
-    # ---- ground object inventory ------------------------------------------------------------
-    ground_objs = {}
-    for nm, (amn, amx) in aabbs.items():
-        low = nm.lower()
-        if any(h in low for h in GROUND_NAME_HINTS):
-            ground_objs[nm] = (amn, amx, float(max(amx - amn)))
-    inv = []
-    for nm, (amn, amx, md) in sorted(ground_objs.items(), key=lambda kv: -kv[1][2]):
-        inv.append({"object": nm, "aabb_min": rnd(amn), "aabb_max": rnd(amx),
-                    "max_dim_units": rnd(md, 4),
-                    "backdrop_excluded": bool(md > BACKDROP_MAX_DIM_UNITS)})
-    log(f"{len(inv)} ground-name-matched objects")
+    # ---- 2. survey area = union of the ground objects' XY extents ---------------------------
+    gmin = np.min([aabbs[g][0] for g in ground_names], axis=0)
+    gmax = np.max([aabbs[g][1] for g in ground_names], axis=0)
+    zstart = float(gmax[2]) + 0.30
+    log(f"survey area x[{gmin[0]:.3f},{gmax[0]:.3f}] y[{gmin[1]:.3f},{gmax[1]:.3f}], "
+        f"cast down from z={zstart:.3f}")
 
-    # survey extent: the union of the NON-backdrop ground objects' XY extents
-    setdress = [g for g in ground_objs.values() if g[2] <= BACKDROP_MAX_DIM_UNITS]
-    if not setdress:
-        raise SystemExit("no non-backdrop ground object found; widen GROUND_NAME_HINTS")
-    gx0 = min(g[0][0] for g in setdress)
-    gx1 = max(g[1][0] for g in setdress)
-    gy0 = min(g[0][1] for g in setdress)
-    gy1 = max(g[1][1] for g in setdress)
-    zstart = max(g[1][2] for g in setdress) + 0.5
-    log(f"survey extent x[{gx0:.2f},{gx1:.2f}] y[{gy0:.2f},{gy1:.2f}], cast from z={zstart:.2f}")
-
-    ground_set = {nm.lower() for nm in ground_objs}
+    gset = {g.lower() for g in ground_names}
     down = Vector((0.0, 0.0, -1.0))
 
-    def cast_grid(step):
-        xs = np.arange(gx0, gx1 + 1e-9, step)
-        ys = np.arange(gy0, gy1 + 1e-9, step)
+    def cast(step):
+        xs = np.arange(gmin[0], gmax[0] + 1e-9, step)
+        ys = np.arange(gmin[1], gmax[1] + 1e-9, step)
         nx, ny = len(xs), len(ys)
-        z_hit = np.full((nx, ny), np.nan)
+        z = np.full((nx, ny), np.nan)
         own = np.full((nx, ny), -1, dtype=np.int32)
         nz = np.full((nx, ny), np.nan)
         for i in range(nx):
             for j in range(ny):
                 loc, nrm, idx, dist = scene_bvh.ray_cast(
-                    Vector((float(xs[i]), float(ys[j]), float(zstart))), down, 400.0)
+                    Vector((float(xs[i]), float(ys[j]), zstart)), down, 400.0)
                 if loc is None or idx is None:
                     continue
                 nm = names[tri_owner[idx]]
-                if nm.lower() not in ground_set:
+                if nm.lower() not in gset:
                     continue
-                if not (A.z_min <= loc.z <= A.z_max):
+                if not (A.z_window[0] <= loc.z <= A.z_window[1]):
                     continue
-                z_hit[i, j] = loc.z
+                z[i, j] = loc.z
                 own[i, j] = int(tri_owner[idx])
                 nz[i, j] = abs(float(nrm.z))
-        return xs, ys, z_hit, own, nz
+        return xs, ys, z, own, nz
 
-    def window_record(i0, j0, L, W, xs, ys, z_hit, own):
+    def window(i0, j0, L, W, xs, ys, z, own, nz):
         bo = own[i0:i0 + L, j0:j0 + W]
-        bz = z_hit[i0:i0 + L, j0:j0 + W]
+        bz = z[i0:i0 + L, j0:j0 + W]
         if np.any(bo < 0) or np.any(np.isnan(bz)):
             return None
         if int(bo.max()) != int(bo.min()):
@@ -224,9 +201,10 @@ def main():
         px = np.repeat(xs[i0:i0 + L], W)
         py = np.tile(ys[j0:j0 + W], L)
         pz = bz.ravel()
-        Amat = np.column_stack([px, py, np.ones(len(px))])
-        coef, *_ = np.linalg.lstsq(Amat, pz, rcond=None)
-        res = pz - Amat @ coef
+        Am = np.column_stack([px, py, np.ones(len(px))])
+        coef, *_ = np.linalg.lstsq(Am, pz, rcond=None)
+        res = pz - Am @ coef
+        bn = nz[i0:i0 + L, j0:j0 + W]
         return {
             "x0": float(xs[i0]), "x1": float(xs[i0 + L - 1]),
             "y0": float(ys[j0]), "y1": float(ys[j0 + W - 1]),
@@ -235,54 +213,59 @@ def main():
             "surface_object": names[int(bo[0, 0])],
             "grid_step_m": float(xs[1] - xs[0]),
             "n_samples": int(L * W),
-            "plane": {"a_dzdx": float(coef[0]), "b_dzdy": float(coef[1]),
-                      "c_z0": float(coef[2]),
-                      "tilt_deg": math.degrees(math.atan(math.hypot(coef[0], coef[1])))},
+            "plane_z_equals_ax_by_c": {"a_dzdx": float(coef[0]), "b_dzdy": float(coef[1]),
+                                       "c_z_at_origin": float(coef[2])},
+            "plane_tilt_deg": math.degrees(math.atan(math.hypot(coef[0], coef[1]))),
+            "plane_normal_world": rnd([-coef[0] / math.sqrt(coef[0] ** 2 + coef[1] ** 2 + 1.0),
+                                       -coef[1] / math.sqrt(coef[0] ** 2 + coef[1] ** 2 + 1.0),
+                                       1.0 / math.sqrt(coef[0] ** 2 + coef[1] ** 2 + 1.0)], 8),
             "flatness_max_dev_m": float(np.max(np.abs(res))),
             "flatness_rms_m": float(np.sqrt(np.mean(res ** 2))),
+            "flatness_p95_dev_m": float(np.percentile(np.abs(res), 95)),
             "z_min": float(bz.min()), "z_max": float(bz.max()),
-            "normal_z_min": float(np.nanmin(nz[i0:i0 + L, j0:j0 + W])),
+            "z_span_m": float(bz.max() - bz.min()),
+            "normal_z_min": (None if np.all(np.isnan(bn)) else float(np.nanmin(bn))),
+            "normal_z_mean": (None if np.all(np.isnan(bn)) else float(np.nanmean(bn))),
         }
 
-    # ---- stage A: coarse sweep ---------------------------------------------------------------
-    xs, ys, z_hit, own, nz = cast_grid(A.coarse)
+    xs, ys, z, own, nz = cast(A.step)
     nx, ny = len(xs), len(ys)
-    Lc = max(2, int(round(A.len / A.coarse)) + 1)
-    Wc = max(2, int(round(A.width / A.coarse)) + 1)
-    log(f"stage A grid {nx}x{ny} step {A.coarse} -> block {Lc}x{Wc} cells "
-        f"({(Lc - 1) * A.coarse:.2f} x {(Wc - 1) * A.coarse:.2f} m)")
-    coarse = []
+    Lc = max(2, int(round(A.len / A.step)) + 1)
+    Wc = max(2, int(round(A.width / A.step)) + 1)
+    log(f"grid {nx}x{ny} step {A.step}; block {Lc}x{Wc} = "
+        f"{(Lc - 1) * A.step:.2f} x {(Wc - 1) * A.step:.2f} m")
+    hits = int(np.sum(own >= 0))
+    log(f"{hits}/{nx * ny} rays landed on a ground object ({time.time() - t0:.1f}s)")
+
+    wins = []
     for i0 in range(0, nx - Lc + 1):
         for j0 in range(0, ny - Wc + 1):
-            rec = window_record(i0, j0, Lc, Wc, xs, ys, z_hit, own)
+            rec = window(i0, j0, Lc, Wc, xs, ys, z, own, nz)
             if rec is not None:
-                coarse.append(rec)
-    log(f"stage A: {len(coarse)} windows land on a single ground object "
-        f"({time.time() - t0:.1f}s)")
-    coarse.sort(key=lambda c: c["flatness_max_dev_m"])
-    log(f"stage A flattest: " + ", ".join(
-        f"{c['surface_object']}@{c['x0']:.2f},{c['y0']:.2f}:{c['flatness_max_dev_m'] * 1000:.1f}mm"
-        for c in coarse[:6]))
+                wins.append(rec)
+    log(f"{len(wins)} single-object windows at {A.step} m ({time.time() - t0:.1f}s)")
+    wins.sort(key=lambda c: c["flatness_max_dev_m"])
 
-    # ---- stage B: refine around the coarse winners -------------------------------------------
-    refine_centres = []
-    for c in coarse:
-        if c["flatness_max_dev_m"] > A.flat_tol * 3:
+    # ---- 3. refine the best windows at the fine step ---------------------------------------
+    centres = []
+    for c in wins:
+        if c["flatness_max_dev_m"] > A.flat_tol:
             break
         cx, cy = (c["x0"] + c["x1"]) / 2, (c["y0"] + c["y1"]) / 2
-        if any(abs(cx - p[0]) < 0.5 and abs(cy - p[1]) < 0.5 for p in refine_centres):
+        if any(abs(cx - p[0]) < 0.50 and abs(cy - p[1]) < 0.50 for p in centres):
             continue
-        refine_centres.append((cx, cy, c["surface_object"]))
-        if len(refine_centres) >= A.refine_keep:
+        centres.append((cx, cy, c["surface_object"]))
+        if len(centres) >= A.top:
             break
-    log(f"stage B: {len(refine_centres)} refinement centres")
+    log(f"{len(centres)} refinement centres")
 
-    fine_finals = []
-    for cx, cy, sur in refine_centres:
-        ax0, ax1 = cx - A.refine_span, cx + A.refine_span
-        ay0, ay1 = cy - A.refine_span, cy + A.refine_span
-        fxs = np.arange(max(ax0, gx0), min(ax1, gx1) + 1e-9, A.fine)
-        fys = np.arange(max(ay0, gy0), min(ay1, gy1) + 1e-9, A.fine)
+    finals = []
+    for cx, cy, sur in centres:
+        span = A.len / 2 + 0.30
+        ax0, ax1 = max(cx - span, gmin[0]), min(cx + span, gmax[0])
+        ay0, ay1 = max(cy - span, gmin[1]), min(cy + span, gmax[1])
+        fxs = np.arange(ax0, ax1 + 1e-9, A.fine)
+        fys = np.arange(ay0, ay1 + 1e-9, A.fine)
         fnx, fny = len(fxs), len(fys)
         fz = np.full((fnx, fny), np.nan)
         fo = np.full((fnx, fny), -1, dtype=np.int32)
@@ -290,11 +273,13 @@ def main():
         for i in range(fnx):
             for j in range(fny):
                 loc, nrm, idx, dist = scene_bvh.ray_cast(
-                    Vector((float(fxs[i]), float(fys[j]), float(zstart))), down, 400.0)
+                    Vector((float(fxs[i]), float(fys[j]), zstart)), down, 400.0)
                 if loc is None or idx is None:
                     continue
                 nm = names[tri_owner[idx]]
-                if nm.lower() not in ground_set or not (A.z_min <= loc.z <= A.z_max):
+                if nm.lower() not in gset:
+                    continue
+                if not (A.z_window[0] <= loc.z <= A.z_window[1]):
                     continue
                 fz[i, j] = loc.z
                 fo[i, j] = int(tri_owner[idx])
@@ -304,74 +289,77 @@ def main():
         best = None
         for i0 in range(0, fnx - fL + 1):
             for j0 in range(0, fny - fW + 1):
-                rec = window_record(i0, j0, fL, fW, fxs, fys, fz, fo)
-                if rec is None:
-                    continue
-                if rec["surface_object"] != sur:
+                rec = window(i0, j0, fL, fW, fxs, fys, fz, fo, fnz)
+                if rec is None or rec["surface_object"] != sur:
                     continue
                 if best is None or rec["flatness_max_dev_m"] < best["flatness_max_dev_m"]:
                     best = rec
         if best is None:
-            log(f"  refine centre ({cx:.2f},{cy:.2f}) {sur}: no single-object fine window "
-                f"-> the coarse winner does not survive at {A.fine} m resolution")
-            fine_finals.append({"refine_centre": [cx, cy], "surface_object": sur,
-                                "fine_window_found": False,
-                                "note": "coarse window did not survive the fine re-measurement"})
+            finals.append({"refine_centre": [cx, cy], "surface_object": sur,
+                           "fine_window_found": False,
+                           "note": f"no single-object {A.len} x {A.width} m window on {sur} "
+                                   f"survives the {A.fine} m re-measurement here"})
+            log(f"  refine ({cx:.2f},{cy:.2f}) {sur}: NO fine window")
             continue
         best["refine_centre"] = [cx, cy]
         best["fine_window_found"] = True
-        fine_finals.append(best)
-        log(f"  refine ({cx:.2f},{cy:.2f}) -> {sur} "
-            f"x[{best['x0']:.3f},{best['x1']:.3f}] y[{best['y0']:.3f},{best['y1']:.3f}] "
-            f"{best['n_samples']} samples flat={best['flatness_max_dev_m'] * 1000:.3f}mm "
-            f"tilt={best['plane']['tilt_deg']:.3f}deg")
+        finals.append(best)
+        log(f"  refine ({cx:.2f},{cy:.2f}) {sur}: x[{best['x0']:.3f},{best['x1']:.3f}] "
+            f"y[{best['y0']:.3f},{best['y1']:.3f}] n={best['n_samples']} "
+            f"flat={best['flatness_max_dev_m'] * 1000:.3f}mm "
+            f"p95={best['flatness_p95_dev_m'] * 1000:.3f}mm "
+            f"tilt={best['plane_tilt_deg']:.3f}deg zspan={best['z_span_m'] * 1000:.1f}mm")
 
-    # longest fine window per surface object: the 3.0 m target may be too long for the best surface,
-    # so the report must say what the longest single-object flat run actually is.
-    longest = []
-    for cx, cy, sur in refine_centres:
-        fxs = np.arange(max(cx - A.refine_span, gx0), min(cx + A.refine_span, gx1) + 1e-9, A.fine)
-        fys = np.arange(max(cy - A.refine_span, gy0), min(cy + A.refine_span, gy1) + 1e-9, A.fine)
+    # ---- 4. longest flat single-object run in each refine box (the 3 m target may be too long) --
+    runs = []
+    for cx, cy, sur in centres:
+        span = A.len / 2 + 0.30
+        fxs = np.arange(max(cx - span, gmin[0]), min(cx + span, gmax[0]) + 1e-9, A.fine)
+        fys = np.arange(max(cy - span, gmin[1]), min(cy + span, gmax[1]) + 1e-9, A.fine)
         fnx, fny = len(fxs), len(fys)
         fz = np.full((fnx, fny), np.nan)
         fo = np.full((fnx, fny), -1, dtype=np.int32)
+        fnz = np.full((fnx, fny), np.nan)
         for i in range(fnx):
             for j in range(fny):
                 loc, nrm, idx, dist = scene_bvh.ray_cast(
-                    Vector((float(fxs[i]), float(fys[j]), float(zstart))), down, 400.0)
+                    Vector((float(fxs[i]), float(fys[j]), zstart)), down, 400.0)
                 if loc is None or idx is None:
                     continue
                 nm = names[tri_owner[idx]]
-                if nm.lower() not in ground_set or not (A.z_min <= loc.z <= A.z_max):
+                if nm.lower() not in gset:
+                    continue
+                if not (A.z_window[0] <= loc.z <= A.z_window[1]):
                     continue
                 fz[i, j] = loc.z
                 fo[i, j] = int(tri_owner[idx])
+                fnz[i, j] = abs(float(nrm.z))
         fW = max(2, int(round(A.width / A.fine)) + 1)
-        # grow the length along x while one object persists and the plane stays within tolerance
-        best_run = None
-        for i0 in range(fnx):
-            for j0 in range(fny - fW + 1):
-                own0 = fo[i0, j0:j0 + fW]
-                if np.any(own0 < 0) or int(own0.max()) != int(own0.min()):
+        # widen the width first (cheap) then grow the length, so we learn how wide a clean
+        # corridor actually is as well as how long
+        best_w = None
+        for j0 in range(fny - fW + 1):
+            for i0 in range(0, fnx - fW + 1):     # a square-ish seed, then grow in x
+                rec = window(i0, j0, fW, fW, fxs, fys, fz, fo, fnz)
+                if rec is None or rec["surface_object"] != sur:
                     continue
-                if names[int(own0[0])] != sur:
-                    continue
-                L = fW and 0
                 for L in range(fW, fnx - i0 + 1):
-                    rec = window_record(i0, j0, L, fW, fxs, fys, fz, fo)
-                    if rec is None or rec["flatness_max_dev_m"] > A.flat_tol:
+                    r2 = window(i0, j0, L, fW, fxs, fys, fz, fo, fnz)
+                    if r2 is None or r2["flatness_max_dev_m"] > A.flat_tol:
                         break
-                    if best_run is None or rec["len_m"] > best_run["len_m"]:
-                        best_run = rec
-        if best_run is not None:
-            longest.append(best_run)
-            log(f"  longest flat single-object run near ({cx:.2f},{cy:.2f}) {sur}: "
-                f"{best_run['len_m']:.3f} x {best_run['width_m']:.3f} m, "
-                f"flat={best_run['flatness_max_dev_m'] * 1000:.3f}mm")
+                    if best_w is None or r2["len_m"] > best_w["len_m"]:
+                        best_w = r2
+                break
+        if best_w is not None:
+            best_w["refine_centre"] = [cx, cy]
+            runs.append(best_w)
+            log(f"  longest flat {A.width:.2f} m-wide corridor near ({cx:.2f},{cy:.2f}) {sur}: "
+                f"len={best_w['len_m']:.3f} m flat={best_w['flatness_max_dev_m'] * 1000:.3f}mm "
+                f"tilt={best_w['plane_tilt_deg']:.3f}deg")
 
-    # ---- obstacle + background checks on the fine winners ------------------------------------
-    scene_items = [(nm, ab[0], ab[1]) for nm, ab in aabbs.items()]
-    for c in fine_finals:
+    # ---- 5. obstacle + background checks ---------------------------------------------------
+    scene_items = [(nm, aabbs[nm][0], aabbs[nm][1]) for nm in names]
+    for c in finals:
         if not c.get("fine_window_found"):
             continue
         zc = c["z_min"]
@@ -385,12 +373,13 @@ def main():
                 hits.append({"object": nm, "aabb_min": rnd(amn), "aabb_max": rnd(amx),
                              "overlap_volume_m3": rnd(vol, 8),
                              "overlap_xy_m": rnd([max(0.0, ov[0]), max(0.0, ov[1])], 5),
-                             "overlap_z_top_above_ground_m": rnd(min(amx[2], hi[2]) - zc, 5)})
+                             "overlap_top_above_ground_m": rnd(min(amx[2], hi[2]) - zc, 5)})
         hits.sort(key=lambda h: -h["overlap_volume_m3"])
         c["obstacle_check"] = {
             "standup_volume_min": rnd(lo), "standup_volume_max": rnd(hi),
             "pad_m": A.pad, "headroom_m": A.headroom,
-            "objects_overlapping": len(hits), "overlapping": hits,
+            "objects_overlapping": len(hits), "overlapping": hits[:25],
+            "overlapping_truncated_at": 25,
         }
         c["obstacle_free"] = len(hits) == 0
         cx, cy = (c["x0"] + c["x1"]) / 2, (c["y0"] + c["y1"]) / 2
@@ -402,56 +391,47 @@ def main():
             c["background_rays"][dn] = (
                 {"hit": None, "note": "ray escaped the scene"} if loc is None else
                 {"hit_object": names[tri_owner[idx]], "distance_m": rnd(dist, 4),
-                 "hit_z_m": rnd(float(loc.z), 4), "normal_z_abs": rnd(abs(float(nrm.z)), 5)})
-        # how far the surface extends in x before the owner changes: the usable chain length
-        c["surface_run_lengths_m"] = {}
-        for c2 in longest:
-            if c2["surface_object"] == c["surface_object"]:
-                c["surface_run_lengths_m"]["longest_flat_run_in_refine_box"] = c2["len_m"]
+                 "hit_point": rnd([float(loc.x), float(loc.y), float(loc.z)], 4),
+                 "normal_z_abs": rnd(abs(float(nrm.z)), 5)})
 
     out = {
         "blend": A.blend,
         "generated_unix": time.time(),
         "parameters": {
-            "coarse_step_m": A.coarse, "fine_step_m": A.fine,
-            "target_len_m": A.len, "target_width_m": A.width,
-            "flat_tol_m": A.flat_tol, "headroom_m": A.headroom, "pad_m": A.pad,
-            "z_window_m": [A.z_min, A.z_max],
-            "backdrop_max_dim_units": BACKDROP_MAX_DIM_UNITS,
-            "ground_name_hints": list(GROUND_NAME_HINTS),
+            "ground_objects": ground_names, "survey_step_m": A.step, "fine_step_m": A.fine,
+            "target_len_m": A.len, "target_width_m": A.width, "flat_tol_m": A.flat_tol,
+            "headroom_m": A.headroom, "pad_m": A.pad, "z_window_m": A.z_window,
         },
         "method": (
-            "downward ray grid against a BVH of the whole scene; a cell is ground only if the "
-            "topmost hit object's name matches the ground hints AND the hit z lies in the z window "
-            "(so the huge backdrop floor/sky planes cannot be reported as the alley ground). All "
-            "cells in a window must hit the SAME object. Flatness is the max |residual| from a "
-            "least-squares plane over the window's hit points at the FINE grid step. The obstacle "
-            "check intersects the stand-up volume with every scene object's world AABB and lists "
-            "each overlapping object with its overlap volume."
+            "downward ray grid against a BVH of the whole scene. A cell counts as ground only if the "
+            "topmost hit belongs to one of `ground_objects` AND the hit z is inside the z window; "
+            "every cell of a window must hit the SAME object. Flatness = max |residual| from a "
+            "least-squares plane through the window's hit points, at the fine step, with the fitted "
+            "plane coefficients and tilt reported. The obstacle check intersects the region's "
+            "stand-up volume with every scene object's world AABB and lists each overlapping object "
+            "and its overlap volume."
         ),
-        "scene": {
-            "mesh_objects": len(meshes),
-            "ground_inventory": inv,
-            "survey_extent": {"x": [float(gx0), float(gx1)], "y": [float(gy0), float(gy1)],
-                              "cast_from_z": float(zstart)},
-            "stage_a_grid": {"nx": nx, "ny": ny, "step_m": A.coarse,
-                             "single_object_windows": len(coarse)},
-        },
-        "stage_a_coarse_windows": coarse[:60],
-        "fine_final_windows": fine_finals,
-        "longest_flat_runs": longest,
+        "ground_object_aabbs": {g: {"min": rnd(aabbs[g][0]), "max": rnd(aabbs[g][1])}
+                                for g in ground_names},
+        "survey": {"x": [float(xs[0]), float(xs[-1])], "y": [float(ys[0]), float(ys[-1])],
+                   "nx": nx, "ny": ny, "step_m": A.step, "cast_from_z": zstart,
+                   "rays_on_ground": hits},
+        "coarse_windows_total": len(wins),
+        "coarse_windows_top": wins[:80],
+        "fine_final_windows": finals,
+        "longest_flat_corridors": runs,
         "runtime_s": rnd(time.time() - t0, 2),
     }
     with open(A.out, "w", encoding="utf-8") as fh:
         json.dump(out, fh, indent=1)
 
-    # a coarse owner map, so the report shows the surface layout rather than asserting it
-    chars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    # a text map of which ground object was hit, and one of the residual-vs-plane sign
+    chars = "0123456789abcdefghijklmnopqrstuvwxyz"
     legend = {}
     with open(A.out.replace(".json", "_gridmap.txt"), "w", encoding="utf-8") as fh:
-        fh.write(f"COARSE OWNER MAP  rows={ny} cols={nx} step={A.coarse} "
+        fh.write(f"GROUND OBJECT MAP  rows={ny} cols={nx} step={A.step} "
                  f"x0={xs[0]:.3f} y0={ys[0]:.3f}  (top row = max y, left col = min x)\n")
-        fh.write("'.' = no ground-named hit in the z window\n\n")
+        fh.write("'.' = no ground-object hit in the z window\n\n")
         for j in range(ny - 1, -1, -1):
             row = []
             for i in range(nx):
