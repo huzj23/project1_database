@@ -59,6 +59,28 @@ DYNAMIC = {
 # Static collision region: the table, the tray, and everything within reach of the props.
 STATIC_REQUIRED = ["Table", "Table.001", "Vassoio"]
 
+# THE ROOM FLOOR MUST BE A COLLIDER, and this was a real defect rather than a tidy-up.
+#
+# The first layer build routed every object larger than 6 m to the visual layer with no collider.
+# `Floor Basement Floor` is 6.98 x 9.90 x 0.10 m, so it went the same way -- and the consequence was
+# not cosmetic: the world had NO floor at all. The stage-05 production run failed the
+# `no_body_below_floor` check because the trigger, deflected off the target's near-vertical flank,
+# slid off the tray and the table and then fell forever, reaching origin z = -17.86 m by the end of a
+# 2.6 s clip. A body that leaves the table was simply gone.
+#
+# Adding an invented ground plane would be exactly the "patch floor" the project forbids, and it
+# would also be wrong: the room already HAS a floor, at the level its own table stands on. What 03
+# section 5 actually requires for a support surface is extracted static mesh collision, so the fix is
+# to extract the scene's own floor rather than to fabricate a substit= for it.
+#
+# Detection is geometric, not name-based, so it cannot silently miss a differently-named floor: an
+# object is a support surface when its AABB spans the whole interaction region in x and y AND its top
+# is at or below the bottom of the interaction region. That is precisely the definition of "the thing
+# underneath the play area". Measured candidates: Floor Basement Floor (top 0.0000, 6 tri),
+# Floor OutDoor (top -0.0380, 22 tri), Green Floor (top -0.0880, 12 tri). The table's own base is
+# z = 0.000, which is the top of the basement floor -- the floor is what it stands on.
+SUPPORT_TOP_Z_MAX = 0.4
+
 # SOFT FURNISHINGS ARE BACKGROUND ONLY.  03 section 5 and 05's no-go rule both state that soft
 # furniture must not take part in the dynamic collision world: a rigid body colliding with it
 # would be solved against a rigid proxy of something the source treats as soft, which is
@@ -100,6 +122,57 @@ def in_reach(lo, hi) -> bool:
         hi.y < REACH["y"][0] or lo.y > REACH["y"][1] or
         hi.z < REACH["z"][0] or lo.z > REACH["z"][1]
     )
+
+
+def collision_mode(obj, size) -> str:
+    """Decide how a static object must be fed to PyBullet, and record WHY.
+
+    This is recorded in the layer report instead of being decided again by each solver script,
+    because the choice is not cosmetic and the two answers are not interchangeable:
+
+      `concave`  a mesh whose geometry is not convex. PyBullet needs
+                 `GEOM_FORCE_CONCAVE_TRIMESH`, and a body can then rest INSIDE a depression --
+                 which is what the tray's 11.66 mm rim requires, since a sliding prop must be
+                 stopped by the kerb rather than sliding over a filled-in slab.
+      `convex`   a mesh that is its own convex hull, or a thin slab where a hull is
+                 indistinguishable. Cheaper and more stable.
+
+    The test is not "is the name Vassoio". It compares the object's volume against the volume of its
+    convex hull: a shape that fills its hull is convex, and one that does not is concave. A closed
+    box scores ~1.0; the open tray, which is a thin shell with a raised rim, scores far lower.
+    """
+    import bmesh  # noqa: PLC0415  (Blender-only module, imported where it is used)
+
+    me = obj.data
+    bm = bmesh.new()
+    bm.from_mesh(me)
+    bmesh.ops.triangulate(bm, faces=bm.faces[:])
+    vol = abs(bm.calc_volume(signed=True))
+    hull_vol = 0.0
+    try:
+        res = bmesh.ops.convex_hull(bm, input=bm.verts[:], use_existing_faces=False)
+        hull_geom = [g for g in res.get("geom", []) if isinstance(g, bmesh.types.BMFace)]
+        if hull_geom:
+            hb = bmesh.new()
+            vmap = {}
+            for f in hull_geom:
+                for v in f.verts:
+                    if v not in vmap:
+                        vmap[v] = hb.verts.new(v.co)
+            hb.verts.index_update()
+            for f in hull_geom:
+                try:
+                    hb.faces.new([vmap[v] for v in f.verts])
+                except ValueError:
+                    pass
+            hb.faces.ensure_lookup_table()
+            hull_vol = abs(hb.calc_volume(signed=True))
+            hb.free()
+    except Exception:
+        hull_vol = 0.0
+    bm.free()
+    ratio = (vol / hull_vol) if hull_vol > 1e-12 else 1.0
+    return ("concave" if ratio < 0.9 else "convex") + f" (fill_ratio={ratio:.4f})"
 
 
 def bake_and_export(obj, path: Path, name: str) -> dict:
@@ -199,6 +272,38 @@ def main() -> int:
         max_size = max(size)
 
         if max_size >= BACKDROP_MIN_SIZE_M or not in_reach(lo, hi):
+            # A SUPPORT SURFACE UNDERNEATH THE PLAY AREA IS NOT BACKDROP.
+            #
+            # Checked before the backdrop rule, because a floor is by nature larger than the play
+            # area -- that is what makes it a floor. The test is geometric: it must span the whole
+            # interaction region in x and y, and its top must be at or below the bottom of that
+            # region. `Floor Basement Floor` satisfies it (top z = 0.0000, the level the table
+            # stands on) and so does `Floor OutDoor` (top -0.0380 m); `Green Floor` is a flat plane
+            # at -0.0880 m and is the ground outside. They are all extracted as static collision so
+            # a body that slides off the table lands on the room instead of falling forever.
+            spans_reach = (lo.x <= REACH["x"][0] and hi.x >= REACH["x"][1]
+                           and lo.y <= REACH["y"][0] and hi.y >= REACH["y"][1])
+            if spans_reach and hi.z <= SUPPORT_TOP_Z_MAX:
+                for coll in list(obj.users_collection):
+                    coll.objects.unlink(obj)
+                layers["environment_static_collision"].objects.link(obj)
+                result["static_collision"][name] = {
+                    "aabb_min": [round(v, 9) for v in lo],
+                    "aabb_max": [round(v, 9) for v in hi],
+                    "size_m": [round(v, 9) for v in size],
+                    "triangles": len(obj.data.polygons),
+                    "is_required": False,
+                    "role": "room_floor_support",
+                    "collision_mode": collision_mode(obj, size),
+                    "reason": ("support surface beneath the interaction region: spans the reach box "
+                               "in x and y with its top at or below the region's base, so a body "
+                               "that leaves the table lands on the room rather than falling "
+                               "forever"),
+                }
+                print(f"    FLOOR support collider: {name}  top_z={hi.z:.4f}  "
+                      f"tris={len(obj.data.polygons)}")
+                continue
+
             # Outside the interaction reach box, or larger than the play area.
             #
             # These objects are VISIBLE but NON-COLLIDING. `environment_static_visual` is the
@@ -265,6 +370,7 @@ def main() -> int:
             "size_m": [round(v, 9) for v in size],
             "triangles": len(obj.data.polygons),
             "is_required": name in STATIC_REQUIRED,
+            "collision_mode": collision_mode(obj, size),
         }
 
     print(f"  static collision objects: {len(result['static_collision'])}")
