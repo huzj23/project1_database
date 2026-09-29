@@ -949,6 +949,56 @@ def content_sha256(path: str | Path) -> str:
     return digest.hexdigest()
 
 
+def static_colliders_from_layer_report(
+    layer_report: dict[str, Any],
+    *,
+    runtime_dir: str | Path,
+    support_z_by_object: dict[str, float] | None = None,
+) -> list[StaticCollider]:
+    """Build the static collision set from a layer report, honouring the recorded collision mode.
+
+    WHY THIS EXISTS. Four separate stage-05 scripts each rebuilt this list by hand, and each
+    independently decided `concave` from the object's NAME (`low.startswith("vassoio")`). That
+    happened to be right for the tray, but it is a guess being used as a physical parameter, and it
+    silently produced `concave=False` for `Table`, `Table.001` and the lamp -- all of which are
+    concave by measurement (convex-hull fill ratios 0.0405, 0.0080 and 0.0866). PyBullet
+    convex-hulls an unflagged static mesh, so those colliders were not the geometry the layer report
+    describes.
+
+    The layer report already records the answer, measured in Blender by comparing each object's
+    volume with the volume of its own convex hull. This function reads that record. Name-based
+    guessing is not used, and an object whose mode is missing raises rather than defaulting to
+    `False`, because a silent default is how the wrong collision geometry gets used.
+
+    `support_z_by_object` carries the measured support height where a stage has measured one; it is
+    a parameter rather than a field of the report because the layer build measures geometry, not
+    contact.
+    """
+    per_object = layer_report.get("static_collision_per_object") or {}
+    recorded = layer_report.get("static_collision") or {}
+    runtime_dir = Path(runtime_dir)
+    support_z_by_object = support_z_by_object or {}
+    out: list[StaticCollider] = []
+    for name in recorded:
+        mode = recorded[name].get("collision_mode")
+        if not mode:
+            raise ContractError(
+                f"layer report records no collision_mode for static object {name!r}; refusing to "
+                f"guess, because PyBullet silently convex-hulls an unflagged concave mesh and the "
+                f"collider would then not be the recorded geometry")
+        info = per_object.get(name) or {}
+        uri = info.get("uri")
+        out.append(StaticCollider(
+            collider_id=name,
+            collider_type="mesh",
+            uri=(str(runtime_dir / Path(str(uri).replace("\\", "/")).name) if uri else None),
+            concave=str(mode).startswith("concave"),
+            triangles=info.get("triangles") or recorded[name].get("triangles"),
+            support_z_m=support_z_by_object.get(name),
+        ))
+    return out
+
+
 def write_jsonl(path: str | Path, records: Iterable[dict[str, Any]]) -> int:
     """Write JSON Lines, returning the record count.  Never deletes or truncates a
     previous file: callers allocate a fresh run directory first."""

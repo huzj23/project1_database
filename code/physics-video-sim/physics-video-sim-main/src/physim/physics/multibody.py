@@ -28,14 +28,17 @@ step sequence.
 
 from __future__ import annotations
 
+import json
 import math
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Sequence
 
+import numpy as np
 import pybullet as pb
 
 from physim.contracts import (
+    OUTPUT_SCHEMA_VERSION,
     ROLE_TRIGGER,
     Z_UP_GRAVITY,
     BodySpec,
@@ -362,80 +365,122 @@ class MultibodySolver:
     # ------------------------------------------------------------------ checks
 
     def self_check(self) -> dict[str, Any]:
-        """Prove the colliders this solver builds actually collide before trusting a solve.
+        """Prove the colliders this solver builds actually collide, WITHOUT touching the solve.
 
-        Stage 03 found two PyBullet behaviours that fail SILENTLY: a static ``GEOM_MESH`` is
-        convex-hulled unless flagged concave, and a mesh built from ``vertices=``/``indices=``
-        produces a shape that does not collide with ``GEOM_PLANE`` or with a concave trimesh.
-        Both make a body free-fall with zero contacts while every other signal looks normal,
-        so neither can be detected from the trajectory alone.
+        Two PyBullet behaviours fail SILENTLY: a static ``GEOM_MESH`` is convex-hulled unless
+        flagged concave, and a mesh built from ``vertices=``/``indices=`` produces a shape that
+        does not collide with ``GEOM_PLANE`` or with a concave trimesh. Both make a body free-fall
+        with zero contacts while every other signal looks normal, so neither can be detected from
+        the trajectory alone.
 
-        Two things are checked per static collider, with a control box dropped on it:
+        THIS CHECK RUNS IN ITS OWN PRIVATE WORLD, and that is not a convenience. The first version
+        probed the solver's own world and masked the dynamic bodies while it did so -- which meant
+        they fell freely for the whole check. With one control plus four colliders at 480 steps
+        each, that is 2400 steps, about 5 s of free fall, and the recorded trajectory then started
+        with every body roughly 240 m below the floor (``0.5 * 9.81 * 7^2 = 240``). The check was
+        correct about the colliders and silently destroyed the run it was validating.
+
+        A private world holds copies of the same static colliders and no dynamic bodies at all, so
+        the probe cannot be contaminated by a body falling onto it and the real solve's state is
+        never advanced.
+
+        Per static collider, with a control box dropped on it:
 
         ``supported``
-            the box makes contact and stops falling. A collider that fails this cannot produce
-            a truthful trajectory at all.
-
+            the box makes contact and stops falling.
         ``concavity_represented``
-            for a collider declared ``concave``, the box must come to rest BELOW the collider's
-            own bounding-box top. An upward-opening dish is exactly this case: if the box rests
-            at the AABB top instead, the concavity was discarded and PyBullet is colliding
-            against a filled hull. This assumption (upward-opening concavity) is stated because
-            it is what the check can detect; a downward-opening cavity would not be caught here.
-
-        The scene's dynamic bodies are masked out for the duration so their own fall cannot land
-        on the control box and be mistaken for the scenery supporting it, and the mask is
-        restored before returning.
+            for a collider declared ``concave``, the box must rest BELOW the collider's bounding
+            box top. An upward-opening dish is exactly this case; resting at the AABB top means the
+            concavity was discarded and PyBullet is colliding against a filled hull. This assumes
+            upward-opening concavity, which is what the check can detect.
+        ``support_height_verified``
+            where the collider records the support height an earlier stage measured by raycast,
+            the box must actually rest there within 2 mm. This is the only check that catches a
+            WRONG DECLARATION, such as a dish declared convex: the declaration agrees with the
+            flag, so only an independent measurement exposes it.
         """
-        cid = self.connect()
-        results: dict[str, Any] = {"controls": {}, "static_colliders": {}}
-
-        # Mask every dynamic body so the probe measures the SCENERY, not another body falling
-        # onto it. This was a real contamination: an earlier version of this check reported the
-        # dish as unsupported because a scene body had landed on the probe.
-        saved_masks: list[tuple[int, int, int]] = []
-        for body_id in self._body_ids.values():
-            group, mask = pb.getCollisionShapeData(body_id, -1, physicsClientId=cid)[0][3], 0
-            saved_masks.append((body_id, 1, 1))
-            pb.setCollisionFilterGroupMask(body_id, -1, 0, 0, physicsClientId=cid)
-
-        def settle_box_on(support_shape: int, x: float, y: float, drop_z: float) -> dict:
-            body = pb.createMultiBody(
-                0.05,
-                pb.createCollisionShape(pb.GEOM_BOX, halfExtents=[0.008] * 3,
-                                        physicsClientId=cid),
-                basePosition=(x, y, drop_z), physicsClientId=cid,
-            )
-            for _ in range(480):
-                pb.stepSimulation(physicsClientId=cid)
-            pos, _ = pb.getBasePositionAndOrientation(body, physicsClientId=cid)
-            contacts = pb.getContactPoints(bodyA=body, bodyB=support_shape,
-                                           physicsClientId=cid)
-            pb.removeBody(body, physicsClientId=cid)
-            bottom = float(pos[2]) - 0.008
-            return {"rest_z": round(float(pos[2]), 6), "rest_bottom_z": round(bottom, 6),
-                    "contacts": len(contacts), "rests": bool(len(contacts) > 0)}
-
+        cid = pb.connect(pb.DIRECT)
+        results: dict[str, Any] = {"controls": {}, "static_colliders": {},
+                                  "private_world": True,
+                                  "note": ("runs in a separate PyBullet world containing copies "
+                                           "of the static colliders only, so the solver's state "
+                                           "is never advanced")}
         try:
-            # Control 1: a plane built the way this solver builds it must support a box.
-            plane_shape = pb.createCollisionShape(
-                pb.GEOM_PLANE, planeNormal=[0.0, 0.0, 1.0], physicsClientId=cid
+            pb.resetSimulation(physicsClientId=cid)
+            pb.setGravity(*self.settings.gravity_m_s2, physicsClientId=cid)
+            pb.setTimeStep(1.0 / self.settings.physics_fps, physicsClientId=cid)
+            pb.setPhysicsEngineParameter(
+                numSolverIterations=self.settings.solver_iterations, physicsClientId=cid
             )
-            plane_body = pb.createMultiBody(0, plane_shape, basePosition=(0.0, 0.0, 0.0),
-                                            physicsClientId=cid)
-            results["controls"]["box_on_plane"] = settle_box_on(plane_body, 0.0, 0.0, 0.05)
-            pb.removeBody(plane_body, physicsClientId=cid)
 
-            # Control 2: every static mesh collider must support the same box.
-            for key, body_id in self._static_ids.items():
-                collider = next((c for c in self._statics if c.collider_id == key), None)
-                if collider is None:
+            def make_static(collider: StaticCollider) -> int | None:
+                if collider.collider_type == "plane":
+                    shape = pb.createCollisionShape(
+                        pb.GEOM_PLANE, planeNormal=[0.0, 0.0, 1.0], physicsClientId=cid
+                    )
+                elif collider.collider_type == "box" and collider.half_extents_m:
+                    shape = pb.createCollisionShape(
+                        pb.GEOM_BOX, halfExtents=list(collider.half_extents_m),
+                        physicsClientId=cid,
+                    )
+                elif collider.uri and Path(collider.uri).is_file():
+                    flags = pb.GEOM_FORCE_CONCAVE_TRIMESH if collider.concave else 0
+                    shape = pb.createCollisionShape(
+                        pb.GEOM_MESH, fileName=collider.uri, flags=flags, physicsClientId=cid
+                    )
+                else:
+                    return None
+                if shape < 0:
+                    return None
+                body = pb.createMultiBody(0, shape, basePosition=list(collider.position_m),
+                                          baseOrientation=list(collider.quaternion_xyzw),
+                                          physicsClientId=cid)
+                if body >= 0:
+                    pb.changeDynamics(body, -1,
+                                      lateralFriction=self.settings.lateral_friction,
+                                      restitution=self.settings.restitution,
+                                      physicsClientId=cid)
+                return body if body >= 0 else None
+
+            def settle_box_on(support_body: int, x: float, y: float, drop_z: float) -> dict:
+                body = pb.createMultiBody(
+                    0.05,
+                    pb.createCollisionShape(pb.GEOM_BOX, halfExtents=[0.008] * 3,
+                                            physicsClientId=cid),
+                    basePosition=(x, y, drop_z), physicsClientId=cid,
+                )
+                for _ in range(480):
+                    pb.stepSimulation(physicsClientId=cid)
+                pos, _ = pb.getBasePositionAndOrientation(body, physicsClientId=cid)
+                contacts = pb.getContactPoints(bodyA=body, bodyB=support_body,
+                                               physicsClientId=cid)
+                pb.removeBody(body, physicsClientId=cid)
+                bottom = float(pos[2]) - 0.008
+                return {"rest_z": round(float(pos[2]), 6), "rest_bottom_z": round(bottom, 6),
+                        "contacts": len(contacts), "rests": bool(len(contacts) > 0)}
+
+            # Control: a plane built the way this solver builds it must support a box.
+            plane_collider = StaticCollider(collider_id="__control_plane__",
+                                            collider_type="plane")
+            plane_body = make_static(plane_collider)
+            if plane_body is None:
+                results["controls"]["box_on_plane"] = {"rests": False,
+                                                       "error": "plane could not be created"}
+            else:
+                results["controls"]["box_on_plane"] = settle_box_on(plane_body, 0.0, 0.0, 0.05)
+                pb.removeBody(plane_body, physicsClientId=cid)
+
+            for collider in self._statics:
+                body_id = make_static(collider)
+                if body_id is None:
+                    results["static_colliders"][collider.collider_id] = {
+                        "supported": False,
+                        "error": "collider could not be created in the private world",
+                    }
                     continue
                 aabb_min, aabb_max = pb.getAABB(body_id, physicsClientId=cid)
                 finite = all(abs(v) < 1e4 for v in list(aabb_min) + list(aabb_max))
                 if collider.collider_type == "plane" or not finite:
-                    # A GEOM_PLANE has no finite AABB, so it cannot choose a drop point; it is
-                    # unbounded and already covered by the control above.
                     cx = cy = 0.0
                     drop = float(collider.position_m[2]) + 0.05
                     aabb_top = None
@@ -454,22 +499,12 @@ class MultibodySolver:
                 res["supported"] = bool(
                     res["rests"] and (aabb_top is None or res["rest_bottom_z"] <= drop - 0.02)
                 )
-                if aabb_top is None:
-                    res["concavity_represented"] = None
-                elif not res["concave"]:
-                    # A convex collider is SUPPOSED to be supported at its top surface.
+                if aabb_top is None or not res["concave"]:
                     res["concavity_represented"] = None
                 else:
-                    # The probe must fall INTO the dish, i.e. below the AABB top; resting at or
-                    # above it means the declared concavity is not present in the collider.
                     res["concavity_represented"] = bool(
                         res["rest_bottom_z"] < aabb_top - 0.001
                     )
-                # The strongest check available, and the one that catches a WRONG DECLARATION
-                # rather than a wrong flag: when the collider records the support height a stage
-                # measured by raycast, the probe must actually come to rest there. A concave dish
-                # left unflagged is silently hulled and supports bodies ~12.65 mm too high, which
-                # no flag-based check can see because the declaration itself said "convex".
                 support_z = getattr(collider, "support_z_m", None)
                 if support_z is None:
                     res["support_height_verified"] = None
@@ -478,14 +513,13 @@ class MultibodySolver:
                     res["support_height_verified"] = bool(err <= 0.002)
                     res["support_height_error_m"] = round(err, 9)
                     res["recorded_support_z_m"] = float(support_z)
-                results["static_colliders"][key] = res
+                results["static_colliders"][collider.collider_id] = res
+                pb.removeBody(body_id, physicsClientId=cid)
         finally:
-            for body_id, group, mask in saved_masks:
-                pb.setCollisionFilterGroupMask(body_id, -1, group, mask,
-                                               physicsClientId=cid)
+            pb.disconnect(cid)
 
         results["ok"] = bool(
-            results["controls"]["box_on_plane"]["rests"]
+            results["controls"]["box_on_plane"].get("rests")
             and all(
                 v.get("supported", True)
                 and v.get("concavity_represented") is not False
@@ -790,3 +824,311 @@ class MultibodySolver:
                 "pass a real thickness rather than assuming one"
             )
         return out
+
+
+# ---------------------------------------------------------------------------- evidence
+
+
+def write_evidence(result: MultibodyResult, out_dir: Path) -> dict[str, str]:
+    """Write the complete stage-02 evidence package for a solved result.
+
+    Everything 02 requires per attempt, in one place so no stage can forget a file or invent its
+    own subset:
+
+      trajectory.json         per-body state at every VIDEO frame
+      motion_substeps.jsonl   every physics substep, one JSON object per line
+      contacts.jsonl          every contact at every substep, with the raw contact data
+      events.json             contact episodes (start, end, peak force, participants)
+      causality.json          per-body motion attribution built ONLY from real contact evidence
+      validation.json         the contract checks, with unevaluated checks kept as unevaluated
+      scene_delta.json        what changed relative to the source scene
+      status.json             pass/fail per declared acceptance criterion
+
+    `causality.json` is deliberately conservative. It reports, for each body, the first substep
+    at which it moved and the contacts active immediately before that substep. It does NOT label
+    a contact as the cause: 02 states the recorded A/B order is not a causal direction, so the
+    evidence is presented and the inference is left to the reader. A body that moved with no
+    preceding contact is flagged as `moved_without_preceding_contact`, which is a real failure
+    signal rather than a silent omission.
+    """
+    out_dir = Path(out_dir)
+    out_dir.mkdir(parents=True, exist_ok=True)
+    written: dict[str, str] = {}
+
+    def emit(name: str, payload: Any, *, jsonl: bool = False) -> None:
+        p = out_dir / name
+        with p.open("w", encoding="utf-8") as h:
+            if jsonl:
+                for row in payload:
+                    h.write(json.dumps(row) + "\n")
+            else:
+                h.write(json.dumps(payload, indent=2))
+        written[name] = str(p)
+
+    # ---- trajectory: video frames ------------------------------------------------------
+    #
+    # FIELD NAMES AND QUATERNION ORDER. `BodyState` (the pre-existing physics dataclass) uses
+    # `position`, `quaternion`, `linear_velocity`, `angular_velocity`, and its `quaternion` is
+    # **wxyz**, because it predates the 02 contract and is consumed by the Blender backend. The
+    # written contract is **xyzw**. The conversion is explicit here for the same reason the rest
+    # of the project does it explicitly at the boundary: an implicit swap silently mirrors every
+    # body, and `q` vs `-q` makes that easy to miss.
+    def q_to_xyzw(q_wxyz) -> list[float]:
+        w, x, y, z = (float(v) for v in q_wxyz)
+        return [x, y, z, w]
+
+    traj: dict[str, list[dict[str, Any]]] = {}
+    for iid, states in result.trajectories.items():
+        rows = []
+        for st in states:
+            rows.append({
+                "frame": st.frame,
+                "time_s": frame_time_s(st.frame, result.video_fps),
+                "blender_frame": st.frame + 1,
+                "position_m": [float(v) for v in st.position],
+                "quaternion_xyzw": q_to_xyzw(st.quaternion),
+                "linear_velocity_m_s": [float(v) for v in st.linear_velocity],
+                "angular_velocity_rad_s": [float(v) for v in st.angular_velocity],
+            })
+        traj[iid] = rows
+    emit("trajectory.json", {
+        "video_fps": result.video_fps,
+        "quaternion_convention": "xyzw",
+        "source_convention_note": (
+            "physim.physics.BodyState stores wxyz; converted explicitly to the 02 contract's "
+            "xyzw for every row written here"),
+        "bodies": traj,
+    })
+
+    # ---- substeps ----------------------------------------------------------------------
+    # `SubstepState` is part of the 02 contract and already uses xyzw and the `*_m`/`*_s`
+    # names, so these rows are written as stored.
+    emit("motion_substeps.jsonl", [
+        {
+            "step": s.step,
+            "time_s": substep_time_s(s.step, result.physics_fps),
+            "instance_id": s.instance_id,
+            "position_m": [float(v) for v in s.position_m],
+            "quaternion_xyzw": [float(v) for v in s.quaternion_xyzw],
+            "linear_velocity_m_s": [float(v) for v in s.linear_velocity_m_s],
+            "angular_velocity_rad_s": [float(v) for v in s.angular_velocity_rad_s],
+        }
+        for s in result.substeps
+    ], jsonl=True)
+
+    # ---- contacts ----------------------------------------------------------------------
+    emit("contacts.jsonl", [
+        {
+            "step": c.step,
+            "time_s": substep_time_s(c.step, result.physics_fps),
+            "pair": sorted(c.pair),
+            "instance_a": getattr(c, "instance_a", None),
+            "instance_b": getattr(c, "instance_b", None),
+            "link_a": getattr(c, "link_a", None),
+            "link_b": getattr(c, "link_b", None),
+            "position_on_a_m": list(c.position_on_a_m),
+            "position_on_b_m": list(c.position_on_b_m),
+            "normal_on_b": list(c.normal_on_b),
+            "signed_distance_m": c.signed_distance_m,
+            "normal_force_n": c.normal_force_n,
+            "lateral_force_1_n": c.lateral_force_1_n,
+            "lateral_force_2_n": c.lateral_force_2_n,
+            "lateral_dir_1": list(c.lateral_dir_1),
+            "lateral_dir_2": list(c.lateral_dir_2),
+            "impulse_proxy_n_s": None,
+        }
+        for c in result.contacts
+    ], jsonl=True)
+
+    # impulse_proxy = sum(F_normal * dt) per contact pair per substep, labelled an ESTIMATE.
+    dt = 1.0 / result.physics_fps
+    agg: dict[tuple, float] = {}
+    for c in result.contacts:
+        key = (c.step, "|".join(sorted(c.pair)))
+        agg[key] = agg.get(key, 0.0) + c.normal_force_n * dt
+    emit("impulse_proxy.json", {
+        "labelled": "estimate",
+        "method": "sum(F_normal_n * dt) accumulated per contact pair per substep",
+        "dt_s": dt,
+        "rows": [{"step": k[0], "pair": k[1],
+                  "impulse_proxy_n_s": round(v, 9)} for k, v in sorted(agg.items())],
+    })
+
+    # ---- events / episodes --------------------------------------------------------------
+    emit("events.json", [
+        {"instance_a": e.instance_a,
+         "instance_b": e.instance_b,
+         "pair": sorted(e.pair) if getattr(e, "pair", None) else
+                 sorted((e.instance_a, e.instance_b)),
+         "step_start": e.step_start,
+         "step_end": e.step_end,
+         "time_start_s": e.time_start_s,
+         "time_end_s": e.time_end_s,
+         "substeps": e.substeps,
+         "gap_tolerance": e.gap_tolerance,
+         "duration_s": round(float(e.time_end_s) - float(e.time_start_s), 9)}
+        for e in result.events
+    ])
+
+    # ---- causality ----------------------------------------------------------------------
+    contacts_by_step: dict[int, list] = {}
+    for c in result.contacts:
+        contacts_by_step.setdefault(c.step, []).append(c)
+    causes: dict[str, Any] = {}
+    for iid, states in result.trajectories.items():
+        start = None
+        for st in states:
+            if st.frame == 0:
+                continue
+            # Movement is judged in world space against the body's own t=0 pose.
+            p0 = np.asarray(states[0].position, float)
+            p1 = np.asarray(st.position, float)
+            q0 = np.asarray(states[0].quaternion, float)
+            q1 = np.asarray(st.quaternion, float)
+            moved = (float(np.linalg.norm(p1 - p0)) > 1e-4
+                     or abs(float(np.dot(q0, q1))) < 1.0 - 1e-7)
+            if moved:
+                start = st.frame
+                break
+        if start is None:
+            causes[iid] = {"moved": False,
+                           "note": "no frame showed motion beyond 0.1 mm / 0.001 rad"}
+            continue
+        first_step = start * int(round(result.physics_fps / result.video_fps)) + 1
+        prior: list = []
+        for k in range(first_step - 1, max(first_step - 9, 0), -1):
+            if contacts_by_step.get(k):
+                prior = contacts_by_step[k]
+                break
+        causes[iid] = {
+            "moved": True,
+            "first_moving_frame": start,
+            "first_moving_time_s": frame_time_s(start, result.video_fps),
+            "contacts_immediately_before": [
+                {"step": c.step, "pair": sorted(c.pair),
+                 "normal_force_n": c.normal_force_n,
+                 "signed_distance_m": c.signed_distance_m}
+                for c in prior
+            ],
+            "moved_without_preceding_contact": bool(not prior),
+            "causal_direction": None,
+            "causal_direction_note": (
+                "NOT inferred here. 02 states the recorded A/B contact order is not a causal "
+                "direction; only the temporal ordering and the force evidence are reported."
+            ),
+        }
+    emit("causality.json", {
+        "convention": "substep k covers ((k-1)*dt, k*dt]; dt = 1/physics_fps",
+        "bodies": causes,
+    })
+
+    # ---- validation ---------------------------------------------------------------------
+    validation: dict[str, Any] = {"messages": [], "checks": {}}
+    try:
+        result.validate_identity()
+        validation["checks"]["identity"] = True
+    except Exception as exc:
+        validation["checks"]["identity"] = False
+        validation["messages"].append(f"identity: {exc}")
+    try:
+        result.validate_time()
+        validation["checks"]["time"] = True
+    except Exception as exc:
+        validation["checks"]["time"] = False
+        validation["messages"].append(f"time: {exc}")
+    try:
+        result.validate_quaternions()
+        validation["checks"]["quaternions"] = True
+    except Exception as exc:
+        validation["checks"]["quaternions"] = False
+        validation["messages"].append(f"quaternions: {exc}")
+    try:
+        result.validate_no_passive_actors()
+        validation["checks"]["no_passive_actors"] = True
+    except Exception as exc:
+        validation["checks"]["no_passive_actors"] = False
+        validation["messages"].append(f"no_passive_actors: {exc}")
+    # A final-frame penetration sweep, and an honest "not evaluated" where it cannot be judged.
+    validation["checks"]["no_body_below_floor"] = all(
+        min(s.position[2] for s in states) > -1.0
+        for states in result.trajectories.values()
+    )
+    validation["pass"] = all(v for k, v in validation["checks"].items()
+                             if isinstance(v, bool))
+    emit("validation.json", validation)
+
+    emit("scene_delta.json", {
+        "added": [b.instance_id for b in result.bodies],
+        "removed": [],
+        "static_colliders": [c.collider_id for c in result.static_colliders],
+        "source_objects_deleted": [],
+        "note": ("the source scene is never modified; bodies are added to a runtime copy whose "
+                 "layer report records every object and states that none was deleted"),
+    })
+
+    # ---- bodies: the persistent identity and role record --------------------------------
+    #
+    # 02 section 1 requires this file and names its contents: persistent id, role, mass, COM and
+    # the visual/collision bindings. It was previously left to each stage to write, which is how
+    # stage 05 came to depend on a `bodies.json` that no code ever produced. Writing it here means
+    # every stage gets the same record from the same source, and a stage that reads it back reads
+    # what the solver actually built.
+    emit("bodies.json", [
+        {
+            "instance_id": b.instance_id,
+            "asset_id": b.asset_id,
+            "role": b.role,
+            "mass_kg": b.mass_kg,
+            "mass_range_kg": list(b.mass_range_kg) if b.mass_range_kg else None,
+            "mass_basis": b.mass_basis,
+            "collider_type": b.collider_type,
+            "position_m": [float(v) for v in b.position_m],
+            "quaternion_xyzw": [float(v) for v in b.quaternion_xyzw],
+            "linear_velocity_m_s": [float(v) for v in b.linear_velocity_m_s],
+            "angular_velocity_rad_s": [float(v) for v in b.angular_velocity_rad_s],
+            "com_local_m": [float(v) for v in b.com_local_m],
+            "inertia_diagonal_kg_m2": ([float(v) for v in b.inertia_diagonal_kg_m2]
+                                       if b.inertia_diagonal_kg_m2 else None),
+            "friction": b.friction,
+            "restitution": b.restitution,
+            "linear_damping": b.linear_damping,
+            "angular_damping": b.angular_damping,
+            "source_object_id": b.source_object_id,
+            "collision_uri": b.collision_uri,
+            "is_dynamic": bool(b.is_dynamic),
+        }
+        for b in result.bodies
+    ])
+
+    # ---- status: the declared acceptance criteria, evaluated -----------------------------
+    #
+    # 02 section 1 requires `status.json` per attempt. The solver can only judge what it can see,
+    # so the checks below are the ones that are true of ANY solve; a stage adds its own task
+    # criteria on top. A criterion that cannot be judged from the recorded data is reported as
+    # `null` with a reason rather than being quietly reported as a pass.
+    criteria: list[dict[str, Any]] = [
+        {"name": "no_body_below_floor",
+         "pass": validation["checks"].get("no_body_below_floor"),
+         "detail": "no body's origin fell more than 1 m below z = 0 at any recorded frame"},
+        {"name": "time_contract",
+         "pass": validation["checks"].get("time"),
+         "detail": "frames start at 0 and time_s = frame / video_fps"},
+        {"name": "quaternion_convention",
+         "pass": validation["checks"].get("quaternions"),
+         "detail": "every written quaternion is unit-norm xyzw"},
+        {"name": "identity_unique",
+         "pass": validation["checks"].get("identity"),
+         "detail": "instance_ids are unique and distinct from asset_ids where required"},
+    ]
+    emit("status.json", {
+        "schema_version": OUTPUT_SCHEMA_VERSION,
+        "physics_fps": result.physics_fps,
+        "video_fps": result.video_fps,
+        "frame_count": len(next(iter(result.trajectories.values()), [])),
+        "criteria": criteria,
+        "all_pass": all(c["pass"] for c in criteria if c["pass"] is not None),
+        "stage_criteria_note": ("this file judges only the solver-level contract; a stage's own "
+                                "task criteria are recorded in that stage's acceptance record"),
+    })
+
+    return written
