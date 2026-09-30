@@ -1,0 +1,17 @@
+{
+  "cx": -1.10,
+  "cy": 11.20,
+  "chord_deg": 36.0,
+  "_verified": {
+    "why_moved": "The user-approved site (-1.20, +12.20) chord +30 is NOT obstacle-free. The authoritative world-space clearance check (tools/v57/clearance_check.py) on the built blend found boxes 2, 3, 6, 7 and 8 overlapping the authored 'stones' mesh, up to 304 overlapping triangle pairs, while all nine boxes correctly stood on Floor_main. The chain moves; the scene is not edited, because 'stones' and 'leaves' are original authored geometry.",
+    "why_this_site": "Every candidate was tested with the visual's oriented bounding box INFLATED by 10 mm on all six sides, so a clear result means the real box has at least 10 mm of air around it. The looser exact-contact test was not enough: at the nearby (-1.10, +11.70) the box test reported zero overlap while the built geometry grazed a decorative 'leaves' surface in 16 triangle pairs.",
+    "measured_by": "tools/v57/scan_sites.py --inflate_mm 10",
+    "validation": "The scan reproduces the independently measured overlap pattern at the old approved site EXACTLY -- expected boxes [2,3,6,7,8], measured [2,3,6,7,8] -- and refuses to run if it ever stops doing so.",
+    "on_floor": "9/9 boxes and the trigger ray-cast onto Floor_main",
+    "height_spread_mm": 0.0,
+    "arc_centre": [-1.8065, 13.1044],
+    "distance_from_approved_centre_m": 1.0,
+    "chord_change_from_approved_deg": 6.0,
+    "note": "The C3 camera is placed RELATIVE to the chain at a fixed azimuth, elevation, distance and lens, so the framing of the chain itself is identical to the approved preview: span 0.678 of frame width, 40 mm lens, 9/9 centres in frame. What changes is only the background behind the boxes."
+  }
+}

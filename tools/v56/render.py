@@ -77,7 +77,18 @@ print(f"  config  {CFG_P}")
 print(f"  scene   {CFG['scene_id']}  runtime {RUNTIME_BLEND.name}")
 print(f"  frames  0..{FRAME_COUNT - 1} at {VIDEO_FPS} fps -> {FRAME_COUNT / VIDEO_FPS:.3f} s")
 
-TRAJ = json.loads((RUN / "trajectory.json").read_text(encoding="utf-8"))["bodies"]
+TRAJ_NAME = CFG.get("trajectory", "trajectory.json")
+# The trajectory may be given as a path outside the run directory (video B passes a WORLD-frame copy).
+# Resolving it naively as `RUN / value` builds `<run>\<value>` for a relative value and fails with a
+# confusing FileNotFoundError -- which is exactly what happened first. The candidates are tried in order:
+# an absolute value, the value relative to the run, then the value relative to the workspace.
+TRAJ_CANDS = [Path(TRAJ_NAME)] if Path(TRAJ_NAME).is_absolute() else [
+    RUN / TRAJ_NAME, Path(TRAJ_NAME), RUN.parent / TRAJ_NAME]
+TRAJ_P = next((p for p in TRAJ_CANDS if p.is_file()), None)
+if TRAJ_P is None:
+    raise SystemExit(f"FATAL: trajectory not found; tried {[str(p) for p in TRAJ_CANDS]}")
+print(f"  trajectory {TRAJ_P}")
+TRAJ = json.loads(TRAJ_P.read_text(encoding="utf-8"))["bodies"]
 BINDING_CFG = CFG["binding"]                 # body_id -> {"objects": [...], "collision_obj": name}
 
 # ---------------------------------------------------------------------------------------
@@ -287,6 +298,13 @@ for body_id, spec in binding.items():
 # A frozen animation is the failure an earlier version shipped, so it is checked explicitly: every
 # animated object must actually take distinct poses across the clip.
 for body_id, spec in binding.items():
+    # `rows` MUST be re-bound here. This is a SECOND loop over the same bodies, and the first loop's
+    # `rows` is left holding the LAST body's trajectory. Without this line the recorded travel below
+    # was computed by applying THE TRIGGER'S motion to every other body's corner, which made the check
+    # fail on 12 of 13 bodies while the reference check passed at 0.0005 mm -- the signature that
+    # exposed it. A stale loop variable is exactly the kind of defect that reads as "the renderer is
+    # broken" when the animation is in fact correct to 5e-7.
+    rows = TRAJ[body_id]
     poses = set()
     for f in range(1, FRAME_COUNT + 1):
         scene.frame_set(f)
@@ -301,17 +319,34 @@ for body_id, spec in binding.items():
     anim_checks[body_id]["distinct_poses"] = distinct
     if not ok:
         fails.append(f"{body_id}: the animation is frozen ({distinct} distinct pose)")
-    # The travel must match the record, measured on a fixed reference point rather than an anchor.
+    # The travel must match the record, but the comparison has to be between THE SAME MATERIAL POINT.
+    #
+    # `refpts` are extreme mesh points, while a naive comparison against `position_m` uses the body
+    # ORIGIN. A box that topples through ~90 deg rotates about a bottom edge, so a corner ~0.2 m from
+    # the centre sweeps further than the centre does. The recorded travel of the SAME local point is
+    # therefore computed by applying the recorded body matrices to that point, so both sides describe
+    # one material point.
+    #
+    # This still catches the failure it was written for: when the objects were left at the world
+    # origin, the rendered travel came out ~13x the recorded travel.
+    first_nm = spec["objects"][0]
+    lp0 = Vector(refpts[body_id]["points_per_object"][first_nm][0])
     got = []
     for f in range(1, FRAME_COUNT + 1):
         scene.frame_set(f)
         bpy.context.view_layer.update()
-        o = bpy.data.objects[spec["objects"][0]]
-        first_nm = spec["objects"][0]
-        got.append(o.matrix_world @ Vector(refpts[body_id]["points_per_object"][first_nm][0]))
+        got.append(bpy.data.objects[first_nm].matrix_world @ lp0)
     rendered_travel = max((p - got[0]).length for p in got)
-    rec = [Vector(r["position_m"]) for r in TRAJ[body_id]]
-    recorded_travel = max((p - rec[0]).length for p in rec)
+    # The recorded side must place the SAME point through the SAME chain the animation uses. An earlier
+    # version applied `t_wb(r) @ lp0`, which skips T_WV(0): `lp0` is a point in the OBJECT's local frame,
+    # so it has to be carried to the world by the visual's frame-0 matrix before any body motion. Omitting
+    # that made the recorded travel wrong for every body while the reference check -- which does include
+    # T_WV(0) -- passed at 0.0005 mm. The two checks disagreeing in that direction is what identified the
+    # omission as a defect in the CHECK rather than in the animation.
+    twb0 = t_wb(rows[0])
+    twv0 = t_wv0_all[body_id][first_nm]
+    rec_pts = [(t_wb(r) @ twb0.inverted() @ twv0) @ lp0 for r in rows]
+    recorded_travel = max((p - rec_pts[0]).length for p in rec_pts)
     err = abs(rendered_travel - recorded_travel)
     ok = err <= max(2e-4, 0.02 * max(recorded_travel, 1e-4))
     print(f"  {'PASS' if ok else 'FAIL'}  {body_id:20s} rendered travel {rendered_travel * 1000:.4f} mm "
@@ -329,9 +364,13 @@ if fails:
 
 (RUN / "animation_verification.json").write_text(json.dumps(
     {"pass": True, "failures": [], "per_body": anim_checks}, indent=2), encoding="utf-8")
-(RUN / "binding.json").write_text(json.dumps(binding, indent=2), encoding="utf-8")
+# The RESOLVED binding is written under its own name. It must NOT be `binding.json`: that file is the
+# AUTHORED binding contract, written by tools/v56/b2_binding.py and read by the deliverable step, and
+# an earlier version of this script overwrote it with its own resolved form -- so `resolved_config.json`
+# ended up citing a binding.json that no longer held the numbers it was built from.
+(RUN / "render_binding.json").write_text(json.dumps(binding, indent=2), encoding="utf-8")
 (RUN / "reference_points.json").write_text(json.dumps(refpts, indent=2), encoding="utf-8")
-print(f"  written: binding.json, reference_points.json, animation_verification.json")
+print(f"  written: render_binding.json, reference_points.json, animation_verification.json")
 
 # ---------------------------------------------------------------------------------------
 # camera: from the config, which the framing step fills in

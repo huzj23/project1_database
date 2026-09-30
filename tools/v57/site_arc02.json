@@ -1,0 +1,16 @@
+{
+  "cx": -1.10,
+  "cy": 11.70,
+  "chord_deg": 33.0,
+  "_verified": {
+    "why_moved": "The user-approved site (-1.20, +12.20) chord +30 is NOT obstacle-free. The authoritative world-space clearance check (tools/v57/clearance_check.py) on the built blend found boxes 2, 3, 6, 7 and 8 overlapping the authored 'stones' mesh, up to 304 overlapping triangle pairs, while all nine boxes correctly stood on Floor_main. The chain therefore had to move rather than the scene be edited.",
+    "why_this_site": "Of every obstacle-free site found, this is the closest to the approved one that also keeps the approved chord: 0.510 m from the approved centre and only 3.0 degrees off the approved chord, so the approved three-quarter high C3 view is preserved as far as a clear site permits.",
+    "measured_by": "tools/v57/scan_sites.py --expect '-1.20,12.20,30,2,3,6,7,8'",
+    "validation": "The scan reproduces the independently measured overlap pattern at the old site EXACTLY -- expected boxes [2,3,6,7,8], measured [2,3,6,7,8] -- and refuses to scan if it ever stops doing so. Its verdicts are therefore trustworthy in a way the earlier scans were not.",
+    "overlap": "zero overlapping triangle pairs for all nine boxes and the trigger, tested at the seated height and 15 mm above and below it",
+    "on_floor": "9/9 boxes and the trigger ray-cast onto Floor_main",
+    "height_spread_mm": 0.0,
+    "arc_centre": [-1.8279, 13.6136],
+    "note": "Sites at the old chord of +30 exist but all overlap stones or leaves; the chord change is what buys the clearance."
+  }
+}

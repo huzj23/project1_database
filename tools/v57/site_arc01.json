@@ -1,0 +1,14 @@
+{
+  "cx": -1.20,
+  "cy": 12.20,
+  "chord_deg": 30.0,
+  "_source": "tools/v57/find_clean_site.py scan of the authored camera's visible pavement; this centre is one of 160 of 240 scanned sites where all 9 box support rays plus the trigger ray land on Floor_main, and is the flattest such site (measured height spread 0.00 mm across the chain).",
+  "_verified": {
+    "support_object_every_box": "Floor_main",
+    "measured_height_spread_mm": 0.0,
+    "fitted_plane_slope_deg": 0.0057,
+    "fitted_plane_max_residual_mm": 0.97,
+    "authored_camera_sees_this_pavement": true,
+    "light_blockers_in_frame": "none"
+  }
+}
