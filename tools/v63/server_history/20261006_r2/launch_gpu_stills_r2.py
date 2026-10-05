@@ -9,9 +9,9 @@ import xml.etree.ElementTree as ET
 
 ROOT = Path('/data/raw/huzijian/project1_database')
 UUID = 'GPU-665e9626-9862-7424-fc4a-dc90d61079fa'
-CONTROL = ROOT / 'tmp/v63_node12/gpu_static_control_r3'
+CONTROL = ROOT / 'tmp/v63_node12/gpu_static_control_r2'
 CONTROL.mkdir(parents=True, exist_ok=False)
-previous_log = ROOT / 'tmp/v63_node12/gpu_static_control_r2.log'
+previous_log = ROOT / 'tmp/v63_node12/gpu_static_control_r1.log'
 deadline = time.monotonic() + 2400
 while True:
     previous = previous_log.read_text() if previous_log.exists() else ''
@@ -46,17 +46,17 @@ env.update({'V63_GPU_UUID': UUID,
             'V62_SCRATCH': str(CONTROL / 'scratch'),
             'LD_PRELOAD': str(ROOT / 'tools/runtime/v63_egl_uuid_r1/libv63_egl_uuid_r2.so'),
             '__EGL_VENDOR_LIBRARY_FILENAMES': str(ROOT / 'tools/runtime/v63_egl_uuid_r1/nvidia_vendor.json')})
-old_cache = ROOT / 'tmp/v63_node12/gpu_static_control_r2/scratch/gl_shader_cache'
+old_cache = ROOT / 'tmp/v63_node12/gpu_static_control_r1/scratch/gl_shader_cache'
 if old_cache.is_dir():
     # Preserve the old cache and seed a fresh project-scoped cache, not a global
     # driver cache. No old output/image is touched.
     shutil.copytree(old_cache, CONTROL / 'scratch/gl_shader_cache')
-ids = ['10b_follow_camera_side']
+ids = ['04_drop_bridge', '10_follow_camera_sample']
 argv = ['/bin/bash', '--noprofile', '--norc', str(ROOT / 'tools/v62/blender42_scoped.sh'),
         '--background', '--factory-startup', '--disable-autoexec', '--threads', '16',
         '--python-exit-code', '2', '--python', str(ROOT / 'tools/v63/render_static_r2.py'), '--',
-        '--scene-dir', str(ROOT / 'tmp/v63_node11/static_scene_r5'),
-        '--out', str(ROOT / 'tmp/v63_node12/static_gpu_r3'), '--ids', ','.join(ids)]
+        '--scene-dir', str(ROOT / 'tmp/v63_node11/static_scene_r4'),
+        '--out', str(ROOT / 'tmp/v63_node12/static_gpu_r2'), '--ids', ','.join(ids)]
 with (CONTROL / 'blender.log').open('x') as handle:
     result = subprocess.run(argv, env=env, stdout=handle, stderr=subprocess.STDOUT)
 print('SCOPED_STILLS_EXIT', result.returncode, flush=True)

@@ -17,7 +17,8 @@ client.set_missing_host_key_policy(remote.ProjectHostPolicy())
 client.connect('172.16.30.11', username='wangzile', password=password, timeout=15,
                allow_agent=False, look_for_keys=False)
 password = None
-destination = LOCAL / 'tools/v63/server_history/20261006_r1'
+destination = LOCAL / 'tools/v63/server_history/20261006_r2'
+prior = LOCAL / 'tools/v63/server_history/20261006_r1'
 destination.mkdir(parents=True, exist_ok=False)
 records = []
 try:
@@ -25,6 +26,10 @@ try:
         folder = remote.remote_checked(sftp, remote.REMOTE + '/tools/v63')
         for entry in sorted(sftp.listdir_attr(folder), key=lambda a: a.filename):
             if not stat.S_ISREG(entry.st_mode) or Path(entry.filename).suffix not in ('.py', '.sh', '.c'):
+                continue
+            if (prior / entry.filename).exists():
+                if (prior / entry.filename).stat().st_size != entry.st_size:
+                    raise RuntimeError('immutable server history changed unexpectedly')
                 continue
             if entry.st_size > 200000:
                 raise ValueError('unexpected code size')

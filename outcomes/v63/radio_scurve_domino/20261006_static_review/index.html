@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>V6.3 静态预审</title>
+<style>
+body{margin:0;background:#141619;color:#ece8df;font:16px/1.7 system-ui,"Microsoft YaHei",sans-serif}
+main{max-width:1500px;margin:auto;padding:32px 24px 60px}h1{margin:0;font-size:30px}p{max-width:1050px;color:#c3c6c9}
+.facts{display:flex;flex-wrap:wrap;gap:10px;margin:20px 0}.facts span{padding:6px 14px;border:1px solid #4c555d;border-radius:20px}
+.notice{border-left:3px solid #dfb46c;padding:12px 20px;background:#242322;margin-bottom:28px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,540px),1fr));gap:24px}
+figure{margin:0;background:#20252b;border:1px solid #353b42;border-radius:8px;overflow:hidden}
+figure:first-child{grid-column:1/-1}img{display:block;width:100%;height:auto}figcaption{padding:14px 20px 18px}
+b{display:block;font-size:18px;margin-bottom:4px}small{color:#c4c4c4}a{color:#bfddf5}footer{margin-top:32px;color:#a2a6ad}
+</style>
+<main>
+<h1>V6.3 · 棒球与双大弯长链</h1>
+<p>请先审核球的质感、路线规模、原场景氛围和摄影方向。所有图片是实际 Blender 渲染，不是生成式效果图。点击图片可查看原尺寸。</p>
+<div class="facts"><span>48 件地面物体</span><span>51 个参与者</span><span>7 类地面资产</span><span>6.0695 m 路线</span><span>1280 × 720</span></div>
+<div class="notice">静态预审，不是完整物理验收。初态与 2 秒静置已通过；四处短链交接尚未接通，全链穿透、收敛和运镜仍待验证。保留原作者 7 盏灯、地面及雾效，没有补丁地板或隐藏轨道。胶带近景仍有棱面感和局部贴图瑕疵，已列入待修项。</div>
+<div class="grid">
+<figure><a href="05_full_route_overview.png"><img src="05_full_route_overview.png" alt="完整双大弯长链总览"></a><figcaption><b>05 · 全路线总览</b><small>桌面故事和 48 件地面参与者同框。两个反向 180° 回弯；原生散布物保留。原场景的日照、雾和高光也保留，未擅自改成另一个光照环境。</small></figcaption></figure>
+<figure><a href="01_ball_and_table.png"><img src="01_ball_and_table.png" alt="棒球、收音机与唯一落体盒"></a><figcaption><b>01 · 桌面三物体</b><small>真实贴图棒球、原生收音机和唯一落体盒。棒球处于预定空中入射初态，并非应该静放在桌面的物体。</small></figcaption></figure>
+<figure><a href="02_ball_material_check.png"><img src="02_ball_material_check.png" alt="棒球原始贴图近景"></a><figcaption><b>02 · 棒球质感检查</b><small>同一 Poly Haven 原始资产的 4K 贴图；可见红缝线与表面纹理。物理上仍是刚体，不模拟球皮压缩。</small></figcaption></figure>
+<figure><a href="03_radio_receiver_side.png"><img src="03_radio_receiver_side.png" alt="桌面接力侧视"></a><figcaption><b>03 · 桌面接力方向</b><small>用于判断球、机身、桌沿落体盒的空间关系。局部动作类别有预检证据，尚非最终穿透合格的轨迹。</small></figcaption></figure>
+<figure><a href="04_drop_bridge.png"><img src="04_drop_bridge.png" alt="桌面与地面接力组同框"></a><figcaption><b>04 · 桌面至地面的过渡</b><small>已修正上下裁切，桌面和地面第一组同框。实际 R→F01 交接及连续下降运镜尚待求解。</small></figcaption></figure>
+<figure><a href="06_first_curve.png"><img src="06_first_curve.png" alt="第一大弯"></a><figcaption><b>06 · 第一大弯</b><small>六类包装使用各自贴图；盒体共同几何不再与扫描外壳混用。不是统一一排直线。</small></figcaption></figure>
+<figure><a href="07_tape_bridge.png"><img src="07_tape_bridge.png" alt="胶带桥近景"></a><figcaption><b>07 · 胶带桥与明确待修项</b><small>保留中孔。可见多边形感和一处深色贴图瑕疵；胶带至下游的接力也未通过。这张图用于真实暴露问题，不能作为最终近景验收。</small></figcaption></figure>
+<figure><a href="08_reverse_curve.png"><img src="08_reverse_curve.png" alt="第二反向大弯"></a><figcaption><b>08 · 第二反向弯</b><small>第二主弯半径约 0.50 m，规模已展开；后续必须检查倒伏扫掠、侧向误击和跨段错触发。</small></figcaption></figure>
+<figure><a href="09_finish.png"><img src="09_finish.png" alt="更换后的链尾"></a><figcaption><b>09 · 取消巨型 LEGO 的链尾</b><small>改用普通包装并向小盒收束；没有假定小盒能推倒巨型 LEGO 厚箱。末段局部交接仍待修复。</small></figcaption></figure>
+<figure><a href="10b_follow_camera_side.png"><img src="10b_follow_camera_side.png" alt="侧向跟拍候选机位"></a><figcaption><b>10b · 侧向跟拍候选</b><small>补拍侧向视角，替代沿队列造成前后遮挡的旧 10 号机位。它只是静态相机锚点，不代表连续运镜已经完成。</small></figcaption></figure>
+</div>
+<footer>当前停在静态预审。原始 PNG 未绘制箭头或后期改色。旧 10 号及 earlier_camera_crop_revision 目录保留为迭代记录，不是本页选定的最终 10 张。归档时另修复了一处作者遗留贴图路径，现有 PNG 未在该修复后重渲，正式 G1 前须复核受影响机位。详细说明见同目录 REVIEW.md。</footer>
+</main>
+</html>

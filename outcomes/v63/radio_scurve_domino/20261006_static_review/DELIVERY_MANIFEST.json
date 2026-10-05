@@ -1,0 +1,957 @@
+{
+  "status": "STATIC_REVIEW_ONLY_PENDING_USER_AND_PHYSICS",
+  "images": [
+    {
+      "id": "01_ball_and_table",
+      "source": "/data/raw/huzijian/project1_database/tmp/v63_node12/static_gpu_r1/01_ball_and_table.png",
+      "file": "/data/raw/huzijian/project1_database/outcomes/v63/radio_scurve_domino/20261006_static_review/01_ball_and_table.png",
+      "sha256": "b645a32c4300e89197d1a5c39104076b6fab271cd9020297bd788a5def7be44b",
+      "bytes": 4714980,
+      "render_seconds": 115.18428683280945,
+      "camera": {
+        "id": "01_ball_and_table",
+        "camera_object": "v63_01_ball_and_table",
+        "position": [
+          -1.7,
+          9.95,
+          1.67
+        ],
+        "aim": [
+          -2.65,
+          11.27,
+          0.85
+        ],
+        "lens_mm": 40,
+        "targets": [
+          "A",
+          "B",
+          "R"
+        ],
+        "projected_target_bounds": {
+          "A": {
+            "xmin": 0.37738150358200073,
+            "xmax": 0.6684508323669434,
+            "ymin": 0.19062981009483337,
+            "ymax": 0.8154288530349731,
+            "minimum_depth": 1.5742995738983154
+          },
+          "B": {
+            "xmin": 0.3088442385196686,
+            "xmax": 0.3706498444080353,
+            "ymin": 0.6426942944526672,
+            "ymax": 0.7498081922531128,
+            "minimum_depth": 1.9302722215652466
+          },
+          "R": {
+            "xmin": 0.6122300624847412,
+            "xmax": 0.6693283319473267,
+            "ymin": 0.21600216627120972,
+            "ymax": 0.411784291267395,
+            "minimum_depth": 1.643916130065918
+          }
+        },
+        "occlusion_status": "VISUAL_REVIEW_REQUIRED; projected bounds are not a ray-clearance proof"
+      }
+    },
+    {
+      "id": "02_ball_material_check",
+      "source": "/data/raw/huzijian/project1_database/tmp/v63_node12/static_gpu_r1/02_ball_material_check.png",
+      "file": "/data/raw/huzijian/project1_database/outcomes/v63/radio_scurve_domino/20261006_static_review/02_ball_material_check.png",
+      "sha256": "dcd6da90f6a7738ec50eca09d800f4d0552e062246faa78adbe33f8a49a34bb0",
+      "bytes": 4508546,
+      "render_seconds": 113.06052422523499,
+      "camera": {
+        "id": "02_ball_material_check",
+        "camera_object": "v63_02_ball_material_check",
+        "position": [
+          -3.3,
+          10.91,
+          1.16
+        ],
+        "aim": [
+          -3.025,
+          11.3,
+          0.95
+        ],
+        "lens_mm": 52,
+        "targets": [
+          "B"
+        ],
+        "projected_target_bounds": {
+          "B": {
+            "xmin": 0.3548685908317566,
+            "xmax": 0.650257408618927,
+            "ymin": 0.20939843356609344,
+            "ymax": 0.7565648555755615,
+            "minimum_depth": 0.458667516708374
+          }
+        },
+        "occlusion_status": "VISUAL_REVIEW_REQUIRED; projected bounds are not a ray-clearance proof"
+      }
+    },
+    {
+      "id": "03_radio_receiver_side",
+      "source": "/data/raw/huzijian/project1_database/tmp/v63_node12/static_gpu_r1/03_radio_receiver_side.png",
+      "file": "/data/raw/huzijian/project1_database/outcomes/v63/radio_scurve_domino/20261006_static_review/03_radio_receiver_side.png",
+      "sha256": "e5f122a128aa282ad49dbec20100951ee90e0324f9587ebfb84685bd6e1b4846",
+      "bytes": 4673820,
+      "render_seconds": 118.2654538154602,
+      "camera": {
+        "id": "03_radio_receiver_side",
+        "camera_object": "v63_03_radio_receiver_side",
+        "position": [
+          -2.88,
+          10.12,
+          1.42
+        ],
+        "aim": [
+          -2.66,
+          11.27,
+          0.86
+        ],
+        "lens_mm": 35,
+        "targets": [
+          "A",
+          "B",
+          "R"
+        ],
+        "projected_target_bounds": {
+          "A": {
+            "xmin": 0.42743226885795593,
+            "xmax": 0.6496367454528809,
+            "ymin": 0.1163962110877037,
+            "ymax": 0.8649913668632507,
+            "minimum_depth": 1.072516918182373
+          },
+          "B": {
+            "xmin": 0.17272232472896576,
+            "xmax": 0.24538612365722656,
+            "ymin": 0.5165092349052429,
+            "ymax": 0.6623708605766296,
+            "minimum_depth": 1.1679425239562988
+          },
+          "R": {
+            "xmin": 0.6670931577682495,
+            "xmax": 0.7199917435646057,
+            "ymin": 0.2914505898952484,
+            "ymax": 0.5105000138282776,
+            "minimum_depth": 1.3040111064910889
+          }
+        },
+        "occlusion_status": "VISUAL_REVIEW_REQUIRED; projected bounds are not a ray-clearance proof"
+      }
+    },
+    {
+      "id": "04_drop_bridge",
+      "source": "/data/raw/huzijian/project1_database/tmp/v63_node12/static_gpu_r2/04_drop_bridge.png",
+      "file": "/data/raw/huzijian/project1_database/outcomes/v63/radio_scurve_domino/20261006_static_review/04_drop_bridge.png",
+      "sha256": "fa6b8dd888791f40d9919362e5630afa28bc21171a7862ca61f315aee9c2b94a",
+      "bytes": 4802524,
+      "render_seconds": 120.75724339485168,
+      "camera": {
+        "id": "04_drop_bridge",
+        "camera_object": "v63_04_drop_bridge",
+        "position": [
+          -0.7,
+          9.65,
+          1.6
+        ],
+        "aim": [
+          -2.2,
+          11.4,
+          0.5
+        ],
+        "lens_mm": 33,
+        "targets": [
+          "A",
+          "R",
+          "F01",
+          "F04"
+        ],
+        "projected_target_bounds": {
+          "A": {
+            "xmin": 0.2662455439567566,
+            "xmax": 0.4652920663356781,
+            "ymin": 0.5963958501815796,
+            "ymax": 0.920063316822052,
+            "minimum_depth": 2.333348035812378
+          },
+          "R": {
+            "xmin": 0.3958406150341034,
+            "xmax": 0.43828728795051575,
+            "ymin": 0.6011101603507996,
+            "ymax": 0.7054638862609863,
+            "minimum_depth": 2.3846595287323
+          },
+          "F01": {
+            "xmin": 0.45029330253601074,
+            "xmax": 0.4873773157596588,
+            "ymin": 0.13907529413700104,
+            "ymax": 0.24569551646709442,
+            "minimum_depth": 2.5466582775115967
+          },
+          "F04": {
+            "xmin": 0.5157305598258972,
+            "xmax": 0.53799968957901,
+            "ymin": 0.056733258068561554,
+            "ymax": 0.18059080839157104,
+            "minimum_depth": 2.371279716491699
+          }
+        },
+        "occlusion_status": "VISUAL_REVIEW_REQUIRED; projected bounds are not a ray-clearance proof"
+      }
+    },
+    {
+      "id": "05_full_route_overview",
+      "source": "/data/raw/huzijian/project1_database/tmp/v63_node12/static_gpu_r1/05_full_route_overview.png",
+      "file": "/data/raw/huzijian/project1_database/outcomes/v63/radio_scurve_domino/20261006_static_review/05_full_route_overview.png",
+      "sha256": "db9ea710258b4a51a59d75a3d1f128fa1a22092fcede533db9145d45421461ab",
+      "bytes": 4700442,
+      "render_seconds": 334.79219007492065,
+      "camera": {
+        "id": "05_full_route_overview",
+        "camera_object": "v63_05_full_route_overview",
+        "position": [
+          1.62,
+          8.3,
+          4.2
+        ],
+        "aim": [
+          -0.85,
+          11.95,
+          0.16
+        ],
+        "lens_mm": 38,
+        "targets": [
+          "A",
+          "B",
+          "R",
+          "F01",
+          "F02",
+          "F03",
+          "F04",
+          "F05",
+          "F06",
+          "F07",
+          "F08",
+          "F09",
+          "F10",
+          "F11",
+          "F12",
+          "F13",
+          "F14",
+          "F15",
+          "F16",
+          "F17",
+          "F18",
+          "F19",
+          "F20",
+          "F21",
+          "F22",
+          "F23",
+          "F24",
+          "F25",
+          "F26",
+          "F27",
+          "F28",
+          "F29",
+          "F30",
+          "F31",
+          "F32",
+          "F33",
+          "F34",
+          "F35",
+          "F36",
+          "F37",
+          "F38",
+          "F39",
+          "F40",
+          "F41",
+          "F42",
+          "F43",
+          "F44",
+          "F45",
+          "F46",
+          "F47",
+          "F48"
+        ],
+        "projected_target_bounds": {
+          "A": {
+            "xmin": 0.11993701756000519,
+            "xmax": 0.22807757556438446,
+            "ymin": 0.6680258512496948,
+            "ymax": 0.8695986866950989,
+            "minimum_depth": 5.622905254364014
+          },
+          "B": {
+            "xmin": 0.10423367470502853,
+            "xmax": 0.1268288642168045,
+            "ymin": 0.8097859025001526,
+            "ymax": 0.8479467630386353,
+            "minimum_depth": 5.8830461502075195
+          },
+          "R": {
+            "xmin": 0.18734154105186462,
+            "xmax": 0.21214938163757324,
+            "ymin": 0.6765850186347961,
+            "ymax": 0.7331026792526245,
+            "minimum_depth": 5.710221290588379
+          },
+          "F01": {
+            "xmin": 0.23303847014904022,
+            "xmax": 0.2551569938659668,
+            "ymin": 0.47207462787628174,
+            "ymax": 0.5253161191940308,
+            "minimum_depth": 6.089709758758545
+          },
+          "F02": {
+            "xmin": 0.24371176958084106,
+            "xmax": 0.263682097196579,
+            "ymin": 0.46360260248184204,
+            "ymax": 0.5185055732727051,
+            "minimum_depth": 6.059932708740234
+          },
+          "F03": {
+            "xmin": 0.2555534839630127,
+            "xmax": 0.27304452657699585,
+            "ymin": 0.4569103419780731,
+            "ymax": 0.5130484700202942,
+            "minimum_depth": 6.0366129875183105
+          },
+          "F04": {
+            "xmin": 0.26288220286369324,
+            "xmax": 0.277912974357605,
+            "ymin": 0.4353608787059784,
+            "ymax": 0.4928581118583679,
+            "minimum_depth": 5.962706089019775
+          },
+          "F05": {
+            "xmin": 0.2838829755783081,
+            "xmax": 0.29714784026145935,
+            "ymin": 0.4663030803203583,
+            "ymax": 0.538022518157959,
+            "minimum_depth": 6.024451732635498
+          },
+          "F06": {
+            "xmin": 0.30224552750587463,
+            "xmax": 0.3106139898300171,
+            "ymin": 0.4490513205528259,
+            "ymax": 0.5213770866394043,
+            "minimum_depth": 5.964509010314941
+          },
+          "F07": {
+            "xmin": 0.32076358795166016,
+            "xmax": 0.33067402243614197,
+            "ymin": 0.4531156122684479,
+            "ymax": 0.5250454545021057,
+            "minimum_depth": 5.978525638580322
+          },
+          "F08": {
+            "xmin": 0.3375410735607147,
+            "xmax": 0.35136276483535767,
+            "ymin": 0.46185198426246643,
+            "ymax": 0.5323033928871155,
+            "minimum_depth": 6.008874416351318
+          },
+          "F09": {
+            "xmin": 0.35324862599372864,
+            "xmax": 0.3722364008426666,
+            "ymin": 0.472267210483551,
+            "ymax": 0.5419109463691711,
+            "minimum_depth": 6.045984745025635
+          },
+          "F10": {
+            "xmin": 0.36314427852630615,
+            "xmax": 0.38502979278564453,
+            "ymin": 0.4896942675113678,
+            "ymax": 0.55593341588974,
+            "minimum_depth": 6.1081695556640625
+          },
+          "F11": {
+            "xmin": 0.3781374394893646,
+            "xmax": 0.4015563428401947,
+            "ymin": 0.5094756484031677,
+            "ymax": 0.57247394323349,
+            "minimum_depth": 6.180291652679443
+          },
+          "F12": {
+            "xmin": 0.392137736082077,
+            "xmax": 0.4131707549095154,
+            "ymin": 0.5250107645988464,
+            "ymax": 0.5902364253997803,
+            "minimum_depth": 6.238114356994629
+          },
+          "F13": {
+            "xmin": 0.40190038084983826,
+            "xmax": 0.43137016892433167,
+            "ymin": 0.5315151214599609,
+            "ymax": 0.6304468512535095,
+            "minimum_depth": 6.207834243774414
+          },
+          "F14": {
+            "xmin": 0.4276564121246338,
+            "xmax": 0.4512147009372711,
+            "ymin": 0.5462793111801147,
+            "ymax": 0.6468251943588257,
+            "minimum_depth": 6.264210224151611
+          },
+          "F15": {
+            "xmin": 0.4555003046989441,
+            "xmax": 0.4725433886051178,
+            "ymin": 0.556039571762085,
+            "ymax": 0.656743586063385,
+            "minimum_depth": 6.302026748657227
+          },
+          "F16": {
+            "xmin": 0.48382291197776794,
+            "xmax": 0.4951961934566498,
+            "ymin": 0.5608605742454529,
+            "ymax": 0.6594964861869812,
+            "minimum_depth": 6.321539402008057
+          },
+          "F17": {
+            "xmin": 0.5069023966789246,
+            "xmax": 0.5231737494468689,
+            "ymin": 0.558035135269165,
+            "ymax": 0.6579510569572449,
+            "minimum_depth": 6.310482978820801
+          },
+          "F18": {
+            "xmin": 0.5278332829475403,
+            "xmax": 0.5503489375114441,
+            "ymin": 0.5660644173622131,
+            "ymax": 0.6656560301780701,
+            "minimum_depth": 6.342002868652344
+          },
+          "F19": {
+            "xmin": 0.5549131035804749,
+            "xmax": 0.5704255104064941,
+            "ymin": 0.5440143942832947,
+            "ymax": 0.6100099682807922,
+            "minimum_depth": 6.309762954711914
+          },
+          "F20": {
+            "xmin": 0.5663132071495056,
+            "xmax": 0.5845964550971985,
+            "ymin": 0.5287854075431824,
+            "ymax": 0.5932520031929016,
+            "minimum_depth": 6.25178861618042
+          },
+          "F21": {
+            "xmin": 0.5800589919090271,
+            "xmax": 0.5999355316162109,
+            "ymin": 0.5177802443504333,
+            "ymax": 0.5650069117546082,
+            "minimum_depth": 6.2554779052734375
+          },
+          "F22": {
+            "xmin": 0.590774655342102,
+            "xmax": 0.6079432368278503,
+            "ymin": 0.5072160363197327,
+            "ymax": 0.5459495186805725,
+            "minimum_depth": 6.2193284034729
+          },
+          "F23": {
+            "xmin": 0.6021180152893066,
+            "xmax": 0.6264398097991943,
+            "ymin": 0.475212961435318,
+            "ymax": 0.5155120491981506,
+            "minimum_depth": 6.100818634033203
+          },
+          "F24": {
+            "xmin": 0.6061816811561584,
+            "xmax": 0.6322764158248901,
+            "ymin": 0.46179530024528503,
+            "ymax": 0.5151440501213074,
+            "minimum_depth": 6.008673191070557
+          },
+          "F25": {
+            "xmin": 0.6035729646682739,
+            "xmax": 0.6304152607917786,
+            "ymin": 0.43971362709999084,
+            "ymax": 0.4891853630542755,
+            "minimum_depth": 5.93255090713501
+          },
+          "F26": {
+            "xmin": 0.6151489019393921,
+            "xmax": 0.6435933113098145,
+            "ymin": 0.42304831743240356,
+            "ymax": 0.4735174775123596,
+            "minimum_depth": 5.876866817474365
+          },
+          "F27": {
+            "xmin": 0.5961798429489136,
+            "xmax": 0.624875009059906,
+            "ymin": 0.3923441171646118,
+            "ymax": 0.4477076530456543,
+            "minimum_depth": 5.775984764099121
+          },
+          "F28": {
+            "xmin": 0.6062899827957153,
+            "xmax": 0.6355244517326355,
+            "ymin": 0.3615565001964569,
+            "ymax": 0.421892374753952,
+            "minimum_depth": 5.678167343139648
+          },
+          "F29": {
+            "xmin": 0.5995559096336365,
+            "xmax": 0.6282345652580261,
+            "ymin": 0.3353970944881439,
+            "ymax": 0.400434285402298,
+            "minimum_depth": 5.597574710845947
+          },
+          "F30": {
+            "xmin": 0.5701073408126831,
+            "xmax": 0.612873375415802,
+            "ymin": 0.31457850337028503,
+            "ymax": 0.4131973683834076,
+            "minimum_depth": 5.480206489562988
+          },
+          "F31": {
+            "xmin": 0.574726402759552,
+            "xmax": 0.6190403699874878,
+            "ymin": 0.27465179562568665,
+            "ymax": 0.3605267405509949,
+            "minimum_depth": 5.363987922668457
+          },
+          "F32": {
+            "xmin": 0.5739418268203735,
+            "xmax": 0.619667649269104,
+            "ymin": 0.23033104836940765,
+            "ymax": 0.3141208291053772,
+            "minimum_depth": 5.240344047546387
+          },
+          "F33": {
+            "xmin": 0.5859758853912354,
+            "xmax": 0.631690263748169,
+            "ymin": 0.18489819765090942,
+            "ymax": 0.2855888903141022,
+            "minimum_depth": 5.119309902191162
+          },
+          "F34": {
+            "xmin": 0.608130693435669,
+            "xmax": 0.6495708227157593,
+            "ymin": 0.1408652812242508,
+            "ymax": 0.25553974509239197,
+            "minimum_depth": 5.007307052612305
+          },
+          "F35": {
+            "xmin": 0.6398748755455017,
+            "xmax": 0.6728043556213379,
+            "ymin": 0.10787748545408249,
+            "ymax": 0.23160725831985474,
+            "minimum_depth": 4.927016258239746
+          },
+          "F36": {
+            "xmin": 0.6770567893981934,
+            "xmax": 0.6999703049659729,
+            "ymin": 0.09094087779521942,
+            "ymax": 0.21635112166404724,
+            "minimum_depth": 4.888266086578369
+          },
+          "F37": {
+            "xmin": 0.7050246000289917,
+            "xmax": 0.7386250495910645,
+            "ymin": 0.08971548825502396,
+            "ymax": 0.21449030935764313,
+            "minimum_depth": 4.8861775398254395
+          },
+          "F38": {
+            "xmin": 0.7289038300514221,
+            "xmax": 0.7743765711784363,
+            "ymin": 0.10311797261238098,
+            "ymax": 0.22747811675071716,
+            "minimum_depth": 4.919218063354492
+          },
+          "F39": {
+            "xmin": 0.7484874129295349,
+            "xmax": 0.80106520652771,
+            "ymin": 0.13298939168453217,
+            "ymax": 0.25011083483695984,
+            "minimum_depth": 4.992005825042725
+          },
+          "F40": {
+            "xmin": 0.7623471021652222,
+            "xmax": 0.81654292345047,
+            "ymin": 0.17273661494255066,
+            "ymax": 0.28129246830940247,
+            "minimum_depth": 5.0912652015686035
+          },
+          "F41": {
+            "xmin": 0.7569974660873413,
+            "xmax": 0.8480929136276245,
+            "ymin": 0.19448375701904297,
+            "ymax": 0.33195391297340393,
+            "minimum_depth": 5.145047187805176
+          },
+          "F42": {
+            "xmin": 0.7722899913787842,
+            "xmax": 0.8625020980834961,
+            "ymin": 0.23298819363117218,
+            "ymax": 0.36760833859443665,
+            "minimum_depth": 5.247128009796143
+          },
+          "F43": {
+            "xmin": 0.7675334811210632,
+            "xmax": 0.8553164005279541,
+            "ymin": 0.27807921171188354,
+            "ymax": 0.4096142649650574,
+            "minimum_depth": 5.372364521026611
+          },
+          "F44": {
+            "xmin": 0.8032526969909668,
+            "xmax": 0.8550050854682922,
+            "ymin": 0.3200978636741638,
+            "ymax": 0.42158594727516174,
+            "minimum_depth": 5.496806621551514
+          },
+          "F45": {
+            "xmin": 0.8210574388504028,
+            "xmax": 0.8727185726165771,
+            "ymin": 0.34584376215934753,
+            "ymax": 0.44722965359687805,
+            "minimum_depth": 5.5754008293151855
+          },
+          "F46": {
+            "xmin": 0.8255916833877563,
+            "xmax": 0.877055823802948,
+            "ymin": 0.35912370681762695,
+            "ymax": 0.45996326208114624,
+            "minimum_depth": 5.616479873657227
+          },
+          "F47": {
+            "xmin": 0.8495199680328369,
+            "xmax": 0.8793432712554932,
+            "ymin": 0.41078826785087585,
+            "ymax": 0.4588657021522522,
+            "minimum_depth": 5.880590438842773
+          },
+          "F48": {
+            "xmin": 0.8447290062904358,
+            "xmax": 0.8741656541824341,
+            "ymin": 0.4275766611099243,
+            "ymax": 0.4752606749534607,
+            "minimum_depth": 5.936452865600586
+          }
+        },
+        "occlusion_status": "VISUAL_REVIEW_REQUIRED; projected bounds are not a ray-clearance proof"
+      }
+    },
+    {
+      "id": "06_first_curve",
+      "source": "/data/raw/huzijian/project1_database/tmp/v63_node12/static_gpu_r1/06_first_curve.png",
+      "file": "/data/raw/huzijian/project1_database/outcomes/v63/radio_scurve_domino/20261006_static_review/06_first_curve.png",
+      "sha256": "79ddfb30ed3f3c1927b912154e861320d72964218a708c40a4857e152c5e7578",
+      "bytes": 4819438,
+      "render_seconds": 119.94627237319946,
+      "camera": {
+        "id": "06_first_curve",
+        "camera_object": "v63_06_first_curve",
+        "position": [
+          -0.5,
+          10.6,
+          1.28
+        ],
+        "aim": [
+          -1.31,
+          12.26,
+          0.12
+        ],
+        "lens_mm": 36,
+        "targets": [
+          "F07",
+          "F12",
+          "F18"
+        ],
+        "projected_target_bounds": {
+          "F07": {
+            "xmin": 0.06212398409843445,
+            "xmax": 0.10189168155193329,
+            "ymin": 0.01882334053516388,
+            "ymax": 0.2590567469596863,
+            "minimum_depth": 1.6323740482330322
+          },
+          "F12": {
+            "xmin": 0.2937741279602051,
+            "xmax": 0.3605315089225769,
+            "ymin": 0.2863560616970062,
+            "ymax": 0.4707460105419159,
+            "minimum_depth": 1.9816317558288574
+          },
+          "F18": {
+            "xmin": 0.6547578573226929,
+            "xmax": 0.7011978030204773,
+            "ymin": 0.4397956132888794,
+            "ymax": 0.6959148049354553,
+            "minimum_depth": 2.210667848587036
+          }
+        },
+        "occlusion_status": "VISUAL_REVIEW_REQUIRED; projected bounds are not a ray-clearance proof"
+      }
+    },
+    {
+      "id": "07_tape_bridge",
+      "source": "/data/raw/huzijian/project1_database/tmp/v63_node12/static_gpu_r1/07_tape_bridge.png",
+      "file": "/data/raw/huzijian/project1_database/outcomes/v63/radio_scurve_domino/20261006_static_review/07_tape_bridge.png",
+      "sha256": "71f87498dea501e8d4ba606bc4ed72a7c6b3a7b1e9cdf399982f8a207a91824a",
+      "bytes": 4725594,
+      "render_seconds": 118.48176741600037,
+      "camera": {
+        "id": "07_tape_bridge",
+        "camera_object": "v63_07_tape_bridge",
+        "position": [
+          -0.5201555253083453,
+          11.397451911805476,
+          0.5593887537160247
+        ],
+        "aim": [
+          -0.5201555253083453,
+          12.517451911805477,
+          0.07938875371602462
+        ],
+        "lens_mm": 48,
+        "targets": [
+          "F20",
+          "F21",
+          "F22",
+          "F23",
+          "F24"
+        ],
+        "projected_target_bounds": {
+          "F20": {
+            "xmin": 0.26188924908638,
+            "xmax": 0.33340078592300415,
+            "ymin": 0.26273754239082336,
+            "ymax": 0.6976861357688904,
+            "minimum_depth": 1.1578024625778198
+          },
+          "F21": {
+            "xmin": 0.37638309597969055,
+            "xmax": 0.44576552510261536,
+            "ymin": 0.2601684629917145,
+            "ymax": 0.5802254676818848,
+            "minimum_depth": 1.181478500366211
+          },
+          "F22": {
+            "xmin": 0.4342860281467438,
+            "xmax": 0.5666053295135498,
+            "ymin": 0.2745594382286072,
+            "ymax": 0.5149140357971191,
+            "minimum_depth": 1.1925607919692993
+          },
+          "F23": {
+            "xmin": 0.6216306686401367,
+            "xmax": 0.724888801574707,
+            "ymin": 0.14736051857471466,
+            "ymax": 0.4882260262966156,
+            "minimum_depth": 1.0800237655639648
+          },
+          "F24": {
+            "xmin": 0.6876388192176819,
+            "xmax": 0.8129240274429321,
+            "ymin": 0.09778601676225662,
+            "ymax": 0.5753516554832458,
+            "minimum_depth": 1.0143392086029053
+          }
+        },
+        "occlusion_status": "VISUAL_REVIEW_REQUIRED; projected bounds are not a ray-clearance proof"
+      }
+    },
+    {
+      "id": "08_reverse_curve",
+      "source": "/data/raw/huzijian/project1_database/tmp/v63_node12/static_gpu_r1/08_reverse_curve.png",
+      "file": "/data/raw/huzijian/project1_database/outcomes/v63/radio_scurve_domino/20261006_static_review/08_reverse_curve.png",
+      "sha256": "fbb8e0ea1ae6df6d634d9fa76fdb606428d5d98ef7e8fd64ac22b25b0aba51fa",
+      "bytes": 4796456,
+      "render_seconds": 121.7334086894989,
+      "camera": {
+        "id": "08_reverse_curve",
+        "camera_object": "v63_08_reverse_curve",
+        "position": [
+          1.93,
+          10.1,
+          1.85
+        ],
+        "aim": [
+          0.47,
+          11.82,
+          0.1
+        ],
+        "lens_mm": 35,
+        "targets": [
+          "F26",
+          "F32",
+          "F39",
+          "F43"
+        ],
+        "projected_target_bounds": {
+          "F26": {
+            "xmin": 0.41890567541122437,
+            "xmax": 0.4616253077983856,
+            "ymin": 0.6631099581718445,
+            "ymax": 0.7577099204063416,
+            "minimum_depth": 3.3936240673065186
+          },
+          "F32": {
+            "xmin": 0.27573251724243164,
+            "xmax": 0.3595527708530426,
+            "ymin": 0.42783790826797485,
+            "ymax": 0.5789750218391418,
+            "minimum_depth": 2.759242296218872
+          },
+          "F39": {
+            "xmin": 0.5690789222717285,
+            "xmax": 0.6467663645744324,
+            "ymin": 0.23215743899345398,
+            "ymax": 0.4583527445793152,
+            "minimum_depth": 2.408303737640381
+          },
+          "F43": {
+            "xmin": 0.6427096724510193,
+            "xmax": 0.7799132466316223,
+            "ymin": 0.4382856786251068,
+            "ymax": 0.6717039346694946,
+            "minimum_depth": 2.7800612449645996
+          }
+        },
+        "occlusion_status": "VISUAL_REVIEW_REQUIRED; projected bounds are not a ray-clearance proof"
+      }
+    },
+    {
+      "id": "09_finish",
+      "source": "/data/raw/huzijian/project1_database/tmp/v63_node12/static_gpu_r1/09_finish.png",
+      "file": "/data/raw/huzijian/project1_database/outcomes/v63/radio_scurve_domino/20261006_static_review/09_finish.png",
+      "sha256": "bcfd1e4f5baa818bf9682c99bb2e95afde1c1d8d0d362230fc4c5f7b079bb26b",
+      "bytes": 4789177,
+      "render_seconds": 119.80871629714966,
+      "camera": {
+        "id": "09_finish",
+        "camera_object": "v63_09_finish",
+        "position": [
+          1.95,
+          11.6,
+          1.11
+        ],
+        "aim": [
+          0.91,
+          12.67,
+          0.1
+        ],
+        "lens_mm": 38,
+        "targets": [
+          "F43",
+          "F44",
+          "F45",
+          "F48"
+        ],
+        "projected_target_bounds": {
+          "F43": {
+            "xmin": 0.23062683641910553,
+            "xmax": 0.4378136694431305,
+            "ymin": 0.13511767983436584,
+            "ymax": 0.6095865964889526,
+            "minimum_depth": 1.4400802850723267
+          },
+          "F44": {
+            "xmin": 0.365556538105011,
+            "xmax": 0.4832459092140198,
+            "ymin": 0.258415162563324,
+            "ymax": 0.6161104440689087,
+            "minimum_depth": 1.5712872743606567
+          },
+          "F45": {
+            "xmin": 0.45283907651901245,
+            "xmax": 0.5707206130027771,
+            "ymin": 0.31681111454963684,
+            "ymax": 0.66178297996521,
+            "minimum_depth": 1.6409955024719238
+          },
+          "F48": {
+            "xmin": 0.5896334052085876,
+            "xmax": 0.6537588238716125,
+            "ymin": 0.5060195326805115,
+            "ymax": 0.6537467241287231,
+            "minimum_depth": 1.9910184144973755
+          }
+        },
+        "occlusion_status": "VISUAL_REVIEW_REQUIRED; projected bounds are not a ray-clearance proof"
+      }
+    },
+    {
+      "id": "10b_follow_camera_side",
+      "source": "/data/raw/huzijian/project1_database/tmp/v63_node12/static_gpu_r3/10b_follow_camera_side.png",
+      "file": "/data/raw/huzijian/project1_database/outcomes/v63/radio_scurve_domino/20261006_static_review/10b_follow_camera_side.png",
+      "sha256": "623cec8b7a642dcca8df44f078359dd877f64ab17a0c41e1e324a2eaaf82bace",
+      "bytes": 4687036,
+      "render_seconds": 122.18426299095154,
+      "camera": {
+        "id": "10b_follow_camera_side",
+        "camera_object": "v63_10b_follow_camera_side",
+        "position": [
+          -1.3976916009141167,
+          11.498380813707202,
+          0.7961034026199922
+        ],
+        "aim": [
+          -0.0676916009141167,
+          11.708380813707201,
+          0.13110340261999226
+        ],
+        "lens_mm": 40,
+        "targets": [
+          "F28",
+          "F29",
+          "F30",
+          "F31",
+          "F32"
+        ],
+        "projected_target_bounds": {
+          "F28": {
+            "xmin": 0.26753002405166626,
+            "xmax": 0.3057495355606079,
+            "ymin": 0.2745836079120636,
+            "ymax": 0.5754925012588501,
+            "minimum_depth": 1.449035882949829
+          },
+          "F29": {
+            "xmin": 0.3445643484592438,
+            "xmax": 0.3866662383079529,
+            "ymin": 0.2750765085220337,
+            "ymax": 0.5757865905761719,
+            "minimum_depth": 1.4496698379516602
+          },
+          "F30": {
+            "xmin": 0.40120193362236023,
+            "xmax": 0.46735066175460815,
+            "ymin": 0.1800236701965332,
+            "ymax": 0.642063558101654,
+            "minimum_depth": 1.3011932373046875
+          },
+          "F31": {
+            "xmin": 0.5178595185279846,
+            "xmax": 0.6056943535804749,
+            "ymin": 0.2511565387248993,
+            "ymax": 0.6875435709953308,
+            "minimum_depth": 1.3838127851486206
+          },
+          "F32": {
+            "xmin": 0.6055632829666138,
+            "xmax": 0.7426081895828247,
+            "ymin": 0.2982690930366516,
+            "ymax": 0.7123343348503113,
+            "minimum_depth": 1.444137692451477
+          }
+        },
+        "occlusion_status": "VISUAL_REVIEW_REQUIRED; projected bounds are not a ray-clearance proof"
+      }
+    }
+  ],
+  "ground_count": 48,
+  "all_actor_count": 51,
+  "route_length_m": 6.0694686130641795,
+  "source_sha256": "be1247889cee3ce10028ee1ef1066a96728b3c2aa191ad12b51cc3b578fa4ae9",
+  "physics_not_accepted": true,
+  "retired_files_deleted": false,
+  "scene_input": "/data/raw/huzijian/project1_database/tmp/v63_node11/static_scene_r5/review_scene.blend",
+  "final_scene": "/data/raw/huzijian/project1_database/outcomes/v63/radio_scurve_domino/20261006_static_review/review_scene.blend"
+}

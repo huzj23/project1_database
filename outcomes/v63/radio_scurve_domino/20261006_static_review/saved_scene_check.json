@@ -1,0 +1,16 @@
+{
+  "status": "RELINKED_COPY_SAVE_REOPEN_MESH_AND_DEPENDENCY_PASS",
+  "file": "/data/raw/huzijian/project1_database/outcomes/v63/radio_scurve_domino/20261006_static_review/review_scene_relinked.blend",
+  "mesh_parts": 134,
+  "missing_unpacked_images": [],
+  "relink": {
+    "image": "modular_urban_apartments_facade_trim_01_rough.png",
+    "old_path": "/data/raw/huzijian/project1_database/outcomes/v63/radio_scurve_domino/20261006_static_review/../../../../models/backgrounds/candidates/Resources/modular_urban_apartments_facade/textures/modular_urban_apartments_facade_trim_01_rough.png",
+    "new_path": "/data/raw/huzijian/project1_database/models/backgrounds/candidates/hidden_alley/extracted/textures/modular_urban_apartments_facade_trim_01_rough.png",
+    "sha256": "5c4054b51ad9a66e2d3e30c5216216fcd3d201b76cb9770588693d02e7f8cf0e"
+  },
+  "original_preview_scene_retained": "/data/raw/huzijian/project1_database/outcomes/v63/radio_scurve_domino/20261006_static_review/review_scene.blend",
+  "preview_pngs_rerendered_after_relink": false,
+  "required_before_G2": "Re-render affected static views using relinked copy; do not treat old PNGs as repaired-path evidence.",
+  "full_physics_acceptance": false
+}

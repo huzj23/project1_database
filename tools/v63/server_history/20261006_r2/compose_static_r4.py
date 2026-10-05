@@ -139,8 +139,8 @@ camera_specs = [
      ['F20', 'F21', 'F22', 'F23', 'F24']),
     ('08_reverse_curve', (1.93, 10.10, 1.85), (.47, 11.82, .10), 35, ['F26', 'F32', 'F39', 'F43']),
     ('09_finish', (1.95, 11.60, 1.11), (.91, 12.67, .10), 38, ['F43', 'F44', 'F45', 'F48']),
-    ('10b_follow_camera_side', tuple(xyz('F30') + [-1.25, -.28, .70]), tuple(xyz('F30') + [.08, -.07, .035]),
-     40, ['F28', 'F29', 'F30', 'F31', 'F32']),
+    ('10_follow_camera_sample', tuple(xyz('F30') + [.60, -1.25, .62]), tuple(xyz('F30') + [.10, .05, .07]),
+     31, ['F28', 'F29', 'F30', 'F31', 'F32']),
 ]
 camera_records = []
 for ident, position, aim, lens, targets in camera_specs:

@@ -1,0 +1,3020 @@
+{
+  "status": "G1_STATIC_REVIEW_NOT_FULL_PHYSICS_PASS",
+  "source": "/data/raw/huzijian/project1_database/models/backgrounds/candidates/hidden_alley/extracted/ph_hidden_alley.blend",
+  "source_sha256": "be1247889cee3ce10028ee1ef1066a96728b3c2aa191ad12b51cc3b578fa4ae9",
+  "layout_source": "/data/raw/huzijian/project1_database/tmp/v63_node11/layout_r6/layout.json",
+  "layout_sha256": "78b8fcfb4abf4f4e6b62cc88135ee89ff9bf819cca72f5241460ef92f2ecc4bc",
+  "common_manifest": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/manifest.json",
+  "common_sha256": "eac354d0f91372ecc3df45f879e576f2453b35b90f611c85661d26518f4397ad",
+  "ground_count": 48,
+  "all_actor_count": 51,
+  "ground_asset_types": 7,
+  "route_length_m": 6.0694686130641795,
+  "arc_radii_m": [
+    0.6,
+    0.75,
+    0.5
+  ],
+  "actors": [
+    {
+      "id": "A",
+      "asset_key": "radio",
+      "asset_id": "boombox.002",
+      "position": [
+        -2.6219245195388794,
+        11.332047939300537,
+        0.7899046242237091
+      ],
+      "quaternion_xyzw": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "mesh_objects": [
+        "v63_A_00",
+        "v63_A_01",
+        "v63_A_02",
+        "v63_A_03",
+        "v63_A_04",
+        "v63_A_05",
+        "v63_A_06",
+        "v63_A_07",
+        "v63_A_08",
+        "v63_A_09",
+        "v63_A_10",
+        "v63_A_11",
+        "v63_A_12",
+        "v63_A_13",
+        "v63_A_14",
+        "v63_A_15",
+        "v63_A_16",
+        "v63_A_17",
+        "v63_A_18",
+        "v63_A_19",
+        "v63_A_20",
+        "v63_A_21",
+        "v63_A_22",
+        "v63_A_23",
+        "v63_A_24",
+        "v63_A_25",
+        "v63_A_26",
+        "v63_A_27",
+        "v63_A_28",
+        "v63_A_29",
+        "v63_A_30",
+        "v63_A_31",
+        "v63_A_32",
+        "v63_A_33",
+        "v63_A_34",
+        "v63_A_35",
+        "v63_A_36"
+      ],
+      "mass_kg_estimate_not_measurement": 1.5
+    },
+    {
+      "id": "B",
+      "asset_key": "baseball",
+      "asset_id": "sphere_baseball",
+      "position": [
+        -3.025,
+        11.3,
+        0.95
+      ],
+      "quaternion_xyzw": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "mesh_objects": [
+        "v63_B_00"
+      ],
+      "mass_kg_estimate_not_measurement": 0.145
+    },
+    {
+      "id": "R",
+      "asset_key": "paper",
+      "asset_id": "Paper_Mario_Sticker_Star_Nintendo_3DS_Game",
+      "position": [
+        -2.38,
+        11.27,
+        0.7488275
+      ],
+      "quaternion_xyzw": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "mesh_objects": [
+        "v63_R_00"
+      ],
+      "mass_kg_estimate_not_measurement": 0.07
+    },
+    {
+      "id": "F01",
+      "asset_key": "paper",
+      "asset_id": "Paper_Mario_Sticker_Star_Nintendo_3DS_Game",
+      "position": [
+        -2.1699949541536365,
+        11.230000819343308,
+        0.022695501170804128
+      ],
+      "quaternion_xyzw": [
+        -6.881952582630735e-06,
+        2.7136256366399127e-05,
+        1.2824990201947474e-05,
+        0.9999999995258909
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "mesh_objects": [
+        "v63_F01_00"
+      ],
+      "mass_kg_estimate_not_measurement": 0.07
+    },
+    {
+      "id": "F02",
+      "asset_key": "paper",
+      "asset_id": "Paper_Mario_Sticker_Star_Nintendo_3DS_Game",
+      "position": [
+        -2.097518816123096,
+        11.234399091469891,
+        0.022695549966793904
+      ],
+      "quaternion_xyzw": [
+        -1.1733382199323468e-06,
+        1.2731340296588836e-05,
+        0.060506451377174135,
+        0.9981678061219356
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "mesh_objects": [
+        "v63_F02_00"
+      ],
+      "mass_kg_estimate_not_measurement": 0.07
+    },
+    {
+      "id": "F03",
+      "asset_key": "paper",
+      "asset_id": "Paper_Mario_Sticker_Star_Nintendo_3DS_Game",
+      "position": [
+        -2.0261014604114935,
+        11.247513471713983,
+        0.02269553581403124
+      ],
+      "quaternion_xyzw": [
+        -2.463618773046015e-06,
+        1.0288895574056226e-05,
+        0.12081694809891362,
+        0.9926748032161055
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "mesh_objects": [
+        "v63_F03_00"
+      ],
+      "mass_kg_estimate_not_measurement": 0.07
+    },
+    {
+      "id": "F04",
+      "asset_key": "paper",
+      "asset_id": "Paper_Mario_Sticker_Star_Nintendo_3DS_Game",
+      "position": [
+        -1.928370985667972,
+        11.19438071870112,
+        0.022696002968837555
+      ],
+      "quaternion_xyzw": [
+        -9.69778593924666e-06,
+        5.6344041776118014e-05,
+        0.18049841665816874,
+        0.9835752733345812
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "mesh_objects": [
+        "v63_F04_00"
+      ],
+      "mass_kg_estimate_not_measurement": 0.07
+    },
+    {
+      "id": "F05",
+      "asset_key": "wii",
+      "asset_id": "New_Super_Mario_BrosWii_Wii_Game",
+      "position": [
+        -1.9278713833884837,
+        11.369815990388144,
+        0.055950492717430425
+      ],
+      "quaternion_xyzw": [
+        -4.8419422585429565e-06,
+        2.028904983348732e-05,
+        0.23964453039202183,
+        0.9708606999040065
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "mesh_objects": [
+        "v63_F05_00"
+      ],
+      "mass_kg_estimate_not_measurement": 0.12
+    },
+    {
+      "id": "F06",
+      "asset_key": "wii",
+      "asset_id": "New_Super_Mario_BrosWii_Wii_Game",
+      "position": [
+        -1.7967024142779164,
+        11.360323812497374,
+        0.055950680220983755
+      ],
+      "quaternion_xyzw": [
+        -2.87710878014149e-06,
+        9.065294937020543e-06,
+        0.330820287192015,
+        0.9436937731551138
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "mesh_objects": [
+        "v63_F06_00"
+      ],
+      "mass_kg_estimate_not_measurement": 0.12
+    },
+    {
+      "id": "F07",
+      "asset_key": "wii",
+      "asset_id": "New_Super_Mario_BrosWii_Wii_Game",
+      "position": [
+        -1.7171701061597213,
+        11.43637570688654,
+        0.05595063875355153
+      ],
+      "quaternion_xyzw": [
+        -4.498924023317328e-06,
+        1.0923594647079678e-05,
+        0.41463775615940274,
+        0.909986555410315
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "mesh_objects": [
+        "v63_F07_00"
+      ],
+      "mass_kg_estimate_not_measurement": 0.12
+    },
+    {
+      "id": "F08",
+      "asset_key": "wii",
+      "asset_id": "New_Super_Mario_BrosWii_Wii_Game",
+      "position": [
+        -1.6524760155868103,
+        11.5264192297102,
+        0.05595057691972894
+      ],
+      "quaternion_xyzw": [
+        -5.724608574970727e-06,
+        1.1770863953212103e-05,
+        0.49555696686747913,
+        0.868575438530114
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "mesh_objects": [
+        "v63_F08_00"
+      ],
+      "mass_kg_estimate_not_measurement": 0.12
+    },
+    {
+      "id": "F09",
+      "asset_key": "dvd",
+      "asset_id": "House_of_Cards_The_Complete_First_Season_4_Discs_DVD",
+      "position": [
+        -1.5958983862284217,
+        11.623833991135992,
+        0.055554822508190604
+      ],
+      "quaternion_xyzw": [
+        4.012484708159505e-06,
+        1.253673902017669e-06,
+        0.5754876834819722,
+        0.8178104463400315
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "mesh_objects": [
+        "v63_F09_00"
+      ],
+      "mass_kg_estimate_not_measurement": 0.23
+    },
+    {
+      "id": "F10",
+      "asset_key": "dvd",
+      "asset_id": "House_of_Cards_The_Complete_First_Season_4_Discs_DVD",
+      "position": [
+        -1.5899263705573714,
+        11.721185628720013,
+        0.05555488008339841
+      ],
+      "quaternion_xyzw": [
+        4.145296028778906e-06,
+        -3.0820691857259837e-07,
+        0.6480050123906247,
+        0.7616360705083156
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "mesh_objects": [
+        "v63_F10_00"
+      ],
+      "mass_kg_estimate_not_measurement": 0.23
+    },
+    {
+      "id": "F11",
+      "asset_key": "dvd",
+      "asset_id": "House_of_Cards_The_Complete_First_Season_4_Discs_DVD",
+      "position": [
+        -1.569846824809429,
+        11.84476058052721,
+        0.055554951365153864
+      ],
+      "quaternion_xyzw": [
+        3.2907899892390305e-06,
+        1.0984065666819787e-06,
+        0.699881047224257,
+        0.7142594204658708
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "mesh_objects": [
+        "v63_F11_00"
+      ],
+      "mass_kg_estimate_not_measurement": 0.23
+    },
+    {
+      "id": "F12",
+      "asset_key": "dvd",
+      "asset_id": "House_of_Cards_The_Complete_First_Season_4_Discs_DVD",
+      "position": [
+        -1.559517039732781,
+        11.954936648017402,
+        0.05555511388963131
+      ],
+      "quaternion_xyzw": [
+        -8.096236713645914e-06,
+        1.5314740099967147e-05,
+        0.6456706361230656,
+        0.7636160221920083
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "mesh_objects": [
+        "v63_F12_00"
+      ],
+      "mass_kg_estimate_not_measurement": 0.23
+    },
+    {
+      "id": "F13",
+      "asset_key": "cranium",
+      "asset_id": "Hasbro_Cranium_Performance_and_Acting_Game",
+      "position": [
+        -1.533065433796358,
+        12.062444009069937,
+        0.0961053863048635
+      ],
+      "quaternion_xyzw": [
+        4.176134145564613e-06,
+        -1.004994201807693e-06,
+        0.5872777505200281,
+        0.8093854728901956
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "mesh_objects": [
+        "v63_F13_00"
+      ],
+      "mass_kg_estimate_not_measurement": 0.6
+    },
+    {
+      "id": "F14",
+      "asset_key": "cranium",
+      "asset_id": "Hasbro_Cranium_Performance_and_Acting_Game",
+      "position": [
+        -1.4687612348687635,
+        12.206300916643295,
+        0.09610546740473581
+      ],
+      "quaternion_xyzw": [
+        -1.216448320530804e-06,
+        2.83332313908144e-06,
+        0.49911709192462855,
+        0.8665345512668231
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "mesh_objects": [
+        "v63_F14_00"
+      ],
+      "mass_kg_estimate_not_measurement": 0.6
+    },
+    {
+      "id": "F15",
+      "asset_key": "cranium",
+      "asset_id": "Hasbro_Cranium_Performance_and_Acting_Game",
+      "position": [
+        -1.3757572500634951,
+        12.333565639063815,
+        0.09610555799124687
+      ],
+      "quaternion_xyzw": [
+        -3.3853948211394186e-06,
+        3.71369396081429e-06,
+        0.4060319341347495,
+        0.9138588886899016
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "mesh_objects": [
+        "v63_F15_00"
+      ],
+      "mass_kg_estimate_not_measurement": 0.6
+    },
+    {
+      "id": "F16",
+      "asset_key": "trivial",
+      "asset_id": "Hasbro_Trivial_Pursuit_Family_Edition_Game",
+      "position": [
+        -1.2583663217062135,
+        12.438546236490913,
+        0.09561100715697257
+      ],
+      "quaternion_xyzw": [
+        -8.120656211383911e-07,
+        1.2130436280676567e-06,
+        0.30709928483219373,
+        0.95167748174128
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "mesh_objects": [
+        "v63_F16_00"
+      ],
+      "mass_kg_estimate_not_measurement": 0.8
+    },
+    {
+      "id": "F17",
+      "asset_key": "trivial",
+      "asset_id": "Hasbro_Trivial_Pursuit_Family_Edition_Game",
+      "position": [
+        -1.1220681466983424,
+        12.51648084967235,
+        0.09561097633408551
+      ],
+      "quaternion_xyzw": [
+        -1.1719752574404106e-06,
+        4.476245075053393e-06,
+        0.20579947886618355,
+        0.9785941827320439
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "mesh_objects": [
+        "v63_F17_00"
+      ],
+      "mass_kg_estimate_not_measurement": 0.8
+    },
+    {
+      "id": "F18",
+      "asset_key": "trivial",
+      "asset_id": "Hasbro_Trivial_Pursuit_Family_Edition_Game",
+      "position": [
+        -1.0230950030753778,
+        12.635524723869944,
+        0.09561095644416091
+      ],
+      "quaternion_xyzw": [
+        -2.590820486511472e-07,
+        6.095913943666375e-07,
+        0.10224882070804639,
+        0.9947588545287621
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "mesh_objects": [
+        "v63_F18_00"
+      ],
+      "mass_kg_estimate_not_measurement": 0.8
+    },
+    {
+      "id": "F19",
+      "asset_key": "wii",
+      "asset_id": "New_Super_Mario_BrosWii_Wii_Game",
+      "position": [
+        -0.8163427934754653,
+        12.579988617234825,
+        0.05595063019237727
+      ],
+      "quaternion_xyzw": [
+        -8.05456384221911e-08,
+        1.2159414200547997e-05,
+        -0.0024472196804316572,
+        0.9999970054795054
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "mesh_objects": [
+        "v63_F19_00"
+      ],
+      "mass_kg_estimate_not_measurement": 0.12
+    },
+    {
+      "id": "F20",
+      "asset_key": "wii",
+      "asset_id": "New_Super_Mario_BrosWii_Wii_Game",
+      "position": [
+        -0.7085779914044585,
+        12.551439454051526,
+        0.055950569615589245
+      ],
+      "quaternion_xyzw": [
+        8.785990482184706e-07,
+        -1.1204343091817484e-05,
+        -0.0767867739802323,
+        0.9970475370890796
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "mesh_objects": [
+        "v63_F20_00"
+      ],
+      "mass_kg_estimate_not_measurement": 0.12
+    },
+    {
+      "id": "F21",
+      "asset_key": "paper",
+      "asset_id": "Paper_Mario_Sticker_Star_Nintendo_3DS_Game",
+      "position": [
+        -0.6026125580259819,
+        12.547804704835945,
+        0.022695523965602787
+      ],
+      "quaternion_xyzw": [
+        -3.8762151814056197e-07,
+        -2.0538106224146962e-06,
+        -0.14646667743021324,
+        0.9892156046070976
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "mesh_objects": [
+        "v63_F21_00"
+      ],
+      "mass_kg_estimate_not_measurement": 0.07
+    },
+    {
+      "id": "F22",
+      "asset_key": "tape",
+      "asset_id": "Shurtape_30_Day_Removal_UV_Delct_15",
+      "position": [
+        -0.5201555253083453,
+        12.517451911805477,
+        0.019388753716024623
+      ],
+      "quaternion_xyzw": [
+        0.006688580761218997,
+        0.032043113745160105,
+        -0.20431184280055917,
+        0.9783584070474148
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "mesh_objects": [
+        "v63_F22_00",
+        "v63_F22_01",
+        "v63_F22_02",
+        "v63_F22_03",
+        "v63_F22_04",
+        "v63_F22_05",
+        "v63_F22_06",
+        "v63_F22_07",
+        "v63_F22_08",
+        "v63_F22_09",
+        "v63_F22_10",
+        "v63_F22_11",
+        "v63_F22_12",
+        "v63_F22_13",
+        "v63_F22_14",
+        "v63_F22_15",
+        "v63_F22_16",
+        "v63_F22_17",
+        "v63_F22_18",
+        "v63_F22_19",
+        "v63_F22_20",
+        "v63_F22_21",
+        "v63_F22_22",
+        "v63_F22_23",
+        "v63_F22_24",
+        "v63_F22_25",
+        "v63_F22_26",
+        "v63_F22_27",
+        "v63_F22_28",
+        "v63_F22_29",
+        "v63_F22_30",
+        "v63_F22_31",
+        "v63_F22_32",
+        "v63_F22_33",
+        "v63_F22_34",
+        "v63_F22_35",
+        "v63_F22_36",
+        "v63_F22_37",
+        "v63_F22_38",
+        "v63_F22_39",
+        "v63_F22_40",
+        "v63_F22_41",
+        "v63_F22_42",
+        "v63_F22_43",
+        "v63_F22_44",
+        "v63_F22_45",
+        "v63_F22_46",
+        "v63_F22_47"
+      ],
+      "mass_kg_estimate_not_measurement": 0.15
+    },
+    {
+      "id": "F23",
+      "asset_key": "paper",
+      "asset_id": "Paper_Mario_Sticker_Star_Nintendo_3DS_Game",
+      "position": [
+        -0.3686481305286626,
+        12.428977604621146,
+        0.022695544723724294
+      ],
+      "quaternion_xyzw": [
+        -3.869507789630793e-06,
+        -1.1357861365966287e-05,
+        -0.3173368654409414,
+        0.9483128775294278
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "mesh_objects": [
+        "v63_F23_00"
+      ],
+      "mass_kg_estimate_not_measurement": 0.07
+    },
+    {
+      "id": "F24",
+      "asset_key": "wii",
+      "asset_id": "New_Super_Mario_BrosWii_Wii_Game",
+      "position": [
+        -0.3128133447489643,
+        12.382500831422876,
+        0.05595060553558049
+      ],
+      "quaternion_xyzw": [
+        2.3902295223577293e-06,
+        8.646763546207614e-06,
+        -0.362765711540706,
+        0.9318803777577279
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "mesh_objects": [
+        "v63_F24_00"
+      ],
+      "mass_kg_estimate_not_measurement": 0.12
+    },
+    {
+      "id": "F25",
+      "asset_key": "wii",
+      "asset_id": "New_Super_Mario_BrosWii_Wii_Game",
+      "position": [
+        -0.26785027182335,
+        12.276347012925239,
+        0.05595058995438232
+      ],
+      "quaternion_xyzw": [
+        -4.706982922682158e-06,
+        -8.555593691760303e-06,
+        -0.4309116068322718,
+        0.9023941417151796
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "mesh_objects": [
+        "v63_F25_00"
+      ],
+      "mass_kg_estimate_not_measurement": 0.12
+    },
+    {
+      "id": "F26",
+      "asset_key": "dvd",
+      "asset_id": "House_of_Cards_The_Complete_First_Season_4_Discs_DVD",
+      "position": [
+        -0.17373188324593672,
+        12.25076782482068,
+        0.055555002640905356
+      ],
+      "quaternion_xyzw": [
+        9.180940929463514e-07,
+        5.83362004447476e-06,
+        -0.4974510802557573,
+        0.8674920303481215
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "mesh_objects": [
+        "v63_F26_00"
+      ],
+      "mass_kg_estimate_not_measurement": 0.23
+    },
+    {
+      "id": "F27",
+      "asset_key": "dvd",
+      "asset_id": "House_of_Cards_The_Complete_First_Season_4_Discs_DVD",
+      "position": [
+        -0.19873670039782332,
+        12.080844357145784,
+        0.055554966814937906
+      ],
+      "quaternion_xyzw": [
+        -7.988738302159457e-06,
+        -1.0373355741613635e-05,
+        -0.5594844318369437,
+        0.828840859490328
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "mesh_objects": [
+        "v63_F27_00"
+      ],
+      "mass_kg_estimate_not_measurement": 0.23
+    },
+    {
+      "id": "F28",
+      "asset_key": "dvd",
+      "asset_id": "House_of_Cards_The_Complete_First_Season_4_Discs_DVD",
+      "position": [
+        -0.09079830088125332,
+        12.005407846250518,
+        0.05555402500575137
+      ],
+      "quaternion_xyzw": [
+        -1.1735305331597906e-06,
+        1.1121955904278757e-05,
+        -0.619475707303759,
+        0.7850158265509253
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "mesh_objects": [
+        "v63_F28_00"
+      ],
+      "mass_kg_estimate_not_measurement": 0.23
+    },
+    {
+      "id": "F29",
+      "asset_key": "dvd",
+      "asset_id": "House_of_Cards_The_Complete_First_Season_4_Discs_DVD",
+      "position": [
+        -0.07289808026165699,
+        11.896158298173528,
+        0.05555315183780046
+      ],
+      "quaternion_xyzw": [
+        -3.397715086728941e-05,
+        2.519597329793641e-05,
+        -0.6753842090831975,
+        0.737466045545
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "mesh_objects": [
+        "v63_F29_00"
+      ],
+      "mass_kg_estimate_not_measurement": 0.23
+    },
+    {
+      "id": "F30",
+      "asset_key": "cranium",
+      "asset_id": "Hasbro_Cranium_Performance_and_Acting_Game",
+      "position": [
+        -0.1476916009141167,
+        11.778380813707201,
+        0.09610340261999224
+      ],
+      "quaternion_xyzw": [
+        -9.97506122176484e-06,
+        1.8376503776394768e-05,
+        -0.6748842460868887,
+        0.7379236098313525
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "mesh_objects": [
+        "v63_F30_00"
+      ],
+      "mass_kg_estimate_not_measurement": 0.6
+    },
+    {
+      "id": "F31",
+      "asset_key": "cranium",
+      "asset_id": "Hasbro_Cranium_Performance_and_Acting_Game",
+      "position": [
+        -0.029574640612054157,
+        11.633459129928728,
+        0.09609183616844766
+      ],
+      "quaternion_xyzw": [
+        -5.441748932494747e-05,
+        8.829865446105948e-05,
+        -0.5473649994252403,
+        0.8368939876987355
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "mesh_objects": [
+        "v63_F31_00"
+      ],
+      "mass_kg_estimate_not_measurement": 0.6
+    },
+    {
+      "id": "F32",
+      "asset_key": "cranium",
+      "asset_id": "Hasbro_Cranium_Performance_and_Acting_Game",
+      "position": [
+        0.05725150610251089,
+        11.48276238735938,
+        0.09604226708011619
+      ],
+      "quaternion_xyzw": [
+        -0.00011345211148243946,
+        0.0003304677166054153,
+        -0.4132145193106047,
+        0.9106336469462418
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "mesh_objects": [
+        "v63_F32_00"
+      ],
+      "mass_kg_estimate_not_measurement": 0.6
+    },
+    {
+      "id": "F33",
+      "asset_key": "cranium",
+      "asset_id": "Hasbro_Cranium_Performance_and_Acting_Game",
+      "position": [
+        0.17549367656300585,
+        11.399724331638208,
+        0.09591695701490859
+      ],
+      "quaternion_xyzw": [
+        -9.371132850500012e-05,
+        0.0007850310310773441,
+        -0.2639759007768226,
+        0.9645289517445976
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "mesh_objects": [
+        "v63_F33_00"
+      ],
+      "mass_kg_estimate_not_measurement": 0.6
+    },
+    {
+      "id": "F34",
+      "asset_key": "cranium",
+      "asset_id": "Hasbro_Cranium_Performance_and_Acting_Game",
+      "position": [
+        0.32187848781581174,
+        11.341741800552512,
+        0.09555175535042952
+      ],
+      "quaternion_xyzw": [
+        0.00016995569540645246,
+        0.0017134373421166932,
+        -0.10927081860814382,
+        0.9940105248176412
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "mesh_objects": [
+        "v63_F34_00"
+      ],
+      "mass_kg_estimate_not_measurement": 0.6
+    },
+    {
+      "id": "F35",
+      "asset_key": "cranium",
+      "asset_id": "Hasbro_Cranium_Performance_and_Acting_Game",
+      "position": [
+        0.479128877287878,
+        11.331724460025416,
+        0.09482841441774811
+      ],
+      "quaternion_xyzw": [
+        0.0009632134341394845,
+        0.002927327756450848,
+        0.04843418743773088,
+        0.9988216219422431
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "mesh_objects": [
+        "v63_F35_00"
+      ],
+      "mass_kg_estimate_not_measurement": 0.6
+    },
+    {
+      "id": "F36",
+      "asset_key": "trivial",
+      "asset_id": "Hasbro_Trivial_Pursuit_Family_Edition_Game",
+      "position": [
+        0.6319408552283858,
+        11.371562019680619,
+        0.09327832302614103
+      ],
+      "quaternion_xyzw": [
+        0.0024880305034746483,
+        0.004990413844953409,
+        0.20478209802696562,
+        0.978791702969301
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "mesh_objects": [
+        "v63_F36_00"
+      ],
+      "mass_kg_estimate_not_measurement": 0.8
+    },
+    {
+      "id": "F37",
+      "asset_key": "trivial",
+      "asset_id": "Hasbro_Trivial_Pursuit_Family_Edition_Game",
+      "position": [
+        0.7641924246844078,
+        11.455860690356026,
+        0.0921500965784846
+      ],
+      "quaternion_xyzw": [
+        0.004536510728175091,
+        0.0054559579528389674,
+        0.3554968541929201,
+        0.9346505439211854
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "mesh_objects": [
+        "v63_F37_00"
+      ],
+      "mass_kg_estimate_not_measurement": 0.8
+    },
+    {
+      "id": "F38",
+      "asset_key": "trivial",
+      "asset_id": "Hasbro_Trivial_Pursuit_Family_Edition_Game",
+      "position": [
+        0.8635700031323212,
+        11.576836752282787,
+        0.0915505051869989
+      ],
+      "quaternion_xyzw": [
+        0.006271119187910888,
+        0.004743767885562438,
+        0.4970331850977446,
+        0.8676959044745861
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "mesh_objects": [
+        "v63_F38_00"
+      ],
+      "mass_kg_estimate_not_measurement": 0.8
+    },
+    {
+      "id": "F39",
+      "asset_key": "trivial",
+      "asset_id": "Hasbro_Trivial_Pursuit_Family_Edition_Game",
+      "position": [
+        0.9202006145404977,
+        11.722510407815292,
+        0.09178097387072585
+      ],
+      "quaternion_xyzw": [
+        0.006906231389923167,
+        0.002387789702106364,
+        0.6274424848150959,
+        0.7786286217943607
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "mesh_objects": [
+        "v63_F39_00"
+      ],
+      "mass_kg_estimate_not_measurement": 0.8
+    },
+    {
+      "id": "F40",
+      "asset_key": "trivial",
+      "asset_id": "Hasbro_Trivial_Pursuit_Family_Edition_Game",
+      "position": [
+        0.9311273148299786,
+        11.878875748891865,
+        0.09275074410621678
+      ],
+      "quaternion_xyzw": [
+        0.0061202454734740185,
+        0.0009079377554665332,
+        0.7066620302866659,
+        0.7075241997242948
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "mesh_objects": [
+        "v63_F40_00"
+      ],
+      "mass_kg_estimate_not_measurement": 0.8
+    },
+    {
+      "id": "F41",
+      "asset_key": "ouija",
+      "asset_id": "Supernatural_Ouija_Board_Game",
+      "position": [
+        0.9309488110073845,
+        12.036529634709439,
+        0.09567190439177019
+      ],
+      "quaternion_xyzw": [
+        0.004537007680049085,
+        0.000427861774650787,
+        0.7069307496250982,
+        0.7072680875948736
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "mesh_objects": [
+        "v63_F41_00"
+      ],
+      "mass_kg_estimate_not_measurement": 0.75
+    },
+    {
+      "id": "F42",
+      "asset_key": "ouija",
+      "asset_id": "Supernatural_Ouija_Board_Game",
+      "position": [
+        0.9406219977320236,
+        12.21116559676531,
+        0.09645638679082245
+      ],
+      "quaternion_xyzw": [
+        0.0033306730450113537,
+        -0.00011281577565507291,
+        0.7073592142821011,
+        0.7068464018864895
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "mesh_objects": [
+        "v63_F42_00"
+      ],
+      "mass_kg_estimate_not_measurement": 0.75
+    },
+    {
+      "id": "F43",
+      "asset_key": "ouija",
+      "asset_id": "Supernatural_Ouija_Board_Game",
+      "position": [
+        0.8502388836119227,
+        12.356127254007994,
+        0.09715638592196892
+      ],
+      "quaternion_xyzw": [
+        0.0013230679861068251,
+        7.070379806935345e-06,
+        0.7070314976063389,
+        0.7071808190510058
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "mesh_objects": [
+        "v63_F43_00"
+      ],
+      "mass_kg_estimate_not_measurement": 0.75
+    },
+    {
+      "id": "F44",
+      "asset_key": "cranium",
+      "asset_id": "Hasbro_Cranium_Performance_and_Acting_Game",
+      "position": [
+        0.8902235188677731,
+        12.51581167318534,
+        0.09589154465314519
+      ],
+      "quaternion_xyzw": [
+        0.0008461159009264423,
+        -6.467330837851703e-05,
+        0.7071491936080602,
+        0.7070638570063638
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "mesh_objects": [
+        "v63_F44_00"
+      ],
+      "mass_kg_estimate_not_measurement": 0.6
+    },
+    {
+      "id": "F45",
+      "asset_key": "trivial",
+      "asset_id": "Hasbro_Trivial_Pursuit_Family_Edition_Game",
+      "position": [
+        0.9300655850354689,
+        12.673692788843862,
+        0.09551287182337304
+      ],
+      "quaternion_xyzw": [
+        0.0004838343049279509,
+        -8.609980445477136e-05,
+        0.7071194753680712,
+        0.7070939160015258
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "mesh_objects": [
+        "v63_F45_00"
+      ],
+      "mass_kg_estimate_not_measurement": 0.8
+    },
+    {
+      "id": "F46",
+      "asset_key": "trivial",
+      "asset_id": "Hasbro_Trivial_Pursuit_Family_Edition_Game",
+      "position": [
+        0.9300693909367259,
+        12.741071806331552,
+        0.09554930744356613
+      ],
+      "quaternion_xyzw": [
+        0.0002917424172965524,
+        -3.777250736481857e-05,
+        0.706775900232366,
+        0.7074374462172103
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "mesh_objects": [
+        "v63_F46_00"
+      ],
+      "mass_kg_estimate_not_measurement": 0.8
+    },
+    {
+      "id": "F47",
+      "asset_key": "paper",
+      "asset_id": "Paper_Mario_Sticker_Star_Nintendo_3DS_Game",
+      "position": [
+        0.9399991118247691,
+        12.972343814817597,
+        0.022686193624359988
+      ],
+      "quaternion_xyzw": [
+        5.458877926344279e-05,
+        -2.1972875176516814e-05,
+        0.7070307283021662,
+        0.7071828234436739
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "mesh_objects": [
+        "v63_F47_00"
+      ],
+      "mass_kg_estimate_not_measurement": 0.07
+    },
+    {
+      "id": "F48",
+      "asset_key": "paper",
+      "asset_id": "Paper_Mario_Sticker_Star_Nintendo_3DS_Game",
+      "position": [
+        0.889996021060993,
+        13.030015811578618,
+        0.022692361815731008
+      ],
+      "quaternion_xyzw": [
+        8.933613262341795e-06,
+        4.75505865137064e-06,
+        0.7070047293155625,
+        0.7072088182587999
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "mesh_objects": [
+        "v63_F48_00"
+      ],
+      "mass_kg_estimate_not_measurement": 0.07
+    }
+  ],
+  "cameras": [
+    {
+      "id": "01_ball_and_table",
+      "camera_object": "v63_01_ball_and_table",
+      "position": [
+        -1.7,
+        9.95,
+        1.67
+      ],
+      "aim": [
+        -2.65,
+        11.27,
+        0.85
+      ],
+      "lens_mm": 40,
+      "targets": [
+        "A",
+        "B",
+        "R"
+      ],
+      "projected_target_bounds": {
+        "A": {
+          "xmin": 0.37738150358200073,
+          "xmax": 0.6684508323669434,
+          "ymin": 0.19062981009483337,
+          "ymax": 0.8154288530349731,
+          "minimum_depth": 1.5742995738983154
+        },
+        "B": {
+          "xmin": 0.3088442385196686,
+          "xmax": 0.3706498444080353,
+          "ymin": 0.6426942944526672,
+          "ymax": 0.7498081922531128,
+          "minimum_depth": 1.9302722215652466
+        },
+        "R": {
+          "xmin": 0.6122300624847412,
+          "xmax": 0.6693283319473267,
+          "ymin": 0.21600216627120972,
+          "ymax": 0.411784291267395,
+          "minimum_depth": 1.643916130065918
+        }
+      },
+      "occlusion_status": "VISUAL_REVIEW_REQUIRED; projected bounds are not a ray-clearance proof"
+    },
+    {
+      "id": "02_ball_material_check",
+      "camera_object": "v63_02_ball_material_check",
+      "position": [
+        -3.3,
+        10.91,
+        1.16
+      ],
+      "aim": [
+        -3.025,
+        11.3,
+        0.95
+      ],
+      "lens_mm": 52,
+      "targets": [
+        "B"
+      ],
+      "projected_target_bounds": {
+        "B": {
+          "xmin": 0.3548685908317566,
+          "xmax": 0.650257408618927,
+          "ymin": 0.20939843356609344,
+          "ymax": 0.7565648555755615,
+          "minimum_depth": 0.458667516708374
+        }
+      },
+      "occlusion_status": "VISUAL_REVIEW_REQUIRED; projected bounds are not a ray-clearance proof"
+    },
+    {
+      "id": "03_radio_receiver_side",
+      "camera_object": "v63_03_radio_receiver_side",
+      "position": [
+        -2.88,
+        10.12,
+        1.42
+      ],
+      "aim": [
+        -2.66,
+        11.27,
+        0.86
+      ],
+      "lens_mm": 35,
+      "targets": [
+        "A",
+        "B",
+        "R"
+      ],
+      "projected_target_bounds": {
+        "A": {
+          "xmin": 0.42743226885795593,
+          "xmax": 0.6496367454528809,
+          "ymin": 0.1163962110877037,
+          "ymax": 0.8649913668632507,
+          "minimum_depth": 1.072516918182373
+        },
+        "B": {
+          "xmin": 0.17272232472896576,
+          "xmax": 0.24538612365722656,
+          "ymin": 0.5165092349052429,
+          "ymax": 0.6623708605766296,
+          "minimum_depth": 1.1679425239562988
+        },
+        "R": {
+          "xmin": 0.6670931577682495,
+          "xmax": 0.7199917435646057,
+          "ymin": 0.2914505898952484,
+          "ymax": 0.5105000138282776,
+          "minimum_depth": 1.3040111064910889
+        }
+      },
+      "occlusion_status": "VISUAL_REVIEW_REQUIRED; projected bounds are not a ray-clearance proof"
+    },
+    {
+      "id": "04_drop_bridge",
+      "camera_object": "v63_04_drop_bridge",
+      "position": [
+        -0.7,
+        9.65,
+        1.6
+      ],
+      "aim": [
+        -2.2,
+        11.4,
+        0.5
+      ],
+      "lens_mm": 33,
+      "targets": [
+        "A",
+        "R",
+        "F01",
+        "F04"
+      ],
+      "projected_target_bounds": {
+        "A": {
+          "xmin": 0.2662455439567566,
+          "xmax": 0.4652920663356781,
+          "ymin": 0.5963958501815796,
+          "ymax": 0.920063316822052,
+          "minimum_depth": 2.333348035812378
+        },
+        "R": {
+          "xmin": 0.3958406150341034,
+          "xmax": 0.43828728795051575,
+          "ymin": 0.6011101603507996,
+          "ymax": 0.7054638862609863,
+          "minimum_depth": 2.3846595287323
+        },
+        "F01": {
+          "xmin": 0.45029330253601074,
+          "xmax": 0.4873773157596588,
+          "ymin": 0.13907529413700104,
+          "ymax": 0.24569551646709442,
+          "minimum_depth": 2.5466582775115967
+        },
+        "F04": {
+          "xmin": 0.5157305598258972,
+          "xmax": 0.53799968957901,
+          "ymin": 0.056733258068561554,
+          "ymax": 0.18059080839157104,
+          "minimum_depth": 2.371279716491699
+        }
+      },
+      "occlusion_status": "VISUAL_REVIEW_REQUIRED; projected bounds are not a ray-clearance proof"
+    },
+    {
+      "id": "05_full_route_overview",
+      "camera_object": "v63_05_full_route_overview",
+      "position": [
+        1.62,
+        8.3,
+        4.2
+      ],
+      "aim": [
+        -0.85,
+        11.95,
+        0.16
+      ],
+      "lens_mm": 38,
+      "targets": [
+        "A",
+        "B",
+        "R",
+        "F01",
+        "F02",
+        "F03",
+        "F04",
+        "F05",
+        "F06",
+        "F07",
+        "F08",
+        "F09",
+        "F10",
+        "F11",
+        "F12",
+        "F13",
+        "F14",
+        "F15",
+        "F16",
+        "F17",
+        "F18",
+        "F19",
+        "F20",
+        "F21",
+        "F22",
+        "F23",
+        "F24",
+        "F25",
+        "F26",
+        "F27",
+        "F28",
+        "F29",
+        "F30",
+        "F31",
+        "F32",
+        "F33",
+        "F34",
+        "F35",
+        "F36",
+        "F37",
+        "F38",
+        "F39",
+        "F40",
+        "F41",
+        "F42",
+        "F43",
+        "F44",
+        "F45",
+        "F46",
+        "F47",
+        "F48"
+      ],
+      "projected_target_bounds": {
+        "A": {
+          "xmin": 0.11993701756000519,
+          "xmax": 0.22807757556438446,
+          "ymin": 0.6680258512496948,
+          "ymax": 0.8695986866950989,
+          "minimum_depth": 5.622905254364014
+        },
+        "B": {
+          "xmin": 0.10423367470502853,
+          "xmax": 0.1268288642168045,
+          "ymin": 0.8097859025001526,
+          "ymax": 0.8479467630386353,
+          "minimum_depth": 5.8830461502075195
+        },
+        "R": {
+          "xmin": 0.18734154105186462,
+          "xmax": 0.21214938163757324,
+          "ymin": 0.6765850186347961,
+          "ymax": 0.7331026792526245,
+          "minimum_depth": 5.710221290588379
+        },
+        "F01": {
+          "xmin": 0.23303847014904022,
+          "xmax": 0.2551569938659668,
+          "ymin": 0.47207462787628174,
+          "ymax": 0.5253161191940308,
+          "minimum_depth": 6.089709758758545
+        },
+        "F02": {
+          "xmin": 0.24371176958084106,
+          "xmax": 0.263682097196579,
+          "ymin": 0.46360260248184204,
+          "ymax": 0.5185055732727051,
+          "minimum_depth": 6.059932708740234
+        },
+        "F03": {
+          "xmin": 0.2555534839630127,
+          "xmax": 0.27304452657699585,
+          "ymin": 0.4569103419780731,
+          "ymax": 0.5130484700202942,
+          "minimum_depth": 6.0366129875183105
+        },
+        "F04": {
+          "xmin": 0.26288220286369324,
+          "xmax": 0.277912974357605,
+          "ymin": 0.4353608787059784,
+          "ymax": 0.4928581118583679,
+          "minimum_depth": 5.962706089019775
+        },
+        "F05": {
+          "xmin": 0.2838829755783081,
+          "xmax": 0.29714784026145935,
+          "ymin": 0.4663030803203583,
+          "ymax": 0.538022518157959,
+          "minimum_depth": 6.024451732635498
+        },
+        "F06": {
+          "xmin": 0.30224552750587463,
+          "xmax": 0.3106139898300171,
+          "ymin": 0.4490513205528259,
+          "ymax": 0.5213770866394043,
+          "minimum_depth": 5.964509010314941
+        },
+        "F07": {
+          "xmin": 0.32076358795166016,
+          "xmax": 0.33067402243614197,
+          "ymin": 0.4531156122684479,
+          "ymax": 0.5250454545021057,
+          "minimum_depth": 5.978525638580322
+        },
+        "F08": {
+          "xmin": 0.3375410735607147,
+          "xmax": 0.35136276483535767,
+          "ymin": 0.46185198426246643,
+          "ymax": 0.5323033928871155,
+          "minimum_depth": 6.008874416351318
+        },
+        "F09": {
+          "xmin": 0.35324862599372864,
+          "xmax": 0.3722364008426666,
+          "ymin": 0.472267210483551,
+          "ymax": 0.5419109463691711,
+          "minimum_depth": 6.045984745025635
+        },
+        "F10": {
+          "xmin": 0.36314427852630615,
+          "xmax": 0.38502979278564453,
+          "ymin": 0.4896942675113678,
+          "ymax": 0.55593341588974,
+          "minimum_depth": 6.1081695556640625
+        },
+        "F11": {
+          "xmin": 0.3781374394893646,
+          "xmax": 0.4015563428401947,
+          "ymin": 0.5094756484031677,
+          "ymax": 0.57247394323349,
+          "minimum_depth": 6.180291652679443
+        },
+        "F12": {
+          "xmin": 0.392137736082077,
+          "xmax": 0.4131707549095154,
+          "ymin": 0.5250107645988464,
+          "ymax": 0.5902364253997803,
+          "minimum_depth": 6.238114356994629
+        },
+        "F13": {
+          "xmin": 0.40190038084983826,
+          "xmax": 0.43137016892433167,
+          "ymin": 0.5315151214599609,
+          "ymax": 0.6304468512535095,
+          "minimum_depth": 6.207834243774414
+        },
+        "F14": {
+          "xmin": 0.4276564121246338,
+          "xmax": 0.4512147009372711,
+          "ymin": 0.5462793111801147,
+          "ymax": 0.6468251943588257,
+          "minimum_depth": 6.264210224151611
+        },
+        "F15": {
+          "xmin": 0.4555003046989441,
+          "xmax": 0.4725433886051178,
+          "ymin": 0.556039571762085,
+          "ymax": 0.656743586063385,
+          "minimum_depth": 6.302026748657227
+        },
+        "F16": {
+          "xmin": 0.48382291197776794,
+          "xmax": 0.4951961934566498,
+          "ymin": 0.5608605742454529,
+          "ymax": 0.6594964861869812,
+          "minimum_depth": 6.321539402008057
+        },
+        "F17": {
+          "xmin": 0.5069023966789246,
+          "xmax": 0.5231737494468689,
+          "ymin": 0.558035135269165,
+          "ymax": 0.6579510569572449,
+          "minimum_depth": 6.310482978820801
+        },
+        "F18": {
+          "xmin": 0.5278332829475403,
+          "xmax": 0.5503489375114441,
+          "ymin": 0.5660644173622131,
+          "ymax": 0.6656560301780701,
+          "minimum_depth": 6.342002868652344
+        },
+        "F19": {
+          "xmin": 0.5549131035804749,
+          "xmax": 0.5704255104064941,
+          "ymin": 0.5440143942832947,
+          "ymax": 0.6100099682807922,
+          "minimum_depth": 6.309762954711914
+        },
+        "F20": {
+          "xmin": 0.5663132071495056,
+          "xmax": 0.5845964550971985,
+          "ymin": 0.5287854075431824,
+          "ymax": 0.5932520031929016,
+          "minimum_depth": 6.25178861618042
+        },
+        "F21": {
+          "xmin": 0.5800589919090271,
+          "xmax": 0.5999355316162109,
+          "ymin": 0.5177802443504333,
+          "ymax": 0.5650069117546082,
+          "minimum_depth": 6.2554779052734375
+        },
+        "F22": {
+          "xmin": 0.590774655342102,
+          "xmax": 0.6079432368278503,
+          "ymin": 0.5072160363197327,
+          "ymax": 0.5459495186805725,
+          "minimum_depth": 6.2193284034729
+        },
+        "F23": {
+          "xmin": 0.6021180152893066,
+          "xmax": 0.6264398097991943,
+          "ymin": 0.475212961435318,
+          "ymax": 0.5155120491981506,
+          "minimum_depth": 6.100818634033203
+        },
+        "F24": {
+          "xmin": 0.6061816811561584,
+          "xmax": 0.6322764158248901,
+          "ymin": 0.46179530024528503,
+          "ymax": 0.5151440501213074,
+          "minimum_depth": 6.008673191070557
+        },
+        "F25": {
+          "xmin": 0.6035729646682739,
+          "xmax": 0.6304152607917786,
+          "ymin": 0.43971362709999084,
+          "ymax": 0.4891853630542755,
+          "minimum_depth": 5.93255090713501
+        },
+        "F26": {
+          "xmin": 0.6151489019393921,
+          "xmax": 0.6435933113098145,
+          "ymin": 0.42304831743240356,
+          "ymax": 0.4735174775123596,
+          "minimum_depth": 5.876866817474365
+        },
+        "F27": {
+          "xmin": 0.5961798429489136,
+          "xmax": 0.624875009059906,
+          "ymin": 0.3923441171646118,
+          "ymax": 0.4477076530456543,
+          "minimum_depth": 5.775984764099121
+        },
+        "F28": {
+          "xmin": 0.6062899827957153,
+          "xmax": 0.6355244517326355,
+          "ymin": 0.3615565001964569,
+          "ymax": 0.421892374753952,
+          "minimum_depth": 5.678167343139648
+        },
+        "F29": {
+          "xmin": 0.5995559096336365,
+          "xmax": 0.6282345652580261,
+          "ymin": 0.3353970944881439,
+          "ymax": 0.400434285402298,
+          "minimum_depth": 5.597574710845947
+        },
+        "F30": {
+          "xmin": 0.5701073408126831,
+          "xmax": 0.612873375415802,
+          "ymin": 0.31457850337028503,
+          "ymax": 0.4131973683834076,
+          "minimum_depth": 5.480206489562988
+        },
+        "F31": {
+          "xmin": 0.574726402759552,
+          "xmax": 0.6190403699874878,
+          "ymin": 0.27465179562568665,
+          "ymax": 0.3605267405509949,
+          "minimum_depth": 5.363987922668457
+        },
+        "F32": {
+          "xmin": 0.5739418268203735,
+          "xmax": 0.619667649269104,
+          "ymin": 0.23033104836940765,
+          "ymax": 0.3141208291053772,
+          "minimum_depth": 5.240344047546387
+        },
+        "F33": {
+          "xmin": 0.5859758853912354,
+          "xmax": 0.631690263748169,
+          "ymin": 0.18489819765090942,
+          "ymax": 0.2855888903141022,
+          "minimum_depth": 5.119309902191162
+        },
+        "F34": {
+          "xmin": 0.608130693435669,
+          "xmax": 0.6495708227157593,
+          "ymin": 0.1408652812242508,
+          "ymax": 0.25553974509239197,
+          "minimum_depth": 5.007307052612305
+        },
+        "F35": {
+          "xmin": 0.6398748755455017,
+          "xmax": 0.6728043556213379,
+          "ymin": 0.10787748545408249,
+          "ymax": 0.23160725831985474,
+          "minimum_depth": 4.927016258239746
+        },
+        "F36": {
+          "xmin": 0.6770567893981934,
+          "xmax": 0.6999703049659729,
+          "ymin": 0.09094087779521942,
+          "ymax": 0.21635112166404724,
+          "minimum_depth": 4.888266086578369
+        },
+        "F37": {
+          "xmin": 0.7050246000289917,
+          "xmax": 0.7386250495910645,
+          "ymin": 0.08971548825502396,
+          "ymax": 0.21449030935764313,
+          "minimum_depth": 4.8861775398254395
+        },
+        "F38": {
+          "xmin": 0.7289038300514221,
+          "xmax": 0.7743765711784363,
+          "ymin": 0.10311797261238098,
+          "ymax": 0.22747811675071716,
+          "minimum_depth": 4.919218063354492
+        },
+        "F39": {
+          "xmin": 0.7484874129295349,
+          "xmax": 0.80106520652771,
+          "ymin": 0.13298939168453217,
+          "ymax": 0.25011083483695984,
+          "minimum_depth": 4.992005825042725
+        },
+        "F40": {
+          "xmin": 0.7623471021652222,
+          "xmax": 0.81654292345047,
+          "ymin": 0.17273661494255066,
+          "ymax": 0.28129246830940247,
+          "minimum_depth": 5.0912652015686035
+        },
+        "F41": {
+          "xmin": 0.7569974660873413,
+          "xmax": 0.8480929136276245,
+          "ymin": 0.19448375701904297,
+          "ymax": 0.33195391297340393,
+          "minimum_depth": 5.145047187805176
+        },
+        "F42": {
+          "xmin": 0.7722899913787842,
+          "xmax": 0.8625020980834961,
+          "ymin": 0.23298819363117218,
+          "ymax": 0.36760833859443665,
+          "minimum_depth": 5.247128009796143
+        },
+        "F43": {
+          "xmin": 0.7675334811210632,
+          "xmax": 0.8553164005279541,
+          "ymin": 0.27807921171188354,
+          "ymax": 0.4096142649650574,
+          "minimum_depth": 5.372364521026611
+        },
+        "F44": {
+          "xmin": 0.8032526969909668,
+          "xmax": 0.8550050854682922,
+          "ymin": 0.3200978636741638,
+          "ymax": 0.42158594727516174,
+          "minimum_depth": 5.496806621551514
+        },
+        "F45": {
+          "xmin": 0.8210574388504028,
+          "xmax": 0.8727185726165771,
+          "ymin": 0.34584376215934753,
+          "ymax": 0.44722965359687805,
+          "minimum_depth": 5.5754008293151855
+        },
+        "F46": {
+          "xmin": 0.8255916833877563,
+          "xmax": 0.877055823802948,
+          "ymin": 0.35912370681762695,
+          "ymax": 0.45996326208114624,
+          "minimum_depth": 5.616479873657227
+        },
+        "F47": {
+          "xmin": 0.8495199680328369,
+          "xmax": 0.8793432712554932,
+          "ymin": 0.41078826785087585,
+          "ymax": 0.4588657021522522,
+          "minimum_depth": 5.880590438842773
+        },
+        "F48": {
+          "xmin": 0.8447290062904358,
+          "xmax": 0.8741656541824341,
+          "ymin": 0.4275766611099243,
+          "ymax": 0.4752606749534607,
+          "minimum_depth": 5.936452865600586
+        }
+      },
+      "occlusion_status": "VISUAL_REVIEW_REQUIRED; projected bounds are not a ray-clearance proof"
+    },
+    {
+      "id": "06_first_curve",
+      "camera_object": "v63_06_first_curve",
+      "position": [
+        -0.5,
+        10.6,
+        1.28
+      ],
+      "aim": [
+        -1.31,
+        12.26,
+        0.12
+      ],
+      "lens_mm": 36,
+      "targets": [
+        "F07",
+        "F12",
+        "F18"
+      ],
+      "projected_target_bounds": {
+        "F07": {
+          "xmin": 0.06212398409843445,
+          "xmax": 0.10189168155193329,
+          "ymin": 0.01882334053516388,
+          "ymax": 0.2590567469596863,
+          "minimum_depth": 1.6323740482330322
+        },
+        "F12": {
+          "xmin": 0.2937741279602051,
+          "xmax": 0.3605315089225769,
+          "ymin": 0.2863560616970062,
+          "ymax": 0.4707460105419159,
+          "minimum_depth": 1.9816317558288574
+        },
+        "F18": {
+          "xmin": 0.6547578573226929,
+          "xmax": 0.7011978030204773,
+          "ymin": 0.4397956132888794,
+          "ymax": 0.6959148049354553,
+          "minimum_depth": 2.210667848587036
+        }
+      },
+      "occlusion_status": "VISUAL_REVIEW_REQUIRED; projected bounds are not a ray-clearance proof"
+    },
+    {
+      "id": "07_tape_bridge",
+      "camera_object": "v63_07_tape_bridge",
+      "position": [
+        -0.5201555253083453,
+        11.397451911805476,
+        0.5593887537160247
+      ],
+      "aim": [
+        -0.5201555253083453,
+        12.517451911805477,
+        0.07938875371602462
+      ],
+      "lens_mm": 48,
+      "targets": [
+        "F20",
+        "F21",
+        "F22",
+        "F23",
+        "F24"
+      ],
+      "projected_target_bounds": {
+        "F20": {
+          "xmin": 0.26188924908638,
+          "xmax": 0.33340078592300415,
+          "ymin": 0.26273754239082336,
+          "ymax": 0.6976861357688904,
+          "minimum_depth": 1.1578024625778198
+        },
+        "F21": {
+          "xmin": 0.37638309597969055,
+          "xmax": 0.44576552510261536,
+          "ymin": 0.2601684629917145,
+          "ymax": 0.5802254676818848,
+          "minimum_depth": 1.181478500366211
+        },
+        "F22": {
+          "xmin": 0.4342860281467438,
+          "xmax": 0.5666053295135498,
+          "ymin": 0.2745594382286072,
+          "ymax": 0.5149140357971191,
+          "minimum_depth": 1.1925607919692993
+        },
+        "F23": {
+          "xmin": 0.6216306686401367,
+          "xmax": 0.724888801574707,
+          "ymin": 0.14736051857471466,
+          "ymax": 0.4882260262966156,
+          "minimum_depth": 1.0800237655639648
+        },
+        "F24": {
+          "xmin": 0.6876388192176819,
+          "xmax": 0.8129240274429321,
+          "ymin": 0.09778601676225662,
+          "ymax": 0.5753516554832458,
+          "minimum_depth": 1.0143392086029053
+        }
+      },
+      "occlusion_status": "VISUAL_REVIEW_REQUIRED; projected bounds are not a ray-clearance proof"
+    },
+    {
+      "id": "08_reverse_curve",
+      "camera_object": "v63_08_reverse_curve",
+      "position": [
+        1.93,
+        10.1,
+        1.85
+      ],
+      "aim": [
+        0.47,
+        11.82,
+        0.1
+      ],
+      "lens_mm": 35,
+      "targets": [
+        "F26",
+        "F32",
+        "F39",
+        "F43"
+      ],
+      "projected_target_bounds": {
+        "F26": {
+          "xmin": 0.41890567541122437,
+          "xmax": 0.4616253077983856,
+          "ymin": 0.6631099581718445,
+          "ymax": 0.7577099204063416,
+          "minimum_depth": 3.3936240673065186
+        },
+        "F32": {
+          "xmin": 0.27573251724243164,
+          "xmax": 0.3595527708530426,
+          "ymin": 0.42783790826797485,
+          "ymax": 0.5789750218391418,
+          "minimum_depth": 2.759242296218872
+        },
+        "F39": {
+          "xmin": 0.5690789222717285,
+          "xmax": 0.6467663645744324,
+          "ymin": 0.23215743899345398,
+          "ymax": 0.4583527445793152,
+          "minimum_depth": 2.408303737640381
+        },
+        "F43": {
+          "xmin": 0.6427096724510193,
+          "xmax": 0.7799132466316223,
+          "ymin": 0.4382856786251068,
+          "ymax": 0.6717039346694946,
+          "minimum_depth": 2.7800612449645996
+        }
+      },
+      "occlusion_status": "VISUAL_REVIEW_REQUIRED; projected bounds are not a ray-clearance proof"
+    },
+    {
+      "id": "09_finish",
+      "camera_object": "v63_09_finish",
+      "position": [
+        1.95,
+        11.6,
+        1.11
+      ],
+      "aim": [
+        0.91,
+        12.67,
+        0.1
+      ],
+      "lens_mm": 38,
+      "targets": [
+        "F43",
+        "F44",
+        "F45",
+        "F48"
+      ],
+      "projected_target_bounds": {
+        "F43": {
+          "xmin": 0.23062683641910553,
+          "xmax": 0.4378136694431305,
+          "ymin": 0.13511767983436584,
+          "ymax": 0.6095865964889526,
+          "minimum_depth": 1.4400802850723267
+        },
+        "F44": {
+          "xmin": 0.365556538105011,
+          "xmax": 0.4832459092140198,
+          "ymin": 0.258415162563324,
+          "ymax": 0.6161104440689087,
+          "minimum_depth": 1.5712872743606567
+        },
+        "F45": {
+          "xmin": 0.45283907651901245,
+          "xmax": 0.5707206130027771,
+          "ymin": 0.31681111454963684,
+          "ymax": 0.66178297996521,
+          "minimum_depth": 1.6409955024719238
+        },
+        "F48": {
+          "xmin": 0.5896334052085876,
+          "xmax": 0.6537588238716125,
+          "ymin": 0.5060195326805115,
+          "ymax": 0.6537467241287231,
+          "minimum_depth": 1.9910184144973755
+        }
+      },
+      "occlusion_status": "VISUAL_REVIEW_REQUIRED; projected bounds are not a ray-clearance proof"
+    },
+    {
+      "id": "10b_follow_camera_side",
+      "camera_object": "v63_10b_follow_camera_side",
+      "position": [
+        -1.3976916009141167,
+        11.498380813707202,
+        0.7961034026199922
+      ],
+      "aim": [
+        -0.0676916009141167,
+        11.708380813707201,
+        0.13110340261999226
+      ],
+      "lens_mm": 40,
+      "targets": [
+        "F28",
+        "F29",
+        "F30",
+        "F31",
+        "F32"
+      ],
+      "projected_target_bounds": {
+        "F28": {
+          "xmin": 0.26753002405166626,
+          "xmax": 0.3057495355606079,
+          "ymin": 0.2745836079120636,
+          "ymax": 0.5754925012588501,
+          "minimum_depth": 1.449035882949829
+        },
+        "F29": {
+          "xmin": 0.3445643484592438,
+          "xmax": 0.3866662383079529,
+          "ymin": 0.2750765085220337,
+          "ymax": 0.5757865905761719,
+          "minimum_depth": 1.4496698379516602
+        },
+        "F30": {
+          "xmin": 0.40120193362236023,
+          "xmax": 0.46735066175460815,
+          "ymin": 0.1800236701965332,
+          "ymax": 0.642063558101654,
+          "minimum_depth": 1.3011932373046875
+        },
+        "F31": {
+          "xmin": 0.5178595185279846,
+          "xmax": 0.6056943535804749,
+          "ymin": 0.2511565387248993,
+          "ymax": 0.6875435709953308,
+          "minimum_depth": 1.3838127851486206
+        },
+        "F32": {
+          "xmin": 0.6055632829666138,
+          "xmax": 0.7426081895828247,
+          "ymin": 0.2982690930366516,
+          "ymax": 0.7123343348503113,
+          "minimum_depth": 1.444137692451477
+        }
+      },
+      "occlusion_status": "VISUAL_REVIEW_REQUIRED; projected bounds are not a ray-clearance proof"
+    }
+  ],
+  "shape_identity": [
+    {
+      "object": "v63_asset_paper",
+      "sha256": "f450f6747f82fc1356392c37aa5fd0e4a21c60b9960cb958b26ddd681d9d21ef",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_wii",
+      "sha256": "b1be83387c60a113aab4458167a48187f4e58c6e105f0cf890f702bf7bf88c67",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_dvd",
+      "sha256": "450c86423ce4f101ba4c12e065c7530cc407974b2c38f36395877d4957a5706b",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_cranium",
+      "sha256": "ff4962888c1a02d60ca2a358e69f4bed629aaa1c8c6750411db96571208fa31c",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_trivial",
+      "sha256": "3af6b346fdfac82f2c96ca65ddaaf8e5f4299907dbfb4e968b8ff293fdb8ba3d",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_ouija",
+      "sha256": "dc1a965db1449e6fb51de811aa84c1752e8223ab2f6cd8dc601c1c7b70c7b39f",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_baseball",
+      "sha256": "3701715d66bc160f36f368df8558fab019cc641473555baf47d022336ba7f4e4",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_tape_00",
+      "sha256": "540b86b54fb7f57c507fc37fbcc341a3cab722abdddcea5c76a4cd8b4eabb73e",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_tape_01",
+      "sha256": "ff0e9a336cb737a1b039e395a6875d7e684e86b850569a899e3f5af6262269cb",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_tape_02",
+      "sha256": "5f8fb6d91d35d2805c53085b3f219c2dc08715fb45603e63e256ca601e20a6ff",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_tape_03",
+      "sha256": "b89e4063ba74f3aef4446ff3ec3e5a20511d6625f8137d9ac3b4193262e79505",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_tape_04",
+      "sha256": "8711d860133a2eafaef7ee37d9783d6969c2dab7dc62a2b792eb311a70a58409",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_tape_05",
+      "sha256": "bf29f344bb02137ee32560c698854b20008bf47224b67fca8e907429acf1cbc5",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_tape_06",
+      "sha256": "9940f54108f093ccd48aa7a9a5a9a410ca17168020619a8cbe72f8b14dc19e63",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_tape_07",
+      "sha256": "7b856c4e945d7c95061bbebe92d99491c837a4c4ec16c7d045c47c94d2c05671",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_tape_08",
+      "sha256": "d2d00b8cfdc9f6331b87eaa8a80ba4865665adf3c2138f0f69b78a0bc34d9bf8",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_tape_09",
+      "sha256": "76c355cc68df1a81a9f2ef8d75f1b1704d0e1ef600b363f241764d968721b0cd",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_tape_10",
+      "sha256": "7acf50089bcc12e498290e9d8b85837c489209a846c9c15cfcf8c1b24eecfe78",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_tape_11",
+      "sha256": "7d284b940852e0917425282321be23441bdb1165759750a7118458d8c0d75b37",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_tape_12",
+      "sha256": "8ef731721f78aa61c9021a8e7b821a959a0ee2e7111b86c02e33688ab7d71f40",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_tape_13",
+      "sha256": "1fc86eef539141b68f80337b561044caab12ae7fc6021269e0823a28f20de057",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_tape_14",
+      "sha256": "7f3d58059ca04101cc6a2487595aee1c39b4c2cf81db86fc85bb71b93ebc22a5",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_tape_15",
+      "sha256": "15e84818fc0a8d2521752dee90327a4c9e1b9b45f689e3a5c239ac21cec110b6",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_tape_16",
+      "sha256": "9160b65b8b6e7fcfbd36770c16f3a606952a4bda99bd0d5925c2d0fcb32793a0",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_tape_17",
+      "sha256": "c2fd6f9c09a9e436e625c84ef0ca3fceefd026da235a5d67c2c315fcc1fb0245",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_tape_18",
+      "sha256": "a30b96545c1814125c814b68d860af151561aaa30a9ce2832d075d85733e86f3",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_tape_19",
+      "sha256": "4d89633f6c0891f84ccecad10ed296b559388f9e3632bcc2c79b3a3acf00a2c4",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_tape_20",
+      "sha256": "1182547bbfd83b49fdc6b9798b0bb295ced635d1f59d5b623d9701af5db4c588",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_tape_21",
+      "sha256": "0137d33a989ef93a9b3452c3aaa5bfd9d79664fad9ace848cab793130bb3cd80",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_tape_22",
+      "sha256": "42a75d9fad10d09e9ecc33bdc16b7203d5b210da0723645d6797cdd3086dd1ef",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_tape_23",
+      "sha256": "4ae38154ba270e822a82c138f7ae3a4da463f51e4aba199d1c67e13b2618a878",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_tape_24",
+      "sha256": "3170e015455598c333d47ad9c5dbc17c59efd6f641dbfa3b27dcfbc26a6ac9d7",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_tape_25",
+      "sha256": "34f7721117ada29059708bb4787f12185912bb26ef84031532ef203b63e64bdc",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_tape_26",
+      "sha256": "084c1874dfa928e34e636b1f3862445c7e967fb53c37ef41cbe4085a6470ec32",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_tape_27",
+      "sha256": "c8a94c04429d78154a3e02f1698fc3846cbcf33e85ecb7e49342391ff55daaca",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_tape_28",
+      "sha256": "87f2a53dd88547478b5bdc6cd55ee8b923512721247f40ac6d39ee75deb041b1",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_tape_29",
+      "sha256": "bd687fe5676f474c1bc1a32ab4a892fe839e565c242e515aaaeae911d171b14f",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_tape_30",
+      "sha256": "2e412f62d76da6fff579fecb38fde236b24c9b95d6becd12219455fa427f4718",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_tape_31",
+      "sha256": "163654046dd2110c5fb2467b387c4db19f017ebefbeec84596cf49d142940c7b",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_tape_32",
+      "sha256": "27170396602fe3dab345a7085163d5c346a74f34772695ba7cc145bc1be073ca",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_tape_33",
+      "sha256": "75ad371dce3c83959a9f92606827cb614fe2d8f28900e9928634c268111cf268",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_tape_34",
+      "sha256": "23834c449f6541292c48adf58942b11cf2d098a4e75181ae44e78a20a6a2e10e",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_tape_35",
+      "sha256": "d27a7b9d09b943eca55cbf817db885feaa8a2c83c920b7145c6cd1fd4333adbf",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_tape_36",
+      "sha256": "400ff17c6e8bc281e2a94d2468018c7c97517b0f1b92a2ed993ed71d168334bb",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_tape_37",
+      "sha256": "b20a9f22215cd3a4e8c9b1fe1364925d3a3a0d7ebd4c6a4466d1237bc58c38ff",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_tape_38",
+      "sha256": "6c57f4c7a5e9c49bf16ddca10f671044e0acdc9cdfccf004f996dd2b63712ac3",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_tape_39",
+      "sha256": "13a142b9808ea25b470a5c7b7655afc9100404c720e568c7d48da1fbb3b116a1",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_tape_40",
+      "sha256": "63a9eaec70d89d652ac77f7de1f78190de5dfd63e9134b0ec12a384725479470",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_tape_41",
+      "sha256": "dadf44f9e37a38b0479ae90437213bfe672ce0ad2b9da66e7ee8af1ec2cc2c42",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_tape_42",
+      "sha256": "aad3f7e0e6d63d8ecb06432ae62e9cb4cba67b516f57e5a779091835b40b7690",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_tape_43",
+      "sha256": "091f8321f65b4187e82180638cd549e3f61007a399031e0e1d9d9d63b04db2aa",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_tape_44",
+      "sha256": "0713cc15196dc4e96e59c8baca4dccf4842ef8c02f1ccda8cf85f197055785f3",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_tape_45",
+      "sha256": "007326cd218cbbbf6941bf841ff26e52fe85598c22fd4d530f077d833627c502",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_tape_46",
+      "sha256": "da18898fdc8fa22fe18bd3dc17ad61ff8ba3eb140bdd32c22d8e27b126a6e9f4",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_tape_47",
+      "sha256": "bfa1a75b73da894cce8555d622477fc135ea8db13fa5dff52905583a28798331",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_radio_00",
+      "sha256": "11556feb87ebd2dbeb5722783d9d911d4d88a3d86b9755ea390760da33b24982",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_radio_01",
+      "sha256": "e92ba6f7dff669a81bc044c18ade2917e86446fe53434d2f48041323b3247319",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_radio_02",
+      "sha256": "f7458c4864b88747c36dd96968ae6ccb8b7d1a2f4ead400d9e064dfc7377b8f4",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_radio_03",
+      "sha256": "de3ed4d243c3edcb5d51b3605ca72bcd3069e30a2689d4ca5bfb0e7e0a23482a",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_radio_04",
+      "sha256": "dc64af90e1e6068163dee3996e07f4ad698347f3cb038f4c379055e880357e8e",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_radio_05",
+      "sha256": "9bd7c73321114fe16be49e89b54ee010a595d8a4da5b5fdb7c99deee7177199c",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_radio_06",
+      "sha256": "4cefd5a17ce9b249c0c6dda4183f2d05bf7ae119c70952f073645cac154465bc",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_radio_07",
+      "sha256": "493e7ff9d72b7173dfce758ca83e7a878c34c92febab3a42be55a5395a681eaa",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_radio_08",
+      "sha256": "81e1c3d77b11d47c805cf322fd2e491fce18dfc19bbbe4c2830e473920e2c41e",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_radio_09",
+      "sha256": "398a894ddb9b6363ff3e96107826c1ef80617b345e6aae582482302bfe6816e1",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_radio_10",
+      "sha256": "d9d364faca201aa8194211fafb962ea13afefd6df4d38780ac95bc861ab796f3",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_radio_11",
+      "sha256": "d262a8bf12064fb219f8acc5e68a1c6fe68067cc808a3d3b41ee6b1f4c58a74b",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_radio_12",
+      "sha256": "e6853325d1ec4a640f1cb52953c9ee6b60618764a9b42d816efa87b836481a81",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_radio_13",
+      "sha256": "8d738a6ff0ca292fbfa3135dd93230d5808b6646f3f723a5d2377e2e770741cd",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_radio_14",
+      "sha256": "3b70247fba67fe228d727efc345080d3b0e3d18037d146181db426fc5d419585",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_radio_15",
+      "sha256": "3c05e30f00132631c95cba173195125c9cb13ead0e51f14ca82cc5bd1507484c",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_radio_16",
+      "sha256": "7a0040dd0519c2c602db1c868fb5d2212cc564b2572cd7830b106d2c9f65fe60",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_radio_17",
+      "sha256": "41775d22a57719a5786feebc1f8f56d56a651eea361052ea2d44cb069d50a395",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_radio_18",
+      "sha256": "77ae62c3b1aac6284b24444d7664aad418100ea08f652b352e321ad4bbc15d05",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_radio_19",
+      "sha256": "0e62eeb30743c577f1d8e732186ea663b9f43dd73cecc6596a3c775072ab0522",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_radio_20",
+      "sha256": "4eea20c6ce92ab96ecc4509ced67546dcd9aa638b010d6aa2556cd80e4248a6b",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_radio_21",
+      "sha256": "d4c1569cc80b31bc183b381fec320cb8873f572269effe604b5b2557f8072d97",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_radio_22",
+      "sha256": "024344a8894d2f7c221e2e0059190628029e2091663b6315de0ad7d15f5782cd",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_radio_23",
+      "sha256": "2ad78d71fa9de63cd04739f1dc9535e619ee18254b2c4c70eb37414115855f3b",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_radio_24",
+      "sha256": "a0688d2575fc9ec2c51aa4cab0ffcf2143f25bd681fce7b87de638e25e769e0d",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_radio_25",
+      "sha256": "716b133979ca414fc0f92bcc445f26cb85c87c4d8c0cdb5cea4914afbc8fd830",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_radio_26",
+      "sha256": "bf0e5e295d9b66b4cef4e7b8f4ec1dd55617e1536988a02cb46669fc31f6f69c",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_radio_27",
+      "sha256": "3660ea112124b415b01ead440549b0ff2f667a12c91c4857ed392617407c5db0",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_radio_28",
+      "sha256": "52930e15be3b0048dfaa8b3686f43b16e7d28c66130c90c52c7d01ac6aa4850d",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_radio_29",
+      "sha256": "b452011087229f2d2f5ef1f471415df8b5ce3fb1ee014af82e0c20db4146c8fc",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_radio_30",
+      "sha256": "041684a6a07090c5e8367e56004479e6cead15c1a2e7a0ffd21b048376667324",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_radio_31",
+      "sha256": "353b080119517ed21a74635ecdc9c9a9cc674e3daf8f4d525c8d3e9c2a7952a5",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_radio_32",
+      "sha256": "2f3e85c1284a6fb21ec3f354190de372051037f430168623f035dabec6478ba1",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_radio_33",
+      "sha256": "e48810ca35549eabeb717384d6376d3161753ccfec6d0bcb34513c8fa7db90ce",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_radio_34",
+      "sha256": "bd6c2f1e5b603266b5996e536e3ee1b3adafc8301466e7eeead1baa54daa7503",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_radio_35",
+      "sha256": "d0f3dda81ca3a0ee65b5d84386c16178600cf88a85a2e07cf85b3b3620c8d02f",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    },
+    {
+      "object": "v63_asset_radio_36",
+      "sha256": "a3c24be4e8b2750fe28b0e4ebbd9d4ba559bc2039e03d5c2940aa11d7ecf8f6c",
+      "status": "EXACT_LIBRARY_NPZ_MATCH"
+    }
+  ],
+  "original_lights": {
+    "Area.001": {
+      "type": "AREA",
+      "energy": 35.0,
+      "color": [
+        1.0,
+        0.8097665905952454,
+        0.5500627160072327
+      ]
+    },
+    "Area.002": {
+      "type": "SPOT",
+      "energy": 15.0,
+      "color": [
+        0.7839639782905579,
+        0.9884171485900879,
+        1.0
+      ]
+    },
+    "Area.003": {
+      "type": "AREA",
+      "energy": 300.0,
+      "color": [
+        1.0,
+        0.6495402455329895,
+        0.49733731150627136
+      ]
+    },
+    "Area.004": {
+      "type": "AREA",
+      "energy": 39.2699089050293,
+      "color": [
+        1.0,
+        0.7360690832138062,
+        0.6476777791976929
+      ]
+    },
+    "Area.005": {
+      "type": "AREA",
+      "energy": 40.0,
+      "color": [
+        1.0,
+        0.6495402455329895,
+        0.49733731150627136
+      ]
+    },
+    "Sun.001": {
+      "type": "SUN",
+      "energy": 8.0,
+      "color": [
+        0.8898804187774658,
+        0.7987613677978516,
+        0.724198579788208
+      ]
+    },
+    "Sun.005": {
+      "type": "SUN",
+      "energy": 15.0,
+      "color": [
+        0.8898493051528931,
+        0.6908843517303467,
+        0.5374991297721863
+      ]
+    }
+  },
+  "original_scenes": {
+    "Fog": {
+      "world": "flower_hillside",
+      "engine": "BLENDER_EEVEE_NEXT",
+      "view_transform": "AgX",
+      "exposure": 0.0,
+      "gamma": 1.0,
+      "compositor_nodes": []
+    },
+    "Scene": {
+      "world": "flower_hillside",
+      "engine": "CYCLES",
+      "view_transform": "AgX",
+      "exposure": 0.0,
+      "gamma": 1.0,
+      "compositor_nodes": [
+        [
+          "Mist+Distance",
+          "NodeFrame"
+        ],
+        [
+          "Volumetric Fog",
+          "NodeFrame"
+        ],
+        [
+          "Grading",
+          "NodeFrame"
+        ],
+        [
+          "Glare.001",
+          "NodeFrame"
+        ],
+        [
+          "Lens Dirt",
+          "NodeFrame"
+        ],
+        [
+          "Vignette",
+          "NodeFrame"
+        ],
+        [
+          "Denoise",
+          "CompositorNodeDenoise"
+        ],
+        [
+          "Render Layers",
+          "CompositorNodeRLayers"
+        ],
+        [
+          "Dilate/Erode",
+          "CompositorNodeDilateErode"
+        ],
+        [
+          "Blur.001",
+          "CompositorNodeBlur"
+        ],
+        [
+          "Map Range.001",
+          "CompositorNodeMapRange"
+        ],
+        [
+          "Map Range",
+          "CompositorNodeMapRange"
+        ],
+        [
+          "Color Ramp.003",
+          "CompositorNodeValToRGB"
+        ],
+        [
+          "Mix.004",
+          "CompositorNodeMixRGB"
+        ],
+        [
+          "Mix.001",
+          "CompositorNodeMixRGB"
+        ],
+        [
+          "Color Ramp.002",
+          "CompositorNodeValToRGB"
+        ],
+        [
+          "Render Layers.001",
+          "CompositorNodeRLayers"
+        ],
+        [
+          "Gamma.001",
+          "CompositorNodeGamma"
+        ],
+        [
+          "Mix",
+          "CompositorNodeMixRGB"
+        ],
+        [
+          "Alpha Over",
+          "CompositorNodeAlphaOver"
+        ],
+        [
+          "Gamma",
+          "CompositorNodeGamma"
+        ],
+        [
+          "Color Balance",
+          "CompositorNodeColorBalance"
+        ],
+        [
+          "Glare",
+          "CompositorNodeGlare"
+        ],
+        [
+          "Mix.002",
+          "CompositorNodeMixRGB"
+        ],
+        [
+          "Glare.002",
+          "CompositorNodeGlare"
+        ],
+        [
+          "Image",
+          "CompositorNodeImage"
+        ],
+        [
+          "Scale",
+          "CompositorNodeScale"
+        ],
+        [
+          "Mix.005",
+          "CompositorNodeMixRGB"
+        ],
+        [
+          "Gamma.002",
+          "CompositorNodeGamma"
+        ],
+        [
+          "Mix.006",
+          "CompositorNodeMixRGB"
+        ],
+        [
+          "Exposure",
+          "CompositorNodeExposure"
+        ],
+        [
+          "Ellipse Mask",
+          "CompositorNodeEllipseMask"
+        ],
+        [
+          "Blur",
+          "CompositorNodeBlur"
+        ],
+        [
+          "Mix.003",
+          "CompositorNodeMixRGB"
+        ],
+        [
+          "Exposure.001",
+          "CompositorNodeExposure"
+        ],
+        [
+          "Composite",
+          "CompositorNodeComposite"
+        ],
+        [
+          "Viewer",
+          "CompositorNodeViewer"
+        ],
+        [
+          "Reroute",
+          "NodeReroute"
+        ],
+        [
+          "Hue/Saturation/Value",
+          "CompositorNodeHueSat"
+        ]
+      ]
+    }
+  },
+  "author_transform_changes": [],
+  "declared_author_change": "Original boombox.002 hidden; 37 source-material common rigid parts at its original pose.",
+  "added_scene_content": "50 new actors plus common radio replacement, review cameras; NO added lamp/floor/rail.",
+  "stability": {
+    "status": "PASS",
+    "peak_tilt_deg": {
+      "F01": 0.006817535840569895,
+      "F02": 0.010520218388601996,
+      "F03": 0.008699522418779677,
+      "F04": 0.005831709314724462,
+      "F05": 0.0039460649496840085,
+      "F06": 0.45832481800937097,
+      "F07": 0.008293559579986419,
+      "F08": 0.03259525298723047,
+      "F09": 0.0024760252702802797,
+      "F10": 0.005628765706425123,
+      "F11": 0.0018503719453845339,
+      "F12": 0.0034515526958954607,
+      "F13": 0.0012480328126582218,
+      "F14": 0.00248051073107213,
+      "F15": 0.0021345806182823343,
+      "F16": 0.0013183343330620818,
+      "F17": 0.0007960087519079806,
+      "F18": 0.0017893211603742813,
+      "F19": 0.00750176696388336,
+      "F20": 0.0055031967757462,
+      "F21": 0.0077247144218509,
+      "F22": 0.026108465865073052,
+      "F23": 0.014237044024193974,
+      "F24": 0.0028203048752431467,
+      "F25": 0.004200446081635402,
+      "F26": 0.028994554702454378,
+      "F27": 0.004076387404206493,
+      "F28": 0.00605566583265162,
+      "F29": 0.008823875961107118,
+      "F30": 0.0033504946518651403,
+      "F31": 0.03919782516918227,
+      "F32": 0.011565101576522898,
+      "F33": 0.014802689430435535,
+      "F34": 0.024079387556952863,
+      "F35": 0.0278322428477947,
+      "F36": 0.11077923303156167,
+      "F37": 0.09164180855578295,
+      "F38": 0.07592204547109495,
+      "F39": 0.03542651599038531,
+      "F40": 0.051725532291878075,
+      "F41": 0.0014332443936339511,
+      "F42": 0.026464426313795524,
+      "F43": 0.04076720458978684,
+      "F44": 0.027434731203762257,
+      "F45": 0.008497814121931933,
+      "F46": 0.002562606826182631,
+      "F47": 0.00923965004183035,
+      "F48": 0.01042097780768995
+    },
+    "seconds": 2,
+    "hz": 960,
+    "input": "no ball, no moving table actor, no impulses",
+    "first_motion": {}
+  },
+  "physics_remaining": [
+    "representative relay checks",
+    "table-ground bridge",
+    "complete chain",
+    "independent penetration checks",
+    "timestep/parameter robustness",
+    "moving camera clearance"
+  ],
+  "ball_initial_velocity_m_s": [
+    7.0,
+    0.0,
+    -1.8119098615
+  ],
+  "ball_mechanism_status": "960/1920 Hz same qualitative outcome; cached penetration gate not passed"
+}
