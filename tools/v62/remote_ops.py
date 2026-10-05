@@ -92,6 +92,7 @@ def main():
     ap.add_argument("--timeout", type=int, default=15)
     ap.add_argument("--directories-only", action="store_true")
     ap.add_argument("--name-regex")
+    ap.add_argument("--tail-lines", type=int, default=0)
     args = ap.parse_args()
     remote_path(args.remote)
     host, env_name = ACCOUNTS[args.account]
@@ -121,10 +122,13 @@ def main():
                 print(json.dumps({"path": path, "entries": data}, ensure_ascii=False))
             elif args.action == "read":
                 with sftp.open(path, "rb") as handle:
+                    if args.tail_lines:
+                        handle.seek(max(0, sftp.stat(path).st_size - 65536))
                     data = handle.read(512 * 1024 + 1)
                 if len(data) > 512 * 1024:
                     raise ValueError("refuse oversized read; download specified artifact instead")
-                print(data.decode("utf-8", errors="replace"))
+                result = data.decode("utf-8", errors="replace")
+                print('\n'.join(result.splitlines()[-args.tail_lines:]) if args.tail_lines else result)
             elif args.action == "put":
                 source = local_path(args.local)
                 ensure_directory(sftp, posixpath.dirname(path))

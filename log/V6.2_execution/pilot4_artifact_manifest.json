@@ -1,0 +1,43 @@
+{
+  "status": "VISUAL_PILOT_NOT_FULL_STAGE1_ACCEPTANCE",
+  "epoch": 1791211611.6068363,
+  "files": [
+    {
+      "name": "01_table_story.png",
+      "bytes": 4713732,
+      "sha256": "e32434428a2114bc2c0b56d4ae921a148db8ba0f3d5ee7530975d889c185cd45"
+    },
+    {
+      "name": "02_table_side.png",
+      "bytes": 4687709,
+      "sha256": "46197a06ce123ee7208aa94ef873981ed8ecc912ec4bbfe71e22214dc8019760"
+    },
+    {
+      "name": "03_drop_bridge.png",
+      "bytes": 4763780,
+      "sha256": "46942da98cd24ae572c44a66cbb9e1bb7115e855f3a3ca04b5692b09308ac45d"
+    },
+    {
+      "name": "05_tape_and_suitcase.png",
+      "bytes": 4779775,
+      "sha256": "1c108e23d5b8aa601bf8236435e94a60e90ab8d24b53c7b2d74c0c7067c86d70"
+    },
+    {
+      "name": "pilot_report.json",
+      "bytes": 19874,
+      "sha256": "bb5a4ee9a626d730f2be21b620569ed9e66929dd028f2cd68a2d249776abce38"
+    },
+    {
+      "name": "pilot.blend",
+      "bytes": 484683833,
+      "sha256": "d89eaaa522870ff88c69a2bc3c685782e4f684cce23592670118c2a0cfcc2ca7"
+    }
+  ],
+  "raw_output": "/data/raw/huzijian/project1_database/tmp/v62_node12/run_20261005_pilot4",
+  "archive": "/data/raw/huzijian/project1_database/outcomes/v62/radio_mixed_domino/20261005_pilot4",
+  "original_scene_sha256": "be1247889cee3ce10028ee1ef1066a96728b3c2aa191ad12b51cc3b578fa4ae9",
+  "original_scene_expected_sha256": "be1247889cee3ce10028ee1ef1066a96728b3c2aa191ad12b51cc3b578fa4ae9",
+  "source_hash_matches_baseline": true,
+  "renderer_sha256": "ee931fbe21376b34787849d7cb33b60ca4c6324376cf6d0552b9c43c8136305c",
+  "note": "Working blend retained server-side; only stills and small reports need local download. No source or failed files removed."
+}

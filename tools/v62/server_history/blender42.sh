@@ -11,10 +11,6 @@ export TMP="$V62_SCRATCH"
 export XDG_CACHE_HOME="$V62_SCRATCH/cache"
 export XDG_CONFIG_HOME="$V62_SCRATCH/config"
 export XDG_DATA_HOME="$V62_SCRATCH/data"
-export CUDA_CACHE_PATH="$V62_SCRATCH/cuda_cache"
-export OPTIX_CACHE_PATH="$V62_SCRATCH/optix_cache"
-export __GL_SHADER_DISK_CACHE_PATH="$V62_SCRATCH/gl_shader_cache"
-export MESA_SHADER_CACHE_DIR="$V62_SCRATCH/mesa_shader_cache"
 export BLENDER_USER_RESOURCES="$V62_SCRATCH/blender_user"
 export BLENDER_USER_CONFIG="$V62_SCRATCH/blender_user/config"
 export BLENDER_USER_SCRIPTS="$V62_SCRATCH/blender_user/scripts"
@@ -26,5 +22,5 @@ export PATH=/data/raw/huzijian/project1_database/tools/runtime/blender-4.2.23-li
 export PYTHONNOUSERSITE=1
 export PYTHONDONTWRITEBYTECODE=1
 export VIRTUAL_ENV=/data/raw/huzijian/project1_database/tools/conda_env
-/usr/bin/mkdir -p "$TMPDIR" "$XDG_CACHE_HOME" "$XDG_CONFIG_HOME" "$XDG_DATA_HOME" "$BLENDER_USER_CONFIG" "$BLENDER_USER_SCRIPTS" "$CUDA_CACHE_PATH" "$OPTIX_CACHE_PATH" "$__GL_SHADER_DISK_CACHE_PATH" "$MESA_SHADER_CACHE_DIR"
+/usr/bin/mkdir -p "$TMPDIR" "$XDG_CACHE_HOME" "$XDG_CONFIG_HOME" "$XDG_DATA_HOME" "$BLENDER_USER_CONFIG" "$BLENDER_USER_SCRIPTS"
 exec /data/raw/huzijian/project1_database/tools/runtime/v62_compat_debian231_r2/lib/ld-linux-x86-64.so.2 --library-path /data/raw/huzijian/project1_database/tools/runtime/v62_compat_debian231_r2/lib:/data/raw/huzijian/project1_database/tools/conda_env/lib:/data/raw/huzijian/project1_database/tools/runtime/blender-4.2.23-linux-x64/lib:/data/raw/huzijian/project1_database/tools/runtime/lib /data/raw/huzijian/project1_database/tools/runtime/blender-4.2.23-linux-x64/blender "$@"
