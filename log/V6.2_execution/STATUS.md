@@ -58,6 +58,6 @@
 
 运行指引与缓存注意事项：`D:\workspace\project1_database\tools\v62\DEPLOYMENT.md`。后续使用项目内 `blender42_scoped.sh`，补全 CUDA/OptiX/OpenGL/Mesa 专项缓存重定向；前期没有单独核验驱动默认缓存位置，不宣称该部分已完成目录审计，也不要访问工作区外去追查/清理。
 
-Git：首个计划提交 `7e39673` 已推送 `origin/main`；执行代码、备份与结果摘要将作为本轮后续独立提交。服务器根原无 `.git`，代码另放项目内隔离检出，实际提交见 `D:\workspace\project1_database\log\V6.2_execution\GIT_HANDOFF.md`（生成后以其为准）。没有把其他任务的修改混入提交。
+Git：计划首稿 `7e39673` 与执行代码/备份/证据提交 `f651d67` 均已推送 `origin/main`。服务器根原无 `.git`，项目内隔离检出已实测 HEAD 为 `f651d67` 且工作树干净。后续交接元数据另作文档提交；详见 `D:\workspace\project1_database\log\V6.2_execution\GIT_HANDOFF.md`。没有把其他任务的修改混入提交。
 
 所有历史失败与旧交付保留，未删除文件。一次提前下载尚未生成的 node12 报告在本地留下空文件 `node12_probe.json`；它不是有效证据，使用 `node12_probe_retry.json`。暂未对其作清理操作。

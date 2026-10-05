@@ -1,0 +1,14 @@
+[
+  {
+    "epoch": 1791210311.6593125,
+    "idle": true,
+    "processes": "",
+    "gpus": "0, GPU-76330662-90bb-222e-1f50-1808f9771d73, 9, 0\n1, GPU-a94dd628-5e85-0eeb-74c9-dc6fb4b56721, 9, 0\n2, GPU-665e9626-9862-7424-fc4a-dc90d61079fa, 11, 0\n3, GPU-245beacc-9dd2-60bb-4538-7e77ee56641f, 53, 0\n"
+  },
+  {
+    "epoch": 1791210314.7725542,
+    "idle": true,
+    "processes": "",
+    "gpus": "0, GPU-76330662-90bb-222e-1f50-1808f9771d73, 9, 0\n1, GPU-a94dd628-5e85-0eeb-74c9-dc6fb4b56721, 9, 0\n2, GPU-665e9626-9862-7424-fc4a-dc90d61079fa, 11, 0\n3, GPU-245beacc-9dd2-60bb-4538-7e77ee56641f, 53, 0\n"
+  }
+]
