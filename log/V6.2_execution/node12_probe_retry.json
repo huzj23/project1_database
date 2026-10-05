@@ -1,0 +1,175 @@
+{
+  "label": "node12",
+  "utc_epoch": 1791204745.1692069,
+  "hostname": "gpu0002",
+  "python": "/data/raw/huzijian/project1_database/tools/conda_env/bin/python",
+  "version": "3.10.18 (main, Jun  5 2025, 13:14:17) [GCC 11.2.0]",
+  "cwd": "/data/raw/huzijian/project1_database",
+  "cpu_count": 104,
+  "load_average": [
+    0.19,
+    0.15,
+    0.16
+  ],
+  "shared_workspace_stat": {
+    "device": 51,
+    "inode": 540581313
+  },
+  "system_tools": [
+    {
+      "command": [
+        "/usr/bin/nvidia-smi",
+        "--query-gpu=index,uuid,name,memory.used,memory.total,utilization.gpu",
+        "--format=csv,noheader"
+      ],
+      "rc": 0,
+      "stdout": "0, GPU-76330662-90bb-222e-1f50-1808f9771d73, NVIDIA A100 80GB PCIe, 9 MiB, 81920 MiB, 0 %\n1, GPU-a94dd628-5e85-0eeb-74c9-dc6fb4b56721, NVIDIA A100 80GB PCIe, 8 MiB, 81920 MiB, 0 %\n2, GPU-665e9626-9862-7424-fc4a-dc90d61079fa, NVIDIA A100 80GB PCIe, 11 MiB, 81920 MiB, 0 %\n3, GPU-245beacc-9dd2-60bb-4538-7e77ee56641f, NVIDIA A100 80GB PCIe, 53 MiB, 81920 MiB, 0 %\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/usr/bin/nvidia-smi",
+        "--query-compute-apps=pid,gpu_uuid,used_gpu_memory",
+        "--format=csv,noheader"
+      ],
+      "rc": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/usr/bin/free",
+        "-m"
+      ],
+      "rc": 0,
+      "stdout": "              total        used        free      shared  buff/cache   available\nMem:         515457       14332       20202        4054      480922      494734\nSwap:             0           0           0\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/usr/bin/tmux",
+        "-V"
+      ],
+      "rc": 0,
+      "stdout": "tmux 1.8\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/usr/bin/getconf",
+        "GNU_LIBC_VERSION"
+      ],
+      "rc": 0,
+      "stdout": "glibc 2.17\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/data/raw/huzijian/project1_database/tools/runtime/blender-3.4.1-linux-x64/blender",
+        "--version"
+      ],
+      "rc": 0,
+      "stdout": "Blender 3.4.1\n\tbuild date: 2022-12-20\n\tbuild time: 00:46:45\n\tbuild commit date: 2022-12-19\n\tbuild commit time: 17:00\n\tbuild hash: 55485cb379f7\n\tbuild platform: Linux\n\tbuild type: release\n\tbuild c flags:  -Wall -Werror=implicit-function-declaration -Werror=return-type -Werror=vla -Wstrict-prototypes -Wmissing-prototypes -Wno-char-subscripts -Wno-unknown-pragmas -Wpointer-arith -Wunused-parameter -Wwrite-strings -Wlogical-op -Wundef -Winit-self -Wmissing-include-dirs -Wno-div-by-zero -Wtype-limits -Wformat-signedness -Wrestrict -Wnonnull -Wabsolute-value -Wuninitialized -Wredundant-decls -Wshadow -Wno-error=unused-but-set-variable -Wimplicit-fallthrough=5  -std=gnu11 -msse -pipe -fPIC -funsigned-char -fno-strict-aliasing -ffp-contract=off -msse2 -D_GLIBCXX_USE_CXX11_ABI=0  \n\tbuild c++ flags:  -Wuninitialized -Wredundant-decls -Wall -Wno-invalid-offsetof -Wno-sign-compare -Wlogical-op -Winit-self -Wmissing-include-dirs -Wno-div-by-zero -Wtype-limits -Werror=return-type -Wno-char-subscripts -Wno-unknown-pragmas -Wpointer-arith -Wunused-parameter -Wwrite-strings -Wundef -Wformat-signedness -Wrestrict -Wno-suggest-override -Wuninitialized -Wundef -Wmissing-declarations -Wimplicit-fallthrough=5  -msse -pipe -fPIC -funsigned-char -fno-strict-aliasing -ffp-contract=off -msse2 -D_GLIBCXX_USE_CXX11_ABI=0  \n\tbuild link flags:  -Wl,--version-script='/home/blender/git/blender-v340/blender.git/source/creator/symbols_unix.map'\n\tbuild system: CMake\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/data/raw/huzijian/project1_database/tools/runtime/blender-4.2.23-linux-x64/blender",
+        "--version"
+      ],
+      "rc": 1,
+      "stdout": "",
+      "stderr": "/data/raw/huzijian/project1_database/tools/runtime/blender-4.2.23-linux-x64/blender: /lib64/libc.so.6: version `GLIBC_2.26' not found (required by /data/raw/huzijian/project1_database/tools/runtime/blender-4.2.23-linux-x64/blender)\n/data/raw/huzijian/project1_database/tools/runtime/blender-4.2.23-linux-x64/blender: /lib64/libc.so.6: version `GLIBC_2.27' not found (required by /data/raw/huzijian/project1_database/tools/runtime/blender-4.2.23-linux-x64/blender)\n/data/raw/huzijian/project1_database/tools/runtime/blender-4.2.23-linux-x64/blender: /lib64/libc.so.6: version `GLIBC_2.25' not found (required by /data/raw/huzijian/project1_database/tools/runtime/blender-4.2.23-linux-x64/blender)\n/data/raw/huzijian/project1_database/tools/runtime/blender-4.2.23-linux-x64/blender: /lib64/libc.so.6: version `GLIBC_2.28' not found (required by /data/raw/huzijian/project1_database/tools/runtime/blender-4.2.23-linux-x64/blender)\n/data/raw/huzijian/project1_database/tools/runtime/blender-4.2.23-linux-x64/blender: /lib64/libstdc++.so.6: version `GLIBCXX_3.4.21' not found (required by /data/raw/huzijian/project1_database/tools/runtime/blender-4.2.23-linux-x64/blender)\n/data/raw/huzijian/project1_database/tools/runtime/blender-4.2.23-linux-x64/blender: /lib64/libstdc++.so.6: version `CXXABI_1.3.11' not found (required by /data/raw/huzijian/project1_database/tools/runtime/blender-4.2.23-linux-x64/blender)\n/data/raw/huzijian/project1_database/tools/runtime/blender-4.2.23-linux-x64/blender: /lib64/libstdc++.so.6: version `GLIBCXX_3.4.22' not found (required by /data/raw/huzijian/project1_database/tools/runtime/blender-4.2.23-linux-x64/blender)\n/data/raw/huzijian/project1_database/tools/runtime/blender-4.2.23-linux-x64/blender: /lib64/libstdc++.so.6: version `GLIBCXX_3.4.20' not found (required by /data/raw/huzijian/project1_database/tools/runtime/blender-4.2.23-linux-x64/blender)\n/data/raw/huzijian/project1_database/tools/runtime/blender-4.2.23-linux-x64/blender: /lib64/libstdc++.so.6: version `CXXABI_1.3.8' not found (required by /data/raw/huzijian/project1_database/tools/runtime/blender-4.2.23-linux-x64/blender)\n/data/raw/huzijian/project1_database/tools/runtime/blender-4.2.23-linux-x64/blender: /lib64/libm.so.6: version `GLIBC_2.27' not found (required by /data/raw/huzijian/project1_database/tools/runtime/blender-4.2.23-linux-x64/blender)\n/data/raw/huzijian/project1_database/tools/runtime/blender-4.2.23-linux-x64/blender: /lib64/libstdc++.so.6: version `GLIBCXX_3.4.21' not found (required by /data/raw/huzijian/project1_database/tools/runtime/blender-4.2.23-linux-x64/lib/libblender_cpu_check.so)\n/data/raw/huzijian/project1_database/tools/runtime/blender-4.2.23-linux-x64/blender: /lib64/libstdc++.so.6: version `CXXABI_1.3.8' not found (required by /data/raw/huzijian/project1_database/tools/runtime/blender-4.2.23-linux-x64/lib/libtbb.so.2)\n/data/raw/huzijian/project1_database/tools/runtime/blender-4.2.23-linux-x64/blender: /lib64/libstdc++.so.6: version `CXXABI_1.3.11' not found (required by /data/raw/huzijian/project1_database/tools/runtime/blender-4.2.23-linux-x64/lib/libtbb.so.2)\n/data/raw/huzijian/project1_database/tools/runtime/blender-4.2.23-linux-x64/blender: /lib64/libstdc++.so.6: version `GLIBCXX_3.4.21' not found (required by /data/raw/huzijian/project1_database/tools/runtime/blender-4.2.23-linux-x64/lib/libtbb.so.2)\n/data/raw/huzijian/project1_database/tools/runtime/blender-4.2.23-linux-x64/blender: /lib64/libstdc++.so.6: version `GLIBCXX_3.4.20' not found (required by /data/raw/huzijian/project1_database/tools/runtime/blender-4.2.23-linux-x64/lib/libosdGPU.so.3.6.0)\n/data/raw/huzijian/project1_database/tools/runtime/blender-4.2.23-linux-x64/blender: /lib64/libstdc++.so.6: version `CXXABI_1.3.8' not found (required by /data/raw/huzijian/project1_database/tools/runtime/blender-4.2.23-linux-x64/lib/libosdGPU.so.3.6.0)\n/data/raw/huzijian/project1_database/tools/runtime/blender-4.2.23-linux-x64/blender: /lib64/libstdc++.so.6: version `CXXABI"
+    }
+  ],
+  "modules": {
+    "numpy": "/data/raw/huzijian/project1_database/tools/conda_env/lib/python3.10/site-packages/numpy/__init__.py",
+    "pybullet": "/data/raw/huzijian/project1_database/tools/conda_env/lib/python3.10/site-packages/pybullet.cpython-310-x86_64-linux-gnu.so",
+    "trimesh": "/data/raw/huzijian/project1_database/tools/conda_env/lib/python3.10/site-packages/trimesh/__init__.py",
+    "PIL": "/data/raw/huzijian/project1_database/tools/conda_env/lib/python3.10/site-packages/PIL/__init__.py",
+    "scipy": "/data/raw/huzijian/project1_database/tools/conda_env/lib/python3.10/site-packages/scipy/__init__.py",
+    "bpy": "/data/raw/huzijian/project1_database/tools/conda_env/lib/python3.10/site-packages/bpy/__init__.so",
+    "psutil": null
+  },
+  "assets": {
+    "Shurtape_30_Day_Removal_UV_Delct_15": [
+      {
+        "path": "/data/raw/huzijian/project1_database/models/gso/Shurtape_30_Day_Removal_UV_Delct_15/collision_geometry.obj",
+        "bytes": 19453
+      },
+      {
+        "path": "/data/raw/huzijian/project1_database/models/gso/Shurtape_30_Day_Removal_UV_Delct_15/data.json",
+        "bytes": 885
+      },
+      {
+        "path": "/data/raw/huzijian/project1_database/models/gso/Shurtape_30_Day_Removal_UV_Delct_15/texture.png",
+        "bytes": 11018797
+      },
+      {
+        "path": "/data/raw/huzijian/project1_database/models/gso/Shurtape_30_Day_Removal_UV_Delct_15/visual_geometry.mtl",
+        "bytes": 410
+      },
+      {
+        "path": "/data/raw/huzijian/project1_database/models/gso/Shurtape_30_Day_Removal_UV_Delct_15/visual_geometry.obj",
+        "bytes": 250655
+      },
+      {
+        "path": "/data/raw/huzijian/project1_database/models/gso/Shurtape_30_Day_Removal_UV_Delct_15/object.urdf",
+        "bytes": 860
+      }
+    ],
+    "LEGO_Bricks_More_Creative_Suitcase": [
+      {
+        "path": "/data/raw/huzijian/project1_database/models/gso/LEGO_Bricks_More_Creative_Suitcase/collision_geometry.obj",
+        "bytes": 3388
+      },
+      {
+        "path": "/data/raw/huzijian/project1_database/models/gso/LEGO_Bricks_More_Creative_Suitcase/data.json",
+        "bytes": 863
+      },
+      {
+        "path": "/data/raw/huzijian/project1_database/models/gso/LEGO_Bricks_More_Creative_Suitcase/texture.png",
+        "bytes": 16837925
+      },
+      {
+        "path": "/data/raw/huzijian/project1_database/models/gso/LEGO_Bricks_More_Creative_Suitcase/visual_geometry.mtl",
+        "bytes": 410
+      },
+      {
+        "path": "/data/raw/huzijian/project1_database/models/gso/LEGO_Bricks_More_Creative_Suitcase/visual_geometry.obj",
+        "bytes": 342855
+      },
+      {
+        "path": "/data/raw/huzijian/project1_database/models/gso/LEGO_Bricks_More_Creative_Suitcase/object.urdf",
+        "bytes": 877
+      }
+    ],
+    "Paper_Mario_Sticker_Star_Nintendo_3DS_Game": [
+      {
+        "path": "/data/raw/huzijian/project1_database/models/gso/Paper_Mario_Sticker_Star_Nintendo_3DS_Game/collision_geometry.obj",
+        "bytes": 3398
+      },
+      {
+        "path": "/data/raw/huzijian/project1_database/models/gso/Paper_Mario_Sticker_Star_Nintendo_3DS_Game/data.json",
+        "bytes": 895
+      },
+      {
+        "path": "/data/raw/huzijian/project1_database/models/gso/Paper_Mario_Sticker_Star_Nintendo_3DS_Game/texture.png",
+        "bytes": 13894147
+      },
+      {
+        "path": "/data/raw/huzijian/project1_database/models/gso/Paper_Mario_Sticker_Star_Nintendo_3DS_Game/visual_geometry.mtl",
+        "bytes": 410
+      },
+      {
+        "path": "/data/raw/huzijian/project1_database/models/gso/Paper_Mario_Sticker_Star_Nintendo_3DS_Game/visual_geometry.obj",
+        "bytes": 177464
+      },
+      {
+        "path": "/data/raw/huzijian/project1_database/models/gso/Paper_Mario_Sticker_Star_Nintendo_3DS_Game/object.urdf",
+        "bytes": 882
+      }
+    ]
+  },
+  "native_blend_exists": true
+}
