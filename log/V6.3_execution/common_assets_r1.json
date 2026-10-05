@@ -1,0 +1,1915 @@
+{
+  "status": "COMMON_ASSETS_PENDING_VISUAL_QA",
+  "assets": {
+    "paper": {
+      "asset_id": "Paper_Mario_Sticker_Star_Nintendo_3DS_Game",
+      "object": "v63_asset_paper",
+      "dims": [
+        0.015746,
+        0.13758599999999999,
+        0.12521100000000002
+      ],
+      "mass_estimate_kg": 0.07,
+      "mass_note": "estimated, not measured; sensitivity required",
+      "source_centre": [
+        0.0018494900000000022,
+        0.00025149000000000005,
+        0.0003631899999999998
+      ],
+      "source_to_body": [
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ]
+      ],
+      "texture": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/textures/paper_own_atlas.png",
+      "texture_stats": {
+        "std": 0.25702062249183655,
+        "nonzero_fraction": 0.9109277725219727
+      },
+      "geometry_note": "common box; scan chamfers/dents are not preserved",
+      "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/paper.npz",
+      "vertices": 8,
+      "triangles": 12,
+      "shape_sha256": "f450f6747f82fc1356392c37aa5fd0e4a21c60b9960cb958b26ddd681d9d21ef",
+      "min": [
+        -0.007872999645769596,
+        -0.06879299879074097,
+        -0.06260550022125244
+      ],
+      "max": [
+        0.007872999645769596,
+        0.06879299879074097,
+        0.06260550022125244
+      ]
+    },
+    "wii": {
+      "asset_id": "New_Super_Mario_BrosWii_Wii_Game",
+      "object": "v63_asset_wii",
+      "dims": [
+        0.016727,
+        0.137079,
+        0.191721
+      ],
+      "mass_estimate_kg": 0.12,
+      "mass_note": "estimated, not measured; sensitivity required",
+      "source_centre": [
+        0.0019032500000000022,
+        -0.00028121000000000396,
+        0.0001868799999999995
+      ],
+      "source_to_body": [
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ]
+      ],
+      "texture": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/textures/wii_own_atlas.png",
+      "texture_stats": {
+        "std": 0.2608104944229126,
+        "nonzero_fraction": 0.9221494197845459
+      },
+      "geometry_note": "common box; scan chamfers/dents are not preserved",
+      "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/wii.npz",
+      "vertices": 8,
+      "triangles": 12,
+      "shape_sha256": "b1be83387c60a113aab4458167a48187f4e58c6e105f0cf890f702bf7bf88c67",
+      "min": [
+        -0.008363500237464905,
+        -0.06853950023651123,
+        -0.09586050361394882
+      ],
+      "max": [
+        0.008363500237464905,
+        0.06853950023651123,
+        0.09586050361394882
+      ]
+    },
+    "dvd": {
+      "asset_id": "House_of_Cards_The_Complete_First_Season_4_Discs_DVD",
+      "object": "v63_asset_dvd",
+      "dims": [
+        0.023612,
+        0.14349299999999998,
+        0.19093
+      ],
+      "mass_estimate_kg": 0.23,
+      "mass_note": "estimated, not measured; sensitivity required",
+      "source_centre": [
+        0.0006253000000000022,
+        7.769000000000005e-05,
+        -0.00014056999999999958
+      ],
+      "source_to_body": [
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          -1,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "texture": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/textures/dvd_own_atlas.png",
+      "texture_stats": {
+        "std": 0.22801466286182404,
+        "nonzero_fraction": 0.9093461036682129
+      },
+      "geometry_note": "common box; scan chamfers/dents are not preserved",
+      "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/dvd.npz",
+      "vertices": 8,
+      "triangles": 12,
+      "shape_sha256": "450c86423ce4f101ba4c12e065c7530cc407974b2c38f36395877d4957a5706b",
+      "min": [
+        -0.011806000024080276,
+        -0.07174649834632874,
+        -0.09546499699354172
+      ],
+      "max": [
+        0.011806000024080276,
+        0.07174649834632874,
+        0.09546499699354172
+      ]
+    },
+    "cranium": {
+      "asset_id": "Hasbro_Cranium_Performance_and_Acting_Game",
+      "object": "v63_asset_cranium",
+      "dims": [
+        0.054855,
+        0.208143,
+        0.272031
+      ],
+      "mass_estimate_kg": 0.6,
+      "mass_note": "estimated, not measured; sensitivity required",
+      "source_centre": [
+        -0.0008247700000000024,
+        -0.00021196000000000062,
+        0.000614629999999991
+      ],
+      "source_to_body": [
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          -1,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "texture": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/textures/cranium_own_atlas.png",
+      "texture_stats": {
+        "std": 0.2823030948638916,
+        "nonzero_fraction": 0.9509997367858887
+      },
+      "geometry_note": "common box; scan chamfers/dents are not preserved",
+      "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/cranium.npz",
+      "vertices": 8,
+      "triangles": 12,
+      "shape_sha256": "ff4962888c1a02d60ca2a358e69f4bed629aaa1c8c6750411db96571208fa31c",
+      "min": [
+        -0.02742750011384487,
+        -0.10407149791717529,
+        -0.13601550459861755
+      ],
+      "max": [
+        0.02742750011384487,
+        0.10407149791717529,
+        0.13601550459861755
+      ]
+    },
+    "trivial": {
+      "asset_id": "Hasbro_Trivial_Pursuit_Family_Edition_Game",
+      "object": "v63_asset_trivial",
+      "dims": [
+        0.063604,
+        0.20462000000000002,
+        0.271042
+      ],
+      "mass_estimate_kg": 0.8,
+      "mass_note": "estimated, not measured; sensitivity required",
+      "source_centre": [
+        -0.0003210400000000016,
+        0.00011034999999999864,
+        0.00046451999999999605
+      ],
+      "source_to_body": [
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          -1,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "texture": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/textures/trivial_own_atlas.png",
+      "texture_stats": {
+        "std": 0.24933607876300812,
+        "nonzero_fraction": 0.9483580589294434
+      },
+      "geometry_note": "common box; scan chamfers/dents are not preserved",
+      "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/trivial.npz",
+      "vertices": 8,
+      "triangles": 12,
+      "shape_sha256": "3af6b346fdfac82f2c96ca65ddaaf8e5f4299907dbfb4e968b8ff293fdb8ba3d",
+      "min": [
+        -0.03180199861526489,
+        -0.10231000185012817,
+        -0.13552099466323853
+      ],
+      "max": [
+        0.03180199861526489,
+        0.10231000185012817,
+        0.13552099466323853
+      ]
+    },
+    "ouija": {
+      "asset_id": "Supernatural_Ouija_Board_Game",
+      "object": "v63_asset_ouija",
+      "dims": [
+        0.057235999999999995,
+        0.406508,
+        0.274949
+      ],
+      "mass_estimate_kg": 0.75,
+      "mass_note": "estimated, not measured; sensitivity required",
+      "source_centre": [
+        -0.0030819399999999914,
+        -0.0003266699999999994,
+        0.00156009
+      ],
+      "source_to_body": [
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          -1,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "texture": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/textures/ouija_own_atlas.png",
+      "texture_stats": {
+        "std": 0.19371160864830017,
+        "nonzero_fraction": 0.9038498401641846
+      },
+      "geometry_note": "common box; scan chamfers/dents are not preserved",
+      "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/ouija.npz",
+      "vertices": 8,
+      "triangles": 12,
+      "shape_sha256": "dc1a965db1449e6fb51de811aa84c1752e8223ab2f6cd8dc601c1c7b70c7b39f",
+      "min": [
+        -0.02861800044775009,
+        -0.20325399935245514,
+        -0.13747450709342957
+      ],
+      "max": [
+        0.02861800044775009,
+        0.20325399935245514,
+        0.13747450709342957
+      ]
+    },
+    "baseball": {
+      "asset_id": "sphere_baseball",
+      "object": "v63_asset_baseball",
+      "mass_estimate_kg": 0.145,
+      "source": "https://polyhaven.com/a/baseball_01",
+      "license": "CC0-1.0",
+      "visual_import_to_body": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ],
+        [
+          0.0,
+          -1.0,
+          0.0
+        ]
+      ],
+      "uv_projection_max_vertex_distance_m": 0.0,
+      "geometry_note": "common convex hull; rigid approximation, no geometric displacement",
+      "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/baseball.npz",
+      "vertices": 3512,
+      "triangles": 7020,
+      "shape_sha256": "3701715d66bc160f36f368df8558fab019cc641473555baf47d022336ba7f4e4",
+      "min": [
+        -0.03675893694162369,
+        -0.037664756178855896,
+        -0.03758450597524643
+      ],
+      "max": [
+        0.03675893694162369,
+        0.037664756178855896,
+        0.03758450597524643
+      ]
+    },
+    "tape": {
+      "asset_id": "Shurtape_30_Day_Removal_UV_Delct_15",
+      "outer_radius": 0.05842375,
+      "inner_radius": 0.03799901294885975,
+      "width": 0.038378999999999996,
+      "parts": [
+        {
+          "object": "v63_asset_tape_00",
+          "uv_projection_max_vertex_distance_m": 0.0021449557971209288,
+          "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/tape_00.npz",
+          "vertices": 8,
+          "triangles": 12,
+          "shape_sha256": "540b86b54fb7f57c507fc37fbcc341a3cab722abdddcea5c76a4cd8b4eabb73e",
+          "min": [
+            0.03767392784357071,
+            -0.0191894993185997,
+            0.0
+          ],
+          "max": [
+            0.05842375010251999,
+            0.0191894993185997,
+            0.007625829428434372
+          ]
+        },
+        {
+          "object": "v63_asset_tape_01",
+          "uv_projection_max_vertex_distance_m": 0.0022040726616978645,
+          "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/tape_01.npz",
+          "vertices": 8,
+          "triangles": 12,
+          "shape_sha256": "ff0e9a336cb737a1b039e395a6875d7e684e86b850569a899e3f5af6262269cb",
+          "min": [
+            0.036704227328300476,
+            -0.0191894993185997,
+            0.004959866404533386
+          ],
+          "max": [
+            0.057923927903175354,
+            0.0191894993185997,
+            0.01512117963284254
+          ]
+        },
+        {
+          "object": "v63_asset_tape_02",
+          "uv_projection_max_vertex_distance_m": 0.0022040726616978645,
+          "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/tape_02.npz",
+          "vertices": 8,
+          "triangles": 12,
+          "shape_sha256": "5f8fb6d91d35d2805c53085b3f219c2dc08715fb45603e63e256ca601e20a6ff",
+          "min": [
+            0.035106509923934937,
+            -0.0191894993185997,
+            0.009834867902100086
+          ],
+          "max": [
+            0.05643301084637642,
+            0.0191894993185997,
+            0.022357800975441933
+          ]
+        },
+        {
+          "object": "v63_asset_tape_03",
+          "uv_projection_max_vertex_distance_m": 0.0021623990032821894,
+          "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/tape_03.npz",
+          "vertices": 8,
+          "triangles": 12,
+          "shape_sha256": "b89e4063ba74f3aef4446ff3ec3e5a20511d6625f8137d9ac3b4193262e79505",
+          "min": [
+            0.032908111810684204,
+            -0.0191894993185997,
+            0.014541592448949814
+          ],
+          "max": [
+            0.05397650599479675,
+            0.0191894993185997,
+            0.029211875051259995
+          ]
+        },
+        {
+          "object": "v63_asset_tape_04",
+          "uv_projection_max_vertex_distance_m": 0.002120116027072072,
+          "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/tape_04.npz",
+          "vertices": 8,
+          "triangles": 12,
+          "shape_sha256": "8711d860133a2eafaef7ee37d9783d6969c2dab7dc62a2b792eb311a70a58409",
+          "min": [
+            0.03014664351940155,
+            -0.0191894993185997,
+            0.018999505788087845
+          ],
+          "max": [
+            0.0505964532494545,
+            0.0191894993185997,
+            0.03556612506508827
+          ]
+        },
+        {
+          "object": "v63_asset_tape_05",
+          "uv_projection_max_vertex_distance_m": 0.0020853779278695583,
+          "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/tape_05.npz",
+          "vertices": 8,
+          "triangles": 12,
+          "shape_sha256": "bf29f344bb02137ee32560c698854b20008bf47224b67fca8e907429acf1cbc5",
+          "min": [
+            0.026869360357522964,
+            -0.0191894993185997,
+            0.023132333531975746
+          ],
+          "max": [
+            0.04635067656636238,
+            0.0191894993185997,
+            0.041311830282211304
+          ]
+        },
+        {
+          "object": "v63_asset_tape_06",
+          "uv_projection_max_vertex_distance_m": 0.0020692271646112204,
+          "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/tape_06.npz",
+          "vertices": 8,
+          "triangles": 12,
+          "shape_sha256": "9940f54108f093ccd48aa7a9a5a9a410ca17168020619a8cbe72f8b14dc19e63",
+          "min": [
+            0.023132333531975746,
+            -0.0191894993185997,
+            0.026869360357522964
+          ],
+          "max": [
+            0.041311830282211304,
+            0.0191894993185997,
+            0.04635067656636238
+          ]
+        },
+        {
+          "object": "v63_asset_tape_07",
+          "uv_projection_max_vertex_distance_m": 0.0020569239277392626,
+          "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/tape_07.npz",
+          "vertices": 8,
+          "triangles": 12,
+          "shape_sha256": "7b856c4e945d7c95061bbebe92d99491c837a4c4ec16c7d045c47c94d2c05671",
+          "min": [
+            0.018999505788087845,
+            -0.0191894993185997,
+            0.03014664351940155
+          ],
+          "max": [
+            0.03556612506508827,
+            0.0191894993185997,
+            0.0505964532494545
+          ]
+        },
+        {
+          "object": "v63_asset_tape_08",
+          "uv_projection_max_vertex_distance_m": 0.002003201749175787,
+          "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/tape_08.npz",
+          "vertices": 8,
+          "triangles": 12,
+          "shape_sha256": "d2d00b8cfdc9f6331b87eaa8a80ba4865665adf3c2138f0f69b78a0bc34d9bf8",
+          "min": [
+            0.014541592448949814,
+            -0.0191894993185997,
+            0.032908111810684204
+          ],
+          "max": [
+            0.029211875051259995,
+            0.0191894993185997,
+            0.05397650599479675
+          ]
+        },
+        {
+          "object": "v63_asset_tape_09",
+          "uv_projection_max_vertex_distance_m": 0.002003201749175787,
+          "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/tape_09.npz",
+          "vertices": 8,
+          "triangles": 12,
+          "shape_sha256": "76c355cc68df1a81a9f2ef8d75f1b1704d0e1ef600b363f241764d968721b0cd",
+          "min": [
+            0.009834867902100086,
+            -0.0191894993185997,
+            0.035106509923934937
+          ],
+          "max": [
+            0.022357800975441933,
+            0.0191894993185997,
+            0.05643301084637642
+          ]
+        },
+        {
+          "object": "v63_asset_tape_10",
+          "uv_projection_max_vertex_distance_m": 0.001954107778146863,
+          "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/tape_10.npz",
+          "vertices": 8,
+          "triangles": 12,
+          "shape_sha256": "7acf50089bcc12e498290e9d8b85837c489209a846c9c15cfcf8c1b24eecfe78",
+          "min": [
+            0.004959866404533386,
+            -0.0191894993185997,
+            0.036704227328300476
+          ],
+          "max": [
+            0.01512117963284254,
+            0.0191894993185997,
+            0.057923927903175354
+          ]
+        },
+        {
+          "object": "v63_asset_tape_11",
+          "uv_projection_max_vertex_distance_m": 0.0018629153491929173,
+          "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/tape_11.npz",
+          "vertices": 8,
+          "triangles": 12,
+          "shape_sha256": "7d284b940852e0917425282321be23441bdb1165759750a7118458d8c0d75b37",
+          "min": [
+            2.3267684868345923e-18,
+            -0.0191894993185997,
+            0.03767392784357071
+          ],
+          "max": [
+            0.007625829428434372,
+            0.0191894993185997,
+            0.05842375010251999
+          ]
+        },
+        {
+          "object": "v63_asset_tape_12",
+          "uv_projection_max_vertex_distance_m": 0.001782638835720718,
+          "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/tape_12.npz",
+          "vertices": 8,
+          "triangles": 12,
+          "shape_sha256": "8ef731721f78aa61c9021a8e7b821a959a0ee2e7111b86c02e33688ab7d71f40",
+          "min": [
+            -0.007625829428434372,
+            -0.0191894993185997,
+            0.03767392784357071
+          ],
+          "max": [
+            3.577422973213224e-18,
+            0.0191894993185997,
+            0.05842375010251999
+          ]
+        },
+        {
+          "object": "v63_asset_tape_13",
+          "uv_projection_max_vertex_distance_m": 0.0017402557423338294,
+          "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/tape_13.npz",
+          "vertices": 8,
+          "triangles": 12,
+          "shape_sha256": "1fc86eef539141b68f80337b561044caab12ae7fc6021269e0823a28f20de057",
+          "min": [
+            -0.01512117963284254,
+            -0.0191894993185997,
+            0.036704227328300476
+          ],
+          "max": [
+            -0.004959866404533386,
+            0.0191894993185997,
+            0.057923927903175354
+          ]
+        },
+        {
+          "object": "v63_asset_tape_14",
+          "uv_projection_max_vertex_distance_m": 0.0017122015124186873,
+          "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/tape_14.npz",
+          "vertices": 8,
+          "triangles": 12,
+          "shape_sha256": "7f3d58059ca04101cc6a2487595aee1c39b4c2cf81db86fc85bb71b93ebc22a5",
+          "min": [
+            -0.022357800975441933,
+            -0.0191894993185997,
+            0.035106509923934937
+          ],
+          "max": [
+            -0.009834867902100086,
+            0.0191894993185997,
+            0.05643301084637642
+          ]
+        },
+        {
+          "object": "v63_asset_tape_15",
+          "uv_projection_max_vertex_distance_m": 0.001605990924872458,
+          "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/tape_15.npz",
+          "vertices": 8,
+          "triangles": 12,
+          "shape_sha256": "15e84818fc0a8d2521752dee90327a4c9e1b9b45f689e3a5c239ac21cec110b6",
+          "min": [
+            -0.029211875051259995,
+            -0.0191894993185997,
+            0.032908111810684204
+          ],
+          "max": [
+            -0.014541592448949814,
+            0.0191894993185997,
+            0.05397650599479675
+          ]
+        },
+        {
+          "object": "v63_asset_tape_16",
+          "uv_projection_max_vertex_distance_m": 0.001497215242125094,
+          "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/tape_16.npz",
+          "vertices": 8,
+          "triangles": 12,
+          "shape_sha256": "9160b65b8b6e7fcfbd36770c16f3a606952a4bda99bd0d5925c2d0fcb32793a0",
+          "min": [
+            -0.03556612506508827,
+            -0.0191894993185997,
+            0.03014664351940155
+          ],
+          "max": [
+            -0.018999505788087845,
+            0.0191894993185997,
+            0.0505964532494545
+          ]
+        },
+        {
+          "object": "v63_asset_tape_17",
+          "uv_projection_max_vertex_distance_m": 0.001620350289158523,
+          "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/tape_17.npz",
+          "vertices": 8,
+          "triangles": 12,
+          "shape_sha256": "c2fd6f9c09a9e436e625c84ef0ca3fceefd026da235a5d67c2c315fcc1fb0245",
+          "min": [
+            -0.041311830282211304,
+            -0.0191894993185997,
+            0.026869360357522964
+          ],
+          "max": [
+            -0.023132333531975746,
+            0.0191894993185997,
+            0.04635067656636238
+          ]
+        },
+        {
+          "object": "v63_asset_tape_18",
+          "uv_projection_max_vertex_distance_m": 0.0016656843945384026,
+          "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/tape_18.npz",
+          "vertices": 8,
+          "triangles": 12,
+          "shape_sha256": "a30b96545c1814125c814b68d860af151561aaa30a9ce2832d075d85733e86f3",
+          "min": [
+            -0.04635067656636238,
+            -0.0191894993185997,
+            0.023132333531975746
+          ],
+          "max": [
+            -0.026869360357522964,
+            0.0191894993185997,
+            0.041311830282211304
+          ]
+        },
+        {
+          "object": "v63_asset_tape_19",
+          "uv_projection_max_vertex_distance_m": 0.0017724839271977544,
+          "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/tape_19.npz",
+          "vertices": 8,
+          "triangles": 12,
+          "shape_sha256": "4d89633f6c0891f84ccecad10ed296b559388f9e3632bcc2c79b3a3acf00a2c4",
+          "min": [
+            -0.0505964532494545,
+            -0.0191894993185997,
+            0.018999505788087845
+          ],
+          "max": [
+            -0.03014664351940155,
+            0.0191894993185997,
+            0.03556612506508827
+          ]
+        },
+        {
+          "object": "v63_asset_tape_20",
+          "uv_projection_max_vertex_distance_m": 0.0017931575421243906,
+          "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/tape_20.npz",
+          "vertices": 8,
+          "triangles": 12,
+          "shape_sha256": "1182547bbfd83b49fdc6b9798b0bb295ced635d1f59d5b623d9701af5db4c588",
+          "min": [
+            -0.05397650599479675,
+            -0.0191894993185997,
+            0.014541592448949814
+          ],
+          "max": [
+            -0.032908111810684204,
+            0.0191894993185997,
+            0.029211875051259995
+          ]
+        },
+        {
+          "object": "v63_asset_tape_21",
+          "uv_projection_max_vertex_distance_m": 0.0018921243026852608,
+          "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/tape_21.npz",
+          "vertices": 8,
+          "triangles": 12,
+          "shape_sha256": "0137d33a989ef93a9b3452c3aaa5bfd9d79664fad9ace848cab793130bb3cd80",
+          "min": [
+            -0.05643301084637642,
+            -0.0191894993185997,
+            0.009834867902100086
+          ],
+          "max": [
+            -0.035106509923934937,
+            0.0191894993185997,
+            0.022357800975441933
+          ]
+        },
+        {
+          "object": "v63_asset_tape_22",
+          "uv_projection_max_vertex_distance_m": 0.0018921243026852608,
+          "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/tape_22.npz",
+          "vertices": 8,
+          "triangles": 12,
+          "shape_sha256": "42a75d9fad10d09e9ecc33bdc16b7203d5b210da0723645d6797cdd3086dd1ef",
+          "min": [
+            -0.057923927903175354,
+            -0.0191894993185997,
+            0.004959866404533386
+          ],
+          "max": [
+            -0.036704227328300476,
+            0.0191894993185997,
+            0.01512117963284254
+          ]
+        },
+        {
+          "object": "v63_asset_tape_23",
+          "uv_projection_max_vertex_distance_m": 0.0018919843714684248,
+          "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/tape_23.npz",
+          "vertices": 8,
+          "triangles": 12,
+          "shape_sha256": "4ae38154ba270e822a82c138f7ae3a4da463f51e4aba199d1c67e13b2618a878",
+          "min": [
+            -0.05842375010251999,
+            -0.0191894993185997,
+            4.6535369736691846e-18
+          ],
+          "max": [
+            -0.03767392784357071,
+            0.0191894993185997,
+            0.007625829428434372
+          ]
+        },
+        {
+          "object": "v63_asset_tape_24",
+          "uv_projection_max_vertex_distance_m": 0.0018960763700306416,
+          "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/tape_24.npz",
+          "vertices": 8,
+          "triangles": 12,
+          "shape_sha256": "3170e015455598c333d47ad9c5dbc17c59efd6f641dbfa3b27dcfbc26a6ac9d7",
+          "min": [
+            -0.05842375010251999,
+            -0.0191894993185997,
+            -0.007625829428434372
+          ],
+          "max": [
+            -0.03767392784357071,
+            0.0191894993185997,
+            7.154845946426447e-18
+          ]
+        },
+        {
+          "object": "v63_asset_tape_25",
+          "uv_projection_max_vertex_distance_m": 0.00191765115596354,
+          "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/tape_25.npz",
+          "vertices": 8,
+          "triangles": 12,
+          "shape_sha256": "34f7721117ada29059708bb4787f12185912bb26ef84031532ef203b63e64bdc",
+          "min": [
+            -0.057923927903175354,
+            -0.0191894993185997,
+            -0.01512117963284254
+          ],
+          "max": [
+            -0.036704227328300476,
+            0.0191894993185997,
+            -0.004959866404533386
+          ]
+        },
+        {
+          "object": "v63_asset_tape_26",
+          "uv_projection_max_vertex_distance_m": 0.00191765115596354,
+          "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/tape_26.npz",
+          "vertices": 8,
+          "triangles": 12,
+          "shape_sha256": "084c1874dfa928e34e636b1f3862445c7e967fb53c37ef41cbe4085a6470ec32",
+          "min": [
+            -0.05643301084637642,
+            -0.0191894993185997,
+            -0.022357800975441933
+          ],
+          "max": [
+            -0.035106509923934937,
+            0.0191894993185997,
+            -0.009834867902100086
+          ]
+        },
+        {
+          "object": "v63_asset_tape_27",
+          "uv_projection_max_vertex_distance_m": 0.0019022461492568254,
+          "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/tape_27.npz",
+          "vertices": 8,
+          "triangles": 12,
+          "shape_sha256": "c8a94c04429d78154a3e02f1698fc3846cbcf33e85ecb7e49342391ff55daaca",
+          "min": [
+            -0.05397650599479675,
+            -0.0191894993185997,
+            -0.029211875051259995
+          ],
+          "max": [
+            -0.032908111810684204,
+            0.0191894993185997,
+            -0.014541592448949814
+          ]
+        },
+        {
+          "object": "v63_asset_tape_28",
+          "uv_projection_max_vertex_distance_m": 0.0018338741501793265,
+          "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/tape_28.npz",
+          "vertices": 8,
+          "triangles": 12,
+          "shape_sha256": "87f2a53dd88547478b5bdc6cd55ee8b923512721247f40ac6d39ee75deb041b1",
+          "min": [
+            -0.0505964532494545,
+            -0.0191894993185997,
+            -0.03556612506508827
+          ],
+          "max": [
+            -0.03014664351940155,
+            0.0191894993185997,
+            -0.018999505788087845
+          ]
+        },
+        {
+          "object": "v63_asset_tape_29",
+          "uv_projection_max_vertex_distance_m": 0.0018131574615836143,
+          "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/tape_29.npz",
+          "vertices": 8,
+          "triangles": 12,
+          "shape_sha256": "bd687fe5676f474c1bc1a32ab4a892fe839e565c242e515aaaeae911d171b14f",
+          "min": [
+            -0.04635067656636238,
+            -0.0191894993185997,
+            -0.041311830282211304
+          ],
+          "max": [
+            -0.026869360357522964,
+            0.0191894993185997,
+            -0.023132333531975746
+          ]
+        },
+        {
+          "object": "v63_asset_tape_30",
+          "uv_projection_max_vertex_distance_m": 0.001652147271670401,
+          "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/tape_30.npz",
+          "vertices": 8,
+          "triangles": 12,
+          "shape_sha256": "2e412f62d76da6fff579fecb38fde236b24c9b95d6becd12219455fa427f4718",
+          "min": [
+            -0.041311830282211304,
+            -0.0191894993185997,
+            -0.04635067656636238
+          ],
+          "max": [
+            -0.023132333531975746,
+            0.0191894993185997,
+            -0.026869360357522964
+          ]
+        },
+        {
+          "object": "v63_asset_tape_31",
+          "uv_projection_max_vertex_distance_m": 0.0016368991928175092,
+          "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/tape_31.npz",
+          "vertices": 8,
+          "triangles": 12,
+          "shape_sha256": "163654046dd2110c5fb2467b387c4db19f017ebefbeec84596cf49d142940c7b",
+          "min": [
+            -0.03556612506508827,
+            -0.0191894993185997,
+            -0.0505964532494545
+          ],
+          "max": [
+            -0.018999505788087845,
+            0.0191894993185997,
+            -0.03014664351940155
+          ]
+        },
+        {
+          "object": "v63_asset_tape_32",
+          "uv_projection_max_vertex_distance_m": 0.001553316949866712,
+          "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/tape_32.npz",
+          "vertices": 8,
+          "triangles": 12,
+          "shape_sha256": "27170396602fe3dab345a7085163d5c346a74f34772695ba7cc145bc1be073ca",
+          "min": [
+            -0.029211875051259995,
+            -0.0191894993185997,
+            -0.05397650599479675
+          ],
+          "max": [
+            -0.014541592448949814,
+            0.0191894993185997,
+            -0.032908111810684204
+          ]
+        },
+        {
+          "object": "v63_asset_tape_33",
+          "uv_projection_max_vertex_distance_m": 0.0015448640333488584,
+          "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/tape_33.npz",
+          "vertices": 8,
+          "triangles": 12,
+          "shape_sha256": "75ad371dce3c83959a9f92606827cb614fe2d8f28900e9928634c268111cf268",
+          "min": [
+            -0.022357800975441933,
+            -0.0191894993185997,
+            -0.05643301084637642
+          ],
+          "max": [
+            -0.009834867902100086,
+            0.0191894993185997,
+            -0.035106509923934937
+          ]
+        },
+        {
+          "object": "v63_asset_tape_34",
+          "uv_projection_max_vertex_distance_m": 0.0014563238946720958,
+          "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/tape_34.npz",
+          "vertices": 8,
+          "triangles": 12,
+          "shape_sha256": "23834c449f6541292c48adf58942b11cf2d098a4e75181ae44e78a20a6a2e10e",
+          "min": [
+            -0.01512117963284254,
+            -0.0191894993185997,
+            -0.057923927903175354
+          ],
+          "max": [
+            -0.004959866404533386,
+            0.0191894993185997,
+            -0.036704227328300476
+          ]
+        },
+        {
+          "object": "v63_asset_tape_35",
+          "uv_projection_max_vertex_distance_m": 0.0015336534706875682,
+          "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/tape_35.npz",
+          "vertices": 8,
+          "triangles": 12,
+          "shape_sha256": "d27a7b9d09b943eca55cbf817db885feaa8a2c83c920b7145c6cd1fd4333adbf",
+          "min": [
+            -0.007625829428434372,
+            -0.0191894993185997,
+            -0.05842375010251999
+          ],
+          "max": [
+            -6.98030504691347e-18,
+            0.0191894993185997,
+            -0.03767392784357071
+          ]
+        },
+        {
+          "object": "v63_asset_tape_36",
+          "uv_projection_max_vertex_distance_m": 0.0015762652037665248,
+          "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/tape_36.npz",
+          "vertices": 8,
+          "triangles": 12,
+          "shape_sha256": "400ff17c6e8bc281e2a94d2468018c7c97517b0f1b92a2ed993ed71d168334bb",
+          "min": [
+            -1.0732268919639671e-17,
+            -0.0191894993185997,
+            -0.05842375010251999
+          ],
+          "max": [
+            0.007625829428434372,
+            0.0191894993185997,
+            -0.03767392784357071
+          ]
+        },
+        {
+          "object": "v63_asset_tape_37",
+          "uv_projection_max_vertex_distance_m": 0.0017335303127765656,
+          "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/tape_37.npz",
+          "vertices": 8,
+          "triangles": 12,
+          "shape_sha256": "b20a9f22215cd3a4e8c9b1fe1364925d3a3a0d7ebd4c6a4466d1237bc58c38ff",
+          "min": [
+            0.004959866404533386,
+            -0.0191894993185997,
+            -0.057923927903175354
+          ],
+          "max": [
+            0.01512117963284254,
+            0.0191894993185997,
+            -0.036704227328300476
+          ]
+        },
+        {
+          "object": "v63_asset_tape_38",
+          "uv_projection_max_vertex_distance_m": 0.0018010041676461697,
+          "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/tape_38.npz",
+          "vertices": 8,
+          "triangles": 12,
+          "shape_sha256": "6c57f4c7a5e9c49bf16ddca10f671044e0acdc9cdfccf004f996dd2b63712ac3",
+          "min": [
+            0.009834867902100086,
+            -0.0191894993185997,
+            -0.05643301084637642
+          ],
+          "max": [
+            0.022357800975441933,
+            0.0191894993185997,
+            -0.035106509923934937
+          ]
+        },
+        {
+          "object": "v63_asset_tape_39",
+          "uv_projection_max_vertex_distance_m": 0.0018507518107071519,
+          "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/tape_39.npz",
+          "vertices": 8,
+          "triangles": 12,
+          "shape_sha256": "13a142b9808ea25b470a5c7b7655afc9100404c720e568c7d48da1fbb3b116a1",
+          "min": [
+            0.014541592448949814,
+            -0.0191894993185997,
+            -0.05397650599479675
+          ],
+          "max": [
+            0.029211875051259995,
+            0.0191894993185997,
+            -0.032908111810684204
+          ]
+        },
+        {
+          "object": "v63_asset_tape_40",
+          "uv_projection_max_vertex_distance_m": 0.0018669695127755404,
+          "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/tape_40.npz",
+          "vertices": 8,
+          "triangles": 12,
+          "shape_sha256": "63a9eaec70d89d652ac77f7de1f78190de5dfd63e9134b0ec12a384725479470",
+          "min": [
+            0.018999505788087845,
+            -0.0191894993185997,
+            -0.0505964532494545
+          ],
+          "max": [
+            0.03556612506508827,
+            0.0191894993185997,
+            -0.03014664351940155
+          ]
+        },
+        {
+          "object": "v63_asset_tape_41",
+          "uv_projection_max_vertex_distance_m": 0.001979474676772952,
+          "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/tape_41.npz",
+          "vertices": 8,
+          "triangles": 12,
+          "shape_sha256": "dadf44f9e37a38b0479ae90437213bfe672ce0ad2b9da66e7ee8af1ec2cc2c42",
+          "min": [
+            0.023132333531975746,
+            -0.0191894993185997,
+            -0.04635067656636238
+          ],
+          "max": [
+            0.041311830282211304,
+            0.0191894993185997,
+            -0.026869360357522964
+          ]
+        },
+        {
+          "object": "v63_asset_tape_42",
+          "uv_projection_max_vertex_distance_m": 0.001979474676772952,
+          "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/tape_42.npz",
+          "vertices": 8,
+          "triangles": 12,
+          "shape_sha256": "aad3f7e0e6d63d8ecb06432ae62e9cb4cba67b516f57e5a779091835b40b7690",
+          "min": [
+            0.026869360357522964,
+            -0.0191894993185997,
+            -0.041311830282211304
+          ],
+          "max": [
+            0.04635067656636238,
+            0.0191894993185997,
+            -0.023132333531975746
+          ]
+        },
+        {
+          "object": "v63_asset_tape_43",
+          "uv_projection_max_vertex_distance_m": 0.002019242150709033,
+          "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/tape_43.npz",
+          "vertices": 8,
+          "triangles": 12,
+          "shape_sha256": "091f8321f65b4187e82180638cd549e3f61007a399031e0e1d9d9d63b04db2aa",
+          "min": [
+            0.03014664351940155,
+            -0.0191894993185997,
+            -0.03556612506508827
+          ],
+          "max": [
+            0.0505964532494545,
+            0.0191894993185997,
+            -0.018999505788087845
+          ]
+        },
+        {
+          "object": "v63_asset_tape_44",
+          "uv_projection_max_vertex_distance_m": 0.0020836617331951857,
+          "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/tape_44.npz",
+          "vertices": 8,
+          "triangles": 12,
+          "shape_sha256": "0713cc15196dc4e96e59c8baca4dccf4842ef8c02f1ccda8cf85f197055785f3",
+          "min": [
+            0.032908111810684204,
+            -0.0191894993185997,
+            -0.029211875051259995
+          ],
+          "max": [
+            0.05397650599479675,
+            0.0191894993185997,
+            -0.014541592448949814
+          ]
+        },
+        {
+          "object": "v63_asset_tape_45",
+          "uv_projection_max_vertex_distance_m": 0.0021108011715114117,
+          "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/tape_45.npz",
+          "vertices": 8,
+          "triangles": 12,
+          "shape_sha256": "007326cd218cbbbf6941bf841ff26e52fe85598c22fd4d530f077d833627c502",
+          "min": [
+            0.035106509923934937,
+            -0.0191894993185997,
+            -0.022357800975441933
+          ],
+          "max": [
+            0.05643301084637642,
+            0.0191894993185997,
+            -0.009834867902100086
+          ]
+        },
+        {
+          "object": "v63_asset_tape_46",
+          "uv_projection_max_vertex_distance_m": 0.0022042179480195045,
+          "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/tape_46.npz",
+          "vertices": 8,
+          "triangles": 12,
+          "shape_sha256": "da18898fdc8fa22fe18bd3dc17ad61ff8ba3eb140bdd32c22d8e27b126a6e9f4",
+          "min": [
+            0.036704227328300476,
+            -0.0191894993185997,
+            -0.01512117963284254
+          ],
+          "max": [
+            0.057923927903175354,
+            0.0191894993185997,
+            -0.004959866404533386
+          ]
+        },
+        {
+          "object": "v63_asset_tape_47",
+          "uv_projection_max_vertex_distance_m": 0.0022042179480195045,
+          "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/tape_47.npz",
+          "vertices": 8,
+          "triangles": 12,
+          "shape_sha256": "bfa1a75b73da894cce8555d622477fc135ea8db13fa5dff52905583a28798331",
+          "min": [
+            0.03767392784357071,
+            -0.0191894993185997,
+            -0.007625829428434372
+          ],
+          "max": [
+            0.05842375010251999,
+            0.0191894993185997,
+            -9.307073947338369e-18
+          ]
+        }
+      ],
+      "mass_estimate_kg": 0.15,
+      "geometry_note": "48 common convex ring wedges, source appearance projected, hole retained"
+    },
+    "radio": {
+      "asset_id": "boombox.002",
+      "parts": [
+        {
+          "object": "v63_asset_radio_00",
+          "uv_projection_max_vertex_distance_m": 4.924151539853483e-07,
+          "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/radio_00.npz",
+          "vertices": 123,
+          "triangles": 242,
+          "shape_sha256": "11556feb87ebd2dbeb5722783d9d911d4d88a3d86b9755ea390760da33b24982",
+          "min": [
+            -0.09131062030792236,
+            -0.2895979881286621,
+            -0.10421118140220642
+          ],
+          "max": [
+            0.09131062030792236,
+            0.2895979881286621,
+            0.10421118140220642
+          ]
+        },
+        {
+          "object": "v63_asset_radio_01",
+          "uv_projection_max_vertex_distance_m": 4.924151539853483e-07,
+          "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/radio_01.npz",
+          "vertices": 72,
+          "triangles": 140,
+          "shape_sha256": "e92ba6f7dff669a81bc044c18ade2917e86446fe53434d2f48041323b3247319",
+          "min": [
+            0.07562291622161865,
+            0.13117551803588867,
+            -0.09740456938743591
+          ],
+          "max": [
+            0.09604060649871826,
+            0.27231264114379883,
+            0.0445687472820282
+          ]
+        },
+        {
+          "object": "v63_asset_radio_02",
+          "uv_projection_max_vertex_distance_m": 5.96791039697564e-07,
+          "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/radio_02.npz",
+          "vertices": 76,
+          "triangles": 148,
+          "shape_sha256": "f7458c4864b88747c36dd96968ae6ccb8b7d1a2f4ead400d9e064dfc7377b8f4",
+          "min": [
+            0.030169129371643066,
+            -0.2855238914489746,
+            -0.09740456938743591
+          ],
+          "max": [
+            0.050586819648742676,
+            -0.14438772201538086,
+            0.0445687472820282
+          ]
+        },
+        {
+          "object": "v63_asset_radio_03",
+          "uv_projection_max_vertex_distance_m": 4.924151539853483e-07,
+          "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/radio_03.npz",
+          "vertices": 96,
+          "triangles": 188,
+          "shape_sha256": "de3ed4d243c3edcb5d51b3605ca72bcd3069e30a2689d4ca5bfb0e7e0a23482a",
+          "min": [
+            0.07078802585601807,
+            0.09765005111694336,
+            0.06995925307273865
+          ],
+          "max": [
+            0.08458960056304932,
+            0.12256288528442383,
+            0.0949200689792633
+          ]
+        },
+        {
+          "object": "v63_asset_radio_04",
+          "uv_projection_max_vertex_distance_m": 5.088806460662454e-07,
+          "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/radio_04.npz",
+          "vertices": 144,
+          "triangles": 284,
+          "shape_sha256": "dc64af90e1e6068163dee3996e07f4ad698347f3cb038f4c379055e880357e8e",
+          "min": [
+            -0.07644283771514893,
+            -0.11964178085327148,
+            0.0747542679309845
+          ],
+          "max": [
+            -0.029838919639587402,
+            0.27309656143188477,
+            0.2658040225505829
+          ]
+        },
+        {
+          "object": "v63_asset_radio_05",
+          "uv_projection_max_vertex_distance_m": 1.1561851351871155e-06,
+          "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/radio_05.npz",
+          "vertices": 128,
+          "triangles": 252,
+          "shape_sha256": "9bd7c73321114fe16be49e89b54ee010a595d8a4da5b5fdb7c99deee7177199c",
+          "min": [
+            0.08668267726898193,
+            0.23487043380737305,
+            0.0593930184841156
+          ],
+          "max": [
+            0.09043228626251221,
+            0.26235055923461914,
+            0.08703604340553284
+          ]
+        },
+        {
+          "object": "v63_asset_radio_06",
+          "uv_projection_max_vertex_distance_m": 4.924151539853483e-07,
+          "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/radio_06.npz",
+          "vertices": 128,
+          "triangles": 252,
+          "shape_sha256": "4cefd5a17ce9b249c0c6dda4183f2d05bf7ae119c70952f073645cac154465bc",
+          "min": [
+            0.03101027011871338,
+            -0.27550745010375977,
+            0.0593930184841156
+          ],
+          "max": [
+            0.03475987911224365,
+            -0.24802827835083008,
+            0.08703604340553284
+          ]
+        },
+        {
+          "object": "v63_asset_radio_07",
+          "uv_projection_max_vertex_distance_m": 4.924151539853483e-07,
+          "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/radio_07.npz",
+          "vertices": 88,
+          "triangles": 172,
+          "shape_sha256": "493e7ff9d72b7173dfce758ca83e7a878c34c92febab3a42be55a5395a681eaa",
+          "min": [
+            0.07142460346221924,
+            0.09268712997436523,
+            0.03866651654243469
+          ],
+          "max": [
+            0.07929861545562744,
+            0.11319208145141602,
+            0.05929306149482727
+          ]
+        },
+        {
+          "object": "v63_asset_radio_08",
+          "uv_projection_max_vertex_distance_m": 5.96791039697564e-07,
+          "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/radio_08.npz",
+          "vertices": 88,
+          "triangles": 172,
+          "shape_sha256": "81e1c3d77b11d47c805cf322fd2e491fce18dfc19bbbe4c2830e473920e2c41e",
+          "min": [
+            0.06297576427459717,
+            0.014640331268310547,
+            0.03866031765937805
+          ],
+          "max": [
+            0.07058465480804443,
+            0.03515768051147461,
+            0.05929926037788391
+          ]
+        },
+        {
+          "object": "v63_asset_radio_09",
+          "uv_projection_max_vertex_distance_m": 4.924151539853483e-07,
+          "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/radio_09.npz",
+          "vertices": 88,
+          "triangles": 172,
+          "shape_sha256": "398a894ddb9b6363ff3e96107826c1ef80617b345e6aae582482302bfe6816e1",
+          "min": [
+            0.060043931007385254,
+            -0.012237071990966797,
+            0.03866031765937805
+          ],
+          "max": [
+            0.06765282154083252,
+            0.008280277252197266,
+            0.05929926037788391
+          ]
+        },
+        {
+          "object": "v63_asset_radio_10",
+          "uv_projection_max_vertex_distance_m": 4.924151539853483e-07,
+          "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/radio_10.npz",
+          "vertices": 88,
+          "triangles": 172,
+          "shape_sha256": "d9d364faca201aa8194211fafb962ea13afefd6df4d38780ac95bc861ab796f3",
+          "min": [
+            0.05711209774017334,
+            -0.03911447525024414,
+            0.03866031765937805
+          ],
+          "max": [
+            0.0647209882736206,
+            -0.018597126007080078,
+            0.05929926037788391
+          ]
+        },
+        {
+          "object": "v63_asset_radio_11",
+          "uv_projection_max_vertex_distance_m": 4.924151539853483e-07,
+          "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/radio_11.npz",
+          "vertices": 96,
+          "triangles": 188,
+          "shape_sha256": "d262a8bf12064fb219f8acc5e68a1c6fe68067cc808a3d3b41ee6b1f4c58a74b",
+          "min": [
+            0.06680285930633545,
+            0.050318241119384766,
+            0.03678545355796814
+          ],
+          "max": [
+            0.07503926753997803,
+            0.07456350326538086,
+            0.06117412447929382
+          ]
+        },
+        {
+          "object": "v63_asset_radio_12",
+          "uv_projection_max_vertex_distance_m": 4.924151539853483e-07,
+          "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/radio_12.npz",
+          "vertices": 168,
+          "triangles": 332,
+          "shape_sha256": "e6853325d1ec4a640f1cb52953c9ee6b60618764a9b42d816efa87b836481a81",
+          "min": [
+            -0.07762229442596436,
+            -0.11766862869262695,
+            0.020955294370651245
+          ],
+          "max": [
+            -0.06970107555389404,
+            -0.10974740982055664,
+            0.08093634247779846
+          ]
+        },
+        {
+          "object": "v63_asset_radio_13",
+          "uv_projection_max_vertex_distance_m": 4.924151539853483e-07,
+          "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/radio_13.npz",
+          "vertices": 77,
+          "triangles": 150,
+          "shape_sha256": "8d738a6ff0ca292fbfa3135dd93230d5808b6646f3f723a5d2377e2e770741cd",
+          "min": [
+            0.08043205738067627,
+            0.13574934005737305,
+            -0.09148618578910828
+          ],
+          "max": [
+            0.0981069803237915,
+            0.26680994033813477,
+            0.04035136103630066
+          ]
+        },
+        {
+          "object": "v63_asset_radio_14",
+          "uv_projection_max_vertex_distance_m": 4.924151539853483e-07,
+          "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/radio_14.npz",
+          "vertices": 77,
+          "triangles": 150,
+          "shape_sha256": "3b70247fba67fe228d727efc345080d3b0e3d18037d146181db426fc5d419585",
+          "min": [
+            0.034978270530700684,
+            -0.28095102310180664,
+            -0.09148618578910828
+          ],
+          "max": [
+            0.05265319347381592,
+            -0.14989042282104492,
+            0.040351420640945435
+          ]
+        },
+        {
+          "object": "v63_asset_radio_15",
+          "uv_projection_max_vertex_distance_m": 4.924151539853483e-07,
+          "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/radio_15.npz",
+          "vertices": 25,
+          "triangles": 46,
+          "shape_sha256": "3c05e30f00132631c95cba173195125c9cb13ead0e51f14ca82cc5bd1507484c",
+          "min": [
+            -0.04037916660308838,
+            0.19004297256469727,
+            -0.010674327611923218
+          ],
+          "max": [
+            -0.03597414493560791,
+            0.1965651512145996,
+            -0.004113525152206421
+          ]
+        },
+        {
+          "object": "v63_asset_radio_16",
+          "uv_projection_max_vertex_distance_m": 4.924151539853483e-07,
+          "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/radio_16.npz",
+          "vertices": 25,
+          "triangles": 46,
+          "shape_sha256": "7a0040dd0519c2c602db1c868fb5d2212cc564b2572cd7830b106d2c9f65fe60",
+          "min": [
+            -0.04037916660308838,
+            0.19004297256469727,
+            -0.02090659737586975
+          ],
+          "max": [
+            -0.03597414493560791,
+            0.1965651512145996,
+            -0.014345794916152954
+          ]
+        },
+        {
+          "object": "v63_asset_radio_17",
+          "uv_projection_max_vertex_distance_m": 4.924151539853483e-07,
+          "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/radio_17.npz",
+          "vertices": 26,
+          "triangles": 48,
+          "shape_sha256": "41775d22a57719a5786feebc1f8f56d56a651eea361052ea2d44cb069d50a395",
+          "min": [
+            -0.07935059070587158,
+            -0.11938142776489258,
+            0.020352870225906372
+          ],
+          "max": [
+            -0.07303893566131592,
+            -0.10799932479858398,
+            0.03180190920829773
+          ]
+        },
+        {
+          "object": "v63_asset_radio_18",
+          "uv_projection_max_vertex_distance_m": 4.924151539853483e-07,
+          "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/radio_18.npz",
+          "vertices": 26,
+          "triangles": 48,
+          "shape_sha256": "77ae62c3b1aac6284b24444d7664aad418100ea08f652b352e321ad4bbc15d05",
+          "min": [
+            -0.07935059070587158,
+            -0.11938142776489258,
+            0.05738678574562073
+          ],
+          "max": [
+            -0.07303893566131592,
+            -0.10799932479858398,
+            0.06840047240257263
+          ]
+        },
+        {
+          "object": "v63_asset_radio_19",
+          "uv_projection_max_vertex_distance_m": 4.777675712830387e-07,
+          "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/radio_19.npz",
+          "vertices": 24,
+          "triangles": 44,
+          "shape_sha256": "0e62eeb30743c577f1d8e732186ea663b9f43dd73cecc6596a3c775072ab0522",
+          "min": [
+            -0.07571947574615479,
+            -0.0931096076965332,
+            -0.09084323048591614
+          ],
+          "max": [
+            -0.06751883029937744,
+            -0.08434438705444336,
+            -0.08202585577964783
+          ]
+        },
+        {
+          "object": "v63_asset_radio_20",
+          "uv_projection_max_vertex_distance_m": 4.777675712830387e-07,
+          "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/radio_20.npz",
+          "vertices": 24,
+          "triangles": 44,
+          "shape_sha256": "4eea20c6ce92ab96ecc4509ced67546dcd9aa638b010d6aa2556cd80e4248a6b",
+          "min": [
+            -0.07854020595550537,
+            -0.11896753311157227,
+            -0.09084323048591614
+          ],
+          "max": [
+            -0.07033956050872803,
+            -0.11020231246948242,
+            -0.08202585577964783
+          ]
+        },
+        {
+          "object": "v63_asset_radio_21",
+          "uv_projection_max_vertex_distance_m": 4.777675712830387e-07,
+          "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/radio_21.npz",
+          "vertices": 24,
+          "triangles": 44,
+          "shape_sha256": "d4c1569cc80b31bc183b381fec320cb8873f572269effe604b5b2557f8072d97",
+          "min": [
+            -0.08136069774627686,
+            -0.14482545852661133,
+            -0.09084323048591614
+          ],
+          "max": [
+            -0.07316005229949951,
+            -0.13606023788452148,
+            -0.08202585577964783
+          ]
+        },
+        {
+          "object": "v63_asset_radio_22",
+          "uv_projection_max_vertex_distance_m": 4.777675712830387e-07,
+          "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/radio_22.npz",
+          "vertices": 24,
+          "triangles": 44,
+          "shape_sha256": "024344a8894d2f7c221e2e0059190628029e2091663b6315de0ad7d15f5782cd",
+          "min": [
+            -0.08418118953704834,
+            -0.1706833839416504,
+            -0.09084323048591614
+          ],
+          "max": [
+            -0.0759807825088501,
+            -0.16191816329956055,
+            -0.08202585577964783
+          ]
+        },
+        {
+          "object": "v63_asset_radio_23",
+          "uv_projection_max_vertex_distance_m": 4.924151539853483e-07,
+          "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/radio_23.npz",
+          "vertices": 12,
+          "triangles": 20,
+          "shape_sha256": "2ad78d71fa9de63cd04739f1dc9535e619ee18254b2c4c70eb37414115855f3b",
+          "min": [
+            0.0711599588394165,
+            0.09572362899780273,
+            -0.09328064322471619
+          ],
+          "max": [
+            0.08199417591094971,
+            0.1131739616394043,
+            -0.06813552975654602
+          ]
+        },
+        {
+          "object": "v63_asset_radio_24",
+          "uv_projection_max_vertex_distance_m": 4.924151539853483e-07,
+          "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/radio_24.npz",
+          "vertices": 12,
+          "triangles": 20,
+          "shape_sha256": "a0688d2575fc9ec2c51aa4cab0ffcf2143f25bd681fce7b87de638e25e769e0d",
+          "min": [
+            0.0692824125289917,
+            0.07851266860961914,
+            -0.09328064322471619
+          ],
+          "max": [
+            0.080116868019104,
+            0.09596395492553711,
+            -0.06813552975654602
+          ]
+        },
+        {
+          "object": "v63_asset_radio_25",
+          "uv_projection_max_vertex_distance_m": 4.924151539853483e-07,
+          "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/radio_25.npz",
+          "vertices": 12,
+          "triangles": 20,
+          "shape_sha256": "716b133979ca414fc0f92bcc445f26cb85c87c4d8c0cdb5cea4914afbc8fd830",
+          "min": [
+            0.067405104637146,
+            0.06130170822143555,
+            -0.09328064322471619
+          ],
+          "max": [
+            0.0782393217086792,
+            0.07875299453735352,
+            -0.06813552975654602
+          ]
+        },
+        {
+          "object": "v63_asset_radio_26",
+          "uv_projection_max_vertex_distance_m": 4.924151539853483e-07,
+          "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/radio_26.npz",
+          "vertices": 13,
+          "triangles": 22,
+          "shape_sha256": "bf0e5e295d9b66b4cef4e7b8f4ec1dd55617e1536988a02cb46669fc31f6f69c",
+          "min": [
+            0.06552779674530029,
+            0.04409074783325195,
+            -0.09328064322471619
+          ],
+          "max": [
+            0.0763620138168335,
+            0.06154203414916992,
+            -0.06813552975654602
+          ]
+        },
+        {
+          "object": "v63_asset_radio_27",
+          "uv_projection_max_vertex_distance_m": 4.924151539853483e-07,
+          "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/radio_27.npz",
+          "vertices": 13,
+          "triangles": 22,
+          "shape_sha256": "3660ea112124b415b01ead440549b0ff2f667a12c91c4857ed392617407c5db0",
+          "min": [
+            0.06365025043487549,
+            0.026880741119384766,
+            -0.09328064322471619
+          ],
+          "max": [
+            0.07448470592498779,
+            0.04433107376098633,
+            -0.06813552975654602
+          ]
+        },
+        {
+          "object": "v63_asset_radio_28",
+          "uv_projection_max_vertex_distance_m": 4.924151539853483e-07,
+          "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/radio_28.npz",
+          "vertices": 13,
+          "triangles": 22,
+          "shape_sha256": "52930e15be3b0048dfaa8b3686f43b16e7d28c66130c90c52c7d01ac6aa4850d",
+          "min": [
+            0.061772942543029785,
+            0.009669780731201172,
+            -0.09328064322471619
+          ],
+          "max": [
+            0.07260739803314209,
+            0.027120113372802734,
+            -0.06813552975654602
+          ]
+        },
+        {
+          "object": "v63_asset_radio_29",
+          "uv_projection_max_vertex_distance_m": 5.96791039697564e-07,
+          "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/radio_29.npz",
+          "vertices": 13,
+          "triangles": 22,
+          "shape_sha256": "b452011087229f2d2f5ef1f471415df8b5ce3fb1ee014af82e0c20db4146c8fc",
+          "min": [
+            -0.025748372077941895,
+            -0.12220144271850586,
+            0.1396690309047699
+          ],
+          "max": [
+            0.016655325889587402,
+            0.12320089340209961,
+            0.15089908242225647
+          ]
+        },
+        {
+          "object": "v63_asset_radio_30",
+          "uv_projection_max_vertex_distance_m": 4.995779363525799e-07,
+          "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/radio_30.npz",
+          "vertices": 18,
+          "triangles": 32,
+          "shape_sha256": "041684a6a07090c5e8367e56004479e6cead15c1a2e7a0ffd21b048376667324",
+          "min": [
+            0.0712043046951294,
+            0.19527196884155273,
+            0.05810287594795227
+          ],
+          "max": [
+            0.08235037326812744,
+            0.21537160873413086,
+            0.0909527838230133
+          ]
+        },
+        {
+          "object": "v63_asset_radio_31",
+          "uv_projection_max_vertex_distance_m": 4.924151539853483e-07,
+          "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/radio_31.npz",
+          "vertices": 18,
+          "triangles": 32,
+          "shape_sha256": "353b080119517ed21a74635ecdc9c9a9cc674e3daf8f4d525c8d3e9c2a7952a5",
+          "min": [
+            0.02523815631866455,
+            -0.22612333297729492,
+            0.058102935552597046
+          ],
+          "max": [
+            0.0363842248916626,
+            -0.2060236930847168,
+            0.0909527838230133
+          ]
+        },
+        {
+          "object": "v63_asset_radio_32",
+          "uv_projection_max_vertex_distance_m": 4.915124804938387e-07,
+          "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/radio_32.npz",
+          "vertices": 10,
+          "triangles": 16,
+          "shape_sha256": "2f3e85c1284a6fb21ec3f354190de372051037f430168623f035dabec6478ba1",
+          "min": [
+            0.0007139444351196289,
+            0.12140703201293945,
+            0.08983108401298523
+          ],
+          "max": [
+            0.01786649227142334,
+            0.12863779067993164,
+            0.15132799744606018
+          ]
+        },
+        {
+          "object": "v63_asset_radio_33",
+          "uv_projection_max_vertex_distance_m": 4.924151539853483e-07,
+          "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/radio_33.npz",
+          "vertices": 10,
+          "triangles": 16,
+          "shape_sha256": "e48810ca35549eabeb717384d6376d3161753ccfec6d0bcb34513c8fa7db90ce",
+          "min": [
+            -0.026458144187927246,
+            -0.12769365310668945,
+            0.08983108401298523
+          ],
+          "max": [
+            -0.009305596351623535,
+            -0.12046289443969727,
+            0.15132805705070496
+          ]
+        },
+        {
+          "object": "v63_asset_radio_34",
+          "uv_projection_max_vertex_distance_m": 4.924151539853483e-07,
+          "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/radio_34.npz",
+          "vertices": 8,
+          "triangles": 12,
+          "shape_sha256": "bd6c2f1e5b603266b5996e536e3ee1b3adafc8301466e7eeead1baa54daa7503",
+          "min": [
+            -0.08465063571929932,
+            -0.10819482803344727,
+            -0.05632016062736511
+          ],
+          "max": [
+            -0.06440865993499756,
+            -0.03194379806518555,
+            0.01602312922477722
+          ]
+        },
+        {
+          "object": "v63_asset_radio_35",
+          "uv_projection_max_vertex_distance_m": 4.995779363525799e-07,
+          "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/radio_35.npz",
+          "vertices": 8,
+          "triangles": 12,
+          "shape_sha256": "d0f3dda81ca3a0ee65b5d84386c16178600cf88a85a2e07cf85b3b3620c8d02f",
+          "min": [
+            -0.05975306034088135,
+            0.006106853485107422,
+            0.011913448572158813
+          ],
+          "max": [
+            -0.05475032329559326,
+            0.025623798370361328,
+            0.014128416776657104
+          ]
+        },
+        {
+          "object": "v63_asset_radio_36",
+          "uv_projection_max_vertex_distance_m": 4.995779363525799e-07,
+          "mesh_file": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/radio_36.npz",
+          "vertices": 8,
+          "triangles": 12,
+          "shape_sha256": "a3c24be4e8b2750fe28b0e4ebbd9d4ba559bc2039e03d5c2940aa11d7ecf8f6c",
+          "min": [
+            -0.05036437511444092,
+            0.09217691421508789,
+            0.011913448572158813
+          ],
+          "max": [
+            -0.045361876487731934,
+            0.1116938591003418,
+            0.014128357172012329
+          ]
+        }
+      ],
+      "initial_centre": [
+        -2.6219245195388794,
+        11.332047939300537,
+        0.7899046242237091
+      ],
+      "mass_estimate_kg": 1.5,
+      "geometry_note": "37 common component hulls; source materials/pose retained, not soft antenna"
+    }
+  }
+}
