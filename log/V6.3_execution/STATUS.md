@@ -1,8 +1,10 @@
 # V6.3 执行状态
 
-日期：2026-10-06。用户本轮授权：完成新版计划并在服务器生成静态图；不生成运镜或完整视频。
+日期：2026-10-06。V6.3 执行时的授权：完成新版计划并在服务器生成静态图；不生成运镜或完整视频。
 
-当前：`WAIT_G1_VISUAL / TECHNICAL_G1_PENDING`。新版计划及选定的 10 张 1280×720 静态预审图已完成、下载并逐张检查，图像 SHA256 与服务器归档逐一一致。尚未启动运镜或完整视频；不要据此继续 G2。
+当前续接状态：`G1_VISUAL_APPROVED_EXCEPT_TAPE / TECHNICAL_G1_PENDING`。用户随后明确认可当前外观，胶带除外，并允许修复或替换；本轮只要计划，不重渲。续接唯一入口为 `D:\workspace\project1_database\log\V6.4_DeepSeek执行计划_胶带修复与长链运镜交付_20261006.md`。不再等待重复整套静态认可，技术门禁仍不得跳过。
+
+V6.3 交付事实：选定的 10 张 1280×720 静态预审图已完成、下载并逐张检查，图像 SHA256 与服务器归档逐一一致。尚未启动运镜或完整视频。下文保留本轮实验事实，后续执行状态记录到 V6.4。
 
 ## 交付入口
 
@@ -43,10 +45,10 @@
 - 桌面机制：`tmp/v63_node11/baseball_probe_r3/`
 - 有效初态：`tmp/v63_node11/layout_r6/layout.json`
 - 代表接力诊断：`tmp/v63_node11/relay_probe_r1/`、`relay_probe_r2/`
-- 静态工程：`tmp/v63_node11/static_scene_r2/review_scene.blend`
-- 场景/共模/相机报告：`tmp/v63_node11/static_scene_r2/composition_report.json`
-- 第一批图片：`tmp/v63_node12/static_render_r1/`
-- 第二批图片：`tmp/v63_node11/static_render_r1/`
+- 最终归档工程、报告和图集：`outcomes/v63/radio_scurve_domino/20261006_static_review/`；续接使用其中 `review_scene_relinked.blend`，不要误用早期 `static_scene_r2`。
+- 最终静态构图输入：`tmp/v63_node11/static_scene_r5/`。
+- 成功图片源批次：`tmp/v63_node12/static_gpu_r1/`、`static_gpu_r2/`、`static_gpu_r3/`；逐张来源见归档 DELIVERY_MANIFEST.json。
+- `static_render_r1` 和较早 `static_scene_r2` 是历史软件试渲／构图证据，不是最终交付入口，原样保留。
 
 本地已有历史试验 JSON 备份，较大的失败布局报告不进入 Git。服务器脚本历史分两批备份，共 77＋18＝95 份，逐文件 SHA256 已记录。
 
@@ -54,6 +56,6 @@
 
 本批完整 720p 合成首张约 335 s，热帧约 113–122 s。不能据此承诺更长的 1080p 全片很快完成。以 118 s/帧、15 秒/30 fps 为例，单工作进程约 14.8 小时；未来可在多张真正空闲且逐卡隔离通过的 GPU 上分帧，但必须重新测速与检查资源。
 
-先等用户外观意见；再修胶带表面、四个接力窗口、旧贴图路径所影响的审图、实际桌面落体接力及全链门禁。任何可见变化补静态图。技术与人工审核都通过后才进入 G2。动态物体必须从 common_assets_r1 的最终共同几何加载，不回退到原扫描外壳或旧白球参数。
+用户外观意见现已收到；后续依 V6.4 修胶带或替代、四个接力窗口、实际桌面落体接力及全链门禁。不要重渲整套静态图；胶带和旧贴图路径所影响的少量内部 QA 随下一次纯运镜交付。重大构图变更仍需询问。动态物体从最终版本化共同几何加载，不回退到原扫描外壳或旧白球参数；运镜认可之前不渲完整视频。
 
 源代码基线 `b526375` 已推送 GitHub；交付补充见该提交之后的 V6.3 提交。服务器使用项目内独立 Git checkout，不在根工作区 init/pull，不改动其他用户/版本的 dirty 文件。
