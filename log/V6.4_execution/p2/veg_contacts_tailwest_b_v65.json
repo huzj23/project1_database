@@ -1,0 +1,557 @@
+{
+  "layout": "/data/raw/huzijian/project1_database/tmp/v64_node12/layout_v65_tailwest_candidate_b.json",
+  "hz": 1920,
+  "sim_s": 9.0,
+  "rows": [
+    {
+      "piece": "F01",
+      "peak": 88.91,
+      "final": 88.35,
+      "veg_max_N": 0.0,
+      "veg_object": null,
+      "veg_first": null,
+      "other_max_N": 72.106,
+      "other_object": "stones"
+    },
+    {
+      "piece": "F02",
+      "peak": 91.06,
+      "final": 90.39,
+      "veg_max_N": 0.0,
+      "veg_object": null,
+      "veg_first": null,
+      "other_max_N": 0.0,
+      "other_object": null
+    },
+    {
+      "piece": "F03",
+      "peak": 90.06,
+      "final": 90.0,
+      "veg_max_N": 0.0,
+      "veg_object": null,
+      "veg_first": null,
+      "other_max_N": 57.127,
+      "other_object": "stones"
+    },
+    {
+      "piece": "F04",
+      "peak": 90.21,
+      "final": 90.0,
+      "veg_max_N": 0.0,
+      "veg_object": null,
+      "veg_first": null,
+      "other_max_N": 0.0,
+      "other_object": null
+    },
+    {
+      "piece": "F05",
+      "peak": 79.56,
+      "final": 79.49,
+      "veg_max_N": 0.0,
+      "veg_object": null,
+      "veg_first": null,
+      "other_max_N": 4.437,
+      "other_object": "stones"
+    },
+    {
+      "piece": "F06",
+      "peak": 79.52,
+      "final": 79.44,
+      "veg_max_N": 0.0,
+      "veg_object": null,
+      "veg_first": null,
+      "other_max_N": 4.178,
+      "other_object": "stones"
+    },
+    {
+      "piece": "F07",
+      "peak": 79.06,
+      "final": 78.04,
+      "veg_max_N": 0.0,
+      "veg_object": null,
+      "veg_first": null,
+      "other_max_N": 0.0,
+      "other_object": null
+    },
+    {
+      "piece": "F08",
+      "peak": 78.98,
+      "final": 77.95,
+      "veg_max_N": 0.0,
+      "veg_object": null,
+      "veg_first": {
+        "t": 0.00052,
+        "object": "leaves",
+        "force_N": 0.0
+      },
+      "other_max_N": 0.0,
+      "other_object": null
+    },
+    {
+      "piece": "F09",
+      "peak": 77.82,
+      "final": 77.14,
+      "veg_max_N": 0.0,
+      "veg_object": null,
+      "veg_first": null,
+      "other_max_N": 13.6,
+      "other_object": "stones"
+    },
+    {
+      "piece": "F10",
+      "peak": 77.35,
+      "final": 76.54,
+      "veg_max_N": 0.0,
+      "veg_object": null,
+      "veg_first": null,
+      "other_max_N": 6.936,
+      "other_object": "stones"
+    },
+    {
+      "piece": "F11",
+      "peak": 71.52,
+      "final": 68.88,
+      "veg_max_N": 0.0,
+      "veg_object": null,
+      "veg_first": null,
+      "other_max_N": 0.0,
+      "other_object": null
+    },
+    {
+      "piece": "F12",
+      "peak": 67.41,
+      "final": 67.35,
+      "veg_max_N": 0.0,
+      "veg_object": null,
+      "veg_first": null,
+      "other_max_N": 0.0,
+      "other_object": null
+    },
+    {
+      "piece": "F13",
+      "peak": 68.53,
+      "final": 68.44,
+      "veg_max_N": 0.0,
+      "veg_object": null,
+      "veg_first": null,
+      "other_max_N": 0.0,
+      "other_object": null
+    },
+    {
+      "piece": "F14",
+      "peak": 68.08,
+      "final": 68.03,
+      "veg_max_N": 0.0,
+      "veg_object": null,
+      "veg_first": null,
+      "other_max_N": 0.0,
+      "other_object": null
+    },
+    {
+      "piece": "F15",
+      "peak": 65.89,
+      "final": 65.71,
+      "veg_max_N": 0.0,
+      "veg_object": null,
+      "veg_first": null,
+      "other_max_N": 0.0,
+      "other_object": null
+    },
+    {
+      "piece": "F16",
+      "peak": 66.86,
+      "final": 65.0,
+      "veg_max_N": 0.0,
+      "veg_object": null,
+      "veg_first": null,
+      "other_max_N": 0.0,
+      "other_object": null
+    },
+    {
+      "piece": "F17",
+      "peak": 66.08,
+      "final": 64.73,
+      "veg_max_N": 40.909,
+      "veg_object": "leaves",
+      "veg_first": {
+        "t": 2.83229,
+        "object": "leaves",
+        "force_N": 40.9085
+      },
+      "other_max_N": 0.0,
+      "other_object": null
+    },
+    {
+      "piece": "F18",
+      "peak": 90.68,
+      "final": 86.06,
+      "veg_max_N": 534.328,
+      "veg_object": "leaves",
+      "veg_first": {
+        "t": 2.51042,
+        "object": "leaves",
+        "force_N": 0.0
+      },
+      "other_max_N": 796.794,
+      "other_object": "stones"
+    },
+    {
+      "piece": "F19",
+      "peak": 92.77,
+      "final": 81.73,
+      "veg_max_N": 60.267,
+      "veg_object": "leaves",
+      "veg_first": {
+        "t": 2.82865,
+        "object": "leaves",
+        "force_N": 15.5171
+      },
+      "other_max_N": 0.0,
+      "other_object": null
+    },
+    {
+      "piece": "F20",
+      "peak": 94.12,
+      "final": 83.47,
+      "veg_max_N": 48.365,
+      "veg_object": "leaves",
+      "veg_first": {
+        "t": 2.93958,
+        "object": "leaves",
+        "force_N": 48.3647
+      },
+      "other_max_N": 0.0,
+      "other_object": null
+    },
+    {
+      "piece": "F21",
+      "peak": 90.05,
+      "final": 90.0,
+      "veg_max_N": 0.0,
+      "veg_object": null,
+      "veg_first": null,
+      "other_max_N": 0.0,
+      "other_object": null
+    },
+    {
+      "piece": "F22",
+      "peak": 97.25,
+      "final": 26.25,
+      "veg_max_N": 0.0,
+      "veg_object": null,
+      "veg_first": null,
+      "other_max_N": 0.0,
+      "other_object": null
+    },
+    {
+      "piece": "F23",
+      "peak": 90.07,
+      "final": 90.0,
+      "veg_max_N": 12.108,
+      "veg_object": "leaves",
+      "veg_first": {
+        "t": 3.59896,
+        "object": "leaves",
+        "force_N": 0.0
+      },
+      "other_max_N": 0.0,
+      "other_object": null
+    },
+    {
+      "piece": "F24",
+      "peak": 77.41,
+      "final": 77.31,
+      "veg_max_N": 0.0,
+      "veg_object": null,
+      "veg_first": null,
+      "other_max_N": 0.0,
+      "other_object": null
+    },
+    {
+      "piece": "F25",
+      "peak": 78.51,
+      "final": 77.53,
+      "veg_max_N": 0.0,
+      "veg_object": null,
+      "veg_first": null,
+      "other_max_N": 0.0,
+      "other_object": null
+    },
+    {
+      "piece": "F26",
+      "peak": 91.24,
+      "final": 86.35,
+      "veg_max_N": 176.157,
+      "veg_object": "leaves",
+      "veg_first": {
+        "t": 0.00052,
+        "object": "leaves",
+        "force_N": 0.0
+      },
+      "other_max_N": 0.0,
+      "other_object": null
+    },
+    {
+      "piece": "F27",
+      "peak": 90.52,
+      "final": 90.0,
+      "veg_max_N": 0.0,
+      "veg_object": null,
+      "veg_first": null,
+      "other_max_N": 0.0,
+      "other_object": null
+    },
+    {
+      "piece": "F28",
+      "peak": 79.07,
+      "final": 77.75,
+      "veg_max_N": 0.0,
+      "veg_object": null,
+      "veg_first": null,
+      "other_max_N": 0.0,
+      "other_object": null
+    },
+    {
+      "piece": "F29",
+      "peak": 66.79,
+      "final": 60.52,
+      "veg_max_N": 0.0,
+      "veg_object": null,
+      "veg_first": null,
+      "other_max_N": 0.0,
+      "other_object": null
+    },
+    {
+      "piece": "F30",
+      "peak": 73.08,
+      "final": 73.07,
+      "veg_max_N": 0.0,
+      "veg_object": null,
+      "veg_first": null,
+      "other_max_N": 0.0,
+      "other_object": null
+    },
+    {
+      "piece": "F31",
+      "peak": 68.01,
+      "final": 68.0,
+      "veg_max_N": 0.0,
+      "veg_object": null,
+      "veg_first": null,
+      "other_max_N": 0.0,
+      "other_object": null
+    },
+    {
+      "piece": "F32",
+      "peak": 65.84,
+      "final": 65.84,
+      "veg_max_N": 0.0,
+      "veg_object": null,
+      "veg_first": null,
+      "other_max_N": 0.0,
+      "other_object": null
+    },
+    {
+      "piece": "F33",
+      "peak": 64.86,
+      "final": 64.85,
+      "veg_max_N": 33.022,
+      "veg_object": "leaves",
+      "veg_first": {
+        "t": 4.68333,
+        "object": "leaves",
+        "force_N": 0.0
+      },
+      "other_max_N": 0.0,
+      "other_object": null
+    },
+    {
+      "piece": "F34",
+      "peak": 64.97,
+      "final": 64.75,
+      "veg_max_N": 0.0,
+      "veg_object": null,
+      "veg_first": null,
+      "other_max_N": 0.0,
+      "other_object": null
+    },
+    {
+      "piece": "F35",
+      "peak": 64.36,
+      "final": 64.15,
+      "veg_max_N": 0.0,
+      "veg_object": null,
+      "veg_first": null,
+      "other_max_N": 0.0,
+      "other_object": null
+    },
+    {
+      "piece": "F36",
+      "peak": 65.89,
+      "final": 63.82,
+      "veg_max_N": 0.0,
+      "veg_object": null,
+      "veg_first": null,
+      "other_max_N": 0.0,
+      "other_object": null
+    },
+    {
+      "piece": "F37",
+      "peak": 62.33,
+      "final": 59.75,
+      "veg_max_N": 0.0,
+      "veg_object": null,
+      "veg_first": null,
+      "other_max_N": 0.0,
+      "other_object": null
+    },
+    {
+      "piece": "F38",
+      "peak": 69.71,
+      "final": 69.71,
+      "veg_max_N": 0.0,
+      "veg_object": null,
+      "veg_first": null,
+      "other_max_N": 0.0,
+      "other_object": null
+    },
+    {
+      "piece": "F39",
+      "peak": 64.09,
+      "final": 64.07,
+      "veg_max_N": 0.0,
+      "veg_object": null,
+      "veg_first": null,
+      "other_max_N": 0.0,
+      "other_object": null
+    },
+    {
+      "piece": "F40",
+      "peak": 64.15,
+      "final": 63.95,
+      "veg_max_N": 0.0,
+      "veg_object": null,
+      "veg_first": null,
+      "other_max_N": 0.0,
+      "other_object": null
+    },
+    {
+      "piece": "F41",
+      "peak": 68.3,
+      "final": 68.18,
+      "veg_max_N": 0.0,
+      "veg_object": null,
+      "veg_first": null,
+      "other_max_N": 0.0,
+      "other_object": null
+    },
+    {
+      "piece": "F42",
+      "peak": 69.8,
+      "final": 68.25,
+      "veg_max_N": 0.0,
+      "veg_object": null,
+      "veg_first": null,
+      "other_max_N": 174.56,
+      "other_object": "stones"
+    },
+    {
+      "piece": "F43",
+      "peak": 74.42,
+      "final": 73.62,
+      "veg_max_N": 0.0,
+      "veg_object": null,
+      "veg_first": null,
+      "other_max_N": 0.0,
+      "other_object": null
+    },
+    {
+      "piece": "F44",
+      "peak": 79.47,
+      "final": 79.15,
+      "veg_max_N": 483.836,
+      "veg_object": "grass",
+      "veg_first": {
+        "t": 6.00833,
+        "object": "grass",
+        "force_N": 483.8363
+      },
+      "other_max_N": 0.0,
+      "other_object": null
+    },
+    {
+      "piece": "F45",
+      "peak": 96.03,
+      "final": 65.61,
+      "veg_max_N": 0.0,
+      "veg_object": null,
+      "veg_first": null,
+      "other_max_N": 0.0,
+      "other_object": null
+    },
+    {
+      "piece": "F46",
+      "peak": 93.27,
+      "final": 93.27,
+      "veg_max_N": 61.968,
+      "veg_object": "leaves",
+      "veg_first": {
+        "t": 6.475,
+        "object": "leaves",
+        "force_N": 61.968
+      },
+      "other_max_N": 0.0,
+      "other_object": null
+    },
+    {
+      "piece": "F47",
+      "peak": 90.14,
+      "final": 90.0,
+      "veg_max_N": 0.0,
+      "veg_object": null,
+      "veg_first": null,
+      "other_max_N": 0.0,
+      "other_object": null
+    },
+    {
+      "piece": "F48",
+      "peak": 90.84,
+      "final": 90.0,
+      "veg_max_N": 0.0,
+      "veg_object": null,
+      "veg_first": null,
+      "other_max_N": 0.0,
+      "other_object": null
+    }
+  ],
+  "touched": [
+    "F17",
+    "F18",
+    "F19",
+    "F20",
+    "F23",
+    "F26",
+    "F33",
+    "F44",
+    "F46"
+  ],
+  "stalled": [
+    "F22",
+    "F37"
+  ],
+  "by_object": {
+    "leaves": [
+      "F17",
+      "F18",
+      "F19",
+      "F20",
+      "F23",
+      "F26",
+      "F33",
+      "F46"
+    ],
+    "grass": [
+      "F44"
+    ]
+  }
+}

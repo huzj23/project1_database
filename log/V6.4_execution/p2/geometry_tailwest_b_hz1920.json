@@ -1,0 +1,424 @@
+{
+  "status": "P3_1_INDEPENDENT_GEOMETRY",
+  "method": "p.getClosestPoints, a GEOMETRIC query, rather than cp[8] from the contact cache. Plan 7.3 forbids using cp[8] as the penetration conclusion; the first comparison run did exactly that and declared every candidate illegal on a -4.32 mm (R,A) impact transient that the untouched baseline also has",
+  "label": "tailwest_b_hz1920",
+  "layout": "/data/raw/huzijian/project1_database/tmp/v64_node12/layout_v65_tailwest_candidate_b.json",
+  "hz": 1920,
+  "sim_s": 9.0,
+  "pairs_checked": 123,
+  "sample_every": 16,
+  "sampled_frames": 1080,
+  "worst": {
+    "t": 0.46719,
+    "pair": [
+      "R",
+      "A"
+    ],
+    "separation": -0.000786063092410272
+  },
+  "overlaps": {
+    "A--B": {
+      "min_separation": -0.000282,
+      "first_t": 0.05052,
+      "last_t": 0.11719,
+      "span_s": 0.06667,
+      "n_overlapping_frames": 3,
+      "classification": "PERSISTENT (resting interpenetration)"
+    },
+    "B--A": {
+      "min_separation": -0.000282,
+      "first_t": 0.05052,
+      "last_t": 0.11719,
+      "span_s": 0.06667,
+      "n_overlapping_frames": 3,
+      "classification": "PERSISTENT (resting interpenetration)"
+    },
+    "A--R": {
+      "min_separation": -0.000786,
+      "first_t": 0.35885,
+      "last_t": 0.48385,
+      "span_s": 0.125,
+      "n_overlapping_frames": 16,
+      "classification": "PERSISTENT (resting interpenetration)"
+    },
+    "R--A": {
+      "min_separation": -0.000786,
+      "first_t": 0.35885,
+      "last_t": 0.48385,
+      "span_s": 0.125,
+      "n_overlapping_frames": 16,
+      "classification": "PERSISTENT (resting interpenetration)"
+    },
+    "R--F01": {
+      "min_separation": -0.000457,
+      "first_t": 0.75052,
+      "last_t": 1.08385,
+      "span_s": 0.33333,
+      "n_overlapping_frames": 21,
+      "classification": "PERSISTENT (resting interpenetration)"
+    },
+    "F02--F03": {
+      "min_separation": -0.000166,
+      "first_t": 0.82552,
+      "last_t": 8.99219,
+      "span_s": 8.16667,
+      "n_overlapping_frames": 979,
+      "classification": "PERSISTENT (resting interpenetration)"
+    },
+    "F03--F04": {
+      "min_separation": -7.5e-05,
+      "first_t": 0.84219,
+      "last_t": 0.90052,
+      "span_s": 0.05833,
+      "n_overlapping_frames": 2,
+      "classification": "PERSISTENT (resting interpenetration)"
+    },
+    "F05--F06": {
+      "min_separation": -9.4e-05,
+      "first_t": 1.21719,
+      "last_t": 8.99219,
+      "span_s": 7.775,
+      "n_overlapping_frames": 897,
+      "classification": "PERSISTENT (resting interpenetration)"
+    },
+    "F06--F07": {
+      "min_separation": -0.000121,
+      "first_t": 1.40885,
+      "last_t": 8.99219,
+      "span_s": 7.58334,
+      "n_overlapping_frames": 876,
+      "classification": "PERSISTENT (resting interpenetration)"
+    },
+    "F07--F08": {
+      "min_separation": -1.3e-05,
+      "first_t": 1.55052,
+      "last_t": 8.99219,
+      "span_s": 7.44167,
+      "n_overlapping_frames": 878,
+      "classification": "PERSISTENT (resting interpenetration)"
+    },
+    "F08--F09": {
+      "min_separation": -7.8e-05,
+      "first_t": 1.57552,
+      "last_t": 8.99219,
+      "span_s": 7.41667,
+      "n_overlapping_frames": 823,
+      "classification": "PERSISTENT (resting interpenetration)"
+    },
+    "F09--F10": {
+      "min_separation": -7e-05,
+      "first_t": 1.63385,
+      "last_t": 8.99219,
+      "span_s": 7.35834,
+      "n_overlapping_frames": 858,
+      "classification": "PERSISTENT (resting interpenetration)"
+    },
+    "F10--F11": {
+      "min_separation": -0.000346,
+      "first_t": 1.72552,
+      "last_t": 1.78385,
+      "span_s": 0.05833,
+      "n_overlapping_frames": 5,
+      "classification": "PERSISTENT (resting interpenetration)"
+    },
+    "F11--F12": {
+      "min_separation": -0.000324,
+      "first_t": 1.80052,
+      "last_t": 1.82552,
+      "span_s": 0.025,
+      "n_overlapping_frames": 4,
+      "classification": "transient (impact overlap)"
+    },
+    "F12--F13": {
+      "min_separation": -0.000155,
+      "first_t": 1.85885,
+      "last_t": 8.99219,
+      "span_s": 7.13334,
+      "n_overlapping_frames": 780,
+      "classification": "PERSISTENT (resting interpenetration)"
+    },
+    "F13--F14": {
+      "min_separation": -2.6e-05,
+      "first_t": 2.00885,
+      "last_t": 8.99219,
+      "span_s": 6.98334,
+      "n_overlapping_frames": 755,
+      "classification": "PERSISTENT (resting interpenetration)"
+    },
+    "F14--F15": {
+      "min_separation": -5.2e-05,
+      "first_t": 2.16719,
+      "last_t": 8.99219,
+      "span_s": 6.825,
+      "n_overlapping_frames": 759,
+      "classification": "PERSISTENT (resting interpenetration)"
+    },
+    "F15--F16": {
+      "min_separation": -0.000214,
+      "first_t": 2.28385,
+      "last_t": 8.99219,
+      "span_s": 6.70834,
+      "n_overlapping_frames": 751,
+      "classification": "PERSISTENT (resting interpenetration)"
+    },
+    "F16--F17": {
+      "min_separation": -0.000213,
+      "first_t": 2.38385,
+      "last_t": 8.99219,
+      "span_s": 6.60834,
+      "n_overlapping_frames": 751,
+      "classification": "PERSISTENT (resting interpenetration)"
+    },
+    "F17--F18": {
+      "min_separation": -0.000107,
+      "first_t": 2.47552,
+      "last_t": 2.85052,
+      "span_s": 0.375,
+      "n_overlapping_frames": 12,
+      "classification": "PERSISTENT (resting interpenetration)"
+    },
+    "F19--F20": {
+      "min_separation": -0.000475,
+      "first_t": 2.72552,
+      "last_t": 8.99219,
+      "span_s": 6.26667,
+      "n_overlapping_frames": 721,
+      "classification": "PERSISTENT (resting interpenetration)"
+    },
+    "F20--F21": {
+      "min_separation": -0.000361,
+      "first_t": 2.80052,
+      "last_t": 3.17552,
+      "span_s": 0.375,
+      "n_overlapping_frames": 27,
+      "classification": "PERSISTENT (resting interpenetration)"
+    },
+    "F21--F22": {
+      "min_separation": -4.7e-05,
+      "first_t": 2.83385,
+      "last_t": 2.87552,
+      "span_s": 0.04167,
+      "n_overlapping_frames": 6,
+      "classification": "transient (impact overlap)"
+    },
+    "F22--F23": {
+      "min_separation": -1.6e-05,
+      "first_t": 3.00885,
+      "last_t": 3.55052,
+      "span_s": 0.54167,
+      "n_overlapping_frames": 48,
+      "classification": "PERSISTENT (resting interpenetration)"
+    },
+    "F23--F24": {
+      "min_separation": -0.000188,
+      "first_t": 3.23385,
+      "last_t": 3.25052,
+      "span_s": 0.01667,
+      "n_overlapping_frames": 3,
+      "classification": "transient (impact overlap)"
+    },
+    "F24--F25": {
+      "min_separation": -0.000185,
+      "first_t": 3.41719,
+      "last_t": 8.99219,
+      "span_s": 5.575,
+      "n_overlapping_frames": 629,
+      "classification": "PERSISTENT (resting interpenetration)"
+    },
+    "F25--F26": {
+      "min_separation": -0.000107,
+      "first_t": 3.63385,
+      "last_t": 3.85885,
+      "span_s": 0.225,
+      "n_overlapping_frames": 13,
+      "classification": "PERSISTENT (resting interpenetration)"
+    },
+    "F26--F27": {
+      "min_separation": -0.000147,
+      "first_t": 3.67552,
+      "last_t": 3.75885,
+      "span_s": 0.08333,
+      "n_overlapping_frames": 2,
+      "classification": "PERSISTENT (resting interpenetration)"
+    },
+    "F28--F29": {
+      "min_separation": -0.000173,
+      "first_t": 3.86719,
+      "last_t": 3.87552,
+      "span_s": 0.00833,
+      "n_overlapping_frames": 2,
+      "classification": "transient (impact overlap)"
+    },
+    "F27--F28": {
+      "min_separation": -2.9e-05,
+      "first_t": 3.89219,
+      "last_t": 3.89219,
+      "span_s": 0.0,
+      "n_overlapping_frames": 1,
+      "classification": "transient (impact overlap)"
+    },
+    "F20--F22": {
+      "min_separation": -1e-05,
+      "first_t": 4.12552,
+      "last_t": 4.35052,
+      "span_s": 0.225,
+      "n_overlapping_frames": 28,
+      "classification": "PERSISTENT (resting interpenetration)"
+    },
+    "F30--F31": {
+      "min_separation": -0.000114,
+      "first_t": 4.27552,
+      "last_t": 4.74219,
+      "span_s": 0.46667,
+      "n_overlapping_frames": 2,
+      "classification": "PERSISTENT (resting interpenetration)"
+    },
+    "F33--F34": {
+      "min_separation": -0.000191,
+      "first_t": 4.67552,
+      "last_t": 8.99219,
+      "span_s": 4.31667,
+      "n_overlapping_frames": 469,
+      "classification": "PERSISTENT (resting interpenetration)"
+    },
+    "F29--F30": {
+      "min_separation": -6e-06,
+      "first_t": 4.68385,
+      "last_t": 4.76719,
+      "span_s": 0.08334,
+      "n_overlapping_frames": 11,
+      "classification": "PERSISTENT (resting interpenetration)"
+    },
+    "F34--F35": {
+      "min_separation": -4.1e-05,
+      "first_t": 4.75885,
+      "last_t": 4.99219,
+      "span_s": 0.23334,
+      "n_overlapping_frames": 2,
+      "classification": "PERSISTENT (resting interpenetration)"
+    },
+    "F35--F36": {
+      "min_separation": -3.6e-05,
+      "first_t": 4.82552,
+      "last_t": 5.50885,
+      "span_s": 0.68333,
+      "n_overlapping_frames": 5,
+      "classification": "PERSISTENT (resting interpenetration)"
+    },
+    "F32--F33": {
+      "min_separation": -1.3e-05,
+      "first_t": 4.88385,
+      "last_t": 8.99219,
+      "span_s": 4.10834,
+      "n_overlapping_frames": 480,
+      "classification": "PERSISTENT (resting interpenetration)"
+    },
+    "F36--F37": {
+      "min_separation": -0.000355,
+      "first_t": 4.89219,
+      "last_t": 5.37552,
+      "span_s": 0.48333,
+      "n_overlapping_frames": 5,
+      "classification": "PERSISTENT (resting interpenetration)"
+    },
+    "F37--F38": {
+      "min_separation": -0.000293,
+      "first_t": 4.96719,
+      "last_t": 5.37552,
+      "span_s": 0.40833,
+      "n_overlapping_frames": 6,
+      "classification": "PERSISTENT (resting interpenetration)"
+    },
+    "F38--F39": {
+      "min_separation": -0.000102,
+      "first_t": 5.04219,
+      "last_t": 5.66719,
+      "span_s": 0.625,
+      "n_overlapping_frames": 5,
+      "classification": "PERSISTENT (resting interpenetration)"
+    },
+    "F39--F40": {
+      "min_separation": -3.6e-05,
+      "first_t": 5.13385,
+      "last_t": 8.99219,
+      "span_s": 3.85834,
+      "n_overlapping_frames": 428,
+      "classification": "PERSISTENT (resting interpenetration)"
+    },
+    "F40--F41": {
+      "min_separation": -0.000243,
+      "first_t": 5.23385,
+      "last_t": 5.65052,
+      "span_s": 0.41667,
+      "n_overlapping_frames": 14,
+      "classification": "PERSISTENT (resting interpenetration)"
+    },
+    "F41--F42": {
+      "min_separation": -0.000201,
+      "first_t": 5.33385,
+      "last_t": 8.99219,
+      "span_s": 3.65834,
+      "n_overlapping_frames": 362,
+      "classification": "PERSISTENT (resting interpenetration)"
+    },
+    "F42--F43": {
+      "min_separation": -0.000224,
+      "first_t": 5.40885,
+      "last_t": 5.97552,
+      "span_s": 0.56667,
+      "n_overlapping_frames": 26,
+      "classification": "PERSISTENT (resting interpenetration)"
+    },
+    "F43--F44": {
+      "min_separation": -0.000198,
+      "first_t": 5.43385,
+      "last_t": 6.01719,
+      "span_s": 0.58334,
+      "n_overlapping_frames": 20,
+      "classification": "PERSISTENT (resting interpenetration)"
+    },
+    "F44--F45": {
+      "min_separation": -4.8e-05,
+      "first_t": 5.51719,
+      "last_t": 6.67552,
+      "span_s": 1.15833,
+      "n_overlapping_frames": 3,
+      "classification": "PERSISTENT (resting interpenetration)"
+    },
+    "F43--F45": {
+      "min_separation": -7.2e-05,
+      "first_t": 5.67552,
+      "last_t": 5.67552,
+      "span_s": 0.0,
+      "n_overlapping_frames": 1,
+      "classification": "transient (impact overlap)"
+    },
+    "F45--F46": {
+      "min_separation": -7.2e-05,
+      "first_t": 5.93385,
+      "last_t": 6.29219,
+      "span_s": 0.35834,
+      "n_overlapping_frames": 23,
+      "classification": "PERSISTENT (resting interpenetration)"
+    },
+    "F47--F48": {
+      "min_separation": -0.000189,
+      "first_t": 6.01719,
+      "last_t": 6.07552,
+      "span_s": 0.05833,
+      "n_overlapping_frames": 6,
+      "classification": "PERSISTENT (resting interpenetration)"
+    },
+    "F46--F47": {
+      "min_separation": -0.000739,
+      "first_t": 6.02552,
+      "last_t": 8.99219,
+      "span_s": 2.96667,
+      "n_overlapping_frames": 353,
+      "classification": "PERSISTENT (resting interpenetration)"
+    }
+  },
+  "persistent_failures": {},
+  "gate": "PASS",
+  "gate_threshold_m": -0.001
+}

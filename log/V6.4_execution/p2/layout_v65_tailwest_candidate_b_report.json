@@ -1,0 +1,169 @@
+{
+  "status": "INITIAL_GEOMETRY_PASS_FULL_SOLVE_PENDING",
+  "variant": "b",
+  "source_layout": "/data/raw/huzijian/project1_database/tmp/v64_node12/layout_v64_iter_f05f23.json",
+  "candidate_layout": "/data/raw/huzijian/project1_database/tmp/v64_node12/layout_v65_tailwest_candidate_b.json",
+  "edits": [
+    {
+      "id": "F44",
+      "old_position": [
+        0.890223519,
+        12.515811673,
+        0.095891545
+      ],
+      "new_position": [
+        0.8,
+        12.5,
+        0.09619755198192934
+      ],
+      "yaw_deg": 135.0,
+      "floor_height_span_m": 6.792422434021006e-05
+    },
+    {
+      "id": "F45",
+      "old_position": [
+        0.930065585,
+        12.673692789,
+        0.095512872
+      ],
+      "new_position": [
+        0.7,
+        12.6,
+        0.09580098425356068
+      ],
+      "yaw_deg": 180.0,
+      "floor_height_span_m": 7.409715496586866e-05
+    },
+    {
+      "id": "F46",
+      "old_position": [
+        0.930069391,
+        12.741071806,
+        0.095549307
+      ],
+      "new_position": [
+        0.55,
+        12.6,
+        0.09581576146999207
+      ],
+      "yaw_deg": 180.0,
+      "floor_height_span_m": 2.8922760930139013e-05
+    },
+    {
+      "id": "F47",
+      "old_position": [
+        0.939999112,
+        12.972343815,
+        0.022686194
+      ],
+      "new_position": [
+        0.45,
+        12.7,
+        0.02290403789739532
+      ],
+      "yaw_deg": 135.0,
+      "floor_height_span_m": 1.107310967363162e-06
+    },
+    {
+      "id": "F48",
+      "old_position": [
+        0.889996021,
+        13.030015812,
+        0.022692362
+      ],
+      "new_position": [
+        0.39,
+        12.79,
+        0.02290527578830443
+      ],
+      "yaw_deg": 135.0,
+      "floor_height_span_m": 4.455204963838e-07
+    }
+  ],
+  "tail_pairs": [
+    {
+      "pair": [
+        "F41",
+        "F42"
+      ],
+      "initial_gap_m": 0.11703205373037832
+    },
+    {
+      "pair": [
+        "F42",
+        "F43"
+      ],
+      "initial_gap_m": 0.08718917672503171
+    },
+    {
+      "pair": [
+        "F43",
+        "F44"
+      ],
+      "initial_gap_m": 0.022035297133990363
+    },
+    {
+      "pair": [
+        "F44",
+        "F45"
+      ],
+      "initial_gap_m": 0.019203772955056365
+    },
+    {
+      "pair": [
+        "F45",
+        "F46"
+      ],
+      "initial_gap_m": 0.08639599999999992
+    },
+    {
+      "pair": [
+        "F46",
+        "F47"
+      ],
+      "initial_gap_m": 0.03875827295505633
+    },
+    {
+      "pair": [
+        "F47",
+        "F48"
+      ],
+      "initial_gap_m": 0.09032001717798203
+    }
+  ],
+  "nearest_static": {
+    "F44": [
+      {
+        "name": "Floor_main",
+        "distance_m": 0.000194697656129174
+      }
+    ],
+    "F45": [
+      {
+        "name": "Floor_main",
+        "distance_m": 0.00019787532717954734
+      }
+    ],
+    "F46": [
+      {
+        "name": "Floor_main",
+        "distance_m": 0.00019934318396939963
+      }
+    ],
+    "F47": [
+      {
+        "name": "Floor_main",
+        "distance_m": 0.00020017217403879993
+      }
+    ],
+    "F48": [
+      {
+        "name": "Floor_main",
+        "distance_m": 0.00020000574469842677
+      }
+    ]
+  },
+  "severe_initial_overlaps": [],
+  "old_length_m": 6.0694686130641795,
+  "new_length_m": 6.089270517389661
+}
