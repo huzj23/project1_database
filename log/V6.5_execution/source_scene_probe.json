@@ -1,0 +1,478 @@
+{
+  "source": "/data/raw/huzijian/project1_database/models/backgrounds/candidates/hidden_alley/extracted/ph_hidden_alley.blend",
+  "blender": "4.2.23 LTS",
+  "scenes": {
+    "Fog": {
+      "engine": "BLENDER_EEVEE_NEXT",
+      "world": "flower_hillside",
+      "view_transform": "AgX",
+      "exposure": 0.0,
+      "gamma": 1.0,
+      "look": "None",
+      "resolution": [
+        2560,
+        1440,
+        75
+      ],
+      "fps": 25,
+      "frame_start": 1,
+      "frame_end": 180,
+      "frame_current": 0,
+      "use_nodes": false,
+      "nodes": [],
+      "cycles_samples": 1000,
+      "cycles_device": "GPU",
+      "eevee_taa": 64,
+      "camera": "hidden_alley_camera"
+    },
+    "Scene": {
+      "engine": "CYCLES",
+      "world": "flower_hillside",
+      "view_transform": "AgX",
+      "exposure": 0.0,
+      "gamma": 1.0,
+      "look": "None",
+      "resolution": [
+        2560,
+        1440,
+        75
+      ],
+      "fps": 25,
+      "frame_start": 1,
+      "frame_end": 180,
+      "frame_current": 0,
+      "use_nodes": true,
+      "nodes": [
+        {
+          "name": "Mist+Distance",
+          "type": "FRAME",
+          "bl_idname": "NodeFrame"
+        },
+        {
+          "name": "Volumetric Fog",
+          "type": "FRAME",
+          "bl_idname": "NodeFrame"
+        },
+        {
+          "name": "Grading",
+          "type": "FRAME",
+          "bl_idname": "NodeFrame"
+        },
+        {
+          "name": "Glare.001",
+          "type": "FRAME",
+          "bl_idname": "NodeFrame"
+        },
+        {
+          "name": "Lens Dirt",
+          "type": "FRAME",
+          "bl_idname": "NodeFrame"
+        },
+        {
+          "name": "Vignette",
+          "type": "FRAME",
+          "bl_idname": "NodeFrame"
+        },
+        {
+          "name": "Denoise",
+          "type": "DENOISE",
+          "bl_idname": "CompositorNodeDenoise"
+        },
+        {
+          "name": "Render Layers",
+          "type": "R_LAYERS",
+          "bl_idname": "CompositorNodeRLayers"
+        },
+        {
+          "name": "Dilate/Erode",
+          "type": "DILATEERODE",
+          "bl_idname": "CompositorNodeDilateErode"
+        },
+        {
+          "name": "Blur.001",
+          "type": "BLUR",
+          "bl_idname": "CompositorNodeBlur"
+        },
+        {
+          "name": "Map Range.001",
+          "type": "MAP_RANGE",
+          "bl_idname": "CompositorNodeMapRange"
+        },
+        {
+          "name": "Map Range",
+          "type": "MAP_RANGE",
+          "bl_idname": "CompositorNodeMapRange"
+        },
+        {
+          "name": "Color Ramp.003",
+          "type": "VALTORGB",
+          "bl_idname": "CompositorNodeValToRGB"
+        },
+        {
+          "name": "Mix.004",
+          "type": "MIX_RGB",
+          "bl_idname": "CompositorNodeMixRGB"
+        },
+        {
+          "name": "Mix.001",
+          "type": "MIX_RGB",
+          "bl_idname": "CompositorNodeMixRGB"
+        },
+        {
+          "name": "Color Ramp.002",
+          "type": "VALTORGB",
+          "bl_idname": "CompositorNodeValToRGB"
+        },
+        {
+          "name": "Render Layers.001",
+          "type": "R_LAYERS",
+          "bl_idname": "CompositorNodeRLayers"
+        },
+        {
+          "name": "Gamma.001",
+          "type": "GAMMA",
+          "bl_idname": "CompositorNodeGamma"
+        },
+        {
+          "name": "Mix",
+          "type": "MIX_RGB",
+          "bl_idname": "CompositorNodeMixRGB"
+        },
+        {
+          "name": "Alpha Over",
+          "type": "ALPHAOVER",
+          "bl_idname": "CompositorNodeAlphaOver"
+        },
+        {
+          "name": "Gamma",
+          "type": "GAMMA",
+          "bl_idname": "CompositorNodeGamma"
+        },
+        {
+          "name": "Color Balance",
+          "type": "COLORBALANCE",
+          "bl_idname": "CompositorNodeColorBalance"
+        },
+        {
+          "name": "Glare",
+          "type": "GLARE",
+          "bl_idname": "CompositorNodeGlare"
+        },
+        {
+          "name": "Mix.002",
+          "type": "MIX_RGB",
+          "bl_idname": "CompositorNodeMixRGB"
+        },
+        {
+          "name": "Glare.002",
+          "type": "GLARE",
+          "bl_idname": "CompositorNodeGlare"
+        },
+        {
+          "name": "Image",
+          "type": "IMAGE",
+          "bl_idname": "CompositorNodeImage"
+        },
+        {
+          "name": "Scale",
+          "type": "SCALE",
+          "bl_idname": "CompositorNodeScale"
+        },
+        {
+          "name": "Mix.005",
+          "type": "MIX_RGB",
+          "bl_idname": "CompositorNodeMixRGB"
+        },
+        {
+          "name": "Gamma.002",
+          "type": "GAMMA",
+          "bl_idname": "CompositorNodeGamma"
+        },
+        {
+          "name": "Mix.006",
+          "type": "MIX_RGB",
+          "bl_idname": "CompositorNodeMixRGB"
+        },
+        {
+          "name": "Exposure",
+          "type": "EXPOSURE",
+          "bl_idname": "CompositorNodeExposure"
+        },
+        {
+          "name": "Ellipse Mask",
+          "type": "ELLIPSEMASK",
+          "bl_idname": "CompositorNodeEllipseMask"
+        },
+        {
+          "name": "Blur",
+          "type": "BLUR",
+          "bl_idname": "CompositorNodeBlur"
+        },
+        {
+          "name": "Mix.003",
+          "type": "MIX_RGB",
+          "bl_idname": "CompositorNodeMixRGB"
+        },
+        {
+          "name": "Exposure.001",
+          "type": "EXPOSURE",
+          "bl_idname": "CompositorNodeExposure"
+        },
+        {
+          "name": "Composite",
+          "type": "COMPOSITE",
+          "bl_idname": "CompositorNodeComposite"
+        },
+        {
+          "name": "Viewer",
+          "type": "VIEWER",
+          "bl_idname": "CompositorNodeViewer"
+        },
+        {
+          "name": "Reroute",
+          "type": "REROUTE",
+          "bl_idname": "NodeReroute"
+        },
+        {
+          "name": "Hue/Saturation/Value",
+          "type": "HUE_SAT",
+          "bl_idname": "CompositorNodeHueSat"
+        }
+      ],
+      "cycles_samples": 1000,
+      "cycles_device": "GPU",
+      "eevee_taa": 64,
+      "camera": "hidden_alley_camera"
+    }
+  },
+  "lights": {
+    "Area.001": {
+      "type": "AREA",
+      "energy": 35.0,
+      "color": [
+        1.0,
+        0.8097665905952454,
+        0.5500627160072327
+      ]
+    },
+    "Area.002": {
+      "type": "SPOT",
+      "energy": 15.0,
+      "color": [
+        0.7839639782905579,
+        0.9884171485900879,
+        1.0
+      ]
+    },
+    "Area.003": {
+      "type": "AREA",
+      "energy": 300.0,
+      "color": [
+        1.0,
+        0.6495402455329895,
+        0.49733731150627136
+      ]
+    },
+    "Area.004": {
+      "type": "AREA",
+      "energy": 39.2699089050293,
+      "color": [
+        1.0,
+        0.7360690832138062,
+        0.6476777791976929
+      ]
+    },
+    "Area.005": {
+      "type": "AREA",
+      "energy": 40.0,
+      "color": [
+        1.0,
+        0.6495402455329895,
+        0.49733731150627136
+      ]
+    },
+    "Sun.001": {
+      "type": "SUN",
+      "energy": 8.0,
+      "color": [
+        0.8898804187774658,
+        0.7987613677978516,
+        0.724198579788208
+      ]
+    },
+    "Sun.005": {
+      "type": "SUN",
+      "energy": 15.0,
+      "color": [
+        0.8898493051528931,
+        0.6908843517303467,
+        0.5374991297721863
+      ]
+    }
+  },
+  "radio_like": [
+    {
+      "name": "boombox.002",
+      "type": "MESH",
+      "matrix": [
+        [
+          0.08535090833902359,
+          -0.782456636428833,
+          4.839291745106777e-10,
+          -2.6380255222320557
+        ],
+        [
+          0.782456636428833,
+          0.08535090833902359,
+          4.436432110566102e-09,
+          11.333807945251465
+        ],
+        [
+          -4.462747948963397e-09,
+          7.633111519565012e-17,
+          0.7870978713035583,
+          0.6856934428215027
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    }
+  ],
+  "collections": [
+    "airducts",
+    "apartment_building_01",
+    "apartment_building_02",
+    "apartments",
+    "Area_Lights",
+    "Background Buildings",
+    "Buildings",
+    "Cameras",
+    "courtyard",
+    "Decorative",
+    "factory_building_01",
+    "factory_building_02",
+    "factory_building_03",
+    "factory_building_04",
+    "factory_building_05",
+    "factory_building_06",
+    "Fog",
+    "high_rise_building",
+    "Light Blockers",
+    "Lights",
+    "metal_trash_can",
+    "modular_bench",
+    "modular_chainlink_fence",
+    "modular_factory_facade",
+    "modular_fire_escape",
+    "modular_fire_escape_02",
+    "modular_fire_escape_03",
+    "modular_industrial_pipes_01",
+    "modular_metal_gutter",
+    "modular_urban_apartments",
+    "Modular_utility_poles",
+    "Paralax Interiors",
+    "ph_hidden_alley",
+    "pipes",
+    "Plants",
+    "power_box_01.001",
+    "Props",
+    "Render",
+    "roller_shutters",
+    "Scene",
+    "security_light",
+    "Sky",
+    "Structural",
+    "Tree",
+    "tree_small_02.001",
+    "tree_small_02_leaves.001",
+    "water_manhole_cover.001"
+  ],
+  "objects_total": 1416,
+  "images_total": 392,
+  "possible_scenery": [
+    "BG_building_a_001",
+    "BG_building_a_002",
+    "BG_building_a_003",
+    "BG_building_a_004",
+    "BG_building_b_001",
+    "BG_building_b_002",
+    "BG_building_b_003",
+    "BG_building_c_001",
+    "BG_building_c_002",
+    "BG_building_c_003",
+    "BG_building_c_004",
+    "BG_building_c_005",
+    "BG_building_c_006",
+    "BG_building_c_007",
+    "BG_building_c_008",
+    "BG_building_c_009",
+    "BG_building_d_001",
+    "BG_building_d_002",
+    "BG_building_d_003",
+    "BG_building_d_004",
+    "BG_building_d_005",
+    "BG_building_e_001",
+    "BG_building_e_002",
+    "BG_building_e_003",
+    "BG_building_e_004",
+    "BG_building_e_005",
+    "BG_building_e_006",
+    "BG_floor",
+    "Barrel_02",
+    "BezierCurve",
+    "Cube",
+    "Cylinder",
+    "Floor_main",
+    "Fog",
+    "Plane",
+    "Sky",
+    "Television_01",
+    "apartment_pillars",
+    "apartment_walls",
+    "arm_rest_01",
+    "back_support_l",
+    "back_support_r",
+    "barrel_03",
+    "barrel_stove",
+    "base_angled01_01",
+    "base_corner_01",
+    "base_corner_02",
+    "base_double_01",
+    "base_end_01",
+    "base_single_01",
+    "base_tripple_01",
+    "baseball_bat",
+    "boombox",
+    "can_rusted",
+    "cardboard_box_01",
+    "cassette_player_body",
+    "cassette_player_tape",
+    "concrete_road_barrier_02_LOD1",
+    "concrete_road_barrier_LOD1",
+    "cornice_01_double_01",
+    "cornice_01_single_01",
+    "cornice_01_tripple_01",
+    "cornice_03_double_01",
+    "cornice_03_tripple_01",
+    "cornice_angled01_01",
+    "cornice_double_01",
+    "cornice_single_01",
+    "cornice_tripple_01",
+    "courtyard_floor",
+    "courtyard_half_wall_brick",
+    "courtyard_half_wall_trim_01",
+    "courtyard_half_wall_trim_02",
+    "courtyard_half_wall_trim_03",
+    "covered_car",
+    "covered_car_wheel_01",
+    "covered_car_wheel_02",
+    "covered_car_wheel_03",
+    "covered_car_wheel_04",
+    "crossbar",
+    "crown_01_corner_01"
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "workers": [
+    {
+      "worker": "w1",
+      "gpu": "1",
+      "uuid": "GPU-a94dd628-5e85-0eeb-74c9-dc6fb4b56721",
+      "start": 1,
+      "stop": 37,
+      "session": "v65_rnd_w1",
+      "launched": true
+    },
+    {
+      "worker": "w2",
+      "gpu": "1",
+      "uuid": "GPU-a94dd628-5e85-0eeb-74c9-dc6fb4b56721",
+      "start": 37,
+      "stop": 73,
+      "session": "v65_rnd_w2",
+      "launched": true
+    },
+    {
+      "worker": "w3",
+      "gpu": "2",
+      "uuid": "GPU-665e9626-9862-7424-fc4a-dc90d61079fa",
+      "start": 73,
+      "stop": 109,
+      "session": "v65_rnd_w3",
+      "launched": true
+    },
+    {
+      "worker": "w4",
+      "gpu": "2",
+      "uuid": "GPU-665e9626-9862-7424-fc4a-dc90d61079fa",
+      "start": 109,
+      "stop": 145,
+      "session": "v65_rnd_w4",
+      "launched": true
+    },
+    {
+      "worker": "w5",
+      "gpu": "3",
+      "uuid": "GPU-245beacc-9dd2-60bb-4538-7e77ee56641f",
+      "start": 145,
+      "stop": 181,
+      "session": "v65_rnd_w5",
+      "launched": true
+    },
+    {
+      "worker": "w6",
+      "gpu": "3",
+      "uuid": "GPU-245beacc-9dd2-60bb-4538-7e77ee56641f",
+      "start": 181,
+      "stop": 217,
+      "session": "v65_rnd_w6",
+      "launched": true
+    }
+  ],
+  "out": "/data/raw/huzijian/project1_database/outcomes/v65/radio_scurve_domino/v65_20261007_final",
+  "scene": "/data/raw/huzijian/project1_database/outcomes/v65/radio_scurve_domino/v65_20261007_final/film_scene.blend",
+  "script": "/data/raw/huzijian/project1_database/tools/v65/render_range_r3.py",
+  "frames_total": 216,
+  "workers_count": 6
+}

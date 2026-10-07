@@ -1,0 +1,18 @@
+{
+  "jobs": [
+    {
+      "name": "v65_noball",
+      "script": "tools/v65/solve_main_r2.py",
+      "also": ["tools/v64/physics_common_r10.py"],
+      "interpreter": "python",
+      "args": "--hz 1920 --sim-s 9.0 --no-ball --out-dir /data/raw/huzijian/project1_database/outcomes/v65/radio_scurve_domino/v65_20261007_final --label v65_noball"
+    },
+    {
+      "name": "v65_camera",
+      "script": "tools/v65/camera_design.py",
+      "also": ["tools/v64/physics_common_r10.py"],
+      "interpreter": "python",
+      "args": "--events /data/raw/huzijian/project1_database/outcomes/v65/radio_scurve_domino/v65_20261007_final/events.json --trajectory /data/raw/huzijian/project1_database/outcomes/v65/radio_scurve_domino/v65_20261007_final/trajectory.npz --out /data/raw/huzijian/project1_database/outcomes/v65/radio_scurve_domino/v65_20261007_final"
+    }
+  ]
+}
