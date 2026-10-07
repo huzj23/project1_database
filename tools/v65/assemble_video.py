@@ -136,6 +136,13 @@ if not ok:
                      f"pink={len(pink)} dupes={len(dupes)}")
 
 # ------------------------------------------------------------------ concat list, exactly the expected order
+#
+# The concat demuxer needs the LAST file listed twice: the `duration` directive that follows a file sets how long that
+# file is shown, and the final file's duration is otherwise ignored. But `-vsync cfr` then emits that repeated frame,
+# so the first encode of this shot came out at 217 frames (9.042 s) instead of 216 (9.000 s) -- one duplicate frame at
+# the end. The fix is to keep the repeat, which is required for correct timing, and cap the output explicitly with
+# `-frames:v` so the video has exactly the frames that were rendered. Letting ffmpeg decide means a video whose length
+# does not match the render, which is the kind of one-frame discrepancy that is easy to miss and hard to explain later.
 lst = OUT / "frames.txt"
 lines = []
 for i in range(args.first_frame, args.first_frame + args.frames):
@@ -151,6 +158,7 @@ if video.exists():
 cmd = [FFMPEG, "-hide_banner", "-loglevel", "error", "-y",
        "-f", "concat", "-safe", "0", "-i", str(lst),
        "-vsync", "cfr", "-r", str(args.fps),
+       "-frames:v", str(args.frames),
        "-c:v", "libx264", "-preset", args.preset, "-crf", str(args.crf),
        "-pix_fmt", "yuv420p", "-movflags", "+faststart", str(video)]
 print(f"  encoding: {' '.join(cmd)}", flush=True)

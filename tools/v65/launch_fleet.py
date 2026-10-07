@@ -29,6 +29,7 @@ Nothing is deleted, no other user's process is touched, and all output stays ins
 """
 
 import json
+import os
 from pathlib import Path
 import subprocess
 import sys
@@ -46,11 +47,15 @@ GPUS = {
     "2": "GPU-665e9626-9862-7424-fc4a-dc90d61079fa",
     "3": "GPU-245beacc-9dd2-60bb-4538-7e77ee56641f",
 }
-# three GPUs, two workers each
+# three GPUs, two workers each. The suffix is the RUN GENERATION: the launcher refuses to overwrite an existing
+# launcher script, which is what stopped this fleet from silently reusing the stale launchers belonging to the earlier
+# (slow-motion) render. A new generation must be a new name, so the old run's launchers stay on disk as evidence of
+# what was actually run and this fleet cannot be confused with it.
+GEN = os.environ.get("V65_RUN_GEN", "r2")
 PLAN = [
-    ("w1", "1", 1, 37), ("w2", "1", 37, 73),
-    ("w3", "2", 73, 109), ("w4", "2", 109, 145),
-    ("w5", "3", 145, 181), ("w6", "3", 181, 217),
+    (f"w1_{GEN}", "1", 1, 37), (f"w2_{GEN}", "1", 37, 73),
+    (f"w3_{GEN}", "2", 73, 109), (f"w4_{GEN}", "2", 109, 145),
+    (f"w5_{GEN}", "3", 145, 181), (f"w6_{GEN}", "3", 181, 217),
 ]
 
 total = sum(stop - start for _, _, start, stop in PLAN)
@@ -69,8 +74,10 @@ launched = []
 for name, gpu_key, start, stop in PLAN:
     uuid = GPUS[gpu_key]
     session = f"v65_rnd_{name}"
-    scratch = f"{ROOT}/tmp/v65_node12/scratch_{name}"
-    control = f"{ROOT}/tmp/v65_node12/control_{name}"
+    # per-generation paths: the renderer creates the control dir with exist_ok=False by design, so a re-run under the
+    # same name fails to launch (this is what happened to x1/x2 in launch_extra_workers.py)
+    scratch = f"{ROOT}/tmp/v65_node12/scratch_{name}_{GEN}"
+    control = f"{ROOT}/tmp/v65_node12/control_{name}_{GEN}"
     args = (f"--uuid {uuid} --scene {SCENE} --out {OUT} --script {SCRIPT} "
             f"--start {start} --stop {stop} --threads 12 --scratch {scratch} --control {control}")
     cmd = [PY, "-u", "tools/v64/remote_run.py", "run", "--account", "chenliang",

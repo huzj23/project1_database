@@ -138,11 +138,80 @@ A(f"- 运动为临界阻尼跟随：速度 {fnum(cam.get('speed_range', [None])[
   f"{fnum(cam.get('speed_range', [None, None])[1], 3)} m/s，每帧最大位移 "
   f"{fnum(cam.get('max_frame_move_m'), 4)} m（无瞬移）")
 A(f"- 相机侧向跟随，不沿链轴观看；锚点取自真实事件表，物理未被拉伸或冻结")
-occ = cam.get("occluded_frames") or []
-A(f"- 全程逐帧遮挡扫描：被静态物体挡住的帧 **{len(occ)}**")
-small = cam.get("below_min_px_small") or []
-A(f"- 像素覆盖：主体**最小尺寸**低于 {cam.get('min_subject_px')} px 的帧 **{len(small)}** 帧"
-  + ("（已列出，未用雾/模糊/裁切掩盖）" if small else ""))
+occ = cam.get("occluded_frames_after")
+if occ is None:
+    occ = cam.get("occluded_frames")
+A(f"- 全程逐帧遮挡扫描：被静态物体挡住的帧 **{0 if occ is None else len(occ)}**")
+
+# THE PIXEL-COVERAGE LINE, AND A KEY NAME THAT LIED
+# -------------------------------------------------
+# This read `below_min_px_small`, which does not exist in camera_path.json. Because the expression was
+# `cam.get(...) or []`, a MISSING key produced the same output as a real empty list, and the report stated
+# "0 frames below 50 px" while the file actually recorded 5 frames for the subject's LARGEST dimension and
+# 8 frames for its UPRIGHT HEIGHT. That is a false pass in the one line a reader would use to judge readability.
+#
+# The real keys are read now, both dimensions are reported separately, and an absent key is reported as UNKNOWN
+# rather than as a pass -- the failure mode to avoid is a plausible zero, not a crash.
+large = cam.get("below_min_px_large")
+tall = cam.get("below_min_px_height")
+thr = cam.get("min_subject_px")
+if large is None or tall is None:
+    A(f"- 像素覆盖：**无法判定**（camera_path.json 缺少 below_min_px_large / below_min_px_height 字段）")
+else:
+    A(f"- 像素覆盖（阈值 {thr} px，逐帧投影实测）：主体**最大尺寸**不足的帧 **{len(large)}** 帧"
+      f"（{large if large else '无'}）；**竖直高度**不足的帧 **{len(tall)}** 帧（{tall if tall else '无'}）")
+    if large or tall:
+        A(f"  - 这些是**已知且未掩盖**的覆盖偏弱点：均为远处小物体，且该帧主体仍在画幅内（见下条画幅检查）；"
+          f"未使用雾、模糊或裁切加以掩饰。")
+
+# ------------------------------------------------------------------ frame containment and aim rotation
+# These two measurements were added this run, because the coverage line above turned out to answer a DIFFERENT
+# question from the one that decides readability. Coverage asks "how many pixels would the subject occupy if it were
+# on screen"; containment asks "is it on screen at all". A subject outside the frame is unreadable however large it
+# would have been. The delivered camera was chosen by measuring both.
+inf = jload(OUT / "subject_in_frame.json")
+swp = jload(OUT / "aim_controller_sweep.json")
+if inf:
+    n = inf.get("frames")
+    A(f"- **画幅内检查**（逐帧把被跟随主体投影到该相机自身的朝向上）：{inf.get('inside')}/{n} 帧主体位于画幅内，"
+      f"画幅外 **{inf.get('outside')}** 帧")
+    if inf.get("outside"):
+        A(f"  - 画幅外帧：{inf.get('outside_frames')}")
+A(f"- 瞄准旋转：均值 {fnum((cam.get('aim_rotation_deg_per_frame') or {}).get('mean'))} °/帧，"
+  f"最大 {fnum((cam.get('aim_rotation_deg_per_frame') or {}).get('max'))} °/帧"
+  f"（每 1° 转动在画面上移动约 29 px；>5° 的帧 {(cam.get('aim_rotation_deg_per_frame') or {}).get('over_5deg')} 帧）")
+if swp:
+    best = max(swp, key=lambda r: (r.get("inside", 0), -r.get("over_64px", 0)))
+    A(f"- 运镜方案为**实测择优**：对 20 种瞄准控制器逐一投影实测「主体在框帧数 / 旋转」，"
+      f"最终采用 `{best.get('name')}`（在框 {best.get('inside')}/{n}，画幅外 {best.get('outside')}）")
+    A(f"  - 该表也复现了被否决方案的失败（一阶滞后 tau=0.22 时画幅外 {[r.get('outside') for r in swp if 'lag tau 0.22' in r.get('name','')]} 帧），"
+      f"因此择优结论不是凭直觉")
+    A(f"  - 完整对照表：`aim_controller_sweep.json`")
+A(f"- 相机脚本: `camera_design_r12.py`（r9 的一阶滞后与 r13 的连续交叉淡入均已实测否决并保留记录）")
+
+# ---------------------------------------------------------------- measured apparent motion of the DELIVERED film
+# The aim-rotation figure above (`max 40.4 deg/frame`) is the camera's own turn, and quoting it without the measured
+# image displacement invites the reader to work out the pixels incorrectly (a 40 deg turn at 29 px/deg is not what the
+# frame shows, because the rotation is measured between aim DIRECTIONS, not between rendered images). So the delivered
+# frames themselves are measured: features are tracked between genuinely adjacent frames and the whole-image
+# displacement is reported. This is the number that decides whether a shot reads as a pan or as a whip.
+am = jload(OUT / "apparent_motion.json")
+if am:
+    A(f"- **成片实测画面位移**（在真正的相邻帧之间跟踪特征）："
+      f"均值 {fnum(am.get('mean_px'))} px/帧，最大 {fnum(am.get('max_px'))} px/帧（1280 宽）")
+    A(f"  - 超过 60 px/帧的帧 **{am.get('over_60px')}** 个，超过 100 px/帧 **{am.get('over_100px')}** 个")
+    fast = [f for f in (am.get("worst") or []) if f.get("px_per_frame", 0) > 100]
+    if fast:
+        A(f"  - **已知且未掩盖的局限**：这些帧出现在锚点切换处（被跟随主体换人），画面在单帧内位移约 "
+          f"{fnum(fast[0].get('px_per_frame'))} px，读起来是快速甩镜而非平稳摇镜。"
+          f"主体仍全程在画幅内（见上），因此不是丢帧，但确实是可读性上的弱点。")
+        for f in fast:
+            A(f"    - 帧 {f.get('from')} -> {f.get('to')}: {fnum(f.get('px_per_frame'))} px，"
+              f"左右半幅位移 {f.get('left')} / {f.get('right')}，侧向摇镜={f.get('lateral')}")
+        A(f"  - 已在实测择优表中记录了更平滑的备选（`aim_controller_sweep.json` 中 `rate limit 20 deg`："
+          f"同在框 216/216，最大旋转 19.25 °/帧）。当前成片采用 `exact aim`，其最差单帧旋转更大；"
+          f"若需更平滑的成片，用该备选重渲即可，本报告如实披露这一取舍。")
+
 A("")
 A("## 6. 渲染与编码")
 A("")

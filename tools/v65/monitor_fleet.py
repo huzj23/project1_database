@@ -7,6 +7,7 @@ per-worker counts can tell them apart.
 """
 
 import glob
+import heapq
 import json
 import os
 import subprocess
@@ -17,15 +18,30 @@ OUT = ROOT + "/outcomes/v65/radio_scurve_domino/v65_20261007_final"
 LOG = ROOT + "/log/V6.4_execution"
 SOCK = ROOT + "/tmp/v64_node12_control.sock"
 
-PLAN = {"w1": (1, 37), "w2": (37, 73), "w3": (73, 109), "w4": (109, 145), "w5": (145, 181), "w6": (181, 217)}
+# The fleet is not the originally planned w1..w6. GPU 1 turned out to carry another user's process, so the two blocks
+# it was to cover went to x1/x2 on GPUs 2 and 3; and because the render is CPU-bound, two further OFFLOAD workers
+# (o1/o2) race the tail of the two late blocks to compress the critical path. The overlapping ranges are intentional:
+# the renderer skips frames whose sidecar already exists, so a race is harmless and neither worker wastes the frame.
+PLAN = {"w3": (73, 109), "w4": (109, 145), "x1": (1, 37),
+        "w5": (145, 181), "w6": (181, 217), "x2": (37, 73),
+        "o1": (25, 37), "o2": (61, 73)}
+# The run generation. The launcher refuses to overwrite an existing launcher script, so a re-run needs new session
+# names; the generation keeps this monitor, the watcher and the fleet pointed at the SAME run rather than at three
+# different ones. Default matches launch_fleet.py.
+GEN = os.environ.get("V65_RUN_GEN", "r2")
 
-print("=== worker sessions ===")
+
+def sess(w):
+    return f"v65_rnd_{w}_{GEN}"
+
+
+print(f"=== worker sessions (generation {GEN}) ===")
 alive = {}
 for w in PLAN:
-    r = subprocess.run(["/usr/bin/tmux", "-S", SOCK, "has-session", "-t", f"v65_rnd_{w}"],
+    r = subprocess.run(["/usr/bin/tmux", "-S", SOCK, "has-session", "-t", sess(w)],
                        capture_output=True, text=True)
     alive[w] = (r.returncode == 0)
-    print(f"  v65_rnd_{w}  {'ALIVE' if alive[w] else 'done/gone'}   range {PLAN[w][0]}..{PLAN[w][1]}")
+    print(f"  {sess(w)}  {'ALIVE' if alive[w] else 'done/gone'}   range {PLAN[w][0]}..{PLAN[w][1]}")
 
 meta = {}
 for p in glob.glob(OUT + "/frames_meta/*.json"):
@@ -59,20 +75,52 @@ if meta:
     print(f"  warm frames:           {len(warm)}  mean {wm:.2f} s  min {min(warm) if warm else 0:.1f} "
           f"max {max(warm) if warm else 0:.1f}")
     remaining = 216 - len(meta)
-    # each worker proceeds independently, so the wall time left is the SLOWEST worker's remaining work
-    slowest = 0.0
-    for w, (a, b) in PLAN.items():
-        left = sum(1 for f in range(a, b) if f not in meta)
-        slowest = max(slowest, left * (per[w]["mean_s"] or wm))
+    # ETA BY SIMULATION, NOT BY "REMAINING x MEAN"
+    # -------------------------------------------
+    # The previous estimate multiplied each worker's remaining frames by its own mean. That is wrong twice over:
+    #
+    #   1. Each worker's mean is contaminated by its COLD START -- the first frame after loading the 500 MB scene
+    #      takes 300-430 s against a warm 140 s -- so every worker's mean overstated its steady rate.
+    #   2. Once offload workers race the tail of the late blocks, a frame is finished by whichever worker reaches it
+    #      first, so "worker X still has 35 frames" no longer means 35 frames of wall time. The offload workers exist
+    #      precisely to shorten that, and a per-worker product cannot see it.
+    #
+    # So simulate the fleet instead: every worker walks its own range in order at the measured WARM rate, skipping
+    # frames another worker already finished, and the finish time is when the last frame falls. That is the quantity
+    # the deadline compares against.
+    rate = wm if warm else 0.0
+    pending = {w: [f for f in range(a, b) if f not in meta] for w, (a, b) in PLAN.items()}
     print(f"  frames remaining: {remaining}")
-    print(f"  projected wall clock for the slowest worker: {slowest / 60:.1f} min "
-          f"({slowest / 3600:.2f} h)")
-    print(f"  projected render completion: {time.strftime('%H:%M:%S', time.localtime(time.time() + slowest))}")
+    if rate > 0 and any(pending.values()):
+        # discrete-event simulation: each worker's next frame completes `rate` seconds from now
+        now = 0.0
+        heap = [(rate, w) for w in pending if pending[w]]
+        heapq.heapify(heap)
+        done = set(meta)
+        while heap:
+            t, w = heapq.heappop(heap)
+            now = max(now, t)
+            while pending[w] and pending[w][0] in done:
+                pending[w].pop(0)
+            if not pending[w]:
+                continue
+            f = pending[w].pop(0)
+            done.add(f)
+            if pending[w]:
+                heapq.heappush(heap, (now + rate, w))
+        print(f"  projected wall clock to finish all frames: {now / 60:.1f} min ({now / 3600:.2f} h)")
+        print(f"  projected render completion: {time.strftime('%H:%M:%S', time.localtime(time.time() + now))}")
+        per_worker = {w: len([f for f in range(a, b) if f not in meta]) for w, (a, b) in PLAN.items()}
+        slow = max(per_worker.items(), key=lambda kv: kv[1])
+        print(f"  most-loaded worker: {slow[0]} with {slow[1]} frames left "
+              f"(naive estimate {slow[1] * rate / 60:.1f} min, shortened by the offload workers)")
+    else:
+        print("  not enough timing data yet for an ETA")
 
 print("\n=== errors in worker logs ===")
 bad = 0
 for w in PLAN:
-    p = f"{LOG}/v65_rnd_{w}.log"
+    p = f"{LOG}/v65_rnd_{w}_{GEN}.log"
     if os.path.exists(p):
         txt = open(p, errors="replace").read()
         for line in txt.splitlines():

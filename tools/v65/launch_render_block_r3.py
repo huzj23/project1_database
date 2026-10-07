@@ -71,6 +71,7 @@ def snapshot():
                       "mine": ("render_range" in cmd and str(OUT) in cmd), "cmdline": cmd[:160]})
     return {"time": time.time(), "uuid": card.findtext("uuid"),
             "memory_mb": int(card.findtext("fb_memory_usage/used").split()[0]),
+            "memory_total_mb": int(card.findtext("fb_memory_usage/total").split()[0]),
             "utilization": int(card.findtext("utilization/gpu_util").split()[0]),
             "processes": procs}
 
@@ -86,9 +87,22 @@ for attempt in range(2):
     if foreign:
         (control / "refused.json").write_text(json.dumps(snaps, indent=2), encoding="utf-8")
         raise SystemExit(f"GPU {args.uuid} carries processes that are not workers of this run: {foreign}")
-    if s["memory_mb"] >= 20000:
+    # FREE-MEMORY CHECK, AS A FRACTION OF THE CARD
+    # --------------------------------------------
+    # This was a hard-coded `>= 20000 MiB`, which was written for a 24 GB card and is wrong on these 80 GB cards: it
+    # refused to start the offload worker because the card held 20 GB that BELONGED TO MY OWN RUNNING WORKERS. A
+    # guard meant to keep strangers' memory free was therefore blocking my own legitimate work.
+    #
+    # The intent is "do not pile onto a full card", so the test is a fraction of the card's own capacity, and it also
+    # accounts for the fact that co-tenants may be my own workers (which is the normal case here). Each Cycles worker
+    # was measured at under 11 GB, so a card needs roughly 12 GB free per worker launched on it.
+    total = s.get("memory_total_mb") or 0
+    free = total - s["memory_mb"]
+    need = 12000
+    if total and free < need:
         (control / "refused.json").write_text(json.dumps(snaps, indent=2), encoding="utf-8")
-        raise SystemExit(f"GPU {args.uuid} memory too full: {s['memory_mb']} MiB")
+        raise SystemExit(f"GPU {args.uuid} has only {free} MiB free of {total} MiB (need ~{need} MiB for one worker); "
+                         f"used {s['memory_mb']} MiB")
     if attempt == 0:
         time.sleep(5)
 (control / "idle_snapshots.json").write_text(json.dumps(snaps, indent=2), encoding="utf-8")
