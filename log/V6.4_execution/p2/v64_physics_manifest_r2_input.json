@@ -1,0 +1,3413 @@
+{
+  "manifest_version": "v64_physics_manifest_r2",
+  "supersedes": {
+    "version": "v64_physics_manifest_r1",
+    "sha256": "8a49c58b074e53915487d40f81e310d23be83bafeae47436dcc6675b09caa6ec",
+    "what_changed": "radio_friction was fabricated as a conflict and set to the ground BOX friction 0.45; corrected to the radio's own 0.80. Static friction set to the desktop 0.75. Nine further r1 'divergences' reclassified as single-world actor definitions",
+    "correction_record": "/data/raw/huzijian/project1_database/log/V6.4_execution/p1b_manifest_r1_correction.json"
+  },
+  "purpose": "ONE physical definition shared by every local and full trial (plan 5.2)",
+  "loaders_must_use_this_file": true,
+  "sources": {
+    "layout": {
+      "path": "/data/raw/huzijian/project1_database/tmp/v63_node11/layout_r6/layout.json",
+      "sha256": "78b8fcfb4abf4f4e6b62cc88135ee89ff9bf819cca72f5241460ef92f2ecc4bc"
+    },
+    "common_assets": {
+      "path": "/data/raw/huzijian/project1_database/tmp/v63_node11/common_assets_r1/manifest.json",
+      "sha256": "eac354d0f91372ecc3df45f879e576f2453b35b90f611c85661d26518f4397ad"
+    },
+    "survey": {
+      "path": "/data/raw/huzijian/project1_database/tmp/v63_node11/survey_r1/survey.json",
+      "sha256": "80810251ae484817e9247845e7cc76085e37f36da8ae7eef9c68a876f4efb3f0"
+    },
+    "baseball_probe_summary": {
+      "path": "/data/raw/huzijian/project1_database/tmp/v63_node11/baseball_probe_r3/summary.json",
+      "sha256": "c361211191a0288943c659d6cb6fb75749cbf23c3fa95e763f2cd0d0f57e5833"
+    },
+    "relay_probe_summary": {
+      "path": "/data/raw/huzijian/project1_database/tmp/v63_node11/relay_probe_r2/summary.json",
+      "sha256": "7c7d2d67fba55233c9e9a211012ed53abca91edc134d9ffd1ce86abcc60e21f1"
+    }
+  },
+  "world": {
+    "gravity_m_s2": [
+      0.0,
+      0.0,
+      -9.81
+    ],
+    "timestep_hz": [
+      960,
+      1920
+    ],
+    "timestep_s": [
+      0.0010416666666666667,
+      0.0005208333333333333
+    ],
+    "numSolverIterations": 120,
+    "deterministicOverlappingPairs": 1,
+    "contactBreakingThreshold": 0.0005,
+    "contactBreakingThreshold_is_not_penetration_allowance": true,
+    "static_friction": 0.75,
+    "static_restitution": 0.03,
+    "static_roi": {
+      "objects": 53,
+      "triangles": 902302,
+      "source": "/data/raw/huzijian/project1_database/tmp/v63_node11/survey_r1/survey.json",
+      "note": "native static ROI; no added floor, no welded caps, no global Z plane. Meshes use GEOM_FORCE_CONCAVE_TRIMESH split every 3000 triangles -- a transport split that does not change triangles or transforms"
+    }
+  },
+  "divergence_resolution": {
+    "static_friction": {
+      "desktop_probe": 0.75,
+      "ground_world": 0.65,
+      "chosen": 0.75,
+      "same_actor_in_both": true,
+      "why": "the native statics are the SAME bodies in both runs, so this is a genuine conflict. 0.75 is chosen because the table is a native static and R's slide-vs-carry behaviour on it governs the desktop mechanism that must survive the merge; 0.65 was tuned for boxes knocked along the floor. The alternative is retained and P3 perturbs this by +-10%"
+    },
+    "static_restitution": {
+      "desktop_probe": 0.03,
+      "ground_world": 0.03,
+      "chosen": 0.03,
+      "same_actor_in_both": true,
+      "why": "the two agree"
+    },
+    "contactBreakingThreshold": {
+      "desktop_probe": 0.001,
+      "ground_world": 0.0005,
+      "chosen": 0.0005,
+      "same_actor_in_both": true,
+      "why": "a global engine setting; the more conservative of the two is kept. Plan 5.2: this is NOT an allowed-penetration amount, so nothing here forgives penetration"
+    },
+    "gravity": {
+      "desktop_probe": [
+        0.0,
+        0.0,
+        -9.81
+      ],
+      "ground_world": [
+        0.0,
+        0.0,
+        -9.81
+      ],
+      "chosen": [
+        0.0,
+        0.0,
+        -9.81
+      ],
+      "same_actor_in_both": true,
+      "why": "the two agree"
+    },
+    "num_solver_iterations": {
+      "desktop_probe": 120,
+      "ground_world": 120,
+      "chosen": 120,
+      "same_actor_in_both": true,
+      "why": "the two agree"
+    },
+    "collision_margin": {
+      "desktop_probe": 0.0001,
+      "ground_world": 0.0001,
+      "chosen": 0.0001,
+      "same_actor_in_both": true,
+      "why": "the two agree"
+    },
+    "radio_friction": {
+      "desktop_probe": 0.8,
+      "ground_world": null,
+      "chosen": 0.8,
+      "same_actor_in_both": false,
+      "why": "the ground world has NO radio; this is the radio's own measured probe value"
+    },
+    "radio_restitution": {
+      "desktop_probe": 0.03,
+      "ground_world": null,
+      "chosen": 0.03,
+      "same_actor_in_both": false,
+      "why": "desktop-only actor"
+    },
+    "radio_linear_damping": {
+      "desktop_probe": 0.02,
+      "ground_world": null,
+      "chosen": 0.02,
+      "same_actor_in_both": false,
+      "why": "desktop-only actor"
+    },
+    "radio_angular_damping": {
+      "desktop_probe": 0.02,
+      "ground_world": null,
+      "chosen": 0.02,
+      "same_actor_in_both": false,
+      "why": "desktop-only actor"
+    },
+    "receiving_box_friction": {
+      "desktop_probe": 0.4,
+      "ground_world": null,
+      "chosen": 0.4,
+      "same_actor_in_both": false,
+      "why": "R is a desktop actor sitting on the table; the probe's own value is kept so the validated desktop mechanism is not perturbed by a merge"
+    },
+    "ground_box_friction": {
+      "desktop_probe": null,
+      "ground_world": 0.45,
+      "chosen": 0.45,
+      "same_actor_in_both": false,
+      "why": "the 48 ground boxes, ground-world value"
+    },
+    "ground_box_restitution": {
+      "desktop_probe": null,
+      "ground_world": 0.02,
+      "chosen": 0.02,
+      "same_actor_in_both": false,
+      "why": "ground boxes only"
+    },
+    "ground_box_linear_damping": {
+      "desktop_probe": null,
+      "ground_world": 0.015,
+      "chosen": 0.015,
+      "same_actor_in_both": false,
+      "why": "ground boxes only"
+    },
+    "ground_box_angular_damping": {
+      "desktop_probe": null,
+      "ground_world": 0.015,
+      "chosen": 0.015,
+      "same_actor_in_both": false,
+      "why": "ground boxes only"
+    },
+    "ground_box_rolling_friction": {
+      "desktop_probe": null,
+      "ground_world": 0.0002,
+      "chosen": 0.0002,
+      "same_actor_in_both": false,
+      "why": "ground boxes only"
+    },
+    "ball_friction": {
+      "desktop_probe": 0.45,
+      "ground_world": null,
+      "chosen": 0.45,
+      "same_actor_in_both": false,
+      "why": "ball is a desktop actor; probe value kept"
+    },
+    "ball_restitution": {
+      "desktop_probe": 0.45,
+      "ground_world": null,
+      "chosen": 0.45,
+      "same_actor_in_both": false,
+      "why": "probe value kept"
+    }
+  },
+  "real_conflict_count": 2,
+  "real_conflicts": [
+    "static_friction",
+    "contactBreakingThreshold"
+  ],
+  "objects": {
+    "F01": {
+      "id": "F01",
+      "asset_key": "paper",
+      "asset_id": "Paper_Mario_Sticker_Star_Nintendo_3DS_Game",
+      "frame": {
+        "world": "shared world XY plane, Z up, metres",
+        "base_pose_convention": "basePosition/baseOrientation place the multibody BASE ORIGIN, which is not necessarily the mesh origin or the centre of mass",
+        "mesh_origin_local": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "units": "metre"
+      },
+      "world_transform": {
+        "position": [
+          -2.1699949541536365,
+          11.230000819343308,
+          0.022695501170804128
+        ],
+        "quaternion_xyzw": [
+          -6.881952582630735e-06,
+          2.7136256366399127e-05,
+          1.2824990201947474e-05,
+          0.9999999995258909
+        ]
+      },
+      "dims_m": [
+        0.015746,
+        0.13758599999999999,
+        0.12521100000000002
+      ],
+      "canonical_half_extents_m": [
+        0.007873,
+        0.06879299999999999,
+        0.06260550000000001
+      ],
+      "mass_kg": 0.07,
+      "mass_source": "common_assets manifest mass_estimate_kg; DECLARED ESTIMATE, not measured",
+      "com_body_frame_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "inertia_frame": "body frame, principal axes aligned with the box axes",
+      "inertia_source": "solid-cuboid closed form from the declared mass and canonical half extents",
+      "solver": {
+        "lateralFriction": 0.45,
+        "restitution": 0.02,
+        "collisionMargin": 0.0001,
+        "linearDamping": 0.015,
+        "angularDamping": 0.015,
+        "rollingFriction": 0.0002
+      },
+      "inertia_kg_m2": [
+        0.00020187826118250003,
+        9.290009771583339e-05,
+        0.00011187075615333332
+      ],
+      "material": {
+        "type": "GEOM_BOX",
+        "source": "common box"
+      }
+    },
+    "F02": {
+      "id": "F02",
+      "asset_key": "paper",
+      "asset_id": "Paper_Mario_Sticker_Star_Nintendo_3DS_Game",
+      "frame": {
+        "world": "shared world XY plane, Z up, metres",
+        "base_pose_convention": "basePosition/baseOrientation place the multibody BASE ORIGIN, which is not necessarily the mesh origin or the centre of mass",
+        "mesh_origin_local": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "units": "metre"
+      },
+      "world_transform": {
+        "position": [
+          -2.097518816123096,
+          11.234399091469891,
+          0.022695549966793904
+        ],
+        "quaternion_xyzw": [
+          -1.1733382199323468e-06,
+          1.2731340296588836e-05,
+          0.060506451377174135,
+          0.9981678061219356
+        ]
+      },
+      "dims_m": [
+        0.015746,
+        0.13758599999999999,
+        0.12521100000000002
+      ],
+      "canonical_half_extents_m": [
+        0.007873,
+        0.06879299999999999,
+        0.06260550000000001
+      ],
+      "mass_kg": 0.07,
+      "mass_source": "common_assets manifest mass_estimate_kg; DECLARED ESTIMATE, not measured",
+      "com_body_frame_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "inertia_frame": "body frame, principal axes aligned with the box axes",
+      "inertia_source": "solid-cuboid closed form from the declared mass and canonical half extents",
+      "solver": {
+        "lateralFriction": 0.45,
+        "restitution": 0.02,
+        "collisionMargin": 0.0001,
+        "linearDamping": 0.015,
+        "angularDamping": 0.015,
+        "rollingFriction": 0.0002
+      },
+      "inertia_kg_m2": [
+        0.00020187826118250003,
+        9.290009771583339e-05,
+        0.00011187075615333332
+      ],
+      "material": {
+        "type": "GEOM_BOX",
+        "source": "common box"
+      }
+    },
+    "F03": {
+      "id": "F03",
+      "asset_key": "paper",
+      "asset_id": "Paper_Mario_Sticker_Star_Nintendo_3DS_Game",
+      "frame": {
+        "world": "shared world XY plane, Z up, metres",
+        "base_pose_convention": "basePosition/baseOrientation place the multibody BASE ORIGIN, which is not necessarily the mesh origin or the centre of mass",
+        "mesh_origin_local": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "units": "metre"
+      },
+      "world_transform": {
+        "position": [
+          -2.0261014604114935,
+          11.247513471713983,
+          0.02269553581403124
+        ],
+        "quaternion_xyzw": [
+          -2.463618773046015e-06,
+          1.0288895574056226e-05,
+          0.12081694809891362,
+          0.9926748032161055
+        ]
+      },
+      "dims_m": [
+        0.015746,
+        0.13758599999999999,
+        0.12521100000000002
+      ],
+      "canonical_half_extents_m": [
+        0.007873,
+        0.06879299999999999,
+        0.06260550000000001
+      ],
+      "mass_kg": 0.07,
+      "mass_source": "common_assets manifest mass_estimate_kg; DECLARED ESTIMATE, not measured",
+      "com_body_frame_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "inertia_frame": "body frame, principal axes aligned with the box axes",
+      "inertia_source": "solid-cuboid closed form from the declared mass and canonical half extents",
+      "solver": {
+        "lateralFriction": 0.45,
+        "restitution": 0.02,
+        "collisionMargin": 0.0001,
+        "linearDamping": 0.015,
+        "angularDamping": 0.015,
+        "rollingFriction": 0.0002
+      },
+      "inertia_kg_m2": [
+        0.00020187826118250003,
+        9.290009771583339e-05,
+        0.00011187075615333332
+      ],
+      "material": {
+        "type": "GEOM_BOX",
+        "source": "common box"
+      }
+    },
+    "F04": {
+      "id": "F04",
+      "asset_key": "paper",
+      "asset_id": "Paper_Mario_Sticker_Star_Nintendo_3DS_Game",
+      "frame": {
+        "world": "shared world XY plane, Z up, metres",
+        "base_pose_convention": "basePosition/baseOrientation place the multibody BASE ORIGIN, which is not necessarily the mesh origin or the centre of mass",
+        "mesh_origin_local": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "units": "metre"
+      },
+      "world_transform": {
+        "position": [
+          -1.928370985667972,
+          11.19438071870112,
+          0.022696002968837555
+        ],
+        "quaternion_xyzw": [
+          -9.69778593924666e-06,
+          5.6344041776118014e-05,
+          0.18049841665816874,
+          0.9835752733345812
+        ]
+      },
+      "dims_m": [
+        0.015746,
+        0.13758599999999999,
+        0.12521100000000002
+      ],
+      "canonical_half_extents_m": [
+        0.007873,
+        0.06879299999999999,
+        0.06260550000000001
+      ],
+      "mass_kg": 0.07,
+      "mass_source": "common_assets manifest mass_estimate_kg; DECLARED ESTIMATE, not measured",
+      "com_body_frame_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "inertia_frame": "body frame, principal axes aligned with the box axes",
+      "inertia_source": "solid-cuboid closed form from the declared mass and canonical half extents",
+      "solver": {
+        "lateralFriction": 0.45,
+        "restitution": 0.02,
+        "collisionMargin": 0.0001,
+        "linearDamping": 0.015,
+        "angularDamping": 0.015,
+        "rollingFriction": 0.0002
+      },
+      "inertia_kg_m2": [
+        0.00020187826118250003,
+        9.290009771583339e-05,
+        0.00011187075615333332
+      ],
+      "material": {
+        "type": "GEOM_BOX",
+        "source": "common box"
+      }
+    },
+    "F05": {
+      "id": "F05",
+      "asset_key": "wii",
+      "asset_id": "New_Super_Mario_BrosWii_Wii_Game",
+      "frame": {
+        "world": "shared world XY plane, Z up, metres",
+        "base_pose_convention": "basePosition/baseOrientation place the multibody BASE ORIGIN, which is not necessarily the mesh origin or the centre of mass",
+        "mesh_origin_local": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "units": "metre"
+      },
+      "world_transform": {
+        "position": [
+          -1.9278713833884837,
+          11.369815990388144,
+          0.055950492717430425
+        ],
+        "quaternion_xyzw": [
+          -4.8419422585429565e-06,
+          2.028904983348732e-05,
+          0.23964453039202183,
+          0.9708606999040065
+        ]
+      },
+      "dims_m": [
+        0.016727,
+        0.137079,
+        0.191721
+      ],
+      "canonical_half_extents_m": [
+        0.0083635,
+        0.0685395,
+        0.0958605
+      ],
+      "mass_kg": 0.12,
+      "mass_source": "common_assets manifest mass_estimate_kg; DECLARED ESTIMATE, not measured",
+      "com_body_frame_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "inertia_frame": "body frame, principal axes aligned with the box axes",
+      "inertia_source": "solid-cuboid closed form from the declared mass and canonical half extents",
+      "solver": {
+        "lateralFriction": 0.45,
+        "restitution": 0.02,
+        "collisionMargin": 0.0001,
+        "linearDamping": 0.015,
+        "angularDamping": 0.015,
+        "rollingFriction": 0.0002
+      },
+      "inertia_kg_m2": [
+        0.0005554759408200001,
+        0.00037036734369999997,
+        0.00019070444770000002
+      ],
+      "material": {
+        "type": "GEOM_BOX",
+        "source": "common box"
+      }
+    },
+    "F06": {
+      "id": "F06",
+      "asset_key": "wii",
+      "asset_id": "New_Super_Mario_BrosWii_Wii_Game",
+      "frame": {
+        "world": "shared world XY plane, Z up, metres",
+        "base_pose_convention": "basePosition/baseOrientation place the multibody BASE ORIGIN, which is not necessarily the mesh origin or the centre of mass",
+        "mesh_origin_local": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "units": "metre"
+      },
+      "world_transform": {
+        "position": [
+          -1.7967024142779164,
+          11.360323812497374,
+          0.055950680220983755
+        ],
+        "quaternion_xyzw": [
+          -2.87710878014149e-06,
+          9.065294937020543e-06,
+          0.330820287192015,
+          0.9436937731551138
+        ]
+      },
+      "dims_m": [
+        0.016727,
+        0.137079,
+        0.191721
+      ],
+      "canonical_half_extents_m": [
+        0.0083635,
+        0.0685395,
+        0.0958605
+      ],
+      "mass_kg": 0.12,
+      "mass_source": "common_assets manifest mass_estimate_kg; DECLARED ESTIMATE, not measured",
+      "com_body_frame_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "inertia_frame": "body frame, principal axes aligned with the box axes",
+      "inertia_source": "solid-cuboid closed form from the declared mass and canonical half extents",
+      "solver": {
+        "lateralFriction": 0.45,
+        "restitution": 0.02,
+        "collisionMargin": 0.0001,
+        "linearDamping": 0.015,
+        "angularDamping": 0.015,
+        "rollingFriction": 0.0002
+      },
+      "inertia_kg_m2": [
+        0.0005554759408200001,
+        0.00037036734369999997,
+        0.00019070444770000002
+      ],
+      "material": {
+        "type": "GEOM_BOX",
+        "source": "common box"
+      }
+    },
+    "F07": {
+      "id": "F07",
+      "asset_key": "wii",
+      "asset_id": "New_Super_Mario_BrosWii_Wii_Game",
+      "frame": {
+        "world": "shared world XY plane, Z up, metres",
+        "base_pose_convention": "basePosition/baseOrientation place the multibody BASE ORIGIN, which is not necessarily the mesh origin or the centre of mass",
+        "mesh_origin_local": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "units": "metre"
+      },
+      "world_transform": {
+        "position": [
+          -1.7171701061597213,
+          11.43637570688654,
+          0.05595063875355153
+        ],
+        "quaternion_xyzw": [
+          -4.498924023317328e-06,
+          1.0923594647079678e-05,
+          0.41463775615940274,
+          0.909986555410315
+        ]
+      },
+      "dims_m": [
+        0.016727,
+        0.137079,
+        0.191721
+      ],
+      "canonical_half_extents_m": [
+        0.0083635,
+        0.0685395,
+        0.0958605
+      ],
+      "mass_kg": 0.12,
+      "mass_source": "common_assets manifest mass_estimate_kg; DECLARED ESTIMATE, not measured",
+      "com_body_frame_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "inertia_frame": "body frame, principal axes aligned with the box axes",
+      "inertia_source": "solid-cuboid closed form from the declared mass and canonical half extents",
+      "solver": {
+        "lateralFriction": 0.45,
+        "restitution": 0.02,
+        "collisionMargin": 0.0001,
+        "linearDamping": 0.015,
+        "angularDamping": 0.015,
+        "rollingFriction": 0.0002
+      },
+      "inertia_kg_m2": [
+        0.0005554759408200001,
+        0.00037036734369999997,
+        0.00019070444770000002
+      ],
+      "material": {
+        "type": "GEOM_BOX",
+        "source": "common box"
+      }
+    },
+    "F08": {
+      "id": "F08",
+      "asset_key": "wii",
+      "asset_id": "New_Super_Mario_BrosWii_Wii_Game",
+      "frame": {
+        "world": "shared world XY plane, Z up, metres",
+        "base_pose_convention": "basePosition/baseOrientation place the multibody BASE ORIGIN, which is not necessarily the mesh origin or the centre of mass",
+        "mesh_origin_local": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "units": "metre"
+      },
+      "world_transform": {
+        "position": [
+          -1.6524760155868103,
+          11.5264192297102,
+          0.05595057691972894
+        ],
+        "quaternion_xyzw": [
+          -5.724608574970727e-06,
+          1.1770863953212103e-05,
+          0.49555696686747913,
+          0.868575438530114
+        ]
+      },
+      "dims_m": [
+        0.016727,
+        0.137079,
+        0.191721
+      ],
+      "canonical_half_extents_m": [
+        0.0083635,
+        0.0685395,
+        0.0958605
+      ],
+      "mass_kg": 0.12,
+      "mass_source": "common_assets manifest mass_estimate_kg; DECLARED ESTIMATE, not measured",
+      "com_body_frame_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "inertia_frame": "body frame, principal axes aligned with the box axes",
+      "inertia_source": "solid-cuboid closed form from the declared mass and canonical half extents",
+      "solver": {
+        "lateralFriction": 0.45,
+        "restitution": 0.02,
+        "collisionMargin": 0.0001,
+        "linearDamping": 0.015,
+        "angularDamping": 0.015,
+        "rollingFriction": 0.0002
+      },
+      "inertia_kg_m2": [
+        0.0005554759408200001,
+        0.00037036734369999997,
+        0.00019070444770000002
+      ],
+      "material": {
+        "type": "GEOM_BOX",
+        "source": "common box"
+      }
+    },
+    "F09": {
+      "id": "F09",
+      "asset_key": "dvd",
+      "asset_id": "House_of_Cards_The_Complete_First_Season_4_Discs_DVD",
+      "frame": {
+        "world": "shared world XY plane, Z up, metres",
+        "base_pose_convention": "basePosition/baseOrientation place the multibody BASE ORIGIN, which is not necessarily the mesh origin or the centre of mass",
+        "mesh_origin_local": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "units": "metre"
+      },
+      "world_transform": {
+        "position": [
+          -1.5958983862284217,
+          11.623833991135992,
+          0.055554822508190604
+        ],
+        "quaternion_xyzw": [
+          4.012484708159505e-06,
+          1.253673902017669e-06,
+          0.5754876834819722,
+          0.8178104463400315
+        ]
+      },
+      "dims_m": [
+        0.023612,
+        0.14349299999999998,
+        0.19093
+      ],
+      "canonical_half_extents_m": [
+        0.011806,
+        0.07174649999999999,
+        0.095465
+      ],
+      "mass_kg": 0.23,
+      "mass_source": "common_assets manifest mass_estimate_kg; DECLARED ESTIMATE, not measured",
+      "com_body_frame_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "inertia_frame": "body frame, principal axes aligned with the box axes",
+      "inertia_source": "solid-cuboid closed form from the declared mass and canonical half extents",
+      "solver": {
+        "lateralFriction": 0.45,
+        "restitution": 0.02,
+        "collisionMargin": 0.0001,
+        "linearDamping": 0.015,
+        "angularDamping": 0.015,
+        "rollingFriction": 0.0002
+      },
+      "inertia_kg_m2": [
+        0.0010933530306891665,
+        0.0007093926693433334,
+        0.0004053322121991666
+      ],
+      "material": {
+        "type": "GEOM_BOX",
+        "source": "common box"
+      }
+    },
+    "F10": {
+      "id": "F10",
+      "asset_key": "dvd",
+      "asset_id": "House_of_Cards_The_Complete_First_Season_4_Discs_DVD",
+      "frame": {
+        "world": "shared world XY plane, Z up, metres",
+        "base_pose_convention": "basePosition/baseOrientation place the multibody BASE ORIGIN, which is not necessarily the mesh origin or the centre of mass",
+        "mesh_origin_local": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "units": "metre"
+      },
+      "world_transform": {
+        "position": [
+          -1.5899263705573714,
+          11.721185628720013,
+          0.05555488008339841
+        ],
+        "quaternion_xyzw": [
+          4.145296028778906e-06,
+          -3.0820691857259837e-07,
+          0.6480050123906247,
+          0.7616360705083156
+        ]
+      },
+      "dims_m": [
+        0.023612,
+        0.14349299999999998,
+        0.19093
+      ],
+      "canonical_half_extents_m": [
+        0.011806,
+        0.07174649999999999,
+        0.095465
+      ],
+      "mass_kg": 0.23,
+      "mass_source": "common_assets manifest mass_estimate_kg; DECLARED ESTIMATE, not measured",
+      "com_body_frame_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "inertia_frame": "body frame, principal axes aligned with the box axes",
+      "inertia_source": "solid-cuboid closed form from the declared mass and canonical half extents",
+      "solver": {
+        "lateralFriction": 0.45,
+        "restitution": 0.02,
+        "collisionMargin": 0.0001,
+        "linearDamping": 0.015,
+        "angularDamping": 0.015,
+        "rollingFriction": 0.0002
+      },
+      "inertia_kg_m2": [
+        0.0010933530306891665,
+        0.0007093926693433334,
+        0.0004053322121991666
+      ],
+      "material": {
+        "type": "GEOM_BOX",
+        "source": "common box"
+      }
+    },
+    "F11": {
+      "id": "F11",
+      "asset_key": "dvd",
+      "asset_id": "House_of_Cards_The_Complete_First_Season_4_Discs_DVD",
+      "frame": {
+        "world": "shared world XY plane, Z up, metres",
+        "base_pose_convention": "basePosition/baseOrientation place the multibody BASE ORIGIN, which is not necessarily the mesh origin or the centre of mass",
+        "mesh_origin_local": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "units": "metre"
+      },
+      "world_transform": {
+        "position": [
+          -1.569846824809429,
+          11.84476058052721,
+          0.055554951365153864
+        ],
+        "quaternion_xyzw": [
+          3.2907899892390305e-06,
+          1.0984065666819787e-06,
+          0.699881047224257,
+          0.7142594204658708
+        ]
+      },
+      "dims_m": [
+        0.023612,
+        0.14349299999999998,
+        0.19093
+      ],
+      "canonical_half_extents_m": [
+        0.011806,
+        0.07174649999999999,
+        0.095465
+      ],
+      "mass_kg": 0.23,
+      "mass_source": "common_assets manifest mass_estimate_kg; DECLARED ESTIMATE, not measured",
+      "com_body_frame_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "inertia_frame": "body frame, principal axes aligned with the box axes",
+      "inertia_source": "solid-cuboid closed form from the declared mass and canonical half extents",
+      "solver": {
+        "lateralFriction": 0.45,
+        "restitution": 0.02,
+        "collisionMargin": 0.0001,
+        "linearDamping": 0.015,
+        "angularDamping": 0.015,
+        "rollingFriction": 0.0002
+      },
+      "inertia_kg_m2": [
+        0.0010933530306891665,
+        0.0007093926693433334,
+        0.0004053322121991666
+      ],
+      "material": {
+        "type": "GEOM_BOX",
+        "source": "common box"
+      }
+    },
+    "F12": {
+      "id": "F12",
+      "asset_key": "dvd",
+      "asset_id": "House_of_Cards_The_Complete_First_Season_4_Discs_DVD",
+      "frame": {
+        "world": "shared world XY plane, Z up, metres",
+        "base_pose_convention": "basePosition/baseOrientation place the multibody BASE ORIGIN, which is not necessarily the mesh origin or the centre of mass",
+        "mesh_origin_local": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "units": "metre"
+      },
+      "world_transform": {
+        "position": [
+          -1.559517039732781,
+          11.954936648017402,
+          0.05555511388963131
+        ],
+        "quaternion_xyzw": [
+          -8.096236713645914e-06,
+          1.5314740099967147e-05,
+          0.6456706361230656,
+          0.7636160221920083
+        ]
+      },
+      "dims_m": [
+        0.023612,
+        0.14349299999999998,
+        0.19093
+      ],
+      "canonical_half_extents_m": [
+        0.011806,
+        0.07174649999999999,
+        0.095465
+      ],
+      "mass_kg": 0.23,
+      "mass_source": "common_assets manifest mass_estimate_kg; DECLARED ESTIMATE, not measured",
+      "com_body_frame_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "inertia_frame": "body frame, principal axes aligned with the box axes",
+      "inertia_source": "solid-cuboid closed form from the declared mass and canonical half extents",
+      "solver": {
+        "lateralFriction": 0.45,
+        "restitution": 0.02,
+        "collisionMargin": 0.0001,
+        "linearDamping": 0.015,
+        "angularDamping": 0.015,
+        "rollingFriction": 0.0002
+      },
+      "inertia_kg_m2": [
+        0.0010933530306891665,
+        0.0007093926693433334,
+        0.0004053322121991666
+      ],
+      "material": {
+        "type": "GEOM_BOX",
+        "source": "common box"
+      }
+    },
+    "F13": {
+      "id": "F13",
+      "asset_key": "cranium",
+      "asset_id": "Hasbro_Cranium_Performance_and_Acting_Game",
+      "frame": {
+        "world": "shared world XY plane, Z up, metres",
+        "base_pose_convention": "basePosition/baseOrientation place the multibody BASE ORIGIN, which is not necessarily the mesh origin or the centre of mass",
+        "mesh_origin_local": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "units": "metre"
+      },
+      "world_transform": {
+        "position": [
+          -1.533065433796358,
+          12.062444009069937,
+          0.0961053863048635
+        ],
+        "quaternion_xyzw": [
+          4.176134145564613e-06,
+          -1.004994201807693e-06,
+          0.5872777505200281,
+          0.8093854728901956
+        ]
+      },
+      "dims_m": [
+        0.054855,
+        0.208143,
+        0.272031
+      ],
+      "canonical_half_extents_m": [
+        0.0274275,
+        0.1040715,
+        0.1360155
+      ],
+      "mass_kg": 0.6,
+      "mass_source": "common_assets manifest mass_estimate_kg; DECLARED ESTIMATE, not measured",
+      "com_body_frame_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "inertia_frame": "body frame, principal axes aligned with the box axes",
+      "inertia_source": "solid-cuboid closed form from the declared mass and canonical half extents",
+      "solver": {
+        "lateralFriction": 0.45,
+        "restitution": 0.02,
+        "collisionMargin": 0.0001,
+        "linearDamping": 0.015,
+        "angularDamping": 0.015,
+        "rollingFriction": 0.0002
+      },
+      "inertia_kg_m2": [
+        0.005866218670500001,
+        0.003850496799300001,
+        0.0023166289737
+      ],
+      "material": {
+        "type": "GEOM_BOX",
+        "source": "common box"
+      }
+    },
+    "F14": {
+      "id": "F14",
+      "asset_key": "cranium",
+      "asset_id": "Hasbro_Cranium_Performance_and_Acting_Game",
+      "frame": {
+        "world": "shared world XY plane, Z up, metres",
+        "base_pose_convention": "basePosition/baseOrientation place the multibody BASE ORIGIN, which is not necessarily the mesh origin or the centre of mass",
+        "mesh_origin_local": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "units": "metre"
+      },
+      "world_transform": {
+        "position": [
+          -1.4687612348687635,
+          12.206300916643295,
+          0.09610546740473581
+        ],
+        "quaternion_xyzw": [
+          -1.216448320530804e-06,
+          2.83332313908144e-06,
+          0.49911709192462855,
+          0.8665345512668231
+        ]
+      },
+      "dims_m": [
+        0.054855,
+        0.208143,
+        0.272031
+      ],
+      "canonical_half_extents_m": [
+        0.0274275,
+        0.1040715,
+        0.1360155
+      ],
+      "mass_kg": 0.6,
+      "mass_source": "common_assets manifest mass_estimate_kg; DECLARED ESTIMATE, not measured",
+      "com_body_frame_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "inertia_frame": "body frame, principal axes aligned with the box axes",
+      "inertia_source": "solid-cuboid closed form from the declared mass and canonical half extents",
+      "solver": {
+        "lateralFriction": 0.45,
+        "restitution": 0.02,
+        "collisionMargin": 0.0001,
+        "linearDamping": 0.015,
+        "angularDamping": 0.015,
+        "rollingFriction": 0.0002
+      },
+      "inertia_kg_m2": [
+        0.005866218670500001,
+        0.003850496799300001,
+        0.0023166289737
+      ],
+      "material": {
+        "type": "GEOM_BOX",
+        "source": "common box"
+      }
+    },
+    "F15": {
+      "id": "F15",
+      "asset_key": "cranium",
+      "asset_id": "Hasbro_Cranium_Performance_and_Acting_Game",
+      "frame": {
+        "world": "shared world XY plane, Z up, metres",
+        "base_pose_convention": "basePosition/baseOrientation place the multibody BASE ORIGIN, which is not necessarily the mesh origin or the centre of mass",
+        "mesh_origin_local": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "units": "metre"
+      },
+      "world_transform": {
+        "position": [
+          -1.3757572500634951,
+          12.333565639063815,
+          0.09610555799124687
+        ],
+        "quaternion_xyzw": [
+          -3.3853948211394186e-06,
+          3.71369396081429e-06,
+          0.4060319341347495,
+          0.9138588886899016
+        ]
+      },
+      "dims_m": [
+        0.054855,
+        0.208143,
+        0.272031
+      ],
+      "canonical_half_extents_m": [
+        0.0274275,
+        0.1040715,
+        0.1360155
+      ],
+      "mass_kg": 0.6,
+      "mass_source": "common_assets manifest mass_estimate_kg; DECLARED ESTIMATE, not measured",
+      "com_body_frame_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "inertia_frame": "body frame, principal axes aligned with the box axes",
+      "inertia_source": "solid-cuboid closed form from the declared mass and canonical half extents",
+      "solver": {
+        "lateralFriction": 0.45,
+        "restitution": 0.02,
+        "collisionMargin": 0.0001,
+        "linearDamping": 0.015,
+        "angularDamping": 0.015,
+        "rollingFriction": 0.0002
+      },
+      "inertia_kg_m2": [
+        0.005866218670500001,
+        0.003850496799300001,
+        0.0023166289737
+      ],
+      "material": {
+        "type": "GEOM_BOX",
+        "source": "common box"
+      }
+    },
+    "F16": {
+      "id": "F16",
+      "asset_key": "trivial",
+      "asset_id": "Hasbro_Trivial_Pursuit_Family_Edition_Game",
+      "frame": {
+        "world": "shared world XY plane, Z up, metres",
+        "base_pose_convention": "basePosition/baseOrientation place the multibody BASE ORIGIN, which is not necessarily the mesh origin or the centre of mass",
+        "mesh_origin_local": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "units": "metre"
+      },
+      "world_transform": {
+        "position": [
+          -1.2583663217062135,
+          12.438546236490913,
+          0.09561100715697257
+        ],
+        "quaternion_xyzw": [
+          -8.120656211383911e-07,
+          1.2130436280676567e-06,
+          0.30709928483219373,
+          0.95167748174128
+        ]
+      },
+      "dims_m": [
+        0.063604,
+        0.20462000000000002,
+        0.271042
+      ],
+      "canonical_half_extents_m": [
+        0.031802,
+        0.10231000000000001,
+        0.135521
+      ],
+      "mass_kg": 0.8,
+      "mass_source": "common_assets manifest mass_estimate_kg; DECLARED ESTIMATE, not measured",
+      "com_body_frame_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "inertia_frame": "body frame, principal axes aligned with the box axes",
+      "inertia_source": "solid-cuboid closed form from the declared mass and canonical half extents",
+      "solver": {
+        "lateralFriction": 0.45,
+        "restitution": 0.02,
+        "collisionMargin": 0.0001,
+        "linearDamping": 0.015,
+        "angularDamping": 0.015,
+        "rollingFriction": 0.0002
+      },
+      "inertia_kg_m2": [
+        0.007688874010933335,
+        0.005167282305333334,
+        0.0030609875477333338
+      ],
+      "material": {
+        "type": "GEOM_BOX",
+        "source": "common box"
+      }
+    },
+    "F17": {
+      "id": "F17",
+      "asset_key": "trivial",
+      "asset_id": "Hasbro_Trivial_Pursuit_Family_Edition_Game",
+      "frame": {
+        "world": "shared world XY plane, Z up, metres",
+        "base_pose_convention": "basePosition/baseOrientation place the multibody BASE ORIGIN, which is not necessarily the mesh origin or the centre of mass",
+        "mesh_origin_local": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "units": "metre"
+      },
+      "world_transform": {
+        "position": [
+          -1.1220681466983424,
+          12.51648084967235,
+          0.09561097633408551
+        ],
+        "quaternion_xyzw": [
+          -1.1719752574404106e-06,
+          4.476245075053393e-06,
+          0.20579947886618355,
+          0.9785941827320439
+        ]
+      },
+      "dims_m": [
+        0.063604,
+        0.20462000000000002,
+        0.271042
+      ],
+      "canonical_half_extents_m": [
+        0.031802,
+        0.10231000000000001,
+        0.135521
+      ],
+      "mass_kg": 0.8,
+      "mass_source": "common_assets manifest mass_estimate_kg; DECLARED ESTIMATE, not measured",
+      "com_body_frame_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "inertia_frame": "body frame, principal axes aligned with the box axes",
+      "inertia_source": "solid-cuboid closed form from the declared mass and canonical half extents",
+      "solver": {
+        "lateralFriction": 0.45,
+        "restitution": 0.02,
+        "collisionMargin": 0.0001,
+        "linearDamping": 0.015,
+        "angularDamping": 0.015,
+        "rollingFriction": 0.0002
+      },
+      "inertia_kg_m2": [
+        0.007688874010933335,
+        0.005167282305333334,
+        0.0030609875477333338
+      ],
+      "material": {
+        "type": "GEOM_BOX",
+        "source": "common box"
+      }
+    },
+    "F18": {
+      "id": "F18",
+      "asset_key": "trivial",
+      "asset_id": "Hasbro_Trivial_Pursuit_Family_Edition_Game",
+      "frame": {
+        "world": "shared world XY plane, Z up, metres",
+        "base_pose_convention": "basePosition/baseOrientation place the multibody BASE ORIGIN, which is not necessarily the mesh origin or the centre of mass",
+        "mesh_origin_local": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "units": "metre"
+      },
+      "world_transform": {
+        "position": [
+          -1.0230950030753778,
+          12.635524723869944,
+          0.09561095644416091
+        ],
+        "quaternion_xyzw": [
+          -2.590820486511472e-07,
+          6.095913943666375e-07,
+          0.10224882070804639,
+          0.9947588545287621
+        ]
+      },
+      "dims_m": [
+        0.063604,
+        0.20462000000000002,
+        0.271042
+      ],
+      "canonical_half_extents_m": [
+        0.031802,
+        0.10231000000000001,
+        0.135521
+      ],
+      "mass_kg": 0.8,
+      "mass_source": "common_assets manifest mass_estimate_kg; DECLARED ESTIMATE, not measured",
+      "com_body_frame_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "inertia_frame": "body frame, principal axes aligned with the box axes",
+      "inertia_source": "solid-cuboid closed form from the declared mass and canonical half extents",
+      "solver": {
+        "lateralFriction": 0.45,
+        "restitution": 0.02,
+        "collisionMargin": 0.0001,
+        "linearDamping": 0.015,
+        "angularDamping": 0.015,
+        "rollingFriction": 0.0002
+      },
+      "inertia_kg_m2": [
+        0.007688874010933335,
+        0.005167282305333334,
+        0.0030609875477333338
+      ],
+      "material": {
+        "type": "GEOM_BOX",
+        "source": "common box"
+      }
+    },
+    "F19": {
+      "id": "F19",
+      "asset_key": "wii",
+      "asset_id": "New_Super_Mario_BrosWii_Wii_Game",
+      "frame": {
+        "world": "shared world XY plane, Z up, metres",
+        "base_pose_convention": "basePosition/baseOrientation place the multibody BASE ORIGIN, which is not necessarily the mesh origin or the centre of mass",
+        "mesh_origin_local": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "units": "metre"
+      },
+      "world_transform": {
+        "position": [
+          -0.8163427934754653,
+          12.579988617234825,
+          0.05595063019237727
+        ],
+        "quaternion_xyzw": [
+          -8.05456384221911e-08,
+          1.2159414200547997e-05,
+          -0.0024472196804316572,
+          0.9999970054795054
+        ]
+      },
+      "dims_m": [
+        0.016727,
+        0.137079,
+        0.191721
+      ],
+      "canonical_half_extents_m": [
+        0.0083635,
+        0.0685395,
+        0.0958605
+      ],
+      "mass_kg": 0.12,
+      "mass_source": "common_assets manifest mass_estimate_kg; DECLARED ESTIMATE, not measured",
+      "com_body_frame_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "inertia_frame": "body frame, principal axes aligned with the box axes",
+      "inertia_source": "solid-cuboid closed form from the declared mass and canonical half extents",
+      "solver": {
+        "lateralFriction": 0.45,
+        "restitution": 0.02,
+        "collisionMargin": 0.0001,
+        "linearDamping": 0.015,
+        "angularDamping": 0.015,
+        "rollingFriction": 0.0002
+      },
+      "inertia_kg_m2": [
+        0.0005554759408200001,
+        0.00037036734369999997,
+        0.00019070444770000002
+      ],
+      "material": {
+        "type": "GEOM_BOX",
+        "source": "common box"
+      }
+    },
+    "F20": {
+      "id": "F20",
+      "asset_key": "wii",
+      "asset_id": "New_Super_Mario_BrosWii_Wii_Game",
+      "frame": {
+        "world": "shared world XY plane, Z up, metres",
+        "base_pose_convention": "basePosition/baseOrientation place the multibody BASE ORIGIN, which is not necessarily the mesh origin or the centre of mass",
+        "mesh_origin_local": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "units": "metre"
+      },
+      "world_transform": {
+        "position": [
+          -0.7085779914044585,
+          12.551439454051526,
+          0.055950569615589245
+        ],
+        "quaternion_xyzw": [
+          8.785990482184706e-07,
+          -1.1204343091817484e-05,
+          -0.0767867739802323,
+          0.9970475370890796
+        ]
+      },
+      "dims_m": [
+        0.016727,
+        0.137079,
+        0.191721
+      ],
+      "canonical_half_extents_m": [
+        0.0083635,
+        0.0685395,
+        0.0958605
+      ],
+      "mass_kg": 0.12,
+      "mass_source": "common_assets manifest mass_estimate_kg; DECLARED ESTIMATE, not measured",
+      "com_body_frame_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "inertia_frame": "body frame, principal axes aligned with the box axes",
+      "inertia_source": "solid-cuboid closed form from the declared mass and canonical half extents",
+      "solver": {
+        "lateralFriction": 0.45,
+        "restitution": 0.02,
+        "collisionMargin": 0.0001,
+        "linearDamping": 0.015,
+        "angularDamping": 0.015,
+        "rollingFriction": 0.0002
+      },
+      "inertia_kg_m2": [
+        0.0005554759408200001,
+        0.00037036734369999997,
+        0.00019070444770000002
+      ],
+      "material": {
+        "type": "GEOM_BOX",
+        "source": "common box"
+      }
+    },
+    "F21": {
+      "id": "F21",
+      "asset_key": "paper",
+      "asset_id": "Paper_Mario_Sticker_Star_Nintendo_3DS_Game",
+      "frame": {
+        "world": "shared world XY plane, Z up, metres",
+        "base_pose_convention": "basePosition/baseOrientation place the multibody BASE ORIGIN, which is not necessarily the mesh origin or the centre of mass",
+        "mesh_origin_local": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "units": "metre"
+      },
+      "world_transform": {
+        "position": [
+          -0.6026125580259819,
+          12.547804704835945,
+          0.022695523965602787
+        ],
+        "quaternion_xyzw": [
+          -3.8762151814056197e-07,
+          -2.0538106224146962e-06,
+          -0.14646667743021324,
+          0.9892156046070976
+        ]
+      },
+      "dims_m": [
+        0.015746,
+        0.13758599999999999,
+        0.12521100000000002
+      ],
+      "canonical_half_extents_m": [
+        0.007873,
+        0.06879299999999999,
+        0.06260550000000001
+      ],
+      "mass_kg": 0.07,
+      "mass_source": "common_assets manifest mass_estimate_kg; DECLARED ESTIMATE, not measured",
+      "com_body_frame_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "inertia_frame": "body frame, principal axes aligned with the box axes",
+      "inertia_source": "solid-cuboid closed form from the declared mass and canonical half extents",
+      "solver": {
+        "lateralFriction": 0.45,
+        "restitution": 0.02,
+        "collisionMargin": 0.0001,
+        "linearDamping": 0.015,
+        "angularDamping": 0.015,
+        "rollingFriction": 0.0002
+      },
+      "inertia_kg_m2": [
+        0.00020187826118250003,
+        9.290009771583339e-05,
+        0.00011187075615333332
+      ],
+      "material": {
+        "type": "GEOM_BOX",
+        "source": "common box"
+      }
+    },
+    "F22": {
+      "id": "F22",
+      "asset_key": "tape",
+      "asset_id": "Shurtape_30_Day_Removal_UV_Delct_15",
+      "frame": {
+        "world": "shared world XY plane, Z up, metres",
+        "base_pose_convention": "basePosition/baseOrientation place the multibody BASE ORIGIN, which is not necessarily the mesh origin or the centre of mass",
+        "mesh_origin_local": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "units": "metre"
+      },
+      "world_transform": {
+        "position": [
+          -0.5201555253083453,
+          12.517451911805477,
+          0.019388753716024623
+        ],
+        "quaternion_xyzw": [
+          0.006688580761218997,
+          0.032043113745160105,
+          -0.20431184280055917,
+          0.9783584070474148
+        ]
+      },
+      "dims_m": [
+        0.1168475,
+        0.038378999999999996,
+        0.1168475
+      ],
+      "canonical_half_extents_m": [
+        0.05842375,
+        0.019189499999999998,
+        0.05842375
+      ],
+      "mass_kg": 0.15,
+      "mass_source": "common_assets manifest mass_estimate_kg; DECLARED ESTIMATE, not measured",
+      "com_body_frame_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "inertia_frame": "body frame, principal axes aligned with the box axes",
+      "inertia_source": "APPROXIMATION, NOT A MEASUREMENT: the uniform-annular-cylinder form the validated runs used, carried verbatim rather than silently recomputed",
+      "solver": {
+        "lateralFriction": 0.45,
+        "restitution": 0.02,
+        "collisionMargin": 0.0001,
+        "linearDamping": 0.015,
+        "angularDamping": 0.015,
+        "rollingFriction": 0.0002
+      },
+      "material": {
+        "type": "GEOM_MESH 48 wedges rigidly joined",
+        "source": "common tape, hole retained"
+      },
+      "ring": {
+        "outer_radius_m": 0.05842375,
+        "inner_radius_m": 0.03799901294885975,
+        "width_m": 0.038378999999999996,
+        "hole_retained": true,
+        "solid_area_fraction": 0.5769752545531097
+      },
+      "inertia_kg_m2": [
+        0.00020055907860562917,
+        0.00036429446618625836,
+        0.00020055907860562917
+      ],
+      "appearance_note": "the V6.4-repaired tape is geometry-identical (48/48 shape hashes match the V6.3 library); only UV, material and shading normals changed"
+    },
+    "F23": {
+      "id": "F23",
+      "asset_key": "paper",
+      "asset_id": "Paper_Mario_Sticker_Star_Nintendo_3DS_Game",
+      "frame": {
+        "world": "shared world XY plane, Z up, metres",
+        "base_pose_convention": "basePosition/baseOrientation place the multibody BASE ORIGIN, which is not necessarily the mesh origin or the centre of mass",
+        "mesh_origin_local": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "units": "metre"
+      },
+      "world_transform": {
+        "position": [
+          -0.3686481305286626,
+          12.428977604621146,
+          0.022695544723724294
+        ],
+        "quaternion_xyzw": [
+          -3.869507789630793e-06,
+          -1.1357861365966287e-05,
+          -0.3173368654409414,
+          0.9483128775294278
+        ]
+      },
+      "dims_m": [
+        0.015746,
+        0.13758599999999999,
+        0.12521100000000002
+      ],
+      "canonical_half_extents_m": [
+        0.007873,
+        0.06879299999999999,
+        0.06260550000000001
+      ],
+      "mass_kg": 0.07,
+      "mass_source": "common_assets manifest mass_estimate_kg; DECLARED ESTIMATE, not measured",
+      "com_body_frame_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "inertia_frame": "body frame, principal axes aligned with the box axes",
+      "inertia_source": "solid-cuboid closed form from the declared mass and canonical half extents",
+      "solver": {
+        "lateralFriction": 0.45,
+        "restitution": 0.02,
+        "collisionMargin": 0.0001,
+        "linearDamping": 0.015,
+        "angularDamping": 0.015,
+        "rollingFriction": 0.0002
+      },
+      "inertia_kg_m2": [
+        0.00020187826118250003,
+        9.290009771583339e-05,
+        0.00011187075615333332
+      ],
+      "material": {
+        "type": "GEOM_BOX",
+        "source": "common box"
+      }
+    },
+    "F24": {
+      "id": "F24",
+      "asset_key": "wii",
+      "asset_id": "New_Super_Mario_BrosWii_Wii_Game",
+      "frame": {
+        "world": "shared world XY plane, Z up, metres",
+        "base_pose_convention": "basePosition/baseOrientation place the multibody BASE ORIGIN, which is not necessarily the mesh origin or the centre of mass",
+        "mesh_origin_local": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "units": "metre"
+      },
+      "world_transform": {
+        "position": [
+          -0.3128133447489643,
+          12.382500831422876,
+          0.05595060553558049
+        ],
+        "quaternion_xyzw": [
+          2.3902295223577293e-06,
+          8.646763546207614e-06,
+          -0.362765711540706,
+          0.9318803777577279
+        ]
+      },
+      "dims_m": [
+        0.016727,
+        0.137079,
+        0.191721
+      ],
+      "canonical_half_extents_m": [
+        0.0083635,
+        0.0685395,
+        0.0958605
+      ],
+      "mass_kg": 0.12,
+      "mass_source": "common_assets manifest mass_estimate_kg; DECLARED ESTIMATE, not measured",
+      "com_body_frame_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "inertia_frame": "body frame, principal axes aligned with the box axes",
+      "inertia_source": "solid-cuboid closed form from the declared mass and canonical half extents",
+      "solver": {
+        "lateralFriction": 0.45,
+        "restitution": 0.02,
+        "collisionMargin": 0.0001,
+        "linearDamping": 0.015,
+        "angularDamping": 0.015,
+        "rollingFriction": 0.0002
+      },
+      "inertia_kg_m2": [
+        0.0005554759408200001,
+        0.00037036734369999997,
+        0.00019070444770000002
+      ],
+      "material": {
+        "type": "GEOM_BOX",
+        "source": "common box"
+      }
+    },
+    "F25": {
+      "id": "F25",
+      "asset_key": "wii",
+      "asset_id": "New_Super_Mario_BrosWii_Wii_Game",
+      "frame": {
+        "world": "shared world XY plane, Z up, metres",
+        "base_pose_convention": "basePosition/baseOrientation place the multibody BASE ORIGIN, which is not necessarily the mesh origin or the centre of mass",
+        "mesh_origin_local": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "units": "metre"
+      },
+      "world_transform": {
+        "position": [
+          -0.26785027182335,
+          12.276347012925239,
+          0.05595058995438232
+        ],
+        "quaternion_xyzw": [
+          -4.706982922682158e-06,
+          -8.555593691760303e-06,
+          -0.4309116068322718,
+          0.9023941417151796
+        ]
+      },
+      "dims_m": [
+        0.016727,
+        0.137079,
+        0.191721
+      ],
+      "canonical_half_extents_m": [
+        0.0083635,
+        0.0685395,
+        0.0958605
+      ],
+      "mass_kg": 0.12,
+      "mass_source": "common_assets manifest mass_estimate_kg; DECLARED ESTIMATE, not measured",
+      "com_body_frame_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "inertia_frame": "body frame, principal axes aligned with the box axes",
+      "inertia_source": "solid-cuboid closed form from the declared mass and canonical half extents",
+      "solver": {
+        "lateralFriction": 0.45,
+        "restitution": 0.02,
+        "collisionMargin": 0.0001,
+        "linearDamping": 0.015,
+        "angularDamping": 0.015,
+        "rollingFriction": 0.0002
+      },
+      "inertia_kg_m2": [
+        0.0005554759408200001,
+        0.00037036734369999997,
+        0.00019070444770000002
+      ],
+      "material": {
+        "type": "GEOM_BOX",
+        "source": "common box"
+      }
+    },
+    "F26": {
+      "id": "F26",
+      "asset_key": "dvd",
+      "asset_id": "House_of_Cards_The_Complete_First_Season_4_Discs_DVD",
+      "frame": {
+        "world": "shared world XY plane, Z up, metres",
+        "base_pose_convention": "basePosition/baseOrientation place the multibody BASE ORIGIN, which is not necessarily the mesh origin or the centre of mass",
+        "mesh_origin_local": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "units": "metre"
+      },
+      "world_transform": {
+        "position": [
+          -0.17373188324593672,
+          12.25076782482068,
+          0.055555002640905356
+        ],
+        "quaternion_xyzw": [
+          9.180940929463514e-07,
+          5.83362004447476e-06,
+          -0.4974510802557573,
+          0.8674920303481215
+        ]
+      },
+      "dims_m": [
+        0.023612,
+        0.14349299999999998,
+        0.19093
+      ],
+      "canonical_half_extents_m": [
+        0.011806,
+        0.07174649999999999,
+        0.095465
+      ],
+      "mass_kg": 0.23,
+      "mass_source": "common_assets manifest mass_estimate_kg; DECLARED ESTIMATE, not measured",
+      "com_body_frame_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "inertia_frame": "body frame, principal axes aligned with the box axes",
+      "inertia_source": "solid-cuboid closed form from the declared mass and canonical half extents",
+      "solver": {
+        "lateralFriction": 0.45,
+        "restitution": 0.02,
+        "collisionMargin": 0.0001,
+        "linearDamping": 0.015,
+        "angularDamping": 0.015,
+        "rollingFriction": 0.0002
+      },
+      "inertia_kg_m2": [
+        0.0010933530306891665,
+        0.0007093926693433334,
+        0.0004053322121991666
+      ],
+      "material": {
+        "type": "GEOM_BOX",
+        "source": "common box"
+      }
+    },
+    "F27": {
+      "id": "F27",
+      "asset_key": "dvd",
+      "asset_id": "House_of_Cards_The_Complete_First_Season_4_Discs_DVD",
+      "frame": {
+        "world": "shared world XY plane, Z up, metres",
+        "base_pose_convention": "basePosition/baseOrientation place the multibody BASE ORIGIN, which is not necessarily the mesh origin or the centre of mass",
+        "mesh_origin_local": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "units": "metre"
+      },
+      "world_transform": {
+        "position": [
+          -0.19873670039782332,
+          12.080844357145784,
+          0.055554966814937906
+        ],
+        "quaternion_xyzw": [
+          -7.988738302159457e-06,
+          -1.0373355741613635e-05,
+          -0.5594844318369437,
+          0.828840859490328
+        ]
+      },
+      "dims_m": [
+        0.023612,
+        0.14349299999999998,
+        0.19093
+      ],
+      "canonical_half_extents_m": [
+        0.011806,
+        0.07174649999999999,
+        0.095465
+      ],
+      "mass_kg": 0.23,
+      "mass_source": "common_assets manifest mass_estimate_kg; DECLARED ESTIMATE, not measured",
+      "com_body_frame_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "inertia_frame": "body frame, principal axes aligned with the box axes",
+      "inertia_source": "solid-cuboid closed form from the declared mass and canonical half extents",
+      "solver": {
+        "lateralFriction": 0.45,
+        "restitution": 0.02,
+        "collisionMargin": 0.0001,
+        "linearDamping": 0.015,
+        "angularDamping": 0.015,
+        "rollingFriction": 0.0002
+      },
+      "inertia_kg_m2": [
+        0.0010933530306891665,
+        0.0007093926693433334,
+        0.0004053322121991666
+      ],
+      "material": {
+        "type": "GEOM_BOX",
+        "source": "common box"
+      }
+    },
+    "F28": {
+      "id": "F28",
+      "asset_key": "dvd",
+      "asset_id": "House_of_Cards_The_Complete_First_Season_4_Discs_DVD",
+      "frame": {
+        "world": "shared world XY plane, Z up, metres",
+        "base_pose_convention": "basePosition/baseOrientation place the multibody BASE ORIGIN, which is not necessarily the mesh origin or the centre of mass",
+        "mesh_origin_local": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "units": "metre"
+      },
+      "world_transform": {
+        "position": [
+          -0.09079830088125332,
+          12.005407846250518,
+          0.05555402500575137
+        ],
+        "quaternion_xyzw": [
+          -1.1735305331597906e-06,
+          1.1121955904278757e-05,
+          -0.619475707303759,
+          0.7850158265509253
+        ]
+      },
+      "dims_m": [
+        0.023612,
+        0.14349299999999998,
+        0.19093
+      ],
+      "canonical_half_extents_m": [
+        0.011806,
+        0.07174649999999999,
+        0.095465
+      ],
+      "mass_kg": 0.23,
+      "mass_source": "common_assets manifest mass_estimate_kg; DECLARED ESTIMATE, not measured",
+      "com_body_frame_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "inertia_frame": "body frame, principal axes aligned with the box axes",
+      "inertia_source": "solid-cuboid closed form from the declared mass and canonical half extents",
+      "solver": {
+        "lateralFriction": 0.45,
+        "restitution": 0.02,
+        "collisionMargin": 0.0001,
+        "linearDamping": 0.015,
+        "angularDamping": 0.015,
+        "rollingFriction": 0.0002
+      },
+      "inertia_kg_m2": [
+        0.0010933530306891665,
+        0.0007093926693433334,
+        0.0004053322121991666
+      ],
+      "material": {
+        "type": "GEOM_BOX",
+        "source": "common box"
+      }
+    },
+    "F29": {
+      "id": "F29",
+      "asset_key": "dvd",
+      "asset_id": "House_of_Cards_The_Complete_First_Season_4_Discs_DVD",
+      "frame": {
+        "world": "shared world XY plane, Z up, metres",
+        "base_pose_convention": "basePosition/baseOrientation place the multibody BASE ORIGIN, which is not necessarily the mesh origin or the centre of mass",
+        "mesh_origin_local": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "units": "metre"
+      },
+      "world_transform": {
+        "position": [
+          -0.07289808026165699,
+          11.896158298173528,
+          0.05555315183780046
+        ],
+        "quaternion_xyzw": [
+          -3.397715086728941e-05,
+          2.519597329793641e-05,
+          -0.6753842090831975,
+          0.737466045545
+        ]
+      },
+      "dims_m": [
+        0.023612,
+        0.14349299999999998,
+        0.19093
+      ],
+      "canonical_half_extents_m": [
+        0.011806,
+        0.07174649999999999,
+        0.095465
+      ],
+      "mass_kg": 0.23,
+      "mass_source": "common_assets manifest mass_estimate_kg; DECLARED ESTIMATE, not measured",
+      "com_body_frame_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "inertia_frame": "body frame, principal axes aligned with the box axes",
+      "inertia_source": "solid-cuboid closed form from the declared mass and canonical half extents",
+      "solver": {
+        "lateralFriction": 0.45,
+        "restitution": 0.02,
+        "collisionMargin": 0.0001,
+        "linearDamping": 0.015,
+        "angularDamping": 0.015,
+        "rollingFriction": 0.0002
+      },
+      "inertia_kg_m2": [
+        0.0010933530306891665,
+        0.0007093926693433334,
+        0.0004053322121991666
+      ],
+      "material": {
+        "type": "GEOM_BOX",
+        "source": "common box"
+      }
+    },
+    "F30": {
+      "id": "F30",
+      "asset_key": "cranium",
+      "asset_id": "Hasbro_Cranium_Performance_and_Acting_Game",
+      "frame": {
+        "world": "shared world XY plane, Z up, metres",
+        "base_pose_convention": "basePosition/baseOrientation place the multibody BASE ORIGIN, which is not necessarily the mesh origin or the centre of mass",
+        "mesh_origin_local": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "units": "metre"
+      },
+      "world_transform": {
+        "position": [
+          -0.1476916009141167,
+          11.778380813707201,
+          0.09610340261999224
+        ],
+        "quaternion_xyzw": [
+          -9.97506122176484e-06,
+          1.8376503776394768e-05,
+          -0.6748842460868887,
+          0.7379236098313525
+        ]
+      },
+      "dims_m": [
+        0.054855,
+        0.208143,
+        0.272031
+      ],
+      "canonical_half_extents_m": [
+        0.0274275,
+        0.1040715,
+        0.1360155
+      ],
+      "mass_kg": 0.6,
+      "mass_source": "common_assets manifest mass_estimate_kg; DECLARED ESTIMATE, not measured",
+      "com_body_frame_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "inertia_frame": "body frame, principal axes aligned with the box axes",
+      "inertia_source": "solid-cuboid closed form from the declared mass and canonical half extents",
+      "solver": {
+        "lateralFriction": 0.45,
+        "restitution": 0.02,
+        "collisionMargin": 0.0001,
+        "linearDamping": 0.015,
+        "angularDamping": 0.015,
+        "rollingFriction": 0.0002
+      },
+      "inertia_kg_m2": [
+        0.005866218670500001,
+        0.003850496799300001,
+        0.0023166289737
+      ],
+      "material": {
+        "type": "GEOM_BOX",
+        "source": "common box"
+      }
+    },
+    "F31": {
+      "id": "F31",
+      "asset_key": "cranium",
+      "asset_id": "Hasbro_Cranium_Performance_and_Acting_Game",
+      "frame": {
+        "world": "shared world XY plane, Z up, metres",
+        "base_pose_convention": "basePosition/baseOrientation place the multibody BASE ORIGIN, which is not necessarily the mesh origin or the centre of mass",
+        "mesh_origin_local": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "units": "metre"
+      },
+      "world_transform": {
+        "position": [
+          -0.029574640612054157,
+          11.633459129928728,
+          0.09609183616844766
+        ],
+        "quaternion_xyzw": [
+          -5.441748932494747e-05,
+          8.829865446105948e-05,
+          -0.5473649994252403,
+          0.8368939876987355
+        ]
+      },
+      "dims_m": [
+        0.054855,
+        0.208143,
+        0.272031
+      ],
+      "canonical_half_extents_m": [
+        0.0274275,
+        0.1040715,
+        0.1360155
+      ],
+      "mass_kg": 0.6,
+      "mass_source": "common_assets manifest mass_estimate_kg; DECLARED ESTIMATE, not measured",
+      "com_body_frame_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "inertia_frame": "body frame, principal axes aligned with the box axes",
+      "inertia_source": "solid-cuboid closed form from the declared mass and canonical half extents",
+      "solver": {
+        "lateralFriction": 0.45,
+        "restitution": 0.02,
+        "collisionMargin": 0.0001,
+        "linearDamping": 0.015,
+        "angularDamping": 0.015,
+        "rollingFriction": 0.0002
+      },
+      "inertia_kg_m2": [
+        0.005866218670500001,
+        0.003850496799300001,
+        0.0023166289737
+      ],
+      "material": {
+        "type": "GEOM_BOX",
+        "source": "common box"
+      }
+    },
+    "F32": {
+      "id": "F32",
+      "asset_key": "cranium",
+      "asset_id": "Hasbro_Cranium_Performance_and_Acting_Game",
+      "frame": {
+        "world": "shared world XY plane, Z up, metres",
+        "base_pose_convention": "basePosition/baseOrientation place the multibody BASE ORIGIN, which is not necessarily the mesh origin or the centre of mass",
+        "mesh_origin_local": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "units": "metre"
+      },
+      "world_transform": {
+        "position": [
+          0.05725150610251089,
+          11.48276238735938,
+          0.09604226708011619
+        ],
+        "quaternion_xyzw": [
+          -0.00011345211148243946,
+          0.0003304677166054153,
+          -0.4132145193106047,
+          0.9106336469462418
+        ]
+      },
+      "dims_m": [
+        0.054855,
+        0.208143,
+        0.272031
+      ],
+      "canonical_half_extents_m": [
+        0.0274275,
+        0.1040715,
+        0.1360155
+      ],
+      "mass_kg": 0.6,
+      "mass_source": "common_assets manifest mass_estimate_kg; DECLARED ESTIMATE, not measured",
+      "com_body_frame_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "inertia_frame": "body frame, principal axes aligned with the box axes",
+      "inertia_source": "solid-cuboid closed form from the declared mass and canonical half extents",
+      "solver": {
+        "lateralFriction": 0.45,
+        "restitution": 0.02,
+        "collisionMargin": 0.0001,
+        "linearDamping": 0.015,
+        "angularDamping": 0.015,
+        "rollingFriction": 0.0002
+      },
+      "inertia_kg_m2": [
+        0.005866218670500001,
+        0.003850496799300001,
+        0.0023166289737
+      ],
+      "material": {
+        "type": "GEOM_BOX",
+        "source": "common box"
+      }
+    },
+    "F33": {
+      "id": "F33",
+      "asset_key": "cranium",
+      "asset_id": "Hasbro_Cranium_Performance_and_Acting_Game",
+      "frame": {
+        "world": "shared world XY plane, Z up, metres",
+        "base_pose_convention": "basePosition/baseOrientation place the multibody BASE ORIGIN, which is not necessarily the mesh origin or the centre of mass",
+        "mesh_origin_local": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "units": "metre"
+      },
+      "world_transform": {
+        "position": [
+          0.17549367656300585,
+          11.399724331638208,
+          0.09591695701490859
+        ],
+        "quaternion_xyzw": [
+          -9.371132850500012e-05,
+          0.0007850310310773441,
+          -0.2639759007768226,
+          0.9645289517445976
+        ]
+      },
+      "dims_m": [
+        0.054855,
+        0.208143,
+        0.272031
+      ],
+      "canonical_half_extents_m": [
+        0.0274275,
+        0.1040715,
+        0.1360155
+      ],
+      "mass_kg": 0.6,
+      "mass_source": "common_assets manifest mass_estimate_kg; DECLARED ESTIMATE, not measured",
+      "com_body_frame_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "inertia_frame": "body frame, principal axes aligned with the box axes",
+      "inertia_source": "solid-cuboid closed form from the declared mass and canonical half extents",
+      "solver": {
+        "lateralFriction": 0.45,
+        "restitution": 0.02,
+        "collisionMargin": 0.0001,
+        "linearDamping": 0.015,
+        "angularDamping": 0.015,
+        "rollingFriction": 0.0002
+      },
+      "inertia_kg_m2": [
+        0.005866218670500001,
+        0.003850496799300001,
+        0.0023166289737
+      ],
+      "material": {
+        "type": "GEOM_BOX",
+        "source": "common box"
+      }
+    },
+    "F34": {
+      "id": "F34",
+      "asset_key": "cranium",
+      "asset_id": "Hasbro_Cranium_Performance_and_Acting_Game",
+      "frame": {
+        "world": "shared world XY plane, Z up, metres",
+        "base_pose_convention": "basePosition/baseOrientation place the multibody BASE ORIGIN, which is not necessarily the mesh origin or the centre of mass",
+        "mesh_origin_local": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "units": "metre"
+      },
+      "world_transform": {
+        "position": [
+          0.32187848781581174,
+          11.341741800552512,
+          0.09555175535042952
+        ],
+        "quaternion_xyzw": [
+          0.00016995569540645246,
+          0.0017134373421166932,
+          -0.10927081860814382,
+          0.9940105248176412
+        ]
+      },
+      "dims_m": [
+        0.054855,
+        0.208143,
+        0.272031
+      ],
+      "canonical_half_extents_m": [
+        0.0274275,
+        0.1040715,
+        0.1360155
+      ],
+      "mass_kg": 0.6,
+      "mass_source": "common_assets manifest mass_estimate_kg; DECLARED ESTIMATE, not measured",
+      "com_body_frame_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "inertia_frame": "body frame, principal axes aligned with the box axes",
+      "inertia_source": "solid-cuboid closed form from the declared mass and canonical half extents",
+      "solver": {
+        "lateralFriction": 0.45,
+        "restitution": 0.02,
+        "collisionMargin": 0.0001,
+        "linearDamping": 0.015,
+        "angularDamping": 0.015,
+        "rollingFriction": 0.0002
+      },
+      "inertia_kg_m2": [
+        0.005866218670500001,
+        0.003850496799300001,
+        0.0023166289737
+      ],
+      "material": {
+        "type": "GEOM_BOX",
+        "source": "common box"
+      }
+    },
+    "F35": {
+      "id": "F35",
+      "asset_key": "cranium",
+      "asset_id": "Hasbro_Cranium_Performance_and_Acting_Game",
+      "frame": {
+        "world": "shared world XY plane, Z up, metres",
+        "base_pose_convention": "basePosition/baseOrientation place the multibody BASE ORIGIN, which is not necessarily the mesh origin or the centre of mass",
+        "mesh_origin_local": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "units": "metre"
+      },
+      "world_transform": {
+        "position": [
+          0.479128877287878,
+          11.331724460025416,
+          0.09482841441774811
+        ],
+        "quaternion_xyzw": [
+          0.0009632134341394845,
+          0.002927327756450848,
+          0.04843418743773088,
+          0.9988216219422431
+        ]
+      },
+      "dims_m": [
+        0.054855,
+        0.208143,
+        0.272031
+      ],
+      "canonical_half_extents_m": [
+        0.0274275,
+        0.1040715,
+        0.1360155
+      ],
+      "mass_kg": 0.6,
+      "mass_source": "common_assets manifest mass_estimate_kg; DECLARED ESTIMATE, not measured",
+      "com_body_frame_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "inertia_frame": "body frame, principal axes aligned with the box axes",
+      "inertia_source": "solid-cuboid closed form from the declared mass and canonical half extents",
+      "solver": {
+        "lateralFriction": 0.45,
+        "restitution": 0.02,
+        "collisionMargin": 0.0001,
+        "linearDamping": 0.015,
+        "angularDamping": 0.015,
+        "rollingFriction": 0.0002
+      },
+      "inertia_kg_m2": [
+        0.005866218670500001,
+        0.003850496799300001,
+        0.0023166289737
+      ],
+      "material": {
+        "type": "GEOM_BOX",
+        "source": "common box"
+      }
+    },
+    "F36": {
+      "id": "F36",
+      "asset_key": "trivial",
+      "asset_id": "Hasbro_Trivial_Pursuit_Family_Edition_Game",
+      "frame": {
+        "world": "shared world XY plane, Z up, metres",
+        "base_pose_convention": "basePosition/baseOrientation place the multibody BASE ORIGIN, which is not necessarily the mesh origin or the centre of mass",
+        "mesh_origin_local": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "units": "metre"
+      },
+      "world_transform": {
+        "position": [
+          0.6319408552283858,
+          11.371562019680619,
+          0.09327832302614103
+        ],
+        "quaternion_xyzw": [
+          0.0024880305034746483,
+          0.004990413844953409,
+          0.20478209802696562,
+          0.978791702969301
+        ]
+      },
+      "dims_m": [
+        0.063604,
+        0.20462000000000002,
+        0.271042
+      ],
+      "canonical_half_extents_m": [
+        0.031802,
+        0.10231000000000001,
+        0.135521
+      ],
+      "mass_kg": 0.8,
+      "mass_source": "common_assets manifest mass_estimate_kg; DECLARED ESTIMATE, not measured",
+      "com_body_frame_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "inertia_frame": "body frame, principal axes aligned with the box axes",
+      "inertia_source": "solid-cuboid closed form from the declared mass and canonical half extents",
+      "solver": {
+        "lateralFriction": 0.45,
+        "restitution": 0.02,
+        "collisionMargin": 0.0001,
+        "linearDamping": 0.015,
+        "angularDamping": 0.015,
+        "rollingFriction": 0.0002
+      },
+      "inertia_kg_m2": [
+        0.007688874010933335,
+        0.005167282305333334,
+        0.0030609875477333338
+      ],
+      "material": {
+        "type": "GEOM_BOX",
+        "source": "common box"
+      }
+    },
+    "F37": {
+      "id": "F37",
+      "asset_key": "trivial",
+      "asset_id": "Hasbro_Trivial_Pursuit_Family_Edition_Game",
+      "frame": {
+        "world": "shared world XY plane, Z up, metres",
+        "base_pose_convention": "basePosition/baseOrientation place the multibody BASE ORIGIN, which is not necessarily the mesh origin or the centre of mass",
+        "mesh_origin_local": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "units": "metre"
+      },
+      "world_transform": {
+        "position": [
+          0.7641924246844078,
+          11.455860690356026,
+          0.0921500965784846
+        ],
+        "quaternion_xyzw": [
+          0.004536510728175091,
+          0.0054559579528389674,
+          0.3554968541929201,
+          0.9346505439211854
+        ]
+      },
+      "dims_m": [
+        0.063604,
+        0.20462000000000002,
+        0.271042
+      ],
+      "canonical_half_extents_m": [
+        0.031802,
+        0.10231000000000001,
+        0.135521
+      ],
+      "mass_kg": 0.8,
+      "mass_source": "common_assets manifest mass_estimate_kg; DECLARED ESTIMATE, not measured",
+      "com_body_frame_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "inertia_frame": "body frame, principal axes aligned with the box axes",
+      "inertia_source": "solid-cuboid closed form from the declared mass and canonical half extents",
+      "solver": {
+        "lateralFriction": 0.45,
+        "restitution": 0.02,
+        "collisionMargin": 0.0001,
+        "linearDamping": 0.015,
+        "angularDamping": 0.015,
+        "rollingFriction": 0.0002
+      },
+      "inertia_kg_m2": [
+        0.007688874010933335,
+        0.005167282305333334,
+        0.0030609875477333338
+      ],
+      "material": {
+        "type": "GEOM_BOX",
+        "source": "common box"
+      }
+    },
+    "F38": {
+      "id": "F38",
+      "asset_key": "trivial",
+      "asset_id": "Hasbro_Trivial_Pursuit_Family_Edition_Game",
+      "frame": {
+        "world": "shared world XY plane, Z up, metres",
+        "base_pose_convention": "basePosition/baseOrientation place the multibody BASE ORIGIN, which is not necessarily the mesh origin or the centre of mass",
+        "mesh_origin_local": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "units": "metre"
+      },
+      "world_transform": {
+        "position": [
+          0.8635700031323212,
+          11.576836752282787,
+          0.0915505051869989
+        ],
+        "quaternion_xyzw": [
+          0.006271119187910888,
+          0.004743767885562438,
+          0.4970331850977446,
+          0.8676959044745861
+        ]
+      },
+      "dims_m": [
+        0.063604,
+        0.20462000000000002,
+        0.271042
+      ],
+      "canonical_half_extents_m": [
+        0.031802,
+        0.10231000000000001,
+        0.135521
+      ],
+      "mass_kg": 0.8,
+      "mass_source": "common_assets manifest mass_estimate_kg; DECLARED ESTIMATE, not measured",
+      "com_body_frame_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "inertia_frame": "body frame, principal axes aligned with the box axes",
+      "inertia_source": "solid-cuboid closed form from the declared mass and canonical half extents",
+      "solver": {
+        "lateralFriction": 0.45,
+        "restitution": 0.02,
+        "collisionMargin": 0.0001,
+        "linearDamping": 0.015,
+        "angularDamping": 0.015,
+        "rollingFriction": 0.0002
+      },
+      "inertia_kg_m2": [
+        0.007688874010933335,
+        0.005167282305333334,
+        0.0030609875477333338
+      ],
+      "material": {
+        "type": "GEOM_BOX",
+        "source": "common box"
+      }
+    },
+    "F39": {
+      "id": "F39",
+      "asset_key": "trivial",
+      "asset_id": "Hasbro_Trivial_Pursuit_Family_Edition_Game",
+      "frame": {
+        "world": "shared world XY plane, Z up, metres",
+        "base_pose_convention": "basePosition/baseOrientation place the multibody BASE ORIGIN, which is not necessarily the mesh origin or the centre of mass",
+        "mesh_origin_local": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "units": "metre"
+      },
+      "world_transform": {
+        "position": [
+          0.9202006145404977,
+          11.722510407815292,
+          0.09178097387072585
+        ],
+        "quaternion_xyzw": [
+          0.006906231389923167,
+          0.002387789702106364,
+          0.6274424848150959,
+          0.7786286217943607
+        ]
+      },
+      "dims_m": [
+        0.063604,
+        0.20462000000000002,
+        0.271042
+      ],
+      "canonical_half_extents_m": [
+        0.031802,
+        0.10231000000000001,
+        0.135521
+      ],
+      "mass_kg": 0.8,
+      "mass_source": "common_assets manifest mass_estimate_kg; DECLARED ESTIMATE, not measured",
+      "com_body_frame_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "inertia_frame": "body frame, principal axes aligned with the box axes",
+      "inertia_source": "solid-cuboid closed form from the declared mass and canonical half extents",
+      "solver": {
+        "lateralFriction": 0.45,
+        "restitution": 0.02,
+        "collisionMargin": 0.0001,
+        "linearDamping": 0.015,
+        "angularDamping": 0.015,
+        "rollingFriction": 0.0002
+      },
+      "inertia_kg_m2": [
+        0.007688874010933335,
+        0.005167282305333334,
+        0.0030609875477333338
+      ],
+      "material": {
+        "type": "GEOM_BOX",
+        "source": "common box"
+      }
+    },
+    "F40": {
+      "id": "F40",
+      "asset_key": "trivial",
+      "asset_id": "Hasbro_Trivial_Pursuit_Family_Edition_Game",
+      "frame": {
+        "world": "shared world XY plane, Z up, metres",
+        "base_pose_convention": "basePosition/baseOrientation place the multibody BASE ORIGIN, which is not necessarily the mesh origin or the centre of mass",
+        "mesh_origin_local": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "units": "metre"
+      },
+      "world_transform": {
+        "position": [
+          0.9311273148299786,
+          11.878875748891865,
+          0.09275074410621678
+        ],
+        "quaternion_xyzw": [
+          0.0061202454734740185,
+          0.0009079377554665332,
+          0.7066620302866659,
+          0.7075241997242948
+        ]
+      },
+      "dims_m": [
+        0.063604,
+        0.20462000000000002,
+        0.271042
+      ],
+      "canonical_half_extents_m": [
+        0.031802,
+        0.10231000000000001,
+        0.135521
+      ],
+      "mass_kg": 0.8,
+      "mass_source": "common_assets manifest mass_estimate_kg; DECLARED ESTIMATE, not measured",
+      "com_body_frame_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "inertia_frame": "body frame, principal axes aligned with the box axes",
+      "inertia_source": "solid-cuboid closed form from the declared mass and canonical half extents",
+      "solver": {
+        "lateralFriction": 0.45,
+        "restitution": 0.02,
+        "collisionMargin": 0.0001,
+        "linearDamping": 0.015,
+        "angularDamping": 0.015,
+        "rollingFriction": 0.0002
+      },
+      "inertia_kg_m2": [
+        0.007688874010933335,
+        0.005167282305333334,
+        0.0030609875477333338
+      ],
+      "material": {
+        "type": "GEOM_BOX",
+        "source": "common box"
+      }
+    },
+    "F41": {
+      "id": "F41",
+      "asset_key": "ouija",
+      "asset_id": "Supernatural_Ouija_Board_Game",
+      "frame": {
+        "world": "shared world XY plane, Z up, metres",
+        "base_pose_convention": "basePosition/baseOrientation place the multibody BASE ORIGIN, which is not necessarily the mesh origin or the centre of mass",
+        "mesh_origin_local": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "units": "metre"
+      },
+      "world_transform": {
+        "position": [
+          0.9309488110073845,
+          12.036529634709439,
+          0.09567190439177019
+        ],
+        "quaternion_xyzw": [
+          0.004537007680049085,
+          0.000427861774650787,
+          0.7069307496250982,
+          0.7072680875948736
+        ]
+      },
+      "dims_m": [
+        0.057235999999999995,
+        0.406508,
+        0.274949
+      ],
+      "canonical_half_extents_m": [
+        0.028617999999999998,
+        0.203254,
+        0.1374745
+      ],
+      "mass_kg": 0.75,
+      "mass_source": "common_assets manifest mass_estimate_kg; DECLARED ESTIMATE, not measured",
+      "com_body_frame_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "inertia_frame": "body frame, principal axes aligned with the box axes",
+      "inertia_source": "solid-cuboid closed form from the declared mass and canonical half extents",
+      "solver": {
+        "lateralFriction": 0.45,
+        "restitution": 0.02,
+        "collisionMargin": 0.0001,
+        "linearDamping": 0.015,
+        "angularDamping": 0.015,
+        "rollingFriction": 0.0002
+      },
+      "inertia_kg_m2": [
+        0.015052856666562498,
+        0.0049295570185625,
+        0.01053279461
+      ],
+      "material": {
+        "type": "GEOM_BOX",
+        "source": "common box"
+      }
+    },
+    "F42": {
+      "id": "F42",
+      "asset_key": "ouija",
+      "asset_id": "Supernatural_Ouija_Board_Game",
+      "frame": {
+        "world": "shared world XY plane, Z up, metres",
+        "base_pose_convention": "basePosition/baseOrientation place the multibody BASE ORIGIN, which is not necessarily the mesh origin or the centre of mass",
+        "mesh_origin_local": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "units": "metre"
+      },
+      "world_transform": {
+        "position": [
+          0.9406219977320236,
+          12.21116559676531,
+          0.09645638679082245
+        ],
+        "quaternion_xyzw": [
+          0.0033306730450113537,
+          -0.00011281577565507291,
+          0.7073592142821011,
+          0.7068464018864895
+        ]
+      },
+      "dims_m": [
+        0.057235999999999995,
+        0.406508,
+        0.274949
+      ],
+      "canonical_half_extents_m": [
+        0.028617999999999998,
+        0.203254,
+        0.1374745
+      ],
+      "mass_kg": 0.75,
+      "mass_source": "common_assets manifest mass_estimate_kg; DECLARED ESTIMATE, not measured",
+      "com_body_frame_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "inertia_frame": "body frame, principal axes aligned with the box axes",
+      "inertia_source": "solid-cuboid closed form from the declared mass and canonical half extents",
+      "solver": {
+        "lateralFriction": 0.45,
+        "restitution": 0.02,
+        "collisionMargin": 0.0001,
+        "linearDamping": 0.015,
+        "angularDamping": 0.015,
+        "rollingFriction": 0.0002
+      },
+      "inertia_kg_m2": [
+        0.015052856666562498,
+        0.0049295570185625,
+        0.01053279461
+      ],
+      "material": {
+        "type": "GEOM_BOX",
+        "source": "common box"
+      }
+    },
+    "F43": {
+      "id": "F43",
+      "asset_key": "ouija",
+      "asset_id": "Supernatural_Ouija_Board_Game",
+      "frame": {
+        "world": "shared world XY plane, Z up, metres",
+        "base_pose_convention": "basePosition/baseOrientation place the multibody BASE ORIGIN, which is not necessarily the mesh origin or the centre of mass",
+        "mesh_origin_local": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "units": "metre"
+      },
+      "world_transform": {
+        "position": [
+          0.8502388836119227,
+          12.356127254007994,
+          0.09715638592196892
+        ],
+        "quaternion_xyzw": [
+          0.0013230679861068251,
+          7.070379806935345e-06,
+          0.7070314976063389,
+          0.7071808190510058
+        ]
+      },
+      "dims_m": [
+        0.057235999999999995,
+        0.406508,
+        0.274949
+      ],
+      "canonical_half_extents_m": [
+        0.028617999999999998,
+        0.203254,
+        0.1374745
+      ],
+      "mass_kg": 0.75,
+      "mass_source": "common_assets manifest mass_estimate_kg; DECLARED ESTIMATE, not measured",
+      "com_body_frame_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "inertia_frame": "body frame, principal axes aligned with the box axes",
+      "inertia_source": "solid-cuboid closed form from the declared mass and canonical half extents",
+      "solver": {
+        "lateralFriction": 0.45,
+        "restitution": 0.02,
+        "collisionMargin": 0.0001,
+        "linearDamping": 0.015,
+        "angularDamping": 0.015,
+        "rollingFriction": 0.0002
+      },
+      "inertia_kg_m2": [
+        0.015052856666562498,
+        0.0049295570185625,
+        0.01053279461
+      ],
+      "material": {
+        "type": "GEOM_BOX",
+        "source": "common box"
+      }
+    },
+    "F44": {
+      "id": "F44",
+      "asset_key": "cranium",
+      "asset_id": "Hasbro_Cranium_Performance_and_Acting_Game",
+      "frame": {
+        "world": "shared world XY plane, Z up, metres",
+        "base_pose_convention": "basePosition/baseOrientation place the multibody BASE ORIGIN, which is not necessarily the mesh origin or the centre of mass",
+        "mesh_origin_local": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "units": "metre"
+      },
+      "world_transform": {
+        "position": [
+          0.8902235188677731,
+          12.51581167318534,
+          0.09589154465314519
+        ],
+        "quaternion_xyzw": [
+          0.0008461159009264423,
+          -6.467330837851703e-05,
+          0.7071491936080602,
+          0.7070638570063638
+        ]
+      },
+      "dims_m": [
+        0.054855,
+        0.208143,
+        0.272031
+      ],
+      "canonical_half_extents_m": [
+        0.0274275,
+        0.1040715,
+        0.1360155
+      ],
+      "mass_kg": 0.6,
+      "mass_source": "common_assets manifest mass_estimate_kg; DECLARED ESTIMATE, not measured",
+      "com_body_frame_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "inertia_frame": "body frame, principal axes aligned with the box axes",
+      "inertia_source": "solid-cuboid closed form from the declared mass and canonical half extents",
+      "solver": {
+        "lateralFriction": 0.45,
+        "restitution": 0.02,
+        "collisionMargin": 0.0001,
+        "linearDamping": 0.015,
+        "angularDamping": 0.015,
+        "rollingFriction": 0.0002
+      },
+      "inertia_kg_m2": [
+        0.005866218670500001,
+        0.003850496799300001,
+        0.0023166289737
+      ],
+      "material": {
+        "type": "GEOM_BOX",
+        "source": "common box"
+      }
+    },
+    "F45": {
+      "id": "F45",
+      "asset_key": "trivial",
+      "asset_id": "Hasbro_Trivial_Pursuit_Family_Edition_Game",
+      "frame": {
+        "world": "shared world XY plane, Z up, metres",
+        "base_pose_convention": "basePosition/baseOrientation place the multibody BASE ORIGIN, which is not necessarily the mesh origin or the centre of mass",
+        "mesh_origin_local": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "units": "metre"
+      },
+      "world_transform": {
+        "position": [
+          0.9300655850354689,
+          12.673692788843862,
+          0.09551287182337304
+        ],
+        "quaternion_xyzw": [
+          0.0004838343049279509,
+          -8.609980445477136e-05,
+          0.7071194753680712,
+          0.7070939160015258
+        ]
+      },
+      "dims_m": [
+        0.063604,
+        0.20462000000000002,
+        0.271042
+      ],
+      "canonical_half_extents_m": [
+        0.031802,
+        0.10231000000000001,
+        0.135521
+      ],
+      "mass_kg": 0.8,
+      "mass_source": "common_assets manifest mass_estimate_kg; DECLARED ESTIMATE, not measured",
+      "com_body_frame_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "inertia_frame": "body frame, principal axes aligned with the box axes",
+      "inertia_source": "solid-cuboid closed form from the declared mass and canonical half extents",
+      "solver": {
+        "lateralFriction": 0.45,
+        "restitution": 0.02,
+        "collisionMargin": 0.0001,
+        "linearDamping": 0.015,
+        "angularDamping": 0.015,
+        "rollingFriction": 0.0002
+      },
+      "inertia_kg_m2": [
+        0.007688874010933335,
+        0.005167282305333334,
+        0.0030609875477333338
+      ],
+      "material": {
+        "type": "GEOM_BOX",
+        "source": "common box"
+      }
+    },
+    "F46": {
+      "id": "F46",
+      "asset_key": "trivial",
+      "asset_id": "Hasbro_Trivial_Pursuit_Family_Edition_Game",
+      "frame": {
+        "world": "shared world XY plane, Z up, metres",
+        "base_pose_convention": "basePosition/baseOrientation place the multibody BASE ORIGIN, which is not necessarily the mesh origin or the centre of mass",
+        "mesh_origin_local": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "units": "metre"
+      },
+      "world_transform": {
+        "position": [
+          0.9300693909367259,
+          12.741071806331552,
+          0.09554930744356613
+        ],
+        "quaternion_xyzw": [
+          0.0002917424172965524,
+          -3.777250736481857e-05,
+          0.706775900232366,
+          0.7074374462172103
+        ]
+      },
+      "dims_m": [
+        0.063604,
+        0.20462000000000002,
+        0.271042
+      ],
+      "canonical_half_extents_m": [
+        0.031802,
+        0.10231000000000001,
+        0.135521
+      ],
+      "mass_kg": 0.8,
+      "mass_source": "common_assets manifest mass_estimate_kg; DECLARED ESTIMATE, not measured",
+      "com_body_frame_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "inertia_frame": "body frame, principal axes aligned with the box axes",
+      "inertia_source": "solid-cuboid closed form from the declared mass and canonical half extents",
+      "solver": {
+        "lateralFriction": 0.45,
+        "restitution": 0.02,
+        "collisionMargin": 0.0001,
+        "linearDamping": 0.015,
+        "angularDamping": 0.015,
+        "rollingFriction": 0.0002
+      },
+      "inertia_kg_m2": [
+        0.007688874010933335,
+        0.005167282305333334,
+        0.0030609875477333338
+      ],
+      "material": {
+        "type": "GEOM_BOX",
+        "source": "common box"
+      }
+    },
+    "F47": {
+      "id": "F47",
+      "asset_key": "paper",
+      "asset_id": "Paper_Mario_Sticker_Star_Nintendo_3DS_Game",
+      "frame": {
+        "world": "shared world XY plane, Z up, metres",
+        "base_pose_convention": "basePosition/baseOrientation place the multibody BASE ORIGIN, which is not necessarily the mesh origin or the centre of mass",
+        "mesh_origin_local": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "units": "metre"
+      },
+      "world_transform": {
+        "position": [
+          0.9399991118247691,
+          12.972343814817597,
+          0.022686193624359988
+        ],
+        "quaternion_xyzw": [
+          5.458877926344279e-05,
+          -2.1972875176516814e-05,
+          0.7070307283021662,
+          0.7071828234436739
+        ]
+      },
+      "dims_m": [
+        0.015746,
+        0.13758599999999999,
+        0.12521100000000002
+      ],
+      "canonical_half_extents_m": [
+        0.007873,
+        0.06879299999999999,
+        0.06260550000000001
+      ],
+      "mass_kg": 0.07,
+      "mass_source": "common_assets manifest mass_estimate_kg; DECLARED ESTIMATE, not measured",
+      "com_body_frame_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "inertia_frame": "body frame, principal axes aligned with the box axes",
+      "inertia_source": "solid-cuboid closed form from the declared mass and canonical half extents",
+      "solver": {
+        "lateralFriction": 0.45,
+        "restitution": 0.02,
+        "collisionMargin": 0.0001,
+        "linearDamping": 0.015,
+        "angularDamping": 0.015,
+        "rollingFriction": 0.0002
+      },
+      "inertia_kg_m2": [
+        0.00020187826118250003,
+        9.290009771583339e-05,
+        0.00011187075615333332
+      ],
+      "material": {
+        "type": "GEOM_BOX",
+        "source": "common box"
+      }
+    },
+    "F48": {
+      "id": "F48",
+      "asset_key": "paper",
+      "asset_id": "Paper_Mario_Sticker_Star_Nintendo_3DS_Game",
+      "frame": {
+        "world": "shared world XY plane, Z up, metres",
+        "base_pose_convention": "basePosition/baseOrientation place the multibody BASE ORIGIN, which is not necessarily the mesh origin or the centre of mass",
+        "mesh_origin_local": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "units": "metre"
+      },
+      "world_transform": {
+        "position": [
+          0.889996021060993,
+          13.030015811578618,
+          0.022692361815731008
+        ],
+        "quaternion_xyzw": [
+          8.933613262341795e-06,
+          4.75505865137064e-06,
+          0.7070047293155625,
+          0.7072088182587999
+        ]
+      },
+      "dims_m": [
+        0.015746,
+        0.13758599999999999,
+        0.12521100000000002
+      ],
+      "canonical_half_extents_m": [
+        0.007873,
+        0.06879299999999999,
+        0.06260550000000001
+      ],
+      "mass_kg": 0.07,
+      "mass_source": "common_assets manifest mass_estimate_kg; DECLARED ESTIMATE, not measured",
+      "com_body_frame_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "inertia_frame": "body frame, principal axes aligned with the box axes",
+      "inertia_source": "solid-cuboid closed form from the declared mass and canonical half extents",
+      "solver": {
+        "lateralFriction": 0.45,
+        "restitution": 0.02,
+        "collisionMargin": 0.0001,
+        "linearDamping": 0.015,
+        "angularDamping": 0.015,
+        "rollingFriction": 0.0002
+      },
+      "inertia_kg_m2": [
+        0.00020187826118250003,
+        9.290009771583339e-05,
+        0.00011187075615333332
+      ],
+      "material": {
+        "type": "GEOM_BOX",
+        "source": "common box"
+      }
+    },
+    "B": {
+      "id": "B",
+      "asset_key": "baseball",
+      "asset_id": "sphere_baseball",
+      "frame": {
+        "world": "shared world",
+        "units": "metre",
+        "base_pose_convention": "base origin = hull bounding-box centre",
+        "mesh_origin_local": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "mass_kg": 0.145,
+      "mass_source": "plan 5.2 baseline; the old 0.4 kg ball is NOT used",
+      "geometry": {
+        "type": "GEOM_MESH common convex hull",
+        "vertices": 3512,
+        "triangles": 7020,
+        "extents_m": [
+          0.07351787015795708,
+          0.07532951608300209,
+          0.07516900822520256
+        ],
+        "note": "keep this hull; do not replace with an ideal sphere of a different radius"
+      },
+      "initial_state": {
+        "position": [
+          -3.025,
+          11.3,
+          0.95
+        ],
+        "velocity": [
+          7.0,
+          0.0,
+          -1.8119098614883202
+        ],
+        "source": "baseball_probe_r3 refined case; a LOCAL PROBE state, see open_issues"
+      },
+      "solver": {
+        "lateralFriction": 0.45,
+        "restitution": 0.45,
+        "collisionMargin": 0.0001,
+        "ccdSweptSphereRadius": 0.03,
+        "contactProcessingThreshold": 0
+      }
+    },
+    "A": {
+      "id": "A",
+      "asset_key": "radio",
+      "asset_id": "boombox.002",
+      "frame": {
+        "world": "shared world",
+        "units": "metre",
+        "base_pose_convention": "baseMass on shape[0] with the 36 remaining parts as FIXED links at relative pose [0,0,0]/identity, so all 37 parts are ONE rigid body",
+        "mesh_origin_local": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "parts": 37,
+      "mass_kg": 1.5,
+      "mass_source": "DECLARED ASSUMPTION, not measured: '1.5/2.5kg estimates, mass concentrated in main body'. The 2.5 kg variant FAILED and is not hidden",
+      "mass_distribution": "concentrated in the base body; the 36 links carry zero mass",
+      "com_body_frame_m": "at the base body origin, because every link mass is zero",
+      "exists_in_ground_world": false,
+      "solver": {
+        "lateralFriction": 0.8,
+        "restitution": 0.03,
+        "collisionMargin": 0.0001,
+        "linearDamping": 0.02,
+        "angularDamping": 0.02
+      },
+      "self_collision_note": "the 36 internal joints are not separate characters; intra-body seams must not be counted as body-to-body penetration, nor used to filter real collisions"
+    },
+    "R": {
+      "id": "R",
+      "asset_key": "paper",
+      "asset_id": "Paper_Mario_Sticker_Star_Nintendo_3DS_Game",
+      "frame": {
+        "world": "shared world",
+        "units": "metre",
+        "base_pose_convention": "base origin = box centre = COM",
+        "mesh_origin_local": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "dims_m": [
+        0.015746,
+        0.13758599999999999,
+        0.12521100000000002
+      ],
+      "canonical_half_extents_m": [
+        0.007873,
+        0.06879299999999999,
+        0.06260550000000001
+      ],
+      "mass_kg": 0.07,
+      "mass_source": "same declared estimate as the paper ground boxes",
+      "exists_in_ground_world": false,
+      "table_top_z": 0.685922,
+      "solver": {
+        "lateralFriction": 0.4,
+        "restitution": 0.03,
+        "collisionMargin": 0.0001
+      }
+    }
+  },
+  "coordinate_system_statement": "PyBullet basePosition/baseOrientation place the multibody BASE ORIGIN. For the boxes that equals the box centre and therefore the COM. For the radio the base origin is the base body's origin and, because every link mass is zero, that is also the COM. For the tape the base origin is wedge 0's origin, which is NOT the ring centre, so the ring's COM is offset from the base origin; the ring inertia is expressed about the ring axis as the validated runs did. Blender consumes the same transform chain, so a COM offset must never be passed as if it were a mesh position",
+  "open_issues": [
+    "the ball's initial state is a LOCAL PROBE state; plan 6.1 requires extending it along the un-collided ballistic arc for a 0.15-0.30 s visible flight and re-solving the whole path from the new state",
+    "the radio and tape masses are declared estimates, not measurements; a COM/inertia revision invalidates the old desktop feasibility and requires re-validation",
+    "the relay diagnostic used a diagnostic-only input ('first block initial edge rotation 5 rad/s') with full_chain_acceptance false; it is NOT a production input",
+    "R's friction 0.40 and the ground paper boxes' 0.45 are the same asset class at different interfaces; recorded as single-world per actor, and P3's sensitivity gate perturbs the static friction only"
+  ],
+  "forbidden_inputs": {
+    "relay_probe_diagnostic_input": {
+      "value": "first block initial edge rotation 5 rad/s",
+      "status": "LOCAL_DIAGNOSTIC_ONLY",
+      "full_chain_acceptance": null,
+      "why_forbidden": "a diagnostic-only initial condition supplied to the FIRST BLOCK of a window. Using it as production input would replace real upstream energy transfer with a hand-supplied rotation rate"
+    }
+  }
+}
